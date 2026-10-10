@@ -13,6 +13,11 @@ ejecuciones usan datos sintéticos.
 | 5. Informes y CLI | HTML/CSV/JSON, metadatos, `bql` (11 órdenes) | `tests/integration/` | Completa |
 | 6. Verificación | ruff, mypy, pytest, instalación desde venv limpio (`scripts/verify_clean_install.sh`) | — | Completa |
 
+## Auditoría (2026-10-10)
+
+Ver `docs/audit_report.md`: 19 hallazgos (3 altos, 6 medios, 6 bajos, 4 informativos), 10
+corregidos con pruebas de regresión que fallaban antes de la corrección. Suite: 231 pruebas.
+
 ## Pendiente
 
 1. **Descarga real desde `api.bybit.com`.** Bloqueada por el proxy del entorno de
