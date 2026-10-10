@@ -1,0 +1,63 @@
+# Configuración por defecto de bybit-quant-lab.
+# Porcentajes como fracción decimal (0.01 = 1 %). Son límites de referencia para
+# investigación, no garantías de seguridad ni recomendaciones de operar.
+
+data:
+  data_dir: data
+  base_url: https://api.bybit.com      # API pública V5; no se usan credenciales
+  category: linear
+  symbols: [BTCUSDT, ETHUSDT]
+  timeframes: [5m, 15m, 1h, 4h]
+  request_limit: 1000                  # máximo por petición de /v5/market/kline
+  max_retries: 5
+  backoff_seconds: 1.0
+  min_request_interval: 0.05           # muy por debajo del límite de 600 peticiones / 5 s
+  timeout_seconds: 15
+
+costs:
+  taker_fee: 0.00055                   # tarifa base publicada para perpetuos USDT (no VIP)
+  maker_fee: 0.0002
+  slippage_bps: 2.0
+  use_funding: true                    # solo se aplica si hay funding descargado
+
+execution:
+  leverage: 3.0
+  same_bar_policy: stop_first
+  close_at_end: true
+  allow_reversal: true
+  maintenance_margin_rate: 0.005       # aproximación; Bybit usa niveles de riesgo
+  simulate_liquidation: true
+
+risk:
+  risk_per_trade: 0.01
+  max_drawdown: 0.15
+  drawdown_action: block               # block | close_and_block
+  max_daily_loss: 0.05
+  daily_loss_action: block             # block | close_and_block
+  max_consecutive_losses: 3
+  pause_bars_after_losses: 24
+  max_open_positions: 1
+  max_symbol_exposure: 3.0             # nocional máximo / equity
+  max_leverage: 5.0
+  margin_reserve: 0.2
+
+backtest:
+  initial_capital: 10000
+  seed: 42
+  min_trades_for_stats: 30
+  min_days_for_cagr: 180
+
+validation:
+  train_frac: 0.6
+  validation_frac: 0.2
+  embargo_bars: 0
+  wf_train_bars: 2000
+  wf_test_bars: 500
+  wf_step_bars: null
+  wf_anchored: false
+  max_grid_size: 200
+  selection_metric: sharpe
+  min_trades_selection: 10
+  bootstrap_samples: 1000
+
+output_dir: outputs

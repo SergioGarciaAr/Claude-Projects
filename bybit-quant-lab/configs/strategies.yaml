@@ -1,0 +1,191 @@
+# Parámetros de las diez estrategias (valores por defecto explícitos).
+# Modificarlos aquí cambia los backtests; cada ejecución queda registrada.
+strategies:
+  adx_di:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: null
+    trailing_atr_mult: 3.0
+    max_holding_bars: null
+    cooldown_bars: 0
+    allow_short: true
+    adx_period: 14
+    adx_threshold: 25.0
+    adx_exit: 20.0
+    di_margin: 2.0
+    require_adx_rising: false
+    exit_on_weak_trend: true
+  bollinger_reversion:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: null
+    trailing_atr_mult: null
+    max_holding_bars: 48
+    cooldown_bars: 0
+    allow_short: true
+    period: 20
+    num_std: 2.0
+    confirm_candle: true
+    adx_max: 30.0
+    adx_period: 14
+  donchian_breakout:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: null
+    trailing_atr_mult: 3.0
+    max_holding_bars: null
+    cooldown_bars: 0
+    allow_short: true
+    channel: 20
+    exit_channel: 10
+    htf: null
+    htf_ema: 50
+  ema_crossover:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: 2.0
+    trailing_atr_mult: null
+    max_holding_bars: null
+    cooldown_bars: 0
+    allow_short: true
+    fast: 12
+    slow: 26
+    trend_ema: 200
+    regime_filter: adx
+    adx_period: 14
+    adx_min: 20.0
+    atr_pct_min: 0.002
+  macd_momentum:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: 2.0
+    trailing_atr_mult: null
+    max_holding_bars: null
+    cooldown_bars: 0
+    allow_short: true
+    fast: 12
+    slow: 26
+    signal_period: 9
+    require_hist_rising: true
+    direction_filter: ema
+    trend_ema: 200
+  obv_trend:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: 2.0
+    trailing_atr_mult: null
+    max_holding_bars: null
+    cooldown_bars: 5
+    allow_short: true
+    obv_ema: 20
+    price_ema: 50
+    slope_window: 5
+  rsi_reversion:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: null
+    trailing_atr_mult: null
+    max_holding_bars: 48
+    cooldown_bars: 0
+    allow_short: true
+    rsi_period: 14
+    oversold: 30.0
+    overbought: 70.0
+    exit_level: 50.0
+    trend_filter: adx
+    trend_ema: 200
+    adx_period: 14
+    adx_max: 25.0
+  stoch_rsi:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: 1.5
+    trailing_atr_mult: null
+    max_holding_bars: 24
+    cooldown_bars: 3
+    allow_short: true
+    rsi_period: 14
+    stoch_period: 14
+    k_smooth: 3
+    d_smooth: 3
+    lower: 20.0
+    upper: 80.0
+    rearm_level: 50.0
+    confirm_candle: true
+    trend_ema: null
+  volume_spike:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: 2.0
+    trailing_atr_mult: null
+    max_holding_bars: 48
+    cooldown_bars: 0
+    allow_short: true
+    volume_window: 20
+    spike_mult: 2.5
+    min_body_ratio: 0.5
+    require_range_break: true
+    min_atr_pct: 0.0
+    max_atr_pct: null
+    exit_ema: 20
+  vwap_deviation:
+    atr_period: 14
+    stop_atr_mult: 2.0
+    take_profit_r: null
+    trailing_atr_mult: null
+    max_holding_bars: null
+    cooldown_bars: 0
+    allow_short: true
+    mode: reversion
+    vwap_type: rolling
+    vwap_window: 96
+    session: 1D
+    dev_window: 100
+    entry_z: 2.0
+    exit_z: 0.5
+    volume_window: 50
+    max_rel_volume: 1.5
+    min_rel_volume: 1.5
+
+# Combinaciones evaluadas por 'bql compare'. Pesos y redundancia se ajustan solo con
+# entrenamiento; el umbral de weighted_vote se elige con validación.
+combinations:
+  - name: vote_all
+    mode: simple_vote
+    min_margin: 3
+    conflict_policy: veto
+  - name: weighted_train
+    mode: weighted_vote          # pesos = Sharpe de entrenamiento (no negativos)
+    use_conviction: false
+  - name: consensus_3
+    mode: min_consensus
+    min_votes: 3
+  - name: category_2
+    mode: category_consensus     # al menos dos categorías distintas coinciden
+    min_categories: 2
+  - name: dedup_vote             # miembros = estrategias no redundantes en entrenamiento
+    mode: simple_vote
+    min_margin: 2
+  - name: regime_switch
+    mode: min_consensus
+    min_votes: 2
+    regime_rules:
+      trend: {trend: [trend]}                         # categoría tendencia solo en tendencia
+      rsi_reversion: {trend: [range]}                 # reversión solo en lateral
+      bollinger_reversion: {trend: [range]}
+      vwap_deviation: {trend: [range]}
+      stoch_rsi: {trend: [range]}
+      "*": {liquidity: [normal_liq, unknown]}         # bloquear baja liquidez
+
+# Rejillas acotadas para 'bql walkforward' y 'bql sensitivity' (máx. validation.max_grid_size).
+grids:
+  ema_crossover: {fast: [8, 12, 20], slow: [26, 50], regime_filter: [none, adx]}
+  donchian_breakout: {channel: [20, 40, 55], stop_atr_mult: [2.0, 3.0]}
+  rsi_reversion: {oversold: [25, 30], overbought: [70, 75], trend_filter: [none, adx]}
+  macd_momentum: {direction_filter: [none, ema, zero_line], require_hist_rising: [true, false]}
+  bollinger_reversion: {period: [20, 30], num_std: [2.0, 2.5]}
+  stoch_rsi: {lower: [10, 20], upper: [80, 90]}
+  adx_di: {adx_threshold: [20, 25, 30], di_margin: [0, 2, 5]}
+  volume_spike: {spike_mult: [2.0, 2.5, 3.0], min_body_ratio: [0.4, 0.6]}
+  obv_trend: {obv_ema: [10, 20, 40], price_ema: [50, 100]}
+  vwap_deviation: {mode: [reversion, continuation], entry_z: [1.5, 2.0, 2.5]}

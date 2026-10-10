@@ -153,3 +153,19 @@ def test_leverage_does_not_change_pnl() -> None:
         )
         pnls.append(run_backtest(df, sig, cfg, "TEST", "1h", spec=SPEC).trades["net_pnl"].iloc[0])
     assert pnls[0] == pytest.approx(pnls[1])
+
+
+@pytest.mark.parametrize("unit", ["ns", "us", "ms", "s"])
+def test_daily_reference_resets_regardless_of_index_resolution(unit: str) -> None:
+    # Regresión: el identificador de día no debe depender de la resolución del índice.
+    # Día 1: -3 %; día 2: otro -3 %. Con reinicio diario correcto nunca se alcanza el 5 %
+    # diario; sin reinicio la pérdida acumulada (~6 %) activaría el límite.
+    closes = [100.0] * 24 + [97.0] * 24 + [94.0] * 24 + [94.0] * 4
+    df = make_bars(closes, spread=0.01, freq="1h")
+    df.index = df.index.as_unit(unit)
+    sig = manual_signals(df.index, {1: 1}, stop=10)
+    cfg = zero_cost_config(max_daily_loss=0.05, risk_per_trade=0.1)
+    res = run_backtest(df, sig, cfg, "TEST", "1h", spec=SPEC)
+    assert res.trades["qty"].iloc[0] == pytest.approx(100.0)
+    assert res.final_equity == pytest.approx(10_000 - 100 * (100 - 94))
+    assert not any(e["kind"] == "daily_loss_limit" for e in res.risk_events)

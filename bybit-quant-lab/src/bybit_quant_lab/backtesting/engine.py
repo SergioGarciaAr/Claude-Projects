@@ -105,6 +105,11 @@ class BacktestEngine:
             else None
         )
         funding_by_bar, funding_ok, fw = self._map_funding(funding, idx, i0, i1)
+        stamps = list(idx[i0 : i1 + 1])
+        # Identificador de día UTC independiente de la resolución del índice (ns, us, ms...).
+        day_ids = (
+            idx.floor("D").as_unit("s").tz_convert(None).to_numpy().astype("int64") // 86_400
+        ).tolist()
         warnings.extend(fw)
 
         trades: list[TradeRecord] = []
@@ -115,8 +120,8 @@ class BacktestEngine:
         prev_target = int(sig[i0 - 1]) if i0 > 0 else 0
 
         for i in range(i0, i1 + 1):
-            ts = idx[i]
-            risk.on_bar_open(ts)
+            ts = stamps[i - i0]
+            risk.on_bar_open(ts, day_ids[i])
             pos = acct.position
             # 2. funding
             if pos is not None and i in funding_by_bar:

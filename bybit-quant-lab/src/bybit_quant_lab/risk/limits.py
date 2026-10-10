@@ -47,7 +47,7 @@ class RiskManager:
 
     config: RiskConfig
     initial_equity: float
-    day: pd.Timestamp | None = None
+    day: int | None = None
     day_start_equity: float = 0.0
     last_equity: float = 0.0
     peak_equity: float = 0.0
@@ -60,9 +60,13 @@ class RiskManager:
     def __post_init__(self) -> None:
         self.day_start_equity = self.last_equity = self.peak_equity = self.initial_equity
 
-    def on_bar_open(self, ts: pd.Timestamp) -> None:
-        """Gestiona el cambio de día UTC (reinicia la referencia diaria y el bloqueo diario)."""
-        day = ts.floor("D")
+    def on_bar_open(self, ts: pd.Timestamp, day: int | None = None) -> None:
+        """Gestiona el cambio de día UTC (reinicia la referencia diaria y el bloqueo diario).
+
+        ``day`` es un identificador entero del día UTC (opcional, para evitar recalcularlo).
+        """
+        if day is None:
+            day = int(ts.floor("D").as_unit("s").value // 86_400)
         if self.day is None:
             self.day = day
             return

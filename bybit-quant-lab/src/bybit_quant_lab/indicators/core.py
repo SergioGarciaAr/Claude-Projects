@@ -158,16 +158,14 @@ def rolling_zscore(s: pd.Series, n: int) -> pd.Series:
 
 
 def rolling_percentile(s: pd.Series, n: int) -> pd.Series:
-    """Percentil (0-1) de ``s[t]`` dentro de las ``n`` velas anteriores (excluye ``t``)."""
+    """Fracción (0-1) de las ``n`` velas **anteriores** con valor estrictamente menor que ``s[t]``.
+
+    Se calcula con el rango mínimo de ``s[t]`` dentro de la ventana ``[t-n, t]``:
+    ``(rank_min - 1) / n``. NaN si la ventana contiene valores ausentes.
+    """
     _check_period(n)
-    values = s.to_numpy(dtype="float64")
-    out = np.full(len(values), np.nan)
-    for i in range(n, len(values)):
-        window = values[i - n : i]
-        if np.isnan(values[i]) or np.isnan(window).any():
-            continue
-        out[i] = float((window < values[i]).mean())
-    return pd.Series(out, index=s.index, name="percentile")
+    ranks = s.rolling(n + 1, min_periods=n + 1).rank(method="min")
+    return ((ranks - 1) / n).rename("percentile")
 
 
 def crossover(a: pd.Series, b: pd.Series | float) -> pd.Series:
