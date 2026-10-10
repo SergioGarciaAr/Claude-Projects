@@ -223,3 +223,41 @@ def test_import_csv(workspace: Path, tmp_path: Path) -> None:
         == 0
     )
     assert (workspace / "data/processed/ETHUSDT_15m.parquet").exists()
+
+
+def test_missing_data_and_bad_params_give_clean_errors(
+    workspace: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    assert (
+        main(
+            [
+                *_base(workspace),
+                "backtest",
+                "--symbol",
+                "BTCUSDT",
+                "--timeframe",
+                "4h",
+                "--strategy",
+                "adx_di",
+            ]
+        )
+        == 1
+    )
+    assert "No existe" in capsys.readouterr().err
+    assert (
+        main(
+            [
+                *_base(workspace),
+                "backtest",
+                "--symbol",
+                "BTCUSDT",
+                "--timeframe",
+                "1h",
+                "--strategy",
+                "adx_di",
+                "--params",
+                '{"adx_period": -3}',
+            ]
+        )
+        == 1
+    )

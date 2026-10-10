@@ -642,7 +642,12 @@ def main(argv: list[str] | None = None) -> int:
         validate_timeframe(args.timeframe)
     if hasattr(args, "strategy") and args.strategy:
         create_strategy(args.strategy)  # valida que exista
-    return int(args.func(args))
+    try:
+        return int(args.func(args))
+    except (FileNotFoundError, ValueError, KeyError) as exc:
+        # Errores esperables de uso (datos ausentes, parámetros inválidos): mensaje sin traza.
+        print(f"Error: {exc}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
