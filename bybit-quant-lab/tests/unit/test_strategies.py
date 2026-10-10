@@ -280,3 +280,30 @@ def test_obv_no_shorts_in_steady_uptrend() -> None:
     df = make_bars(list(_noisy(closes, noise=0.05)), spread=0.1)
     sig = create_strategy("obv_trend").generate_signals(df)["signal"]
     assert (sig.iloc[100:] != -1).all()
+
+
+@pytest.mark.parametrize("name", ALL)
+def test_every_entry_coincides_with_an_entry_event(name: str, synth: pd.DataFrame) -> None:
+    # Regresión (auditoría E-07): con atr_period largo, forzar FLAT tras la máquina de
+    # estados creaba entradas ficticias en la primera vela con ATR válido.
+    strat = create_strategy(name, {"atr_period": 120})
+    ev = strat.compute_events(synth)
+    sig = strat.generate_signals(synth)["signal"]
+    prev = sig.shift(1, fill_value=0)
+    long_in = (sig == 1) & (prev != 1)
+    short_in = (sig == -1) & (prev != -1)
+    assert not (long_in & ~ev.long_entry.fillna(False).astype(bool)).any()
+    assert not (short_in & ~ev.short_entry.fillna(False).astype(bool)).any()
+
+
+def test_no_spurious_entry_when_atr_warmup_exceeds_indicator_warmup(synth: pd.DataFrame) -> None:
+    # Reproducción exacta del hallazgo E-07: EMAs cortas y ATR de 80 velas.
+    strat = create_strategy(
+        "ema_crossover",
+        {"fast": 3, "slow": 6, "trend_ema": None, "regime_filter": "none", "atr_period": 80},
+    )
+    ev = strat.compute_events(synth)
+    sig = strat.generate_signals(synth)["signal"]
+    entries = (sig != 0) & (sig != sig.shift(1, fill_value=0))
+    assert entries.any()
+    assert not (entries & ~(ev.long_entry | ev.short_entry)).any()

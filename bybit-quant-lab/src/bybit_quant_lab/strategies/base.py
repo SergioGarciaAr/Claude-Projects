@@ -118,6 +118,13 @@ class Strategy(ABC):
         long_entry, short_entry = _clean_bool(ev.long_entry), _clean_bool(ev.short_entry)
         if not p.allow_short:
             short_entry = pd.Series(False, index=data.index)
+        atr_ = atr(data, p.atr_period)
+        stop = atr_ * p.stop_atr_mult
+        # Sin stop válido (calentamiento del ATR) no se permite ENTRAR. Se aplica a los eventos,
+        # antes de la máquina de estados, para no crear transiciones ficticias después.
+        valid_stop = stop.notna() & (stop > 0)
+        long_entry &= valid_stop
+        short_entry &= valid_stop
         state = events_to_state(
             long_entry,
             short_entry,
@@ -126,8 +133,6 @@ class Strategy(ABC):
             max_holding_bars=p.max_holding_bars,
             cooldown_bars=p.cooldown_bars,
         )
-        atr_ = atr(data, p.atr_period)
-        stop = atr_ * p.stop_atr_mult
         out = pd.DataFrame(index=data.index)
         out["signal"] = state.astype("int64")
         conv = ev.conviction.reindex(data.index).astype("float64").clip(0, 1).fillna(0.0)

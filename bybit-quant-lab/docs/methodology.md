@@ -84,15 +84,21 @@ Las comisiones se calculan sobre el nocional (`cantidad · precio de ejecución`
 2. Las señales se calculan una vez sobre toda la serie. Al ser causales, el valor en `t` no
    depende de datos futuros. Cada segmento se simula por separado y empieza sin posición.
 3. **Ajustes con entrenamiento:** la selección de estrategias no redundantes (correlación de
-   señales en train) y los pesos de la votación ponderada (Sharpe de train, no negativos).
-4. **Ajustes con validación:** el umbral de la votación ponderada (rejilla de 4 valores, que se
-   registra) y la **selección de candidatos** (top-K por `selection_metric`, con un mínimo de
-   operaciones).
-5. **Test final.** Solo se evalúa la selección congelada en `selection.json`, una vez. El
-   registro `experiments.jsonl` bloquea una segunda evaluación salvo con `--allow-repeat`, y
-   entonces el informe advierte que el resultado ya no es independiente. Si los datos cambian
-   (otro hash), la evaluación se rechaza.
+   señales en train), los pesos de la votación ponderada (Sharpe de train, no negativos) y su
+   umbral (rejilla de 4 valores, registrada).
+4. **Ajustes con validación:** solo la **selección de candidatos** (top-K por
+   `selection_metric`, con un mínimo de operaciones). Validación no se usa para ajustar nada
+   más, así que no hay doble uso del mismo segmento.
+5. **Test final.** Solo se evalúa la selección congelada en `selection.json`. La selección
+   guarda los parámetros de **todas** las estrategias individuales, de modo que las
+   combinaciones se reconstruyen exactamente como se seleccionaron, aunque después cambie el
+   YAML. Se rechaza la evaluación si cambian los datos (hash) o la configuración (hash). El
+   registro `experiments.jsonl` bloquea **cualquier** segunda evaluación del mismo período de
+   test con los mismos datos, sea de la misma selección o de otra distinta. Solo puede
+   forzarse con `--allow-repeat`, y entonces el informe advierte que el resultado ya no es
+   independiente.
 6. La sensibilidad de parámetros no admite el segmento de test.
+7. El walk-forward solo usa entrenamiento + validación (ver sección 5).
 
 ## 5. Walk-forward
 
@@ -102,6 +108,12 @@ la rejilla en entrenamiento, se elige la mejor configuración por `selection_met
 mínimo de operaciones; los empates se resuelven por el orden de la rejilla) y se simula en la
 ventana de test siguiente. Los retornos fuera de muestra se encadenan. La tabla in-sample
 completa se exporta para analizar la estabilidad.
+
+Las ventanas se construyen **solo sobre entrenamiento + validación** (`data_range` en el
+resumen): el período de test final queda excluido para que siga siendo independiente. Si en
+una ventana ninguna configuración alcanza `min_trades_selection`, se usa la primera de la
+rejilla y la columna `selection_valid` vale `false`: esa ventana no representa una selección
+real.
 
 ## 6. Control del sobreajuste y pruebas múltiples
 

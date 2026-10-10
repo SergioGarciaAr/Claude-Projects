@@ -27,8 +27,9 @@ Reglas de la máquina de estados (`events_to_state`), evaluadas al cierre en est
 
 Otras reglas comunes:
 
-- Mientras el ATR no esté disponible (calentamiento) no hay stop válido y la señal se fuerza a
-  FLAT.
+- Mientras el ATR no esté disponible (calentamiento) no hay stop válido: los **eventos de
+  entrada** se anulan antes de la máquina de estados (no se crean entradas ficticias en la
+  primera vela con ATR válido) y, por seguridad, la señal también se fuerza a FLAT.
 - Datos ausentes (NaN): las comparaciones con NaN son falsas, de modo que no se generan eventos.
   Los indicadores recursivos ignoran los NaN.
 - `allow_short: false` elimina las entradas cortas.

@@ -174,9 +174,12 @@ costes. Selecciona candidatos **solo con validación** y congela la selección e
 bql final-test --selection outputs/compare_BTCUSDT_1h_<fecha>/selection.json
 ```
 
-Evalúa la selección congelada en el período de test. Si se intenta repetir, la orden se
-niega (código de salida 3), salvo que se use `--allow-repeat`. En ese caso el informe marca
-el resultado como no independiente.
+Evalúa la selección congelada en el período de test. Si ese período ya se evaluó con los
+mismos datos, la orden se niega (código de salida 3), tanto para la misma selección como para
+otra distinta, salvo que se use `--allow-repeat`. En ese caso el informe marca el resultado
+como no independiente. También se rechaza si la configuración o los datos cambiaron desde la
+selección. Las selecciones creadas antes de la auditoría (sin `strategy_params`) deben
+regenerarse con `bql compare`.
 
 ## Walk-forward y sensibilidad
 
@@ -272,3 +275,4 @@ Ver [`docs/methodology.md`](docs/methodology.md), [`docs/metrics.md`](docs/metri
 - [`docs/metrics.md`](docs/metrics.md): fórmulas de las métricas.
 - [`docs/data_sources.md`](docs/data_sources.md): API de Bybit, disponibilidad y calidad de datos.
 - [`docs/progress.md`](docs/progress.md): estado verificado de cada fase y tareas pendientes.
+- [`docs/audit_report.md`](docs/audit_report.md): auditoría técnica y cuantitativa con hallazgos, evidencias y correcciones.

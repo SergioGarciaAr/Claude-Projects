@@ -501,6 +501,9 @@ class Researcher:
                     "test_end": str(te.end),
                     "params": grid[best_i],
                     "is_score": best_score,
+                    # False: ninguna configuración alcanzó min_trades_selection en esta ventana
+                    # y se usó la primera de la rejilla por defecto (no es una selección real).
+                    "selection_valid": bool(np.isfinite(best_score)),
                     "is_" + v.selection_metric: best_m.get(v.selection_metric),
                     "oos_net_profit": m_oos["net_profit"],
                     "oos_sharpe": m_oos["sharpe"],

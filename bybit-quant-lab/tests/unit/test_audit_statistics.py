@@ -199,3 +199,15 @@ def test_random_benchmark_calibrated_only_on_simulated_segment() -> None:
     first_half = random_signals(ref, 1, slice(0, 500))
     assert (first_half["signal"] == 0).all()
     assert (random_signals(ref, 1, slice(500, 1000))["signal"] != 0).any()
+
+
+def test_walk_forward_flags_windows_without_valid_selection(researcher: Researcher) -> None:
+    researcher.config = researcher.config.model_copy(
+        update={
+            "validation": researcher.config.validation.model_copy(
+                update={"min_trades_selection": 10_000}
+            )
+        }
+    )
+    wf = researcher.walk_forward("ema_crossover", {"fast": [8, 12]})
+    assert not wf["windows"]["selection_valid"].any()
