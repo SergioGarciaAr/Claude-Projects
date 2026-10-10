@@ -66,17 +66,38 @@ class FinalTestAlreadyEvaluatedError(RuntimeError):
     """El período de test ya fue evaluado para esta selección."""
 
 
-def guard_final_test(log: ExperimentLog, selection_id: str, allow_repeat: bool) -> bool:
-    """Comprueba si ``selection_id`` ya se evaluó en test. Devuelve ``True`` si es repetición."""
+def guard_final_test(
+    log: ExperimentLog,
+    selection_id: str,
+    allow_repeat: bool,
+    data_hash: str | None = None,
+    test_segment: dict[str, Any] | None = None,
+) -> bool:
+    """Comprueba si el período de test ya se usó. Devuelve ``True`` si es repetición.
+
+    Bloquea tanto la misma selección como **cualquier otra** evaluada sobre los mismos datos
+    y el mismo período de test: probar varias selecciones contra el test y quedarse con la
+    mejor equivale a seleccionar con el test.
+    """
+
+    def same_period(r: dict[str, Any]) -> bool:
+        return (
+            data_hash is not None
+            and r.get("data_hash") == data_hash
+            and (test_segment is None or r.get("test_segment") in (None, test_segment))
+        )
+
     done = [
         r
         for r in log.records()
-        if r.get("kind") == "final_test" and r.get("selection_id") == selection_id
+        if r.get("kind") == "final_test"
+        and (r.get("selection_id") == selection_id or same_period(r))
     ]
     if done and not allow_repeat:
         raise FinalTestAlreadyEvaluatedError(
-            f"La selección {selection_id} ya se evaluó en el período de test el "
-            f"{done[0]['logged_at']}. Reevaluarla tras modificar parámetros invalidaría la "
-            "independencia del test. Usa --allow-repeat solo si entiendes la consecuencia."
+            f"El período de test de estos datos ya se evaluó el {done[0]['logged_at']} "
+            f"(selección {done[0].get('selection_id')}). Evaluar otra selección o la misma tras "
+            "cambios invalidaría la independencia del test. Usa --allow-repeat solo si "
+            "entiendes la consecuencia; el informe lo marcará como no independiente."
         )
     return bool(done)

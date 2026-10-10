@@ -7,7 +7,9 @@ Las velas OHLC no revelan el orden real de los precios dentro de la vela. Reglas
 2. **Intravela, stop primero**: si en la misma vela se tocan el nivel adverso (stop o
    liquidación) y el objetivo, se asume que se tocó **primero el adverso**. Nunca se asume
    el resultado más favorable.
-3. **Liquidación frente a stop**: el nivel adverso efectivo es el más cercano al precio de
+3. **Gap más allá de la liquidación**: se liquida (pérdida = margen aislado), aunque el
+   stop estuviera más cerca de la entrada.
+4. **Liquidación frente a stop**: el nivel adverso efectivo es el más cercano al precio de
    entrada (para largos, ``max(stop, liquidación)``). Si ambos coinciden prevalece la
    liquidación.
 """
@@ -39,7 +41,14 @@ def _adverse(side: int, stop: float | None, liq: float | None) -> tuple[float | 
 def check_gap_exit(
     side: int, open_: float, stop: float | None, take_profit: float | None, liq: float | None
 ) -> ExitCheck | None:
-    """Comprueba si la apertura ya ha superado algún nivel."""
+    """Comprueba si la apertura ya ha superado algún nivel.
+
+    Si la apertura supera el precio de liquidación, la posición se liquida aunque el stop
+    estuviera más cerca: con margen aislado la pérdida queda limitada al margen y nunca se
+    ejecuta un stop a un precio peor que la liquidación.
+    """
+    if liq is not None and (open_ <= liq if side > 0 else open_ >= liq):
+        return ExitCheck(liq, "liquidation_gap")
     level, name = _adverse(side, stop, liq)
     if level is not None and (open_ <= level if side > 0 else open_ >= level):
         return ExitCheck(open_, f"{name}_gap")

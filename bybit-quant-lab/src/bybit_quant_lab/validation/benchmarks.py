@@ -4,8 +4,9 @@
   segmento con comisión y slippage, y vende al cierre final con los mismos costes.
 * ``cash``: equity constante (retorno 0). Referencia neutral para estrategias long/short.
 * ``random_entries``: estados aleatorios (semilla fija) con la misma fracción de velas activas
-  y duración media similar a la estrategia evaluada, simulados con el mismo motor, stops y
-  costes. Sirve para medir si la estrategia supera a la aleatoriedad con igual exposición.
+  y duración media similar a una estrategia de referencia, medidas solo en el segmento
+  simulado, con el mismo motor, stops y costes. En ``bql compare`` la referencia es la primera
+  estrategia de la lista (su nombre figura en la etiqueta); no es un benchmark por estrategia.
 """
 
 from __future__ import annotations
@@ -130,18 +131,24 @@ def cash_benchmark(
     )
 
 
-def random_signals(reference: pd.DataFrame, seed: int) -> pd.DataFrame:
-    """Señales aleatorias con exposición y duración media similares a ``reference``."""
+def random_signals(
+    reference: pd.DataFrame, seed: int, calibration: slice | None = None
+) -> pd.DataFrame:
+    """Señales aleatorias con exposición y duración media similares a ``reference``.
+
+    ``calibration`` limita las velas usadas para medir exposición y duración (el segmento
+    simulado), de modo que el benchmark no use estadísticas de otros períodos.
+    """
     rng = np.random.default_rng(seed)
-    sig = reference["signal"].to_numpy()
-    n = len(sig)
+    sig = reference["signal"].to_numpy()[calibration or slice(None)]
+    n_out = len(reference)
     active = sig != 0
-    starts = int(np.sum(active[1:] & (sig[1:] != sig[:-1]))) + int(active[0]) if n else 0
+    starts = int(np.sum(active[1:] & (sig[1:] != sig[:-1]))) + int(active[0]) if len(sig) else 0
     avg_len = max(int(active.sum() / starts), 1) if starts else 1
-    out = np.zeros(n, dtype=np.int64)
-    p_start = starts / max(n - active.sum(), 1)
+    out = np.zeros(n_out, dtype=np.int64)
+    p_start = starts / max(len(sig) - active.sum(), 1)
     i = 0
-    while i < n:
+    while i < n_out:
         if rng.random() < p_start:
             length = max(1, int(rng.exponential(avg_len)))
             out[i : i + length] = rng.choice([-1, 1])
@@ -163,15 +170,20 @@ def random_benchmark(
     timeframe: str,
     seed: int,
     funding: pd.Series | None = None,
+    reference_name: str = "ref",
 ) -> BacktestResult:
-    """Simula entradas aleatorias (semilla fija) con el mismo motor y gestión de salidas."""
-    sig = random_signals(reference_signals, seed)
+    """Simula entradas aleatorias (semilla fija) con el mismo motor y gestión de salidas.
+
+    La exposición se calibra con las señales de ``reference_name`` **en el segmento simulado**.
+    """
+    calib = slice(segment.start_pos, segment.end_pos + 1)
+    sig = random_signals(reference_signals, seed, calib)
     res = BacktestEngine(config, symbol, timeframe).run(
         data,
         sig,
         funding=funding,
         start=segment.start,
         end=segment.end,
-        label=f"benchmark_random_seed{seed}",
+        label=f"benchmark_random_{reference_name}_seed{seed}",
     )
     return res

@@ -35,15 +35,26 @@ def _moments(returns: pd.Series) -> tuple[float, float, float, int]:
     return sr, float(np.mean(z**3)), float(np.mean(z**4)), n
 
 
+def psr_from_moments(
+    sr: float, skew: float, kurtosis: float, n_obs: int, benchmark_sr: float = 0.0
+) -> float | None:
+    """PSR = Φ((SR - SR*)·sqrt(T-1) / sqrt(1 - γ3·SR + (γ4-1)/4·SR²)).
+
+    ``sr`` no anualizado (misma frecuencia que las observaciones); ``kurtosis`` es la curtosis
+    **no** en exceso (normal = 3). Devuelve ``None`` si el denominador no es positivo.
+    """
+    if n_obs < 3 or math.isnan(sr):
+        return None
+    denom = 1 - skew * sr + (kurtosis - 1) / 4 * sr**2
+    if denom <= 0:
+        return None
+    return _N.cdf((sr - benchmark_sr) * math.sqrt(n_obs - 1) / math.sqrt(denom))
+
+
 def probabilistic_sharpe(returns: pd.Series, benchmark_sr: float = 0.0) -> float | None:
     """P(SR verdadero > ``benchmark_sr``) con SR no anualizado por vela."""
     sr, skew, kurt, n = _moments(returns)
-    if math.isnan(sr) or n < 3:
-        return None
-    denom = 1 - skew * sr + (kurt - 1) / 4 * sr**2
-    if denom <= 0:
-        return None
-    return _N.cdf((sr - benchmark_sr) * math.sqrt(n - 1) / math.sqrt(denom))
+    return psr_from_moments(sr, skew, kurt, n, benchmark_sr)
 
 
 def expected_max_sharpe(n_trials: int, sr_variance: float) -> float:

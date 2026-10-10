@@ -196,7 +196,7 @@ class Researcher:
     def build_combinations(
         self, singles: dict[str, Candidate], combos: list[CombinationConfig]
     ) -> tuple[dict[str, Candidate], dict[str, Any]]:
-        """Construye combinaciones; redundancia y pesos se ajustan con entrenamiento."""
+        """Construye combinaciones; redundancia, pesos y umbrales se ajustan con entrenamiento."""
         tr = self.segments["train"]
         frames = {n: c.signals for n, c in singles.items()}
         cats = {n: create_strategy(n).category.value for n in singles}
@@ -221,7 +221,8 @@ class Researcher:
                 }
                 cfg = cfg.model_copy(update={"weights": fit_weights(train_rets)})
                 info.setdefault("weights", {})[cfg.name] = cfg.weights
-                # Umbral elegido con validación (rejilla pequeña y registrada)
+                # Umbral elegido en ENTRENAMIENTO (rejilla pequeña y registrada). Validación
+                # queda reservada para seleccionar candidatos sin doble uso de los datos.
                 best_t, best_s = cfg.threshold, float("-inf")
                 for t in (0.2, 0.3, 0.4, 0.5):
                     trial = cfg.model_copy(update={"threshold": t})
@@ -231,7 +232,7 @@ class Researcher:
                         combine_signals(frames, cats, trial, self.regime),
                         {},
                     )
-                    s = self._score(self.metrics(self.simulate(c, self.segments["validation"])))
+                    s = self._score(self.metrics(self.simulate(c, tr)))
                     if s > best_s:
                         best_t, best_s = t, s
                 cfg = cfg.model_copy(update={"threshold": best_t})
@@ -274,6 +275,7 @@ class Researcher:
                     self.timeframe,
                     self.config.backtest.seed,
                     self.funding,
+                    reference_name=names[0],
                 ),
             ):
                 results[(bench.label, seg_name, "net")] = bench
@@ -360,6 +362,9 @@ class Researcher:
             "data_hash": self.data_hash,
             "config_hash": config_hash(self.config),
             "selection_metric": self.config.validation.selection_metric,
+            # Parámetros de TODAS las estrategias individuales en el momento de la selección:
+            # el test final reconstruye las combinaciones con ellos, no con el YAML vigente.
+            "strategy_params": {n: c.params for n, c in cands.items() if c.kind == "strategy"},
             "segments": {k: s.to_dict() for k, s in self.segments.items()},
             "selected": [
                 {
@@ -380,18 +385,29 @@ class Researcher:
         """Evalúa la selección congelada en el período de test (una sola vez)."""
         if selection["data_hash"] != self.data_hash:
             raise ValueError("Los datos no coinciden con los usados en la selección")
+        if selection.get("config_hash") != config_hash(self.config):
+            raise ValueError(
+                "La configuración actual difiere de la usada en la selección (costes, riesgo, "
+                "segmentos...); el test final debe usar exactamente la misma configuración."
+            )
+        frozen = selection.get("strategy_params")
+        if not isinstance(frozen, dict):
+            raise ValueError(
+                "La selección no contiene 'strategy_params' (formato anterior a la auditoría); "
+                "vuelve a ejecutar 'bql compare'."
+            )
         if self.log is None:
             raise ValueError("El test final requiere un log de experimentos")
-        repeated = guard_final_test(self.log, selection["selection_id"], allow_repeat)
         seg = self.segments["test"]
+        repeated = guard_final_test(
+            self.log, selection["selection_id"], allow_repeat, self.data_hash, seg.to_dict()
+        )
         singles = {
             n: Candidate(
                 n,
                 "strategy",
-                create_strategy(n, self._strategy_params_from(selection, n)).generate_signals(
-                    self.data
-                ),
-                {},
+                create_strategy(n, frozen.get(n, {})).generate_signals(self.data),
+                frozen.get(n, {}),
             )
             for n in available_strategies()
         }
@@ -433,6 +449,7 @@ class Researcher:
                 "selection_id": selection["selection_id"],
                 "repeated": repeated,
                 "data_hash": self.data_hash,
+                "test_segment": seg.to_dict(),
                 "metrics": {
                     n: {k: self.metrics(v["net"]).get(k) for k in KEY_METRICS}
                     for n, v in out["candidates"].items()
@@ -441,19 +458,18 @@ class Researcher:
         )
         return out
 
-    def _strategy_params_from(self, selection: dict[str, Any], name: str) -> dict[str, Any]:
-        for sel in selection["selected"]:
-            if sel["kind"] == "strategy" and sel["name"] == name:
-                return dict(sel["params"])
-        return self.strategy_params.get(name, {})
-
     # -------------------------------------------------------- walk-forward
     def walk_forward(self, strategy: str, space: dict[str, list[Any]]) -> dict[str, Any]:
-        """Optimiza en cada ventana de entrenamiento y evalúa fuera de muestra."""
+        """Optimiza en cada ventana de entrenamiento y evalúa fuera de muestra.
+
+        Las ventanas se limitan a entrenamiento + validación: el período de test final nunca
+        se usa, para que siga siendo una evaluación independiente.
+        """
         v = self.config.validation
         grid = param_grid(space, v.max_grid_size)
+        usable = self.segments["validation"].end_pos + 1
         windows = walk_forward_windows(
-            pd.DatetimeIndex(self.data.index),
+            pd.DatetimeIndex(self.data.index[:usable]),
             v.wf_train_bars,
             v.wf_test_bars,
             v.wf_step_bars,
@@ -500,6 +516,7 @@ class Researcher:
         return {
             "strategy": strategy,
             "grid_size": len(grid),
+            "data_range": [str(self.data.index[0]), str(self.data.index[usable - 1])],
             "windows": pd.DataFrame(rows),
             "oos_equity": equity,
             "oos_total_return": float(equity.iloc[-1] / self.config.backtest.initial_capital - 1),

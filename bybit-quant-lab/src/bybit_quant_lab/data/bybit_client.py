@@ -185,6 +185,7 @@ class BybitPublicClient:
         """Descarga tasas de funding históricas en ``[start, end]`` paginando hacia atrás."""
         rows: dict[pd.Timestamp, float] = {}
         cursor_end = end
+        previous_oldest: pd.Timestamp | None = None
         while cursor_end >= start:
             params = {
                 "category": category,
@@ -208,6 +209,12 @@ class BybitPublicClient:
                     raise BybitAPIError(f"Registro de funding inválido: {item}") from exc
                 stamps.append(ts)
             oldest = min(stamps)
+            if previous_oldest is not None and oldest >= previous_oldest:
+                raise BybitAPIError(
+                    "La paginación de funding no avanza (la API no respeta endTime); se "
+                    "detiene para evitar un bucle infinito."
+                )
+            previous_oldest = oldest
             if len(items) < limit or oldest <= start:
                 break
             cursor_end = oldest - pd.Timedelta(milliseconds=1)

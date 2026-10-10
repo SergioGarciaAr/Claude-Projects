@@ -124,7 +124,9 @@ completa se exporta para analizar la estabilidad.
   mejor y dispersión.
 - **Benchmarks:** buy-and-hold 1x con costes, efectivo (la referencia neutral para sistemas
   long/short) y entradas aleatorias con semilla fija. Estas últimas tienen la misma fracción de
-  velas activas y una duración media similar, y se simulan con los mismos stops y costes.
+  velas activas y una duración media similar a las de **una** estrategia de referencia (la
+  primera de la lista, indicada en la etiqueta), medidas solo en el segmento simulado, y se
+  simulan con los mismos stops y costes.
 - **Redundancia:** correlación y coincidencia de señales en entrenamiento. Las combinaciones
   pueden excluir miembros redundantes (`dedup_vote`) y la votación por categorías evita el
   doble conteo de información de la misma familia.
