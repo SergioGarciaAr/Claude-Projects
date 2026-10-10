@@ -21,6 +21,13 @@ from bybit_quant_lab.reporting.export import to_jsonable
 MAX_TRADE_ROWS = 500
 
 
+def _fmt(x: float) -> str:
+    """Formato legible: separador de miles y sin notación científica para importes."""
+    if x == 0:
+        return "0"
+    return f"{x:,.2f}" if abs(x) >= 1000 else f"{x:.4g}"
+
+
 @dataclass
 class Section:
     """Sección del informe."""
@@ -33,9 +40,7 @@ class Section:
 
     def table(self, df: pd.DataFrame, caption: str = "", index: bool = True) -> Section:
         """Añade una tabla formateada."""
-        html = df.to_html(
-            index=index, float_format=lambda x: f"{x:,.4g}", na_rep="—", border=0, escape=True
-        )
+        html = df.to_html(index=index, float_format=_fmt, na_rep="—", border=0, escape=True)
         self.tables.append({"html": html, "caption": caption})
         return self
 
@@ -270,10 +275,11 @@ def comparison_report(out: Any, metadata: dict[str, Any], path: Path) -> Path:
         )
         .table(out.correlation.round(2), "Correlación")
         .table(out.agreement.round(2), "Coincidencia cuando ambas están activas")
-        .table(
-            pd.DataFrame({"valor": pd.Series(out.redundancy, dtype=object)}),
-            "Decisiones de combinación ajustadas en entrenamiento/validación",
-        )
+    )
+    secs[-1].pre = (
+        "Decisiones de combinación ajustadas en entrenamiento (pesos, redundancia) y "
+        "validación (umbrales):\n"
+        + json.dumps(to_jsonable(out.redundancy), indent=2, ensure_ascii=False)
     )
     st = out.statistics
     holm = pd.DataFrame(st["holm_validation"]).T

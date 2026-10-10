@@ -38,12 +38,20 @@ def _encode(fig: plt.Figure) -> str:
     return base64.b64encode(buf.getvalue()).decode("ascii")
 
 
+#: Colores fijos por entidad: buy-and-hold siempre naranja y efectivo siempre gris
+#: discontinuo, en todos los informes. Las estrategias usan azul y aqua, en ese orden.
+RESERVED = {"buy_and_hold": (SERIES[1], "-"), "cash": (INK_2, "--")}
+FREE = (SERIES[0], SERIES[2])
+
+
 def line_chart(series: dict[str, pd.Series], title: str, ylabel: str = "") -> str:
     """Hasta tres series temporales en un eje (las adicionales se ignoran)."""
     fig, ax = plt.subplots(figsize=(9, 3.2))
     fig.patch.set_facecolor(SURFACE)
-    for color, (name, s) in zip(SERIES, list(series.items())[:3], strict=False):
-        ax.plot(s.index, s.to_numpy(), color=color, linewidth=1.6, label=name)
+    free = iter(FREE)
+    for name, s in list(series.items())[:3]:
+        color, style = RESERVED.get(name) or (next(free, INK_2), "-")
+        ax.plot(s.index, s.to_numpy(), color=color, linestyle=style, linewidth=1.6, label=name)
     _style(ax, title)
     ax.set_ylabel(ylabel, color=INK_2, fontsize=8)
     if len(series) > 1:

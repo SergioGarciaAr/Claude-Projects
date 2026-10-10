@@ -27,6 +27,10 @@ from bybit_quant_lab.backtesting.results import BacktestResult
 from bybit_quant_lab.timeframes import bars_per_year
 
 MIN_BARS_FOR_RATIOS = 30
+#: Con menos operaciones (y exposición no continua) Sharpe/Sortino no se presentan: con
+#: 1-9 operaciones la serie de retornos está dominada por unos pocos episodios.
+MIN_TRADES_FOR_RATIOS = 10
+CONTINUOUS_EXPOSURE = 0.9
 
 
 def bar_returns(equity: pd.Series, initial: float) -> pd.Series:
@@ -60,7 +64,7 @@ def drawdown_stats(equity: pd.Series) -> dict[str, Any]:
         longest = max(longest, cur)
     idx = equity.index
     return {
-        "max_drawdown": float(-np.min(dd)),
+        "max_drawdown": max(0.0, float(-np.min(dd))),
         "max_dd_duration_bars": longest,
         "max_dd_recovery_bars": recovery,
         "max_dd_start": str(idx[peak_idx]),
@@ -89,7 +93,14 @@ def compute_metrics(
     days = (n_bars * (525600 / ann)) / 1440 if n_bars else 0.0
 
     sharpe = sortino = None
-    if n_bars >= MIN_BARS_FOR_RATIOS:
+    exposure = float(result.equity["in_position"].mean()) if n_bars else 0.0
+    few_trades = n_trades < MIN_TRADES_FOR_RATIOS and exposure < CONTINUOUS_EXPOSURE
+    if few_trades:
+        warnings.append(
+            f"Solo {n_trades} operaciones (< {MIN_TRADES_FOR_RATIOS}) con exposición no "
+            "continua: Sharpe/Sortino no se presentan por no ser representativos."
+        )
+    elif n_bars >= MIN_BARS_FOR_RATIOS:
         std = float(rets.std(ddof=1))
         if std > 0:
             sharpe = float(rets.mean() / std * math.sqrt(ann))
@@ -139,7 +150,7 @@ def compute_metrics(
         "profit_factor": (gross_win / gross_loss) if gross_loss > 0 else None,
         "expectancy": float(net.mean()) if n_trades else None,
         "expectancy_pct_equity": float(trades["return_on_equity"].mean()) if n_trades else None,
-        "exposure": float(result.equity["in_position"].mean()) if n_bars else 0.0,
+        "exposure": exposure,
         "turnover": result.totals["traded_notional"] / float(eq.mean()) if n_bars else 0.0,
         "total_fees": result.totals["fees"],
         "total_slippage": result.totals["slippage"],

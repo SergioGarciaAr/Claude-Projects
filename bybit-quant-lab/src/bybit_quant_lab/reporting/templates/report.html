@@ -31,7 +31,7 @@ ul { margin:4px 0 4px 18px; padding:0; }
 <body>
 <h1>{{ title }}</h1>
 <p class="sub">{{ subtitle }}</p>
-<div class="disclaimer"><strong>Advertencia.</strong> {{ disclaimer }}</div>
+<div class="disclaimer">{{ disclaimer }}</div>
 {% if warnings %}<div class="warn"><strong>Limitaciones y advertencias</strong><ul>
 {% for w in warnings %}<li>{{ w }}</li>{% endfor %}</ul></div>{% endif %}
 {% for s in sections %}

@@ -167,3 +167,13 @@ def test_misaligned_signals_rejected() -> None:
     sig = manual_signals(df.index[:-1], {})
     with pytest.raises(ValueError):
         _run(df, sig, zero_cost_config())
+
+
+def test_ratios_not_reported_with_too_few_trades() -> None:
+    from bybit_quant_lab.analytics import compute_metrics
+
+    df = make_bars([100 + i * 0.1 for i in range(200)])
+    sig = manual_signals(df.index, {10: 1, 20: 0}, stop=50)
+    m = compute_metrics(_run(df, sig, zero_cost_config()))
+    assert m["num_trades"] == 1 and m["sharpe"] is None and m["sortino"] is None
+    assert any("Sharpe/Sortino no se presentan" in w for w in m["warnings"])
