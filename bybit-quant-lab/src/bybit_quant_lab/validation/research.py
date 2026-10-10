@@ -528,6 +528,65 @@ class Researcher:
         return table, stability_summary(table, self.config.validation.selection_metric)
 
 
+def market_matrix(
+    markets: list[Researcher],
+    strategies: list[str] | None = None,
+    segment: str = "validation",
+) -> pd.DataFrame:
+    """Métricas netas de cada estrategia en cada mercado (símbolo × temporalidad).
+
+    Cada ``Researcher`` aplica su propia separación cronológica, de modo que el segmento
+    ``validation`` de cada mercado es independiente de su período de test, que no se usa.
+    """
+    if segment == "test":
+        raise ValueError("La matriz de mercados no puede usar el período de test")
+    names = strategies or available_strategies()
+    rows: list[dict[str, Any]] = []
+    for r in markets:
+        seg = r.segments[segment]
+        for name in names:
+            m = r.metrics(r.simulate(r.strategy_candidate(name), seg))
+            rows.append(
+                {
+                    "symbol": r.symbol,
+                    "timeframe": r.timeframe,
+                    "candidate": name,
+                    "segment": segment,
+                    **{k: m.get(k) for k in KEY_METRICS},
+                }
+            )
+        bh = r.metrics(buy_and_hold(r.data, r.config, seg, r.symbol, r.timeframe))
+        rows.append(
+            {
+                "symbol": r.symbol,
+                "timeframe": r.timeframe,
+                "candidate": "benchmark_buy_and_hold",
+                "segment": segment,
+                **{k: bh.get(k) for k in KEY_METRICS},
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def consistency_summary(matrix: pd.DataFrame) -> pd.DataFrame:
+    """Por estrategia: mercados evaluados, fracción con resultado neto positivo y dispersión.
+
+    Un resultado positivo en un único mercado y negativo en el resto indica fragilidad.
+    """
+    strat = matrix[~matrix["candidate"].str.startswith("benchmark")]
+    g = strat.groupby("candidate")
+    return pd.DataFrame(
+        {
+            "markets": g.size(),
+            "fraction_positive": g["net_profit_pct"].apply(lambda s: float((s > 0).mean())),
+            "median_net_profit_pct": g["net_profit_pct"].median(),
+            "worst_net_profit_pct": g["net_profit_pct"].min(),
+            "best_net_profit_pct": g["net_profit_pct"].max(),
+            "total_trades": g["num_trades"].sum(),
+        }
+    ).sort_values("fraction_positive", ascending=False)
+
+
 def _selection_id(dhash: str, names: list[str], chash: str) -> str:
     blob = json.dumps({"d": dhash, "n": names, "c": chash}, sort_keys=True).encode()
     return hashlib.sha256(blob).hexdigest()[:16]

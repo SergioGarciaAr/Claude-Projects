@@ -261,3 +261,53 @@ def test_missing_data_and_bad_params_give_clean_errors(
         )
         == 1
     )
+
+
+def test_markets_command(workspace: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    assert (
+        main(
+            [
+                *_base(workspace),
+                "synth",
+                "--symbol",
+                "ETHUSDT",
+                "--timeframe",
+                "1h",
+                "--bars",
+                "3000",
+                "--seed",
+                "5",
+            ]
+        )
+        == 0
+    )
+    out = workspace / "mk"
+    assert (
+        main(
+            [
+                *_base(workspace),
+                "markets",
+                "--symbols",
+                "BTCUSDT",
+                "ETHUSDT",
+                "--timeframes",
+                "1h",
+                "4h",
+                "--strategies",
+                "adx_di,ema_crossover",
+                "--out",
+                str(out),
+            ]
+        )
+        == 0
+    )
+    matrix = pd.read_csv(out / "matrix.csv")
+    # 4h no existe para ninguno de los dos símbolos: se omite con aviso
+    assert set(zip(matrix["symbol"], matrix["timeframe"], strict=True)) == {
+        ("BTCUSDT", "1h"),
+        ("ETHUSDT", "1h"),
+    }
+    assert "se omite" in capsys.readouterr().err
+    meta = json.loads((out / "metadata.json").read_text())
+    assert set(meta["data_hashes"]) == {"BTCUSDT_1h", "ETHUSDT_1h"}
+    assert (out / "report.html").exists()

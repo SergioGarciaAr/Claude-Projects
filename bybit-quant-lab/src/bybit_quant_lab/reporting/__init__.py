@@ -5,6 +5,7 @@ from bybit_quant_lab.reporting.html import (
     backtest_report,
     comparison_report,
     final_test_report,
+    markets_report,
     walkforward_report,
 )
 from bybit_quant_lab.reporting.metadata import build_metadata
@@ -15,6 +16,7 @@ __all__ = [
     "comparison_report",
     "export_result",
     "final_test_report",
+    "markets_report",
     "walkforward_report",
     "write_json",
 ]

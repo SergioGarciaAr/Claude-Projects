@@ -320,6 +320,41 @@ def comparison_report(out: Any, metadata: dict[str, Any], path: Path) -> Path:
     )
 
 
+def markets_report(
+    matrix: pd.DataFrame, consistency: pd.DataFrame, metadata: dict[str, Any], path: Path
+) -> Path:
+    """Informe de rendimiento por símbolo y temporalidad."""
+    m = matrix.assign(market=matrix["symbol"] + " " + matrix["timeframe"])
+    pivot = m.pivot_table(index="candidate", columns="market", values="net_profit_pct")
+    trades = m.pivot_table(index="candidate", columns="market", values="num_trades")
+    secs = [
+        Section(
+            "Resumen ejecutivo",
+            text=(
+                "Resultado neto de cada estrategia (parámetros de configuración, sin optimizar por "
+                f"mercado) en el segmento '{matrix['segment'].iloc[0]}' de cada mercado. "
+                "El período de test no se usa. Un resultado que solo aparece en un mercado "
+                "es una señal de fragilidad, no de robustez."
+            ),
+        ).table(consistency, "Consistencia entre mercados"),
+        Section("Rendimiento neto por mercado")
+        .table(pivot, "Beneficio neto (fracción)")
+        .table(trades, "Número de operaciones"),
+        Section("Detalle").table(matrix, index=False),
+    ]
+    warnings = ["Las estrategias con pocas operaciones en un mercado no permiten conclusiones."]
+    if metadata.get("data_synthetic"):
+        warnings.append("Datos SINTÉTICOS: sirven para validar la lógica, no la rentabilidad.")
+    return render(
+        "Rendimiento por símbolo y temporalidad",
+        str(sorted(set(m["market"]))),
+        secs,
+        metadata,
+        warnings,
+        path,
+    )
+
+
 def final_test_report(
     ft: dict[str, Any],
     metadata: dict[str, Any],

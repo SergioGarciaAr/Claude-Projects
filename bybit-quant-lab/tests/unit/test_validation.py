@@ -164,3 +164,21 @@ def test_comparison_is_deterministic(synth: pd.DataFrame) -> None:
     b = Researcher(synth, "BTCUSDT", "1h", AppConfig()).run_comparison(COMBOS, ["adx_di"])
     pd.testing.assert_frame_equal(a.summary, b.summary)
     assert a.selection == b.selection
+
+
+def test_market_matrix_and_consistency(synth: pd.DataFrame) -> None:
+    from bybit_quant_lab.data.synthetic import generate_synthetic_ohlcv
+    from bybit_quant_lab.validation.research import consistency_summary, market_matrix
+
+    cfg = AppConfig()
+    eth = generate_synthetic_ohlcv(2000, "4h", seed=9, start_price=2000.0)
+    markets = [Researcher(synth, "BTCUSDT", "1h", cfg), Researcher(eth, "ETHUSDT", "4h", cfg)]
+    m = market_matrix(markets, ["ema_crossover", "adx_di"])
+    assert len(m) == 2 * (2 + 1)  # 2 mercados x (2 estrategias + buy-and-hold)
+    for r in markets:  # ninguna simulación toca el período de test de su mercado
+        assert r.segments["validation"].end < r.segments["test"].start
+    c = consistency_summary(m)
+    assert set(c.index) == {"ema_crossover", "adx_di"}
+    assert (c["markets"] == 2).all() and c["fraction_positive"].between(0, 1).all()
+    with pytest.raises(ValueError):
+        market_matrix(markets, ["adx_di"], segment="test")

@@ -189,6 +189,17 @@ bql walkforward --symbol BTCUSDT --timeframe 1h --strategy donchian_breakout --g
 Las rejillas por defecto están en `configs/strategies.yaml` (`grids`) y se limitan a
 `validation.max_grid_size` combinaciones.
 
+## Rendimiento por símbolo y temporalidad
+
+```bash
+bql markets --symbols BTCUSDT ETHUSDT --timeframes 1h 4h --segment validation
+```
+
+Evalúa cada estrategia, con los parámetros configurados y sin optimizarla por mercado, en el
+segmento elegido de cada dataset disponible (los que faltan se omiten con un aviso). Genera
+`matrix.csv`, `consistency.csv` (fracción de mercados con resultado positivo, mediana y peor
+caso) y `report.html`. No usa el período de test.
+
 ## Informes
 
 Cada orden genera su propio `report.html`. Para regenerar el informe de un backtest a
@@ -260,3 +271,4 @@ Ver [`docs/methodology.md`](docs/methodology.md), [`docs/metrics.md`](docs/metri
 - [`docs/risk_management.md`](docs/risk_management.md): límites de riesgo.
 - [`docs/metrics.md`](docs/metrics.md): fórmulas de las métricas.
 - [`docs/data_sources.md`](docs/data_sources.md): API de Bybit, disponibilidad y calidad de datos.
+- [`docs/progress.md`](docs/progress.md): estado verificado de cada fase y tareas pendientes.

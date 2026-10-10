@@ -43,8 +43,9 @@ están en la moneda cotizada (USDT).
 
 Desgloses (`analytics/breakdowns.py`): por dirección (`side`), motivo de salida
 (`exit_reason`) y régimen al entrar (`regime`: tendencia/lateral × volatilidad). Para
-comparar por símbolo o temporalidad, se ejecutan las órdenes con distintos
-`--symbol`/`--timeframe` y se comparan los informes o los CSV.
+comparar por símbolo y temporalidad: `bql markets` (matriz de métricas por mercado y
+resumen de consistencia, en `validation/research.py`: `market_matrix` y
+`consistency_summary`).
 
 ## Validez y muestras pequeñas
 

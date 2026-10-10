@@ -73,6 +73,7 @@ herramienta lo impide salvo con `--allow-repeat`, y entonces lo marca como no in
 
 ```bash
 bql compare --symbol ETHUSDT --timeframe 4h
+bql markets --symbols BTCUSDT ETHUSDT --timeframes 1h 4h
 ```
 
 Un resultado que solo aparece en un símbolo y una temporalidad es una señal de alarma.

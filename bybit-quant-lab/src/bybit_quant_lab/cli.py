@@ -40,6 +40,7 @@ from bybit_quant_lab.reporting import (
     comparison_report,
     export_result,
     final_test_report,
+    markets_report,
     walkforward_report,
     write_json,
 )
@@ -53,7 +54,9 @@ from bybit_quant_lab.validation.experiment_log import (
 )
 from bybit_quant_lab.validation.research import (
     Researcher,
+    consistency_summary,
     load_selection,
+    market_matrix,
     save_selection,
 )
 
@@ -458,6 +461,52 @@ def cmd_walkforward(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_markets(args: argparse.Namespace) -> int:
+    """Matriz de rendimiento por símbolo y temporalidad (sin usar el período de test)."""
+    cfg = _load_cfg(args)
+    researchers: list[Researcher] = []
+    hashes: dict[str, str] = {}
+    synthetic = False
+    for symbol in args.symbols:
+        for tf in args.timeframes:
+            path = dataset_path(cfg.data.data_dir, symbol, tf)
+            if not path.exists():
+                print(f"Aviso: sin datos para {symbol} {tf} ({path}); se omite.", file=sys.stderr)
+                continue
+            df, dmeta = _load_data(cfg, symbol, tf)
+            synthetic |= bool(dmeta.get("synthetic"))
+            r = Researcher(
+                df,
+                symbol,
+                tf,
+                cfg,
+                _strategy_params(args),
+                load_funding(cfg.data.data_dir, symbol),
+                _log(cfg),
+            )
+            hashes[f"{symbol}_{tf}"] = r.data_hash
+            researchers.append(r)
+    if not researchers:
+        raise FileNotFoundError("No hay datasets para los símbolos y temporalidades indicados")
+    names = args.strategies.split(",") if args.strategies else None
+    matrix = market_matrix(researchers, names, args.segment)
+    consistency = consistency_summary(matrix)
+    out = _out_dir(cfg, args.out, "markets", args.segment)
+    matrix.to_csv(out / "matrix.csv", index=False)
+    consistency.to_csv(out / "consistency.csv")
+    meta = build_metadata(
+        cfg,
+        "multiple",
+        {"synthetic": synthetic},
+        {"command": "markets", "data_hashes": hashes, "segment": args.segment},
+    )
+    write_json(meta, out / "metadata.json")
+    report = markets_report(matrix, consistency, meta, out / "report.html")
+    print(consistency.to_string(float_format=lambda x: f"{x:,.4f}"))
+    print(f"Informe: {report}")
+    return 0
+
+
 def cmd_sensitivity(args: argparse.Namespace) -> int:
     """Sensibilidad de parámetros en entrenamiento o validación."""
     cfg = _load_cfg(args)
@@ -625,6 +674,14 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--segment", default="train", choices=["train", "validation"])
     sp.add_argument("--out")
     sp.set_defaults(func=cmd_sensitivity)
+
+    sp = sub.add_parser("markets", help="Rendimiento por símbolo y temporalidad")
+    sp.add_argument("--symbols", nargs="+", required=True, type=str.upper)
+    sp.add_argument("--timeframes", nargs="+", required=True, choices=tfs)
+    sp.add_argument("--strategies", help="Lista separada por comas (por defecto, las diez)")
+    sp.add_argument("--segment", default="validation", choices=["train", "validation"])
+    sp.add_argument("--out")
+    sp.set_defaults(func=cmd_markets)
 
     sp = sub.add_parser("report", help="Regenera el HTML de un backtest exportado")
     sp.add_argument("--run-dir", required=True)
