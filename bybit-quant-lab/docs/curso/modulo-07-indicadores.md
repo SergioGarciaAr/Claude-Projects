@@ -30,6 +30,7 @@ Los once indicadores se construyen con tres medias:
 Las tres se explicaron con ejemplos en el Módulo V (secciones 5.9 y 5.10). La cabecera del
 archivo resume las reglas que impiden usar información futura:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L1-L10 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 1–10
 
@@ -45,6 +46,7 @@ Reglas de causalidad:
 * Las series de temporalidad superior solo se exponen cuando la vela superior ha cerrado.
 """
 ```
+<!-- fmt: on -->
 
 ### Convención de inicio: una diferencia con otras plataformas
 
@@ -70,13 +72,17 @@ datos = generate_synthetic_ohlcv(bars=300, seed=4)
 tr = true_range(datos).to_numpy()
 n = 14
 clasico = np.full(len(tr), np.nan)
-clasico[n - 1] = tr[:n].mean()                      # semilla: media simple de los 14 primeros
+clasico[n - 1] = tr[:n].mean()  # semilla: media simple de los 14 primeros
 for t in range(n, len(tr)):
     clasico[t] = clasico[t - 1] + (tr[t] - clasico[t - 1]) / n
 proyecto = atr(datos, n).to_numpy()
 for t in (13, 30, 100, 299):
-    print(t, round(proyecto[t], 3), round(clasico[t], 3),
-          f"diferencia {abs(proyecto[t] - clasico[t]) / clasico[t]:.2%}")
+    print(
+        t,
+        round(proyecto[t], 3),
+        round(clasico[t], 3),
+        f"diferencia {abs(proyecto[t] - clasico[t]) / clasico[t]:.2%}",
+    )
 ```
 <!-- salida -->
 ```text
@@ -125,6 +131,7 @@ enorme subiría su propia media y se "escondería" en parte.
 
 **Implementación** (dentro de la estrategia Volume Spike):
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/volume_spike.py#L49-L51 -->
 `src/bybit_quant_lab/strategies/volume_spike.py` · líneas 49–51
 
@@ -133,6 +140,7 @@ enorme subiría su propia media y se "escondería" en parte.
         ratio = v / vol_ma.replace(0, np.nan)
         spike = ratio > p.spike_mult
 ```
+<!-- fmt: on -->
 
 `replace(0, np.nan)` evita dividir entre cero si el volumen medio fuera 0. La estrategia VWAP
 Deviation usa el mismo cálculo en su línea 72.
@@ -183,6 +191,7 @@ OBV[t] = OBV[t−1] + signo(C[t] − C[t−1]) · V[t]
 
 `signo` vale +1 si el cierre sube, −1 si baja y 0 si no cambia.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L118-L121 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 118–121
 
@@ -192,6 +201,7 @@ def obv(close: pd.Series, volume: pd.Series) -> pd.Series:
     direction = np.sign(close.diff()).fillna(0.0)
     return (direction * volume).cumsum().rename("obv")
 ```
+<!-- fmt: on -->
 
 `close.diff()` es `C[t] − C[t−1]`; `np.sign` toma su signo; `fillna(0.0)` trata la primera vela
 (sin anterior) como 0; `cumsum()` acumula.
@@ -240,6 +250,7 @@ El proyecto ofrece dos versiones:
 - **De sesión** (`vwap_session`): las sumas se reinician en cada sesión UTC (por defecto, cada
   día a las 00:00 UTC).
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L124-L142 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 124–142
 
@@ -264,6 +275,7 @@ def vwap_session(df: pd.DataFrame, session: str = "1D") -> pd.Series:
     vol = df["volume"].groupby(key).cumsum()
     return (pv / vol.replace(0, np.nan)).rename("vwap")
 ```
+<!-- fmt: on -->
 
 **Definición de sesión en un mercado 24/7.** Las bolsas tienen apertura y cierre; las
 criptomonedas no. **[Diseño]** El proyecto define la sesión como el día UTC. Es una convención: no
@@ -280,8 +292,9 @@ import pandas as pd
 from bybit_quant_lab.indicators import vwap_rolling
 
 idx = pd.date_range("2024-01-01", periods=2, freq="1h", tz="UTC")
-velas = pd.DataFrame({"high": [101, 112.0], "low": [99, 108.0], "close": [100, 110.0],
-                      "volume": [1, 3.0]}, index=idx)
+velas = pd.DataFrame(
+    {"high": [101, 112.0], "low": [99, 108.0], "close": [100, 110.0], "volume": [1, 3.0]}, index=idx
+)
 print(vwap_rolling(velas, 2).tolist())
 ```
 <!-- salida -->
@@ -314,6 +327,7 @@ reciente está por encima del precio "de fondo": posible inicio de tendencia alc
 **Fórmulas.** `EMA` con `α = 2/(n+1)` (sección 7.0). Cruce al alza en `t`:
 `rápida[t] > lenta[t]` y `rápida[t−1] ≤ lenta[t−1]`.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L171-L180 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 171–180
 
@@ -329,6 +343,7 @@ def crossunder(a: pd.Series, b: pd.Series | float) -> pd.Series:
     bb = b if isinstance(b, pd.Series) else pd.Series(b, index=a.index)
     return ((a < bb) & (a.shift(1) >= bb.shift(1))).fillna(False).astype(bool)
 ```
+<!-- fmt: on -->
 
 El cálculo manual de la EMA está en el Módulo V (sección 5.10) y el de un cruce, en la sección
 5.8.
@@ -358,6 +373,7 @@ inferior[t] = mín(L[t−n], ..., L[t−1])
 medio[t]    = (superior[t] + inferior[t]) / 2
 ```
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L145-L150 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 145–150
 
@@ -369,6 +385,7 @@ def donchian(df: pd.DataFrame, n: int = 20) -> pd.DataFrame:
     lower = df["low"].rolling(n, min_periods=n).min().shift(1)
     return pd.DataFrame({"upper": upper, "lower": lower, "mid": (upper + lower) / 2})
 ```
+<!-- fmt: on -->
 
 **[Diseño] Diferencia con la definición habitual.** Muchas plataformas incluyen la vela actual en
 el canal. Entonces la condición "cierre > máximo del canal" es imposible por construcción (el
@@ -418,6 +435,7 @@ ATR[t] = Wilder(TR, n)[t]
 Los dos últimos términos capturan los **gaps**: si una vela abre muy por encima del cierre
 anterior, su rango propio puede ser pequeño, pero el movimiento real fue grande.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L41-L53 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 41–53
 
@@ -436,6 +454,7 @@ def atr(df: pd.DataFrame, n: int = 14) -> pd.Series:
     """Average True Range de Wilder."""
     return wilder(true_range(df), n).rename("atr")
 ```
+<!-- fmt: on -->
 
 **Cálculo manual.** Cierre anterior 98; vela actual con máximo 105 y mínimo 100:
 `TR = máx(5, |105 − 98|, |100 − 98|) = máx(5, 7, 2) = 7`.
@@ -446,8 +465,9 @@ import pandas as pd
 
 from bybit_quant_lab.indicators import atr, true_range
 
-velas = pd.DataFrame({"high": [99, 105, 104, 103.0], "low": [97, 100, 101, 99.0],
-                      "close": [98, 103, 102, 100.0]})
+velas = pd.DataFrame(
+    {"high": [99, 105, 104, 103.0], "low": [97, 100, 101, 99.0], "close": [98, 103, 102, 100.0]}
+)
 tr = true_range(velas)
 print(tr.tolist())
 # Wilder con n = 2 (alfa = 1/2), sembrado con el primer valor y publicado desde el segundo
@@ -489,6 +509,7 @@ RS = G / P                          RSI = 100 − 100 / (1 + RS)
 Casos límite del proyecto: sin pérdidas (`P = 0`), RSI = 100; sin movimiento (`G = P = 0`),
 RSI = 50.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L56-L66 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 56–66
 
@@ -505,6 +526,7 @@ def rsi(close: pd.Series, n: int = 14) -> pd.Series:
     out = out.where(~((gain == 0) & (loss == 0)), 50.0)
     return out.where(gain.notna() & loss.notna()).rename("rsi")
 ```
+<!-- fmt: on -->
 
 **Cálculo manual con `n = 2`.** Cierres `[10, 11, 10,5, 11,5, 12]`.
 
@@ -553,6 +575,7 @@ histograma = MACD − señal
 
 Parámetros clásicos: 12, 26 y 9.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L69-L75 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 69–75
 
@@ -565,6 +588,7 @@ def macd(close: pd.Series, fast: int = 12, slow: int = 26, signal: int = 9) -> p
     sig = line.ewm(span=signal, adjust=False, min_periods=signal).mean()
     return pd.DataFrame({"macd": line, "signal": sig, "hist": line - sig})
 ```
+<!-- fmt: on -->
 
 **Cálculo comprobable.** Con `rápida=2`, `lenta=3` y `señal=2`, cada paso puede seguirse a mano con
 la fórmula de la EMA:
@@ -577,8 +601,17 @@ from bybit_quant_lab.indicators import ema, macd
 
 c = pd.Series([10.0, 11.0, 12.0, 11.0, 13.0, 14.0])
 m = macd(c, fast=2, slow=3, signal=2)
-print(pd.DataFrame({"ema2": ema(c, 2), "ema3": ema(c, 3), "macd": m["macd"],
-                    "senal": m["signal"], "hist": m["hist"]}).round(4))
+print(
+    pd.DataFrame(
+        {
+            "ema2": ema(c, 2),
+            "ema3": ema(c, 3),
+            "macd": m["macd"],
+            "senal": m["signal"],
+            "hist": m["hist"],
+        }
+    ).round(4)
+)
 ```
 <!-- salida -->
 ```text
@@ -614,6 +647,7 @@ medio    = SMA(C, n)
 superior = medio + k·σ          inferior = medio − k·σ
 ```
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L78-L82 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 78–82
 
@@ -624,6 +658,7 @@ def bollinger(close: pd.Series, n: int = 20, k: float = 2.0) -> pd.DataFrame:
     std = close.rolling(n, min_periods=n).std(ddof=0)
     return pd.DataFrame({"mid": mid, "upper": mid + k * std, "lower": mid - k * std, "std": std})
 ```
+<!-- fmt: on -->
 
 **Cálculo manual.** Cierres `[2, 4, 4, 4, 5, 5, 7, 9]`, `n = 8`, `k = 2`. Media 5; σ poblacional 2
 (Módulo VI, sección 6.3); bandas `[5 − 4 ; 5 + 4] = [1 ; 9]`.
@@ -665,6 +700,7 @@ crudo = 100 · (RSI − mín(RSI, n)) / (máx(RSI, n) − mín(RSI, n))     (50 
 %D    = SMA(%K, suavizado_d)
 ```
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L85-L97 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 85–97
 
@@ -683,6 +719,7 @@ def stoch_rsi(
     d = sma(k, d_smooth)
     return pd.DataFrame({"k": k, "d": d})
 ```
+<!-- fmt: on -->
 
 **Cálculo manual del valor crudo.** Si en las últimas 14 velas el RSI estuvo entre 40 y 60 y ahora
 vale 55: `crudo = 100 · (55 − 40) / (60 − 40) = 75`.
@@ -718,6 +755,7 @@ DX  = 100 · |+DI − −DI| / (+DI + −DI)
 ADX = Wilder(DX, n)
 ```
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L100-L115 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 100–115
 
@@ -739,6 +777,7 @@ def adx(df: pd.DataFrame, n: int = 14) -> pd.DataFrame:
     dx = dx.where(plus_di.notna() & minus_di.notna())
     return pd.DataFrame({"plus_di": plus_di, "minus_di": minus_di, "adx": wilder(dx, n)})
 ```
+<!-- fmt: on -->
 
 - **102–105:** los movimientos direccionales. Solo cuenta el lado que domina en esa vela.
 - **106–108:** la primera vela no tiene anterior: sus valores se marcan como ausentes para que no
@@ -762,9 +801,16 @@ import pandas as pd
 velas = pd.DataFrame({"high": [10, 12, 11, 13.0], "low": [8, 9, 7, 8.0]})
 subida = velas["high"].diff()
 bajada = -velas["low"].diff()
-print(pd.DataFrame({"subida": subida, "bajada": bajada,
-                    "+DM": subida.where((subida > bajada) & (subida > 0), 0.0),
-                    "-DM": bajada.where((bajada > subida) & (bajada > 0), 0.0)}))
+print(
+    pd.DataFrame(
+        {
+            "subida": subida,
+            "bajada": bajada,
+            "+DM": subida.where((subida > bajada) & (subida > 0), 0.0),
+            "-DM": bajada.where((bajada > subida) & (bajada > 0), 0.0),
+        }
+    )
+)
 ```
 <!-- salida -->
 ```text
@@ -793,6 +839,7 @@ Mide qué fracción de las `n` velas **anteriores** tenía un valor menor que el
 clasificador de régimen (Módulo IX) lo usa con la volatilidad: un percentil de 0,9 significa
 "la volatilidad actual supera al 90 % de la reciente".
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L160-L168 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 160–168
 
@@ -807,6 +854,7 @@ def rolling_percentile(s: pd.Series, n: int) -> pd.Series:
     ranks = s.rolling(n + 1, min_periods=n + 1).rank(method="min")
     return ((ranks - 1) / n).rename("percentile")
 ```
+<!-- fmt: on -->
 
 <!-- ejecutar -->
 ```python
@@ -828,6 +876,7 @@ En la última vela, el 5 es mayor que los 4 valores anteriores `[3, 1, 4, 1]`: p
 La estrategia 5 puede filtrar con una temporalidad mayor, por ejemplo velas de 4h sobre datos de
 1h. El riesgo es usar una vela de 4h **antes de que termine**.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L183-L208 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 183–208
 
@@ -859,6 +908,7 @@ def higher_timeframe(
     aligned.index = df.index
     return aligned
 ```
+<!-- fmt: on -->
 
 - **196–198:** agrega las velas base en velas de 4h (`resample`), con la etiqueta en la apertura.
 - **199–201:** descarta las velas de 4h **incompletas** (con menos velas base de las esperadas,
@@ -878,8 +928,9 @@ from bybit_quant_lab.indicators import higher_timeframe
 
 idx = pd.date_range("2024-01-01", periods=10, freq="1h", tz="UTC")
 cierres = np.arange(1, 11, dtype=float)
-velas = pd.DataFrame({"open": cierres, "high": cierres, "low": cierres, "close": cierres,
-                      "volume": 1.0}, index=idx)
+velas = pd.DataFrame(
+    {"open": cierres, "high": cierres, "low": cierres, "close": cierres, "volume": 1.0}, index=idx
+)
 h4 = higher_timeframe(velas, pd.Timedelta("1h"), pd.Timedelta("4h"))
 print(pd.DataFrame({"cierre_1h": velas["close"], "cierre_4h_visible": h4["close"]}))
 ```

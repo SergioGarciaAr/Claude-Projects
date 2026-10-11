@@ -33,6 +33,7 @@ test y luego "solo" ajustar un parámetro).
 
 ## 13.2 Tres segmentos cronológicos
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/splits.py#L48-L61 -->
 `src/bybit_quant_lab/validation/splits.py` · líneas 48–61
 
@@ -52,6 +53,7 @@ def chronological_split(
     assert tr.end < va.start < va.end < te.start, "segmentos no ordenados"
     return {"train": tr, "validation": va, "test": te}
 ```
+<!-- fmt: on -->
 
 Con 6000 velas y las fracciones por defecto (60 % / 20 %):
 
@@ -78,6 +80,7 @@ test    = resto           = 1200  → velas 4800..5999
 
 ## 13.3 El protocolo: qué se decide con cada segmento
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/research.py#L1-L12 -->
 `src/bybit_quant_lab/validation/research.py` · líneas 1–12
 
@@ -95,6 +98,7 @@ Protocolo anti-fuga implementado:
 5. Cada configuración evaluada se registra en el log de experimentos.
 """
 ```
+<!-- fmt: on -->
 
 | Segmento | Se usa para | No se usa para |
 |---|---|---|
@@ -118,6 +122,7 @@ sería el máximo de varios resultados ruidosos, sesgado al alza (sesgo de selec
 combinaciones) en entrenamiento y validación, **con y sin costes**, añade tres benchmarks y
 calcula la redundancia en entrenamiento. Después selecciona:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/research.py#L188-L193 -->
 `src/bybit_quant_lab/validation/research.py` · líneas 188–193
 
@@ -129,7 +134,9 @@ calcula la redundancia en entrenamiento. Después selecciona:
         val = m.get(v.selection_metric)
         return float(val) if val is not None and np.isfinite(val) else float("-inf")
 ```
+<!-- fmt: on -->
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/research.py#L313-L379 -->
 `src/bybit_quant_lab/validation/research.py` · líneas 313–379
 
@@ -202,6 +209,7 @@ calcula la redundancia en entrenamiento. Después selecciona:
         }
         return selection, stats
 ```
+<!-- fmt: on -->
 
 - **316–320:** solo filas de **validación**, **netas**, de estrategias y combinaciones.
 - **188–193 (`_score`):** la métrica de selección (`sharpe` por defecto); `−∞` si hay menos de
@@ -260,13 +268,21 @@ with tempfile.TemporaryDirectory() as tmp:
         d = st["selected_details"][s["name"]]
         ds, top = d["deflated_sharpe"], d["top_trade_dependence"]
         ic = d["bootstrap_ci_trade_pnl"]
-        print(f"  {s['name']:14s} Sharpe={s['validation_score']:.2f} "
-              f"DSR={ds['dsr']:.2f} PSR(0)={ds['psr_vs_zero']:.2f} "
-              f"IC95 media/op=[{ic[0]:.1f}, {ic[1]:.1f}] "
-              f"cambia de signo sin top-3={top['sign_flips_without_top_k']}")
-    print("SR0 por vela (máximo esperado por azar):",
-          round(next(iter(st["selected_details"].values()))["deflated_sharpe"]
-                ["expected_max_sharpe_null"], 4))
+        print(
+            f"  {s['name']:14s} Sharpe={s['validation_score']:.2f} "
+            f"DSR={ds['dsr']:.2f} PSR(0)={ds['psr_vs_zero']:.2f} "
+            f"IC95 media/op=[{ic[0]:.1f}, {ic[1]:.1f}] "
+            f"cambia de signo sin top-3={top['sign_flips_without_top_k']}"
+        )
+    print(
+        "SR0 por vela (máximo esperado por azar):",
+        round(
+            next(iter(st["selected_details"].values()))["deflated_sharpe"][
+                "expected_max_sharpe_null"
+            ],
+            4,
+        ),
+    )
     holm = st["holm_validation"]
     print("Holm rechaza H0 en:", [k for k, v in holm.items() if v["reject"]])
     mejor = min((v["p"], k) for k, v in holm.items() if v["p"] is not None)
@@ -278,8 +294,10 @@ with tempfile.TemporaryDirectory() as tmp:
     for nombre, res in ft["candidates"].items():
         v = s[(s.candidate == nombre) & (s.segment == "validation") & (s.cost_mode == "net")]
         mt = r.metrics(res["net"])
-        print(f"  {nombre:14s} Sharpe {v['sharpe'].iloc[0]:6.2f} -> {mt['sharpe']:6.2f}   "
-              f"retorno {v['net_profit_pct'].iloc[0]:6.2%} -> {mt['net_profit_pct']:6.2%}")
+        print(
+            f"  {nombre:14s} Sharpe {v['sharpe'].iloc[0]:6.2f} -> {mt['sharpe']:6.2f}   "
+            f"retorno {v['net_profit_pct'].iloc[0]:6.2%} -> {mt['net_profit_pct']:6.2%}"
+        )
     bh = r.metrics(ft["benchmarks"]["buy_and_hold"])
     print(f"  comprar y mantener en test: {bh['net_profit_pct']:.2%}")
     try:
@@ -331,6 +349,7 @@ de forma especial: el **Sharpe máximo que cabría esperar por azar** tras proba
 configuraciones. Si la mejor de cien estrategias sin ventaja alguna ya tendría un Sharpe
 aparente alto, superar ese nivel es lo mínimo exigible.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/overfitting.py#L1-L13 -->
 `src/bybit_quant_lab/validation/overfitting.py` · líneas 1–13
 
@@ -349,7 +368,9 @@ Supuestos y limitaciones:
 * Bootstrap i.i.d. de operaciones (semilla fija): ignora dependencia temporal.
 """
 ```
+<!-- fmt: on -->
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/overfitting.py#L28-L82 -->
 `src/bybit_quant_lab/validation/overfitting.py` · líneas 28–82
 
@@ -410,6 +431,7 @@ def deflated_sharpe(
         "psr_vs_zero": probabilistic_sharpe(returns, 0.0),
     }
 ```
+<!-- fmt: on -->
 
 **Fórmulas** (todo por vela, **sin** anualizar):
 
@@ -463,6 +485,7 @@ búsqueda localiza el artículo (Journal of Portfolio Management 40(5), 2014; SS
 pero no devolvió el ejemplo numérico, y el entorno no pudo abrir las páginas. Siguen sin
 confirmar con la fuente. La implementación sí tiene verificaciones independientes:
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_audit_statistics.py#L47-L60 -->
 `tests/unit/test_audit_statistics.py` · líneas 47–60
 
@@ -482,6 +505,7 @@ def test_psr_is_calibrated_under_null() -> None:
     rate = float(np.mean([p is not None and p > 0.95 for p in psr]))
     assert 0.035 <= rate <= 0.065
 ```
+<!-- fmt: on -->
 
 - El SR₀ de la fórmula coincide con el máximo de `N` normales simulado por Monte Carlo
   (error relativo < 3 % para N = 10, 100 y 1000).
@@ -501,6 +525,7 @@ convención, no una garantía.
 
 ## 13.7 p-valores por operación y ajuste de Holm
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/overfitting.py#L85-L106 -->
 `src/bybit_quant_lab/validation/overfitting.py` · líneas 85–106
 
@@ -528,6 +553,7 @@ def holm_bonferroni(pvalues: dict[str, float | None], alpha: float = 0.05) -> di
         out[k] = {"p": p, "p_adj": adj, "reject": still}
     return out
 ```
+<!-- fmt: on -->
 
 **p-valor (líneas 85–91).** Hipótesis nula: la expectativa por operación es ≤ 0. Estadístico
 `t = media / (desv / √n)`; p unilateral `= 1 − Φ(t)`. Con menos de 30 operaciones se marca
@@ -560,6 +586,7 @@ independencia entre las pruebas.
 
 ## 13.8 Bootstrap y dependencia de pocas operaciones
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/overfitting.py#L109-L137 -->
 `src/bybit_quant_lab/validation/overfitting.py` · líneas 109–137
 
@@ -594,6 +621,7 @@ def top_trade_dependence(trades: pd.DataFrame, k: int = 3) -> dict[str, Any]:
         "sign_flips_without_top_k": total > 0 >= total - top,
     }
 ```
+<!-- fmt: on -->
 
 **Bootstrap (líneas 109–119).** Remuestrea las operaciones **con reemplazo** 1000 veces
 (`bootstrap_samples`), calcula la media de cada remuestreo y toma los percentiles 2,5 y 97,5.
@@ -615,6 +643,7 @@ modelan.
 
 ## 13.9 Benchmarks
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/benchmarks.py#L1-L10 -->
 `src/bybit_quant_lab/validation/benchmarks.py` · líneas 1–10
 
@@ -630,6 +659,7 @@ modelan.
   estrategia de la lista (su nombre figura en la etiqueta); no es un benchmark por estrategia.
 """
 ```
+<!-- fmt: on -->
 
 | Benchmark | Qué responde | Detalle |
 |---|---|---|
@@ -637,6 +667,7 @@ modelan.
 | `cash` | ¿Supera a no hacer nada? | Retorno 0 |
 | `random` | ¿Supera a entrar al azar con la misma exposición y gestión? | Mismo motor, stops y costes; semilla fija |
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/benchmarks.py#L134-L161 -->
 `src/bybit_quant_lab/validation/benchmarks.py` · líneas 134–161
 
@@ -670,6 +701,7 @@ def random_signals(
     frame["conviction"] = np.where(out != 0, 0.5, 0.0)
     return frame
 ```
+<!-- fmt: on -->
 
 - **143:** la exposición y la duración media se miden solo en el segmento simulado
   (`calibration`). Corrección B-02: antes se medían en toda la serie, incluido el test.
@@ -690,6 +722,7 @@ no es una distribución: para comparar en serio habría que repetirlo con muchas
 evaluar en el siguiente tramo" a lo largo del tiempo, como haría alguien que reoptimiza
 periódicamente.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/splits.py#L64-L94 -->
 `src/bybit_quant_lab/validation/splits.py` · líneas 64–94
 
@@ -726,12 +759,14 @@ def walk_forward_windows(
         raise ValueError("Datos insuficientes para una sola ventana walk-forward")
     return out
 ```
+<!-- fmt: on -->
 
 - **Ventana móvil** (`anchored=False`): el entrenamiento tiene siempre `train_bars` velas y se
   desplaza `step` velas.
 - **Ventana anclada** (`anchored=True`): el entrenamiento empieza siempre en 0 y crece.
 - `step` es por defecto igual a `test_bars`: los tramos de prueba quedan contiguos.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/research.py#L462-L533 -->
 `src/bybit_quant_lab/validation/research.py` · líneas 462–533
 
@@ -809,6 +844,7 @@ def walk_forward_windows(
             else {},
         }
 ```
+<!-- fmt: on -->
 
 - **469:** la rejilla tiene un límite (`max_grid_size`, 200) (sección 13.12).
 - **470–478 (corrección A-01):** las ventanas se construyen solo con entrenamiento +
@@ -832,18 +868,36 @@ from bybit_quant_lab.validation.research import Researcher
 
 datos = generate_synthetic_ohlcv(bars=6000, seed=42)
 raw = yaml.safe_load(open("configs/strategies.yaml"))
-r = Researcher(datos, "BTCUSDT", "1h", load_config(),
-               strategy_params=load_strategy_params("configs/strategies.yaml"))
+r = Researcher(
+    datos,
+    "BTCUSDT",
+    "1h",
+    load_config(),
+    strategy_params=load_strategy_params("configs/strategies.yaml"),
+)
 wf = r.walk_forward("ema_crossover", raw["grids"]["ema_crossover"])
 print("rejilla:", wf["grid_size"], "| datos usados:", wf["data_range"])
 print("inicio del test final:", r.segments["test"].start)
-tabla = wf["windows"][["window", "test_start", "params", "selection_valid", "is_sharpe",
-                        "oos_net_profit", "oos_trades"]]
+tabla = wf["windows"][
+    [
+        "window",
+        "test_start",
+        "params",
+        "selection_valid",
+        "is_sharpe",
+        "oos_net_profit",
+        "oos_trades",
+    ]
+]
 print(tabla.round(2).to_string())
-print(f"fuera de muestra: retorno {wf['oos_total_return']:.2%}, "
-      f"Sharpe {wf['oos_sharpe']:.2f}, drawdown {wf['oos_max_drawdown']:.2%}")
-print("estabilidad en entrenamiento:",
-      {k: round(v, 3) if isinstance(v, float) else v for k, v in wf["stability"].items()})
+print(
+    f"fuera de muestra: retorno {wf['oos_total_return']:.2%}, "
+    f"Sharpe {wf['oos_sharpe']:.2f}, drawdown {wf['oos_max_drawdown']:.2%}"
+)
+print(
+    "estabilidad en entrenamiento:",
+    {k: round(v, 3) if isinstance(v, float) else v for k, v in wf["stability"].items()},
+)
 ```
 <!-- salida -->
 ```text
@@ -877,6 +931,7 @@ validación dos veces. El registro de experimentos guarda ambas, pero el protoco
 
 ## 13.11 Registro de experimentos y guarda del test final
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/experiment_log.py#L17-L62 -->
 `src/bybit_quant_lab/validation/experiment_log.py` · líneas 17–62
 
@@ -928,12 +983,14 @@ class ExperimentLog:
         }
         return len(keys)
 ```
+<!-- fmt: on -->
 
 - **Append-only:** solo se añaden líneas JSON (formato JSON Lines); nunca se reescriben.
 - **`count_distinct_configs`:** cuenta pares (candidato, parámetros) evaluados en validación con
   el mismo hash de datos. Se acumula entre ejecuciones: si alguien prueba veinte variantes en
   días distintos, `N` lo refleja y el DSR se vuelve más exigente.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/experiment_log.py#L69-L103 -->
 `src/bybit_quant_lab/validation/experiment_log.py` · líneas 69–103
 
@@ -974,6 +1031,7 @@ def guard_final_test(
         )
     return bool(done)
 ```
+<!-- fmt: on -->
 
 - **Corrección A-02:** la guarda bloquea cualquier evaluación con los **mismos datos y el mismo
   segmento de test**, no solo la misma selección. Antes, una selección con otro `top_k` tenía
@@ -985,6 +1043,7 @@ def guard_final_test(
 configuración distintos y reconstruye todas las estrategias con los `strategy_params`
 **guardados**, no con el YAML vigente:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/research.py#L386-L413 -->
 `src/bybit_quant_lab/validation/research.py` · líneas 386–413
 
@@ -1018,11 +1077,13 @@ configuración distintos y reconstruye todas las estrategias con los `strategy_p
             for n in available_strategies()
         }
 ```
+<!-- fmt: on -->
 
 ---
 
 ## 13.12 Sensibilidad de parámetros y tamaño de las rejillas
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/sensitivity.py#L12-L44 -->
 `src/bybit_quant_lab/validation/sensitivity.py` · líneas 12–44
 
@@ -1061,6 +1122,7 @@ def stability_summary(table: pd.DataFrame, metric: str) -> dict[str, Any]:
         "best_minus_median": float(vals.max() - vals.median()),
     }
 ```
+<!-- fmt: on -->
 
 - **`param_grid`:** producto cartesiano; si supera `max_grid_size` (200), error explícito. Cada
   combinación es una prueba más (sección 6.9).
@@ -1096,6 +1158,7 @@ versión anterior a la auditoría) y pasa desde la corrección (`docs/audit_repo
 
 La prueba de A-02, completa:
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_audit_statistics.py#L94-L103 -->
 `tests/unit/test_audit_statistics.py` · líneas 94–103
 
@@ -1111,6 +1174,7 @@ def test_final_test_period_can_only_be_used_once(researcher: Researcher) -> None
     with pytest.raises(FinalTestAlreadyEvaluatedError):
         researcher.run_final_test(out2.selection, combos)
 ```
+<!-- fmt: on -->
 
 Para ver un cambio concreto: `git show a50ac62 -- src/bybit_quant_lab/validation/research.py`.
 

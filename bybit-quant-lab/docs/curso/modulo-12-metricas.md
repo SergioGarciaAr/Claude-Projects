@@ -14,6 +14,7 @@ de referencia: `docs/metrics.md`, coherente con el código en la versión actual
 
 ## 12.1 La cabecera: todas las convenciones en un lugar
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/analytics/metrics.py#L1-L33 -->
 `src/bybit_quant_lab/analytics/metrics.py` · líneas 1–33
 
@@ -52,6 +53,7 @@ MIN_BARS_FOR_RATIOS = 30
 MIN_TRADES_FOR_RATIOS = 10
 CONTINUOUS_EXPOSURE = 0.9
 ```
+<!-- fmt: on -->
 
 Dos decisiones condicionan todo lo demás:
 
@@ -60,13 +62,16 @@ Dos decisiones condicionan todo lo demás:
    efectivo.
 2. **El año tiene 525 600 minutos** (365 × 24 × 60), porque el mercado cripto no cierra:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/timeframes.py#L18-L18 -->
 `src/bybit_quant_lab/timeframes.py` · líneas 18–18
 
 ```python
 MINUTES_PER_YEAR = 365 * 24 * 60  # mercado cripto 24/7, año de 365 días
 ```
+<!-- fmt: on -->
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/timeframes.py#L43-L45 -->
 `src/bybit_quant_lab/timeframes.py` · líneas 43–45
 
@@ -75,6 +80,7 @@ def bars_per_year(timeframe: str) -> float:
     """Número de velas por año (365 días, 24 h)."""
     return MINUTES_PER_YEAR / timeframe_minutes(timeframe)
 ```
+<!-- fmt: on -->
 
 | Temporalidad | Velas por año (`N`) | √N |
 |---|---|---|
@@ -90,6 +96,7 @@ la anualización. La tasa libre de riesgo se fija en 0.
 
 ## 12.2 Retornos por vela
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/analytics/metrics.py#L36-L40 -->
 `src/bybit_quant_lab/analytics/metrics.py` · líneas 36–40
 
@@ -100,6 +107,7 @@ def bar_returns(equity: pd.Series, initial: float) -> pd.Series:
     prev.iloc[0] = initial
     return equity / prev - 1
 ```
+<!-- fmt: on -->
 
 ```text
 r_t = E_t / E_{t−1} − 1,      con E_{−1} = capital inicial
@@ -132,6 +140,7 @@ Sortino = media(r) / DD · √N,      DD = √( media( min(r, 0)² ) )
 - `DD` (*downside deviation*) promedia sobre **todas** las velas, poniendo 0 en las positivas.
 - `√N` convierte un ratio por vela en anual, **suponiendo** retornos independientes entre velas.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/analytics/metrics.py#L95-L111 -->
 `src/bybit_quant_lab/analytics/metrics.py` · líneas 95–111
 
@@ -154,6 +163,7 @@ Sortino = media(r) / DD · √N,      DD = √( media( min(r, 0)² ) )
     else:
         warnings.append(f"Menos de {MIN_BARS_FOR_RATIOS} velas: Sharpe/Sortino no calculados.")
 ```
+<!-- fmt: on -->
 
 **Cálculo a mano.** Cinco velas de 1 h con retornos `r = [0; 0,01; −0,01; 0,02; 0]`:
 
@@ -220,6 +230,7 @@ retorno medio por vela.
 
 ## 12.4 Drawdown: profundidad, duración y recuperación
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/analytics/metrics.py#L43-L73 -->
 `src/bybit_quant_lab/analytics/metrics.py` · líneas 43–73
 
@@ -256,6 +267,7 @@ def drawdown_stats(equity: pd.Series) -> dict[str, Any]:
         "max_dd_end": str(idx[trough + recovery]) if recovery is not None else None,
     }
 ```
+<!-- fmt: on -->
 
 **Términos.**
 
@@ -323,6 +335,7 @@ episodio; la recuperación se refiere solo al episodio del drawdown más profund
 CAGR = (E_final / E_0)^(365 / días) − 1,      días = velas × minutos_por_vela / 1440
 ```
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/analytics/metrics.py#L112-L116 -->
 `src/bybit_quant_lab/analytics/metrics.py` · líneas 112–116
 
@@ -333,6 +346,7 @@ CAGR = (E_final / E_0)^(365 / días) − 1,      días = velas × minutos_por_ve
     else:
         warnings.append(f"Período de {days:.0f} días < {min_days_for_cagr}: CAGR no calculado.")
 ```
+<!-- fmt: on -->
 
 **Intuición.** La tasa de crecimiento anual compuesta que habría producido el mismo resultado.
 
@@ -348,6 +362,7 @@ inflado.
 
 ## 12.6 Métricas por operación
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/analytics/metrics.py#L123-L166 -->
 `src/bybit_quant_lab/analytics/metrics.py` · líneas 123–166
 
@@ -397,6 +412,7 @@ inflado.
         "warnings": warnings + list(result.warnings),
     }
 ```
+<!-- fmt: on -->
 
 **Cálculo a mano** con las doce operaciones de `test_metrics_match_hand_computation`:
 `[50, −20, 30, −10, −40, 80, 15, −5, 25, −30, 60, −12]`.
@@ -451,6 +467,7 @@ exposición es, por tanto, una cota inferior del tiempo real en el mercado.
 
 ## 12.8 Desgloses
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/analytics/breakdowns.py#L8-L24 -->
 `src/bybit_quant_lab/analytics/breakdowns.py` · líneas 8–24
 
@@ -473,6 +490,7 @@ def breakdown_trades(trades: pd.DataFrame, by: str) -> pd.DataFrame:
     )
     return out.sort_values("net_pnl", ascending=False)
 ```
+<!-- fmt: on -->
 
 `groupby(by, dropna=False)` agrupa por dirección (`side`), motivo de salida (`exit_reason`) o
 régimen al entrar (`regime`); `dropna=False` conserva un grupo para valores ausentes. El informe
@@ -505,10 +523,28 @@ cfg = load_config()
 res = run_backtest(datos, senales, cfg, "BTCUSDT", "1h", end=datos.index[3599])
 m = compute_metrics(res, cfg.backtest.min_trades_for_stats, cfg.backtest.min_days_for_cagr)
 
-claves = ["bars", "days", "num_trades", "net_profit", "gross_profit_before_costs",
-          "total_costs", "total_funding", "sharpe", "sortino", "max_drawdown",
-          "max_dd_duration_bars", "max_dd_recovery_bars", "win_rate", "avg_win", "avg_loss",
-          "profit_factor", "expectancy", "exposure", "turnover", "cagr"]
+claves = [
+    "bars",
+    "days",
+    "num_trades",
+    "net_profit",
+    "gross_profit_before_costs",
+    "total_costs",
+    "total_funding",
+    "sharpe",
+    "sortino",
+    "max_drawdown",
+    "max_dd_duration_bars",
+    "max_dd_recovery_bars",
+    "win_rate",
+    "avg_win",
+    "avg_loss",
+    "profit_factor",
+    "expectancy",
+    "exposure",
+    "turnover",
+    "cagr",
+]
 for k in claves:
     v = m[k]
     print(f"{k:26s} {round(v, 4) if isinstance(v, float) else v}")

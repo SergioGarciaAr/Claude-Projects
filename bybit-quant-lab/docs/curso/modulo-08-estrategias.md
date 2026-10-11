@@ -45,6 +45,7 @@ indicadores).
 Cada estrategia solo implementa `compute_events`, que devuelve cinco series: entrada larga,
 entrada corta, salida larga, salida corta y convicción. El resto lo hace la clase base:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/base.py#L111-L146 -->
 `src/bybit_quant_lab/strategies/base.py` · líneas 111–146
 
@@ -86,6 +87,7 @@ entrada corta, salida larga, salida corta y convicción. El resto lo hace la cla
         out.loc[out["signal"] == 0, "conviction"] = 0.0
         return out
 ```
+<!-- fmt: on -->
 
 - **113–115:** valida las columnas y el orden; con datos vacíos devuelve una tabla neutral.
 - **116:** llama a la estrategia concreta (polimorfismo, Módulo II, sección 2.11).
@@ -123,7 +125,14 @@ Valores por defecto reales:
 ```python
 from bybit_quant_lab.strategies import available_strategies, get_strategy_class
 
-cols = ["atr_period", "stop_atr_mult", "take_profit_r", "trailing_atr_mult", "max_holding_bars", "cooldown_bars"]
+cols = [
+    "atr_period",
+    "stop_atr_mult",
+    "take_profit_r",
+    "trailing_atr_mult",
+    "max_holding_bars",
+    "cooldown_bars",
+]
 print(f"{'estrategia':20s} " + " ".join(f"{c[:14]:>14s}" for c in cols))
 for nombre in available_strategies():
     p = get_strategy_class(nombre).params_model()
@@ -168,12 +177,31 @@ senales = create_strategy("ema_crossover").generate_signals(datos)
 resultado = run_backtest(datos, senales, AppConfig(), "BTCUSDT", "1h")
 op = resultado.trades.iloc[0]
 i = datos.index.get_loc(op["entry_time"])
-print("señal al cierre de la vela", i - 1, "->", int(senales["signal"].iloc[i - 1]),
-      "| vela anterior:", int(senales["signal"].iloc[i - 2]))
-print("entrada en la apertura de la vela", i, ":", round(datos["open"].iloc[i], 2),
-      "-> ejecutada a", round(op["entry_price"], 2))
-print("stop a", round(senales["stop_distance"].iloc[i - 1], 2), "de distancia |",
-      "salida:", op["exit_reason"], "| resultado neto:", round(op["net_pnl"], 2))
+print(
+    "señal al cierre de la vela",
+    i - 1,
+    "->",
+    int(senales["signal"].iloc[i - 1]),
+    "| vela anterior:",
+    int(senales["signal"].iloc[i - 2]),
+)
+print(
+    "entrada en la apertura de la vela",
+    i,
+    ":",
+    round(datos["open"].iloc[i], 2),
+    "-> ejecutada a",
+    round(op["entry_price"], 2),
+)
+print(
+    "stop a",
+    round(senales["stop_distance"].iloc[i - 1], 2),
+    "de distancia |",
+    "salida:",
+    op["exit_reason"],
+    "| resultado neto:",
+    round(op["net_pnl"], 2),
+)
 ```
 <!-- salida -->
 ```text
@@ -226,6 +254,7 @@ dice hacia dónde.
 
 **Código.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/volume_spike.py#L46-L72 -->
 `src/bybit_quant_lab/strategies/volume_spike.py` · líneas 46–72
 
@@ -258,6 +287,7 @@ dice hacia dónde.
             conviction=conviction,
         )
 ```
+<!-- fmt: on -->
 
 - **52–54:** la "fuerza" de la vela es su cuerpo (`|cierre − apertura|`) dividido entre su rango
   (`máximo − mínimo`). Un cuerpo del 50 % o más es una vela decidida; un doji (cuerpo casi nulo)
@@ -267,6 +297,7 @@ dice hacia dónde.
 
 **Parámetros.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/volume_spike.py#L19-L29 -->
 `src/bybit_quant_lab/strategies/volume_spike.py` · líneas 19–29
 
@@ -283,6 +314,7 @@ class VolumeSpikeParams(StrategyParams):
     exit_ema: int = Field(20, ge=2, le=500)
     max_holding_bars: int | None = Field(48, ge=1)
 ```
+<!-- fmt: on -->
 
 **Ejemplos controlados.** Una serie plana de 60 velas con volumen 100; en la vela 50 se coloca
 una vela concreta y se mira la señal en esa vela:
@@ -297,15 +329,24 @@ from bybit_quant_lab.strategies import create_strategy
 rng = np.random.default_rng(1)
 cierres = 100 + rng.normal(0, 0.05, 60)
 aperturas = np.r_[cierres[0], cierres[:-1]]
-base = pd.DataFrame({"open": aperturas, "high": np.maximum(aperturas, cierres) + 0.2,
-                     "low": np.minimum(aperturas, cierres) - 0.2, "close": cierres, "volume": 100.0},
-                    index=pd.date_range("2024-01-01", periods=60, freq="1h", tz="UTC"))
+base = pd.DataFrame(
+    {
+        "open": aperturas,
+        "high": np.maximum(aperturas, cierres) + 0.2,
+        "low": np.minimum(aperturas, cierres) - 0.2,
+        "close": cierres,
+        "volume": 100.0,
+    },
+    index=pd.date_range("2024-01-01", periods=60, freq="1h", tz="UTC"),
+)
 estrategia = create_strategy("volume_spike", {"spike_mult": 3.0})
+
 
 def senal_en_vela_50(open_, high, low, close, volume):
     datos = base.copy()
     datos.iloc[50] = [open_, high, low, close, volume]
     return int(estrategia.generate_signals(datos)["signal"].iloc[50])
+
 
 print("vela alcista fuerte, volumen x10:", senal_en_vela_50(100, 103.2, 99.9, 103.0, 1000))
 print("vela bajista fuerte, volumen x10:", senal_en_vela_50(100, 100.1, 96.8, 97.0, 1000))
@@ -359,6 +400,7 @@ espejo para la bajista).
 
 **Código.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/obv_trend.py#L42-L58 -->
 `src/bybit_quant_lab/strategies/obv_trend.py` · líneas 42–58
 
@@ -381,6 +423,7 @@ espejo para la bajista).
             conviction=conviction,
         )
 ```
+<!-- fmt: on -->
 
 - **47:** la pendiente es la variación del OBV en las últimas `slope_window` velas.
 - **49–51:** convicción: distancia entre el OBV y su media, dividida entre el cambio absoluto
@@ -404,8 +447,16 @@ from bybit_quant_lab.strategies import create_strategy
 datos = generate_synthetic_ohlcv(bars=3000, seed=7)
 s = create_strategy("obv_trend").generate_signals(datos)["signal"]
 o = obv(datos["close"], datos["volume"])
-tabla = pd.DataFrame({"OBV": o, "EMA20(OBV)": ema(o, 20), "pendiente5": o - o.shift(5),
-                      "cierre": datos["close"], "EMA50(cierre)": ema(datos["close"], 50), "senal": s})
+tabla = pd.DataFrame(
+    {
+        "OBV": o,
+        "EMA20(OBV)": ema(o, 20),
+        "pendiente5": o - o.shift(5),
+        "cierre": datos["close"],
+        "EMA50(cierre)": ema(datos["close"], 50),
+        "senal": s,
+    }
+)
 for lado in (1, -1):
     t = int(((s == lado) & (s.shift(1, fill_value=0) != lado)).to_numpy().argmax())
     print("primera entrada", "LARGA" if lado == 1 else "CORTA", "en la vela", t)
@@ -457,6 +508,7 @@ relativo):
 
 **Código.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/vwap_deviation.py#L61-L90 -->
 `src/bybit_quant_lab/strategies/vwap_deviation.py` · líneas 61–90
 
@@ -492,6 +544,7 @@ relativo):
             conviction=conviction,
         )
 ```
+<!-- fmt: on -->
 
 - **70–71:** el z-score usa la desviación de las `dev_window` velas **anteriores** (`shift(1)`):
   la vela actual no infla su propia normalización.
@@ -513,17 +566,30 @@ from bybit_quant_lab.strategies import create_strategy
 rng = np.random.default_rng(1)
 cierres = 100 + rng.normal(0, 0.2, 300)
 aperturas = np.r_[cierres[0], cierres[:-1]]
-datos = pd.DataFrame({"open": aperturas, "high": np.maximum(aperturas, cierres) + 0.2,
-                      "low": np.minimum(aperturas, cierres) - 0.2, "close": cierres, "volume": 100.0},
-                     index=pd.date_range("2024-01-01", periods=300, freq="1h", tz="UTC"))
+datos = pd.DataFrame(
+    {
+        "open": aperturas,
+        "high": np.maximum(aperturas, cierres) + 0.2,
+        "low": np.minimum(aperturas, cierres) - 0.2,
+        "close": cierres,
+        "volume": 100.0,
+    },
+    index=pd.date_range("2024-01-01", periods=300, freq="1h", tz="UTC"),
+)
 datos.iloc[280, :4] = [100, 100.2, 94.8, 95]
 parametros = {"vwap_window": 50, "dev_window": 50}
 for volumen in (100.0, 1000.0):
     datos.iloc[280, 4] = volumen
-    rev = create_strategy("vwap_deviation", {**parametros, "mode": "reversion"}).generate_signals(datos)
-    con = create_strategy("vwap_deviation", {**parametros, "mode": "continuation"}).generate_signals(datos)
-    print(f"volumen {volumen:6.0f}: reversion -> {int(rev['signal'].iloc[280]):2d} | "
-          f"continuation -> {int(con['signal'].iloc[280]):2d}")
+    rev = create_strategy("vwap_deviation", {**parametros, "mode": "reversion"}).generate_signals(
+        datos
+    )
+    con = create_strategy(
+        "vwap_deviation", {**parametros, "mode": "continuation"}
+    ).generate_signals(datos)
+    print(
+        f"volumen {volumen:6.0f}: reversion -> {int(rev['signal'].iloc[280]):2d} | "
+        f"continuation -> {int(con['signal'].iloc[280]):2d}"
+    )
 ```
 <!-- salida -->
 ```text
@@ -572,15 +638,32 @@ from bybit_quant_lab.strategies import create_strategy
 datos = generate_synthetic_ohlcv(bars=3000, seed=7)
 c = datos["close"]
 s = create_strategy("ema_crossover").generate_signals(datos)["signal"]
-tabla = pd.DataFrame({"EMA12": ema(c, 12), "EMA26": ema(c, 26), "cierre": c, "EMA200": ema(c, 200),
-                      "ADX": adx(datos, 14)["adx"], "senal": s})
+tabla = pd.DataFrame(
+    {
+        "EMA12": ema(c, 12),
+        "EMA26": ema(c, 26),
+        "cierre": c,
+        "EMA200": ema(c, 200),
+        "ADX": adx(datos, 14)["adx"],
+        "senal": s,
+    }
+)
 t = int(((s == 1) & (s.shift(1, fill_value=0) != 1)).to_numpy().argmax())
 print("primera entrada larga en la vela", t)
 print(tabla.iloc[t - 1 : t + 1].round(2).to_string())
-print("velas con señal sin filtros:",
-      int((create_strategy("ema_crossover", {"trend_ema": None, "regime_filter": "none"})
-           .generate_signals(datos)["signal"] != 0).sum()),
-      "| con filtros:", int((s != 0).sum()))
+print(
+    "velas con señal sin filtros:",
+    int(
+        (
+            create_strategy(
+                "ema_crossover", {"trend_ema": None, "regime_filter": "none"}
+            ).generate_signals(datos)["signal"]
+            != 0
+        ).sum()
+    ),
+    "| con filtros:",
+    int((s != 0).sum()),
+)
 ```
 <!-- salida -->
 ```text
@@ -621,6 +704,7 @@ direccional (la idea clásica de los sistemas de "tortugas").
 
 **Código.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/donchian_breakout.py#L58-L83 -->
 `src/bybit_quant_lab/strategies/donchian_breakout.py` · líneas 58–83
 
@@ -652,6 +736,7 @@ direccional (la idea clásica de los sistemas de "tortugas").
             conviction=conviction,
         )
 ```
+<!-- fmt: on -->
 
 - **65–73:** filtro opcional de temporalidad superior (por ejemplo, `htf: "4h"`): solo largos si
   el cierre de la última vela de 4h **cerrada** está por encima de su EMA. La alineación sin
@@ -675,21 +760,34 @@ from bybit_quant_lab.strategies import create_strategy
 rng = np.random.default_rng(1)
 cierres = 100 + rng.normal(0, 0.1, 40)
 aperturas = np.r_[cierres[0], cierres[:-1]]
-base = pd.DataFrame({"open": aperturas, "high": np.maximum(aperturas, cierres) + 0.2,
-                     "low": np.minimum(aperturas, cierres) - 0.2, "close": cierres, "volume": 100.0},
-                    index=pd.date_range("2024-01-01", periods=40, freq="1h", tz="UTC"))
-estrategia = create_strategy("donchian_breakout", {"channel": 20, "exit_channel": 10, "atr_period": 5})
+base = pd.DataFrame(
+    {
+        "open": aperturas,
+        "high": np.maximum(aperturas, cierres) + 0.2,
+        "low": np.minimum(aperturas, cierres) - 0.2,
+        "close": cierres,
+        "volume": 100.0,
+    },
+    index=pd.date_range("2024-01-01", periods=40, freq="1h", tz="UTC"),
+)
+estrategia = create_strategy(
+    "donchian_breakout", {"channel": 20, "exit_channel": 10, "atr_period": 5}
+)
 maximo_previo = base["high"].iloc[15:35].max()
 minimo_previo = base["low"].iloc[15:35].min()
 print("máximo de las 20 velas anteriores:", round(maximo_previo, 3))
-for nombre, cierre, extremo in (("ruptura al alza", maximo_previo + 0.01, maximo_previo + 0.02),
-                                ("ruptura a la baja", minimo_previo - 0.01, minimo_previo - 0.02),
-                                ("dentro del canal", 100.0, 100.1)):
+for nombre, cierre, extremo in (
+    ("ruptura al alza", maximo_previo + 0.01, maximo_previo + 0.02),
+    ("ruptura a la baja", minimo_previo - 0.01, minimo_previo - 0.02),
+    ("dentro del canal", 100.0, 100.1),
+):
     datos = base.copy()
     columna = "high" if cierre > 100 else "low"
     datos.loc[datos.index[35], ["close", columna]] = [cierre, extremo]
-    print(f"{nombre:18s} -> señal en la vela 35:",
-          int(estrategia.generate_signals(datos)["signal"].iloc[35]))
+    print(
+        f"{nombre:18s} -> señal en la vela 35:",
+        int(estrategia.generate_signals(datos)["signal"].iloc[35]),
+    )
 ```
 <!-- salida -->
 ```text
@@ -734,6 +832,7 @@ cayendo por debajo de 30 sería "intentar atrapar un cuchillo que cae".
 
 **Código.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/rsi_reversion.py#L60-L81 -->
 `src/bybit_quant_lab/strategies/rsi_reversion.py` · líneas 60–81
 
@@ -761,6 +860,7 @@ cayendo por debajo de 30 sería "intentar atrapar un cuchillo que cae".
             conviction=conviction,
         )
 ```
+<!-- fmt: on -->
 
 - **66–71:** filtro de tendencia. Con `ema`, solo largos por encima de la EMA200 (comprar caídas
   dentro de una tendencia alcista). Con `adx` (por defecto), solo se opera si el ADX < 25, es
@@ -783,11 +883,20 @@ from bybit_quant_lab.indicators import rsi
 from bybit_quant_lab.strategies import create_strategy
 
 rng = np.random.default_rng(1)
-cierres = np.r_[np.full(30, 100.0), np.linspace(100, 80, 20), np.linspace(80, 84, 6)] + rng.normal(0, 0.02, 56)
+cierres = np.r_[np.full(30, 100.0), np.linspace(100, 80, 20), np.linspace(80, 84, 6)] + rng.normal(
+    0, 0.02, 56
+)
 aperturas = np.r_[cierres[0], cierres[:-1]]
-datos = pd.DataFrame({"open": aperturas, "high": np.maximum(aperturas, cierres) + 0.1,
-                      "low": np.minimum(aperturas, cierres) - 0.1, "close": cierres, "volume": 100.0},
-                     index=pd.date_range("2024-01-01", periods=56, freq="1h", tz="UTC"))
+datos = pd.DataFrame(
+    {
+        "open": aperturas,
+        "high": np.maximum(aperturas, cierres) + 0.1,
+        "low": np.minimum(aperturas, cierres) - 0.1,
+        "close": cierres,
+        "volume": 100.0,
+    },
+    index=pd.date_range("2024-01-01", periods=56, freq="1h", tz="UTC"),
+)
 s = create_strategy("rsi_reversion", {"trend_filter": "none"}).generate_signals(datos)["signal"]
 r = rsi(datos["close"], 14)
 for t in range(48, 56):
@@ -831,6 +940,7 @@ filtro direccional opcional exige que ese impulso vaya a favor de la tendencia d
 
 **Código.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/macd_momentum.py#L53-L76 -->
 `src/bybit_quant_lab/strategies/macd_momentum.py` · líneas 53–76
 
@@ -860,6 +970,7 @@ filtro direccional opcional exige que ese impulso vaya a favor de la tendencia d
             conviction=conviction,
         )
 ```
+<!-- fmt: on -->
 
 **[Hecho] Hallazgo de revisión (nuevo, no recogido en la auditoría): `require_hist_rising` no
 tiene ningún efecto.** El histograma es `MACD − señal`. Un cruce al alza en `t` exige
@@ -874,10 +985,17 @@ from bybit_quant_lab.strategies import create_strategy
 
 datos = generate_synthetic_ohlcv(bars=6000, seed=11)
 for filtro in ("none", "ema", "zero_line"):
-    con = create_strategy("macd_momentum", {"require_hist_rising": True, "direction_filter": filtro})
-    sin = create_strategy("macd_momentum", {"require_hist_rising": False, "direction_filter": filtro})
-    print(filtro, "señales idénticas:",
-          con.generate_signals(datos)["signal"].equals(sin.generate_signals(datos)["signal"]))
+    con = create_strategy(
+        "macd_momentum", {"require_hist_rising": True, "direction_filter": filtro}
+    )
+    sin = create_strategy(
+        "macd_momentum", {"require_hist_rising": False, "direction_filter": filtro}
+    )
+    print(
+        filtro,
+        "señales idénticas:",
+        con.generate_signals(datos)["signal"].equals(sin.generate_signals(datos)["signal"]),
+    )
 ```
 <!-- salida -->
 ```text
@@ -924,6 +1042,7 @@ diría lo contrario: salir de la banda es el inicio de un movimiento). Tocar la 
 
 **Código.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/bollinger_reversion.py#L47-L70 -->
 `src/bybit_quant_lab/strategies/bollinger_reversion.py` · líneas 47–70
 
@@ -953,6 +1072,7 @@ diría lo contrario: salir de la banda es el inicio de un movimiento). Tocar la 
             conviction=conviction,
         )
 ```
+<!-- fmt: on -->
 
 **Ejemplo controlado** (prueba `test_bollinger_touch_is_not_signal_but_reentry_is`):
 
@@ -967,23 +1087,39 @@ from bybit_quant_lab.strategies import create_strategy
 rng = np.random.default_rng(1)
 cierres = 100 + rng.normal(0, 0.3, 80)
 aperturas = np.r_[cierres[0], cierres[:-1]]
-base = pd.DataFrame({"open": aperturas, "high": np.maximum(aperturas, cierres) + 0.1,
-                     "low": np.minimum(aperturas, cierres) - 0.1, "close": cierres, "volume": 100.0},
-                    index=pd.date_range("2024-01-01", periods=80, freq="1h", tz="UTC"))
+base = pd.DataFrame(
+    {
+        "open": aperturas,
+        "high": np.maximum(aperturas, cierres) + 0.1,
+        "low": np.minimum(aperturas, cierres) - 0.1,
+        "close": cierres,
+        "volume": 100.0,
+    },
+    index=pd.date_range("2024-01-01", periods=80, freq="1h", tz="UTC"),
+)
 estrategia = create_strategy("bollinger_reversion", {"adx_max": None, "confirm_candle": True})
 
 toque = base.copy()
-toque.loc[toque.index[60], "low"] = 95.0                       # la mecha toca, el cierre no sale
-print("toque de banda -> señales en velas 58-62:",
-      estrategia.generate_signals(toque)["signal"].iloc[58:63].tolist())
+toque.loc[toque.index[60], "low"] = 95.0  # la mecha toca, el cierre no sale
+print(
+    "toque de banda -> señales en velas 58-62:",
+    estrategia.generate_signals(toque)["signal"].iloc[58:63].tolist(),
+)
 
 reingreso = base.copy()
 reingreso.loc[reingreso.index[60], ["open", "close", "low", "high"]] = [100.0, 97.0, 96.9, 100.1]
 reingreso.loc[reingreso.index[61], ["open", "close", "low", "high"]] = [97.0, 99.5, 96.95, 99.6]
 bandas = bollinger(reingreso["close"], 20, 2.0)
 for t in (60, 61):
-    print(t, "cierre", reingreso["close"].iloc[t], "| banda inferior", round(bandas["lower"].iloc[t], 2),
-          "| señal", int(estrategia.generate_signals(reingreso)["signal"].iloc[t]))
+    print(
+        t,
+        "cierre",
+        reingreso["close"].iloc[t],
+        "| banda inferior",
+        round(bandas["lower"].iloc[t], 2),
+        "| señal",
+        int(estrategia.generate_signals(reingreso)["signal"].iloc[t]),
+    )
 ```
 <!-- salida -->
 ```text
@@ -1018,6 +1154,7 @@ confirmación indica un giro de corto plazo.
 
 **Código.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/stoch_rsi.py#L63-L88 -->
 `src/bybit_quant_lab/strategies/stoch_rsi.py` · líneas 63–88
 
@@ -1049,6 +1186,7 @@ confirmación indica un giro de corto plazo.
             conviction=conviction,
         )
 ```
+<!-- fmt: on -->
 
 **El rearmado (líneas 77–78).** El Stochastic RSI oscila mucho: dentro de una misma zona de
 sobreventa puede cruzar %D varias veces en pocas velas. Contar cada cruce como una señal nueva
@@ -1067,7 +1205,12 @@ st = stoch_rsi(datos["close"])
 k, d = st["k"], st["d"]
 crudos = crossover(k, d) & (k.shift(1) < 20) & (datos["close"] > datos["open"])
 rearmados = rearm_events(crudos, k > 50)
-print("cruces alcistas en zona extrema:", int(crudos.sum()), "| tras el rearmado:", int(rearmados.sum()))
+print(
+    "cruces alcistas en zona extrema:",
+    int(crudos.sum()),
+    "| tras el rearmado:",
+    int(rearmados.sum()),
+)
 ```
 <!-- salida -->
 ```text
@@ -1107,6 +1250,7 @@ vela.
 
 **Código.**
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/adx_di.py#L53-L71 -->
 `src/bybit_quant_lab/strategies/adx_di.py` · líneas 53–71
 
@@ -1131,6 +1275,7 @@ vela.
             conviction=(a["adx"] / 50).clip(0, 1),
         )
 ```
+<!-- fmt: on -->
 
 - **63–64:** los eventos de entrada son **transiciones** (`bull` y no `bull` en la vela anterior),
   no niveles.

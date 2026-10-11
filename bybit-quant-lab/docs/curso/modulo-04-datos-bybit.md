@@ -57,9 +57,17 @@ ejemplo prepara la petición **sin enviarla**, para ver la URL resultante:
 ```python
 import requests
 
-parametros = {"category": "linear", "symbol": "BTCUSDT", "interval": "60",
-              "start": 1704067200000, "end": 1707667199999, "limit": 1000}
-peticion = requests.Request("GET", "https://api.bybit.com/v5/market/kline", params=parametros).prepare()
+parametros = {
+    "category": "linear",
+    "symbol": "BTCUSDT",
+    "interval": "60",
+    "start": 1704067200000,
+    "end": 1707667199999,
+    "limit": 1000,
+}
+peticion = requests.Request(
+    "GET", "https://api.bybit.com/v5/market/kline", params=parametros
+).prepare()
 print(peticion.method)
 print(peticion.url)
 ```
@@ -75,6 +83,7 @@ https://api.bybit.com/v5/market/kline?category=linear&symbol=BTCUSDT&interval=60
 
 El cliente construye exactamente estos parámetros para cada petición de velas:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L157-L165 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 157–165
 
@@ -89,6 +98,7 @@ El cliente construye exactamente estos parámetros para cada petición de velas:
             }
             result = self.get("/v5/market/kline", params)
 ```
+<!-- fmt: on -->
 
 | Parámetro | Valor | Significado | Estado |
 |---|---|---|---|
@@ -118,6 +128,7 @@ fechas UTC, la validación convierte cualquier índice a UTC y el almacenamiento
 
 Conversión de fecha a milisegundos en el cliente:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L45-L50 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 45–50
 
@@ -129,6 +140,7 @@ def _to_ms(ts: pd.Timestamp) -> int:
         else int(ts.tz_localize("UTC").timestamp() * 1000)
     )
 ```
+<!-- fmt: on -->
 
 Si la fecha no tiene zona (`tzinfo` vacío), se **supone** UTC (`tz_localize("UTC")`); si la
 tiene, se **convierte** a UTC (`tz_convert("UTC")`). Son operaciones distintas: localizar
@@ -137,6 +149,7 @@ instante.
 
 Alineación de fechas al borde de una vela:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L238-L240 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 238–240
 
@@ -145,6 +158,7 @@ def _align(ts: pd.Timestamp, delta: pd.Timedelta, ceil: bool) -> pd.Timestamp:
     ts = ts.tz_localize("UTC") if ts.tzinfo is None else ts.tz_convert("UTC")
     return ts.ceil(delta) if ceil else ts.floor(delta)
 ```
+<!-- fmt: on -->
 
 `ceil` redondea hacia arriba al múltiplo de la duración de vela y `floor` hacia abajo.
 
@@ -221,6 +235,7 @@ Hay **dos niveles de error**:
 
 ### El método `get`, línea por línea
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L85-L131 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 85–131
 
@@ -273,6 +288,7 @@ Hay **dos niveles de error**:
             return result
         raise BybitAPIError(f"Reintentos agotados en {path}: {last_error}")
 ```
+<!-- fmt: on -->
 
 - **87:** construye la URL completa uniendo la base y la ruta.
 - **89:** bucle de intentos: el primero más `max_retries` reintentos (5 por defecto, 6 intentos en
@@ -321,6 +337,7 @@ reintentar. Lo verifica `test_non_retryable_and_exhausted_errors` en `tests/unit
 
 El intervalo mínimo entre peticiones se impone así:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L79-L83 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 79–83
 
@@ -331,6 +348,7 @@ El intervalo mínimo entre peticiones se impone así:
             self._sleep(self.min_request_interval - elapsed)
         self._last_request = time.monotonic()
 ```
+<!-- fmt: on -->
 
 Con `min_request_interval = 0.05` s, el cliente hace como máximo 20 peticiones por segundo, es
 decir, 100 cada 5 segundos: una sexta parte del límite documentado.
@@ -344,28 +362,37 @@ import requests
 
 from bybit_quant_lab.data.bybit_client import BybitPublicClient
 
+
 class Respuesta:
     def __init__(self, estado, cuerpo):
         self.status_code, self._cuerpo = estado, cuerpo
+
     def json(self):
         return self._cuerpo
 
+
 class SesionSimulada:
     """No usa la red: devuelve respuestas preparadas en orden."""
+
     def __init__(self):
-        self.guion = [requests.ConnectionError("red caída"),
-                      Respuesta(503, {}),
-                      Respuesta(200, {"retCode": 10006, "retMsg": "Too many visits"}),
-                      Respuesta(200, {"retCode": 0, "result": {"list": []}})]
+        self.guion = [
+            requests.ConnectionError("red caída"),
+            Respuesta(503, {}),
+            Respuesta(200, {"retCode": 10006, "retMsg": "Too many visits"}),
+            Respuesta(200, {"retCode": 0, "result": {"list": []}}),
+        ]
+
     def get(self, url, params, timeout):
         paso = self.guion.pop(0)
         if isinstance(paso, Exception):
             raise paso
         return paso
 
+
 esperas = []
-cliente = BybitPublicClient(session=SesionSimulada(), sleep=esperas.append,
-                            backoff_seconds=1.0, min_request_interval=0)
+cliente = BybitPublicClient(
+    session=SesionSimulada(), sleep=esperas.append, backoff_seconds=1.0, min_request_interval=0
+)
 print(cliente.get("/v5/market/kline", {}))
 print("esperas de backoff:", esperas, "| peticiones:", cliente.request_count)
 ```
@@ -399,6 +426,7 @@ Hay dos formas habituales de paginar:
 vela`, así que nunca puede contener más de 1000 velas, y el resultado **no depende del orden** en
 que Bybit devuelva la lista.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L134-L174 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 134–174
 
@@ -445,6 +473,7 @@ que Bybit devuelva la lista.
         closed = df.index + delta <= now
         return df[closed]
 ```
+<!-- fmt: on -->
 
 - **149:** duración de una vela (`Timedelta`).
 - **150:** alinea el inicio hacia arriba (sección 4.4).
@@ -524,6 +553,7 @@ for apertura, cerrada in zip(aperturas, cerradas):
 
 ## 4.9 Normalización: de lista de textos a tabla tipada
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L249-L269 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 249–269
 
@@ -550,6 +580,7 @@ def _parse_klines(result: dict[str, Any]) -> pd.DataFrame:
     df = df.set_index("open_time")
     return df.apply(pd.to_numeric, errors="coerce").astype("float64")
 ```
+<!-- fmt: on -->
 
 - **251–255:** `list` debe existir y ser una lista; una lista vacía es válida (no hay velas en
   ese tramo).
@@ -583,39 +614,66 @@ from bybit_quant_lab.data.downloader import download_ohlcv
 from bybit_quant_lab.data.storage import dataset_path, load_dataset, load_metadata
 from bybit_quant_lab.strategies import create_strategy
 
+
 class Respuesta:
     def __init__(self, cuerpo):
         self.status_code, self._cuerpo = 200, cuerpo
+
     def json(self):
         return self._cuerpo
 
+
 class BybitSimulado:
     """Imita /v5/market/kline: textos, 7 campos, lista de la más reciente a la más antigua."""
+
     def __init__(self):
         self.peticiones = []
+
     def get(self, url, params, timeout):
         self.peticiones.append(params)
         paso = int(params["interval"]) * 60_000
         filas, t = [], params["start"]
         while t <= params["end"] and len(filas) < params["limit"]:
             p = 42000 + (t // paso) % 40
-            filas.append([str(t), f"{p}", f"{p + 15}", f"{p - 12}", f"{p + 5}", "3.5", f"{3.5 * p:.2f}"])
+            filas.append(
+                [str(t), f"{p}", f"{p + 15}", f"{p - 12}", f"{p + 5}", "3.5", f"{3.5 * p:.2f}"]
+            )
             t += paso
-        return Respuesta({"retCode": 0, "retMsg": "OK",
-                          "result": {"category": "linear", "symbol": params["symbol"], "list": filas[::-1]}})
+        return Respuesta(
+            {
+                "retCode": 0,
+                "retMsg": "OK",
+                "result": {"category": "linear", "symbol": params["symbol"], "list": filas[::-1]},
+            }
+        )
+
 
 carpeta = Path(tempfile.mkdtemp())
 api = BybitSimulado()
-cliente = BybitPublicClient(session=api, min_request_interval=0,
-                            clock=lambda: pd.Timestamp("2026-01-01", tz="UTC"))
-resumen = download_ohlcv(cliente, "BTCUSDT", "1h", pd.Timestamp("2024-01-01", tz="UTC"),
-                         pd.Timestamp("2024-03-01", tz="UTC"), carpeta)
+cliente = BybitPublicClient(
+    session=api, min_request_interval=0, clock=lambda: pd.Timestamp("2026-01-01", tz="UTC")
+)
+resumen = download_ohlcv(
+    cliente,
+    "BTCUSDT",
+    "1h",
+    pd.Timestamp("2024-01-01", tz="UTC"),
+    pd.Timestamp("2024-03-01", tz="UTC"),
+    carpeta,
+)
 print("peticiones:", resumen.requests, "| velas:", resumen.rows)
 tabla = load_dataset(dataset_path(carpeta, "BTCUSDT", "1h"))
 print(tabla.head(3).to_string())
 print("tipos:", sorted(set(map(str, tabla.dtypes))), "| índice:", tabla.index.dtype)
-print("ordenada:", tabla.index.is_monotonic_increasing, "| duplicados:", int(tabla.index.duplicated().sum()))
-print("calidad válida:", load_metadata(dataset_path(carpeta, "BTCUSDT", "1h"))["quality"]["is_valid"])
+print(
+    "ordenada:",
+    tabla.index.is_monotonic_increasing,
+    "| duplicados:",
+    int(tabla.index.duplicated().sum()),
+)
+print(
+    "calidad válida:", load_metadata(dataset_path(carpeta, "BTCUSDT", "1h"))["quality"]["is_valid"]
+)
 senales = create_strategy("donchian_breakout").generate_signals(tabla)
 print("señales con el mismo índice:", senales.index.equals(tabla.index))
 ```
@@ -645,6 +703,7 @@ con números de tipo `float64`, listas para cualquier estrategia.
 Antes de usar datos hay que comprobar que tienen sentido. El informe de calidad cuenta cada tipo
 de problema:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/validation.py#L20-L50 -->
 `src/bybit_quant_lab/data/validation.py` · líneas 20–50
 
@@ -681,6 +740,7 @@ class DataQualityReport:
             or self.misaligned
         )
 ```
+<!-- fmt: on -->
 
 `is_valid` es `True` solo si no hay **errores estructurales**. **[Diseño]** Los huecos
 (`gaps`) **no** invalidan los datos: se informan, porque pueden ser interrupciones reales del
@@ -688,6 +748,7 @@ exchange y no hay forma honesta de rellenarlos.
 
 Las comprobaciones de cada vela:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/validation.py#L86-L94 -->
 `src/bybit_quant_lab/data/validation.py` · líneas 86–94
 
@@ -702,6 +763,7 @@ Las comprobaciones de cada vela:
     offsets = (dt_index - epoch).to_numpy() % delta.to_timedelta64()
     rep.misaligned = int((offsets != np.timedelta64(0, "ns")).sum())
 ```
+<!-- fmt: on -->
 
 - **87:** una vela es inválida si el máximo es menor que el mínimo, la apertura o el cierre; si
   el mínimo es mayor que la apertura o el cierre; o si algún precio es cero o negativo.
@@ -711,6 +773,7 @@ Las comprobaciones de cada vela:
 La limpieza normaliza, ordena, elimina duplicados y descarta filas inválidas, y **después**
 vuelve a validar:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/validation.py#L115-L139 -->
 `src/bybit_quant_lab/data/validation.py` · líneas 115–139
 
@@ -741,6 +804,7 @@ def clean_ohlcv(df: pd.DataFrame, timeframe: str) -> tuple[pd.DataFrame, DataQua
         rep.issues.insert(0, f"limpieza: {dropped} filas descartadas (duplicadas o inválidas)")
     return out, rep
 ```
+<!-- fmt: on -->
 
 <!-- ejecutar -->
 ```python
@@ -750,14 +814,19 @@ import pandas as pd
 from bybit_quant_lab.data.validation import clean_ohlcv, validate_ohlcv
 
 idx = pd.date_range("2024-01-01", periods=6, freq="1h", tz="UTC")
-velas = pd.DataFrame({"open": [100, 101, 102, 103, 104, 105.0],
-                      "high": [101, 102, 103, 104, 105, 106.0],
-                      "low": [99, 100, 101, 102, 103, 104.0],
-                      "close": [101, 102, 103, 104, 105, 105.5],
-                      "volume": [10, 11, 12, 13, 14, 15.0]}, index=idx)
-velas.iloc[2, velas.columns.get_loc("high")] = 90.0       # máximo imposible
-velas.iloc[4, velas.columns.get_loc("close")] = np.nan    # dato ausente
-velas = velas.drop(idx[3])                                # una vela que falta
+velas = pd.DataFrame(
+    {
+        "open": [100, 101, 102, 103, 104, 105.0],
+        "high": [101, 102, 103, 104, 105, 106.0],
+        "low": [99, 100, 101, 102, 103, 104.0],
+        "close": [101, 102, 103, 104, 105, 105.5],
+        "volume": [10, 11, 12, 13, 14, 15.0],
+    },
+    index=idx,
+)
+velas.iloc[2, velas.columns.get_loc("high")] = 90.0  # máximo imposible
+velas.iloc[4, velas.columns.get_loc("close")] = np.nan  # dato ausente
+velas = velas.drop(idx[3])  # una vela que falta
 informe = validate_ohlcv(velas, "1h")
 print("válido:", informe.is_valid, "| problemas:", informe.issues)
 limpia, informe_limpio = clean_ohlcv(velas, "1h")
@@ -801,6 +870,7 @@ local que evita repetir el trabajo.
 
 Cálculo de los tramos que faltan:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/downloader.py#L38-L60 -->
 `src/bybit_quant_lab/data/downloader.py` · líneas 38–60
 
@@ -829,12 +899,14 @@ def missing_ranges(
         ranges.append((idx[-1] + delta, end))
     return ranges
 ```
+<!-- fmt: on -->
 
 Tres tipos de tramo pendiente: la **cabecera** (antes de la primera vela guardada), los **huecos
 internos** y la **cola** (después de la última vela guardada).
 
 El proceso completo:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/downloader.py#L78-L96 -->
 `src/bybit_quant_lab/data/downloader.py` · líneas 78–96
 
@@ -859,6 +931,7 @@ El proceso completo:
     merged = pd.concat(non_empty)
     cleaned, report = clean_ohlcv(merged, timeframe)
 ```
+<!-- fmt: on -->
 
 - **80–84:** si existe un archivo local y no se pidió `--refresh`, se carga; si no supera la
   validación, se ignora y se descarga todo de nuevo.
@@ -873,8 +946,12 @@ import pandas as pd
 from bybit_quant_lab.data.downloader import missing_ranges
 
 guardadas = pd.date_range("2024-01-01 02:00", periods=8, freq="1h", tz="UTC").delete([3, 4])
-tramos = missing_ranges(guardadas, pd.Timestamp("2024-01-01", tz="UTC"),
-                        pd.Timestamp("2024-01-01 12:00", tz="UTC"), "1h")
+tramos = missing_ranges(
+    guardadas,
+    pd.Timestamp("2024-01-01", tz="UTC"),
+    pd.Timestamp("2024-01-01 12:00", tz="UTC"),
+    "1h",
+)
 for a, b in tramos:
     print(a.strftime("%H:%M"), "->", b.strftime("%H:%M"))
 ```
@@ -895,6 +972,7 @@ peticiones, no un error en los datos.
 
 ## 4.14 Almacenamiento en Parquet y metadatos
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/storage.py#L34-L69 -->
 `src/bybit_quant_lab/data/storage.py` · líneas 34–69
 
@@ -936,6 +1014,7 @@ def load_dataset(path: Path) -> pd.DataFrame:
     df.index.name = "open_time"
     return df.sort_index()
 ```
+<!-- fmt: on -->
 
 - **save_dataset:** escribe el Parquet y, al lado, un archivo `.meta.json` con la procedencia
   (fuente, endpoint, URL base, historial de descargas), el informe de calidad, el número de
@@ -953,6 +1032,7 @@ guardado en los metadatos coincide con el contenido del Parquet.
 El funding se descarga de **otro endpoint** (`/v5/market/funding/history`), se guarda en **otro
 archivo** (`<SÍMBOLO>_funding.parquet`) y pagina en sentido contrario:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L177-L223 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 177–223
 
@@ -1005,6 +1085,7 @@ archivo** (`<SÍMBOLO>_funding.parquet`) y pagina en sentido contrario:
         series.index.name = "funding_time"
         return series[(series.index >= start) & (series.index <= end)]
 ```
+<!-- fmt: on -->
 
 - **Paginación hacia atrás (líneas 189–220):** pide hasta 200 registros que terminen en
   `cursor_end`, toma la marca más antigua recibida y mueve el cursor justo antes de ella.
@@ -1027,6 +1108,7 @@ como se describe. No se ha verificado contra Bybit.
 
 Si no tienes acceso a la API, puedes importar un CSV o Parquet:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/importers.py#L15-L41 -->
 `src/bybit_quant_lab/data/importers.py` · líneas 15–41
 
@@ -1059,6 +1141,7 @@ def read_ohlcv_file(path: Path, time_column: str | None = None) -> pd.DataFrame:
     out = raw.drop(columns=[col]).set_index(pd.DatetimeIndex(ts, name="open_time"))
     return out
 ```
+<!-- fmt: on -->
 
 - **27:** los nombres de columna se pasan a minúsculas y sin espacios.
 - **31:** si no se indica la columna temporal, busca una de una lista de nombres habituales.
@@ -1082,6 +1165,7 @@ comporta como la sesión pero devuelve respuestas preparadas.
 El cliente lo permite porque recibe la sesión, la función de espera y el reloj como parámetros
 (inyección de dependencias, Módulo II, sección 2.14):
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L56-L76 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 56–76
 
@@ -1108,10 +1192,12 @@ El cliente lo permite porque recibe la sesión, la función de espera y el reloj
         self._last_request = 0.0
         self.request_count = 0
 ```
+<!-- fmt: on -->
 
 Y las pruebas definen un exchange simulado que imita el formato documentado, incluido el orden
 descendente:
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_data.py#L36-L72 -->
 `tests/unit/test_data.py` · líneas 36–72
 
@@ -1154,6 +1240,7 @@ class FakeExchange:
                 200, {"retCode": 0, "retMsg": "OK", "result": {"category": "linear", "list": rows}}
             )
 ```
+<!-- fmt: on -->
 
 Con él se comprueban paginación, orden, recorte de la vela abierta, reintentos ante cada tipo de
 error, errores definitivos, descarga incremental, funding y la forma exacta de cada petición

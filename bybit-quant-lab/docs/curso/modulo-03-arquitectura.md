@@ -57,6 +57,7 @@ señales).
 
 El único acuerdo entre estrategias y motor son **cinco columnas** con significado fijo:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/base.py#L36-L42 -->
 `src/bybit_quant_lab/strategies/base.py` · líneas 36–42
 
@@ -69,9 +70,11 @@ SIGNAL_COLUMNS: tuple[str, ...] = (
     "trailing_distance",
 )
 ```
+<!-- fmt: on -->
 
 El motor comprueba ese contrato al empezar y falla de inmediato si no se cumple:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L246-L256 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 246–256
 
@@ -88,6 +91,7 @@ El motor comprueba ese contrato al empezar y falla de inmediato si no se cumple:
         if data[["open", "high", "low", "close"]].isna().any().any():
             raise ValueError("Los datos contienen precios NaN; límpialos antes de simular")
 ```
+<!-- fmt: on -->
 
 Gracias a este contrato, **una combinación de estrategias** (Módulo IX) devuelve las mismas
 cinco columnas y el motor no necesita saber si recibe una estrategia o una votación de diez.
@@ -115,29 +119,38 @@ raiz = pathlib.Path("src/bybit_quant_lab")
 deps = {}
 for archivo in raiz.rglob("*.py"):
     partes = archivo.relative_to(raiz).parts
-    origen = partes[0].removesuffix(".py") if len(partes) > 1 or partes[0] != "__init__.py" else "(raíz)"
+    origen = (
+        partes[0].removesuffix(".py") if len(partes) > 1 or partes[0] != "__init__.py" else "(raíz)"
+    )
     for nodo in ast.walk(ast.parse(archivo.read_text(encoding="utf-8"))):
-        if isinstance(nodo, ast.ImportFrom) and nodo.module and nodo.module.startswith("bybit_quant_lab."):
+        if (
+            isinstance(nodo, ast.ImportFrom)
+            and nodo.module
+            and nodo.module.startswith("bybit_quant_lab.")
+        ):
             destino = nodo.module.split(".")[1]
             if destino != origen:
                 deps.setdefault(origen, set()).add(destino)
 for origen in sorted(deps):
     print(f"{origen:12s} -> {', '.join(sorted(deps[origen]))}")
 
+
 def tiene_ciclo():
     def visita(n, camino):
         if n in camino:
-            return camino[camino.index(n):] + [n]
+            return camino[camino.index(n) :] + [n]
         for m in deps.get(n, ()):
             ciclo = visita(m, camino + [n])
             if ciclo:
                 return ciclo
         return None
+
     for n in deps:
         ciclo = visita(n, [])
         if ciclo:
             return ciclo
     return None
+
 
 print("ciclos entre subpaquetes:", tiene_ciclo())
 ```
@@ -226,6 +239,7 @@ Recorrido de la configuración:
 2. La CLI puede sobrescribir algunos valores (`--data-dir`, `--output-dir`).
 3. Pydantic valida el resultado y crea un `AppConfig` **inmutable**.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/config/loader.py#L25-L35 -->
 `src/bybit_quant_lab/config/loader.py` · líneas 25–35
 
@@ -242,6 +256,7 @@ def load_config(
             raw[key] = value
     return AppConfig.model_validate(raw)
 ```
+<!-- fmt: on -->
 
 `raw.setdefault(key, {}).update(value)` significa: "si la sección no existe, créala vacía; luego
 mezcla en ella los valores nuevos". Así `--data-dir` cambia solo `data.data_dir` sin borrar el
@@ -249,6 +264,7 @@ resto de la sección `data`.
 
 Y así construye la CLI esos valores a sobrescribir:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/cli.py#L69-L78 -->
 `src/bybit_quant_lab/cli.py` · líneas 69–78
 
@@ -264,6 +280,7 @@ def _load_cfg(args: argparse.Namespace) -> AppConfig:
         overrides["output_dir"] = args.output_dir
     return load_config(path, overrides)
 ```
+<!-- fmt: on -->
 
 ### Variables de entorno
 
@@ -382,6 +399,7 @@ El cliente de Bybit implementa esa clasificación; el Módulo IV la estudia lín
 de arquitectura, lo importante es **dónde** se convierten los errores en mensajes para la
 persona usuaria: en un único lugar, la función `main` de la CLI:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/cli.py#L692-L707 -->
 `src/bybit_quant_lab/cli.py` · líneas 692–707
 
@@ -403,6 +421,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
 ```
+<!-- fmt: on -->
 
 - **Línea 697:** antes de cualquier orden (salvo listar estrategias) se imprime la advertencia
   legal en la salida de error.
@@ -432,6 +451,7 @@ El **logging** (registro) es el diario del programa: mensajes con fecha, nivel d
 origen, que ayudan a saber qué pasó sin tener que depurar. Los niveles habituales, de menor a
 mayor gravedad, son `DEBUG`, `INFO`, `WARNING` y `ERROR`.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/logging_utils.py#L12-L40 -->
 `src/bybit_quant_lab/logging_utils.py` · líneas 12–40
 
@@ -466,6 +486,7 @@ def get_logger(name: str) -> logging.Logger:
     """Devuelve un logger hijo de ``bybit_quant_lab``."""
     return logging.getLogger(f"bybit_quant_lab.{name}")
 ```
+<!-- fmt: on -->
 
 - Cada módulo pide su logger con `get_logger("data.bybit")`, que cuelga del logger raíz
   `bybit_quant_lab`. Así los mensajes indican de qué parte vienen.
@@ -489,6 +510,7 @@ escribiendo órdenes en la terminal. `bql` tiene **subórdenes** (como `git comm
 
 La biblioteca estándar `argparse` construye el analizador de argumentos:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/cli.py#L592-L622 -->
 `src/bybit_quant_lab/cli.py` · líneas 592–622
 
@@ -525,6 +547,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--start", default="2023-01-01")
     sp.set_defaults(func=cmd_synth)
 ```
+<!-- fmt: on -->
 
 - **Líneas 599–603:** opciones **globales**, que van **antes** de la suborden
   (`bql --data-dir X backtest ...`).
@@ -563,6 +586,7 @@ cualquier cambio en el contenido (un solo decimal) produce un hash completamente
 como huella digital: si dos ejecuciones tienen el mismo hash de datos, usaron exactamente los
 mismos datos.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/storage.py#L28-L31 -->
 `src/bybit_quant_lab/data/storage.py` · líneas 28–31
 
@@ -572,7 +596,9 @@ def data_hash(df: pd.DataFrame) -> str:
     hashed = pd.util.hash_pandas_object(df, index=True).to_numpy()
     return hashlib.sha256(hashed.tobytes()).hexdigest()
 ```
+<!-- fmt: on -->
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/config/loader.py#L47-L52 -->
 `src/bybit_quant_lab/config/loader.py` · líneas 47–52
 
@@ -584,6 +610,7 @@ def config_hash(payload: Any) -> str:
     blob = json.dumps(payload, sort_keys=True, default=str).encode("utf-8")
     return hashlib.sha256(blob).hexdigest()[:16]
 ```
+<!-- fmt: on -->
 
 `sort_keys=True` es importante: ordena las claves antes de calcular el hash, de modo que la misma
 configuración escrita en otro orden produce el mismo hash.
@@ -596,7 +623,7 @@ from bybit_quant_lab.data.synthetic import generate_synthetic_ohlcv
 
 datos = generate_synthetic_ohlcv(bars=100, seed=5)
 copia = datos.copy()
-copia.iloc[50, copia.columns.get_loc("close")] += 0.01   # un céntimo en una sola vela
+copia.iloc[50, copia.columns.get_loc("close")] += 0.01  # un céntimo en una sola vela
 print(data_hash(datos)[:16], data_hash(datos)[:16] == data_hash(datos.copy())[:16])
 print(data_hash(copia)[:16])
 print(config_hash(AppConfig()))
@@ -615,6 +642,7 @@ ee0aec2f3e42ffeb
 Cada informe incluye un bloque de **metadatos**: todo lo necesario para saber exactamente qué se
 ejecutó.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/reporting/metadata.py#L43-L67 -->
 `src/bybit_quant_lab/reporting/metadata.py` · líneas 43–67
 
@@ -645,6 +673,7 @@ def build_metadata(
         **(extra or {}),
     }
 ```
+<!-- fmt: on -->
 
 Si dentro de seis meses un resultado te sorprende, con el commit de Git (`git`), el hash de datos
 y la configuración completa puedes reconstruir la ejecución exacta. `dirty: true` avisa de que

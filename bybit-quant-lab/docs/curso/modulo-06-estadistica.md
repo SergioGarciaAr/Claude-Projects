@@ -36,6 +36,7 @@ largo del tiempo: `ln(110/100) + ln(100/110) = 0`. Para movimientos pequeños, `
 
 **[Hecho]** El proyecto usa **rendimientos simples** por vela sobre la curva de capital:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/analytics/metrics.py#L36-L40 -->
 `src/bybit_quant_lab/analytics/metrics.py` · líneas 36–40
 
@@ -46,6 +47,7 @@ def bar_returns(equity: pd.Series, initial: float) -> pd.Series:
     prev.iloc[0] = initial
     return equity / prev - 1
 ```
+<!-- fmt: on -->
 
 `equity` es la serie de capital al cierre de cada vela. `shift(1)` trae el capital de la vela
 anterior y, para la primera vela, se usa el capital inicial.
@@ -195,11 +197,15 @@ import numpy as np
 x, y = np.array([1, 2, 3.0]), np.array([2, 4, 7.0])
 print(round(np.cov(x, y, ddof=1)[0, 1], 3), round(np.corrcoef(x, y)[0, 1], 3))
 
-a = np.array([0, 0, 0, 0, 0, 0, 0, 0, 1, 1])     # dos señales casi siempre en 0...
+a = np.array([0, 0, 0, 0, 0, 0, 0, 0, 1, 1])  # dos señales casi siempre en 0...
 b = np.array([0, 0, 0, 1, 0, 0, 0, 0, 1, 0])
 activas = (a != 0) & (b != 0)
-print("correlación:", round(np.corrcoef(a, b)[0, 1], 3),
-      "| coinciden cuando ambas están activas:", float((a[activas] == b[activas]).mean()))
+print(
+    "correlación:",
+    round(np.corrcoef(a, b)[0, 1], 3),
+    "| coinciden cuando ambas están activas:",
+    float((a[activas] == b[activas]).mean()),
+)
 ```
 <!-- salida -->
 ```text
@@ -237,6 +243,7 @@ variable normal estándar (media 0, desviación 1) sea menor o igual que `z`. Su
   "curtosis en exceso" (`γ₄ − 3`); **[Hecho]** el proyecto usa la curtosis **sin** restar 3,
   como indica la fórmula del PSR (Módulo XIII).
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/overfitting.py#L28-L35 -->
 `src/bybit_quant_lab/validation/overfitting.py` · líneas 28–35
 
@@ -250,6 +257,7 @@ def _moments(returns: pd.Series) -> tuple[float, float, float, int]:
     z = (r - r.mean()) / r.std(ddof=0)
     return sr, float(np.mean(z**3)), float(np.mean(z**4)), n
 ```
+<!-- fmt: on -->
 
 `z` son los valores **estandarizados** (restada la media y divididos entre la desviación); la
 asimetría es la media de `z³` y la curtosis, la media de `z⁴`.
@@ -295,11 +303,15 @@ verdadera de 0 (sin ninguna ventaja real) y una desviación de 50 USDT:
 import numpy as np
 
 rng = np.random.default_rng(7)
-historias = rng.normal(loc=0.0, scale=50.0, size=(2000, 20))   # media real = 0
+historias = rng.normal(loc=0.0, scale=50.0, size=(2000, 20))  # media real = 0
 medias = historias.mean(axis=1)
 print("error estándar teórico:", round(50 / np.sqrt(20), 2))
 print("desviación de las medias simuladas:", round(medias.std(ddof=1), 2))
-print("historias con media > +15 USDT por operación:", round(float((medias > 15).mean()) * 100, 1), "%")
+print(
+    "historias con media > +15 USDT por operación:",
+    round(float((medias > 15).mean()) * 100, 1),
+    "%",
+)
 ```
 <!-- salida -->
 ```text
@@ -334,6 +346,7 @@ probabilidad de que el resultado sea casualidad. Es la probabilidad de un result
 
 ### El contraste que usa el proyecto
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/overfitting.py#L85-L91 -->
 `src/bybit_quant_lab/validation/overfitting.py` · líneas 85–91
 
@@ -346,6 +359,7 @@ def mean_pvalue(values: pd.Series) -> tuple[float | None, bool]:
     t = v.mean() / (v.std(ddof=1) / math.sqrt(len(v)))
     return 1 - _N.cdf(t), len(v) >= 30
 ```
+<!-- fmt: on -->
 
 - **90:** el **estadístico t** mide cuántos errores estándar separan la media de 0:
   `t = x̄ / (s / √n)`.
@@ -366,7 +380,7 @@ from bybit_quant_lab.validation.overfitting import mean_pvalue
 
 rng = np.random.default_rng(1)
 pnl = rng.normal(0, 30, 36)
-pnl = (pnl - pnl.mean()) / pnl.std(ddof=1) * 30 + 10     # media 10 y desviación 30 exactas
+pnl = (pnl - pnl.mean()) / pnl.std(ddof=1) * 30 + 10  # media 10 y desviación 30 exactas
 p, fiable = mean_pvalue(pd.Series(pnl))
 print(round(p, 4), fiable)
 ```
@@ -433,6 +447,7 @@ con `m` contrastes independientes. Con 20 estrategias sin ninguna ventaja:
   así sucesivamente, obligando a que los valores ajustados no disminuyan. Se rechazan las
   hipótesis en orden **hasta la primera que no pase**; a partir de ahí, ninguna.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/overfitting.py#L94-L106 -->
 `src/bybit_quant_lab/validation/overfitting.py` · líneas 94–106
 
@@ -451,6 +466,7 @@ def holm_bonferroni(pvalues: dict[str, float | None], alpha: float = 0.05) -> di
         out[k] = {"p": p, "p_adj": adj, "reject": still}
     return out
 ```
+<!-- fmt: on -->
 
 - **96:** ordena los p-valores de menor a mayor (ignora los que no se pudieron calcular).
 - **102:** `(m − i) · p` es el factor de Holm; `max(running, ...)` impide que un ajustado sea menor
@@ -474,7 +490,7 @@ están correlacionadas.
 ```python
 from bybit_quant_lab.validation.overfitting import holm_bonferroni
 
-print(round(1 - 0.95 ** 20, 3))
+print(round(1 - 0.95**20, 3))
 resultado = holm_bonferroni({"a": 0.01, "b": 0.04, "c": 0.03, "d": 0.005})
 for nombre in "dacb":
     print(nombre, resultado[nombre])
@@ -503,6 +519,7 @@ Analogía: tienes 40 papeletas con los resultados de tus operaciones en una urna
 anotas su valor, **la devuelves** a la urna y repites 40 veces. Calculas la media de esas 40.
 Repites todo mil veces. Las mil medias muestran cuánto podría variar la media.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/overfitting.py#L109-L119 -->
 `src/bybit_quant_lab/validation/overfitting.py` · líneas 109–119
 
@@ -519,6 +536,7 @@ def bootstrap_mean_ci(
     lo, hi = np.quantile(means, [(1 - level) / 2, 1 - (1 - level) / 2])
     return float(lo), float(hi)
 ```
+<!-- fmt: on -->
 
 - **117:** genera de una vez `n_samples` remuestras del mismo tamaño que los datos y calcula la
   media de cada una.
@@ -585,6 +603,7 @@ proyecto corrige este efecto con el **Deflated Sharpe Ratio** (Módulo XIII), qu
 esta idea: estima el Sharpe máximo que cabría esperar por azar entre `N` pruebas y exige superar
 **ese** listón, no cero:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/overfitting.py#L60-L66 -->
 `src/bybit_quant_lab/validation/overfitting.py` · líneas 60–66
 
@@ -597,6 +616,7 @@ def expected_max_sharpe(n_trials: int, sr_variance: float) -> float:
     b = _N.inv_cdf(1 - 1 / (n_trials * math.e))
     return math.sqrt(sr_variance) * ((1 - EULER_GAMMA) * a + EULER_GAMMA * b)
 ```
+<!-- fmt: on -->
 
 ---
 

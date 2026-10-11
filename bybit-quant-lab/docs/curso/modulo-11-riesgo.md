@@ -13,6 +13,7 @@ en cada operación, **cuándo** deja de operar y **cómo** lleva las cuentas. El
 
 ## 11.0 Tres capas de protección distintas
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/risk/limits.py#L1-L19 -->
 `src/bybit_quant_lab/risk/limits.py` · líneas 1–19
 
@@ -37,6 +38,7 @@ El stop de estrategia (por operación), estos límites del sistema y la liquidac
 exchange (simulada por el motor) son mecanismos distintos y se registran por separado.
 """
 ```
+<!-- fmt: on -->
 
 | Capa | Quién la define | Qué protege | Dónde |
 |---|---|---|---|
@@ -57,6 +59,7 @@ comprobación distinta del bucle (pasos 3, 5 y 6 de la sección 10.2).
 
 ## 11.1 Contabilidad de la cuenta
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/portfolio/account.py#L1-L48 -->
 `src/bybit_quant_lab/portfolio/account.py` · líneas 1–48
 
@@ -110,6 +113,7 @@ class Account:
         """Equity menos margen usado."""
         return self.equity(price) - self.used_margin
 ```
+<!-- fmt: on -->
 
 **Términos.**
 
@@ -146,6 +150,7 @@ Es código sin efecto, no un error (Módulo III, sección 3.7).
 de la cuenta si salta el stop". La cantidad se deduce de esa pérdida máxima y de la distancia
 al stop: si el stop está lejos, se compra menos; si está cerca, más.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/risk/sizing.py#L1-L71 -->
 `src/bybit_quant_lab/risk/sizing.py` · líneas 1–71
 
@@ -222,6 +227,7 @@ def size_position(
         return SizingResult(0.0, "below_min_notional", capped_by)
     return SizingResult(qty, "ok", capped_by)
 ```
+<!-- fmt: on -->
 
 **Fórmula base** (con `E` = equity, `r` = `risk_per_trade`, `d` = distancia al stop en USDT,
 `P` = precio de ejecución, `f` = comisión taker, `s` = deslizamiento como fracción):
@@ -316,6 +322,7 @@ cantidad sale? (`test_size_uses_stop_distance_and_costs`.)
 
 ## 11.3 Especificaciones del instrumento
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/risk/instruments.py#L1-L67 -->
 `src/bybit_quant_lab/risk/instruments.py` · líneas 1–67
 
@@ -388,6 +395,7 @@ def spec_from_bybit(info: dict[str, Any]) -> InstrumentSpec:
         verified=True,
     )
 ```
+<!-- fmt: on -->
 
 - **`qty_step`:** incremento mínimo de cantidad (0,001 BTC).
 - **`min_qty` / `max_qty`:** cantidad mínima y máxima por orden.
@@ -478,6 +486,7 @@ auditoría M-02 (entrada 100, liquidación 90,5).
 
 ## 11.5 Límites del sistema: `RiskManager`
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/risk/limits.py#L44-L131 -->
 `src/bybit_quant_lab/risk/limits.py` · líneas 44–131
 
@@ -571,6 +580,7 @@ class RiskManager:
             return False, "loss_streak_pause"
         return True, "ok"
 ```
+<!-- fmt: on -->
 
 ### Pérdida diaria (líneas 63–98)
 
@@ -632,12 +642,13 @@ from bybit_quant_lab.backtesting import run_backtest
 from bybit_quant_lab.risk.instruments import InstrumentSpec
 from tests.conftest import make_bars, manual_signals, zero_cost_config
 
-spec = InstrumentSpec("TEST", tick_size=0.01, qty_step=0.001, min_qty=0.001, max_qty=1e9,
-                      min_notional=0.0)
-cierres = [100, 100, 100, 90, 100] * 5          # cinco caídas iguales
+spec = InstrumentSpec(
+    "TEST", tick_size=0.01, qty_step=0.001, min_qty=0.001, max_qty=1e9, min_notional=0.0
+)
+cierres = [100, 100, 100, 90, 100] * 5  # cinco caídas iguales
 mapa = {}
 for k in range(5):
-    mapa[5 * k + 1], mapa[5 * k + 4] = 1, 0     # largo en 1, 6, 11...; FLAT en 4, 9, 14...
+    mapa[5 * k + 1], mapa[5 * k + 4] = 1, 0  # largo en 1, 6, 11...; FLAT en 4, 9, 14...
 datos = make_bars(cierres, spread=0.1)
 senales = manual_signals(datos.index, mapa, stop=5)
 cfg = zero_cost_config(max_consecutive_losses=3, pause_bars_after_losses=100)
@@ -674,6 +685,7 @@ cierra la posición abierta.
 
 ## 11.6 Una prueba de regresión sobre el día UTC
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_risk.py#L158-L171 -->
 `tests/unit/test_risk.py` · líneas 158–171
 
@@ -693,6 +705,7 @@ def test_daily_reference_resets_regardless_of_index_resolution(unit: str) -> Non
     assert res.final_equity == pytest.approx(10_000 - 100 * (100 - 94))
     assert not any(e["kind"] == "daily_loss_limit" for e in res.risk_events)
 ```
+<!-- fmt: on -->
 
 **Qué comprueba.** Dos días seguidos con una pérdida del 3 % cada uno. Con el reinicio diario
 correcto, ningún día alcanza el 5 %; si el día no se reiniciara, la pérdida acumulada (~6 %)
@@ -708,6 +721,7 @@ conversión que supusiera nanosegundos calcularía días erróneos (sección 10.
 
 ## 11.7 Validaciones de configuración
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/config/models.py#L63-L76 -->
 `src/bybit_quant_lab/config/models.py` · líneas 63–76
 
@@ -727,6 +741,7 @@ class RiskConfig(_Strict):
     max_leverage: float = Field(5.0, ge=1)
     margin_reserve: float = Field(0.2, ge=0, lt=1, description="Fracción de equity no usable")
 ```
+<!-- fmt: on -->
 
 - Los `Field(..., gt=0, le=0.1)` impiden, por ejemplo, un riesgo por operación del 50 %.
 - `max_open_positions` solo admite 1 (`ge=1, le=1`): el motor no gestiona carteras.

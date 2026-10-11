@@ -28,6 +28,7 @@ abajo. Los elementos que verás en todos los archivos del proyecto son:
 
 El archivo más corto del paquete muestra un docstring y dos variables:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/__init__.py#L1-L13 -->
 `src/bybit_quant_lab/__init__.py` · líneas 1–13
 
@@ -46,6 +47,7 @@ DISCLAIMER = (
     "órdenes reales ni constituye recomendación de inversión."
 )
 ```
+<!-- fmt: on -->
 
 `__version__` y `DISCLAIMER` son **variables de módulo**: cualquier otro archivo puede leerlas
 con `from bybit_quant_lab import DISCLAIMER`. El texto de `DISCLAIMER` está partido en tres
@@ -70,12 +72,14 @@ y qué operaciones admite:
 
 En `timeframes.py` hay una variable calculada con operadores aritméticos:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/timeframes.py#L18-L18 -->
 `src/bybit_quant_lab/timeframes.py` · líneas 18–18
 
 ```python
 MINUTES_PER_YEAR = 365 * 24 * 60  # mercado cripto 24/7, año de 365 días
 ```
+<!-- fmt: on -->
 
 `365 * 24 * 60` multiplica días × horas × minutos: el número de minutos de un año de 365 días.
 La convención de MAYÚSCULAS indica una **constante**: un valor que no debe cambiar mientras el
@@ -91,10 +95,10 @@ Operadores que verás a menudo:
 <!-- ejecutar -->
 ```python
 minutos_por_anio = 365 * 24 * 60
-velas_de_1h = minutos_por_anio / 60      # "/" siempre devuelve float
-velas_de_4h = minutos_por_anio // 240     # "//" descarta los decimales
+velas_de_1h = minutos_por_anio / 60  # "/" siempre devuelve float
+velas_de_4h = minutos_por_anio // 240  # "//" descarta los decimales
 print(minutos_por_anio, velas_de_1h, velas_de_4h)
-print(10_000 * 0.01)                      # el guion bajo separa miles, no cambia el número
+print(10_000 * 0.01)  # el guion bajo separa miles, no cambia el número
 print(0.1 + 0.2 == 0.3, abs((0.1 + 0.2) - 0.3) < 1e-12)
 ```
 <!-- salida -->
@@ -130,6 +134,7 @@ La función `events_to_state` de `strategies/base.py` usa ambos, y es una de las
 importantes del proyecto: convierte "eventos" (momentos en que se cumple una condición de
 entrada o salida) en un "estado" que se mantiene vela tras vela.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/base.py#L191-L217 -->
 `src/bybit_quant_lab/strategies/base.py` · líneas 191–217
 
@@ -162,6 +167,7 @@ entrada o salida) en un "estado" que se mantiene vela tras vela.
         out[i] = state
     return pd.Series(out, index=long_entry.index, name="signal")
 ```
+<!-- fmt: on -->
 
 Línea por línea:
 
@@ -194,8 +200,10 @@ import pandas as pd
 
 from bybit_quant_lab.strategies.base import events_to_state
 
+
 def serie(valores):
     return pd.Series([bool(v) for v in valores])
+
 
 estado = events_to_state(
     long_entry=serie([0, 1, 0, 0, 0, 0]),
@@ -235,6 +243,7 @@ los **argumentos**.
 
 `timeframes.py` contiene cinco funciones pequeñas que se llaman unas a otras:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/timeframes.py#L21-L45 -->
 `src/bybit_quant_lab/timeframes.py` · líneas 21–45
 
@@ -265,6 +274,7 @@ def bars_per_year(timeframe: str) -> float:
     """Número de velas por año (365 días, 24 h)."""
     return MINUTES_PER_YEAR / timeframe_minutes(timeframe)
 ```
+<!-- fmt: on -->
 
 - `def validate_timeframe(timeframe: str) -> str:` declara una función con un parámetro
   `timeframe` de tipo texto que devuelve texto (la parte `: str` y `-> str` son **type hints**,
@@ -328,6 +338,7 @@ traduce el nombre interno del proyecto al código de la API.
 Un **diccionario** asocia claves con valores. `TIMEFRAMES` asocia cada temporalidad con una
 tupla de dos elementos (código de Bybit, minutos):
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/timeframes.py#L7-L16 -->
 `src/bybit_quant_lab/timeframes.py` · líneas 7–16
 
@@ -343,10 +354,12 @@ TIMEFRAMES: dict[str, tuple[str, int]] = {
     "1d": ("D", 1440),
 }
 ```
+<!-- fmt: on -->
 
 Una **tupla** define las columnas que toda señal debe tener. Se usa tupla y no lista porque no
 debe modificarse:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/base.py#L36-L43 -->
 `src/bybit_quant_lab/strategies/base.py` · líneas 36–43
 
@@ -360,11 +373,13 @@ SIGNAL_COLUMNS: tuple[str, ...] = (
 )
 REQUIRED_COLUMNS: tuple[str, ...] = ("open", "high", "low", "close", "volume")
 ```
+<!-- fmt: on -->
 
 Un **conjunto** guarda los códigos de error que merece la pena reintentar. Se usa conjunto
 porque la única pregunta que se le hace es "¿este código está aquí?", y esa consulta es muy
 rápida en un conjunto:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L27-L30 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 27–30
 
@@ -374,15 +389,16 @@ rápida en un conjunto:
 RETRYABLE_RET_CODES = {10000, 10006, 10016}
 RETRYABLE_HTTP = {429, 500, 502, 503, 504}
 ```
+<!-- fmt: on -->
 
 <!-- ejecutar -->
 ```python
 from bybit_quant_lab.timeframes import TIMEFRAMES
 
-codigo, minutos = TIMEFRAMES["15m"]          # "desempaquetar" una tupla en dos variables
+codigo, minutos = TIMEFRAMES["15m"]  # "desempaquetar" una tupla en dos variables
 print(codigo, minutos)
-print(list(TIMEFRAMES)[:3])                  # recorrer un diccionario da sus claves
-print(10006 in {10000, 10006, 10016})        # pertenencia en un conjunto
+print(list(TIMEFRAMES)[:3])  # recorrer un diccionario da sus claves
+print(10006 in {10000, 10006, 10016})  # pertenencia en un conjunto
 operaciones = []
 operaciones.append(12.5)
 operaciones.append(-3.0)
@@ -419,6 +435,7 @@ pon `x * 2` en una lista nueva".
 
 El registro de experimentos (`validation/experiment_log.py`) usa los tres tipos:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/experiment_log.py#L30-L62 -->
 `src/bybit_quant_lab/validation/experiment_log.py` · líneas 30–62
 
@@ -457,6 +474,7 @@ El registro de experimentos (`validation/experiment_log.py`) usa los tres tipos:
         }
         return len(keys)
 ```
+<!-- fmt: on -->
 
 - **Línea 35:** comprensión de **lista**. Lee cada línea del archivo, ignora las vacías
   (`if line.strip()`) y convierte cada una de JSON a diccionario.
@@ -503,6 +521,7 @@ tres piezas:
 
 El registro de estrategias muestra las tres:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/registry.py#L25-L32 -->
 `src/bybit_quant_lab/strategies/registry.py` · líneas 25–32
 
@@ -516,6 +535,7 @@ def get_strategy_class(name: str) -> type[Strategy]:
             f"Estrategia desconocida: {name!r}. Disponibles: {available_strategies()}"
         ) from exc
 ```
+<!-- fmt: on -->
 
 Buscar una clave inexistente en un diccionario lanza `KeyError`. El código la captura y lanza
 otra `KeyError` con un mensaje útil, que incluye la lista de estrategias disponibles.
@@ -523,6 +543,7 @@ otra `KeyError` con un mensaje útil, que incluye la lista de estrategias dispon
 El cliente HTTP define su **propia** excepción, heredando de una de Python (la herencia se
 explica en 2.11):
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L33-L34 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 33–34
 
@@ -530,12 +551,14 @@ explica en 2.11):
 class BybitAPIError(RuntimeError):
     """Error no recuperable o reintentos agotados al consultar Bybit."""
 ```
+<!-- fmt: on -->
 
 Tener un tipo propio permite que la CLI capture exactamente los errores de Bybit y los muestre
 de forma limpia, sin capturar por accidente errores de programación.
 
 Y así captura los errores de red para reintentar en lugar de rendirse:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L98-L102 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 98–102
 
@@ -546,6 +569,7 @@ Y así captura los errores de red para reintentar en lugar de rendirse:
                 last_error = f"error de red: {exc}"
                 continue
 ```
+<!-- fmt: on -->
 
 `continue` salta a la siguiente vuelta del bucle de reintentos (lo verás completo en el
 Módulo IV).
@@ -584,6 +608,7 @@ La ruta `bybit_quant_lab.strategies.ema_crossover` corresponde al archivo
 
 El `__init__.py` del paquete de estrategias tiene un detalle importante:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/__init__.py#L1-L14 -->
 `src/bybit_quant_lab/strategies/__init__.py` · líneas 1–14
 
@@ -603,6 +628,7 @@ from bybit_quant_lab.strategies import (  # noqa: F401  (registro por efecto de 
     vwap_deviation,
 )
 ```
+<!-- fmt: on -->
 
 Importa los diez módulos de estrategias **aunque no use ningún nombre de ellos**. Lo hace por su
 **efecto secundario**: al importarse, cada módulo ejecuta el decorador `@register`, que añade la
@@ -638,6 +664,7 @@ rellenado con una posición concreta.
 
 La clase `Position` representa una posición abierta:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/portfolio/position.py#L11-L53 -->
 `src/bybit_quant_lab/portfolio/position.py` · líneas 11–53
 
@@ -686,6 +713,7 @@ class Position:
             candidate = self.extreme + self.trailing_distance
             self.stop = candidate if self.stop is None else min(self.stop, candidate)
 ```
+<!-- fmt: on -->
 
 - **Líneas 15–31:** los atributos y sus tipos. Algunos tienen valor por defecto (`= 0.0`).
 - **Líneas 33–36:** `@property` convierte un método en algo que se lee como un atributo:
@@ -702,10 +730,21 @@ import pandas as pd
 
 from bybit_quant_lab.portfolio.position import Position
 
-p = Position(side=1, qty=0.5, entry_price=100.0, entry_time=pd.Timestamp("2024-01-01", tz="UTC"),
-             entry_bar=0, stop=95.0, take_profit=None, trailing_distance=4.0,
-             liquidation_price=None, margin=16.67, entry_fee=0.0, entry_slippage=0.0,
-             extreme=100.0)
+p = Position(
+    side=1,
+    qty=0.5,
+    entry_price=100.0,
+    entry_time=pd.Timestamp("2024-01-01", tz="UTC"),
+    entry_bar=0,
+    stop=95.0,
+    take_profit=None,
+    trailing_distance=4.0,
+    liquidation_price=None,
+    margin=16.67,
+    entry_fee=0.0,
+    entry_slippage=0.0,
+    extreme=100.0,
+)
 print(p.notional_entry, p.unrealized(104.0))
 for cierre in (103.0, 106.0, 102.0):
     p.update_trailing(cierre)
@@ -744,6 +783,7 @@ automáticamente a partir de la lista de atributos. `Position` y `TradeRecord` s
 `CostModel` usa además `frozen=True`, que hace los objetos **inmutables**: una vez creado, nadie
 puede cambiar sus comisiones por error a mitad de una simulación.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/execution/costs.py#L15-L39 -->
 `src/bybit_quant_lab/execution/costs.py` · líneas 15–39
 
@@ -774,6 +814,7 @@ class CostModel:
         """Comisión sobre el nocional (``qty * precio_ejecución``)."""
         return abs(notional) * (self.taker_fee if taker else self.maker_fee)
 ```
+<!-- fmt: on -->
 
 - **`@classmethod` (líneas 23–26):** un método que se llama sobre la **clase**, no sobre un
   objeto, y suele usarse como constructor alternativo: `CostModel.from_config(cfg)` crea un
@@ -786,6 +827,7 @@ class CostModel:
 La clase `Account` usa `__post_init__`, un método que la dataclass ejecuta justo después de crear
 el objeto, para que el efectivo inicial sea igual al capital:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/portfolio/account.py#L20-L48 -->
 `src/bybit_quant_lab/portfolio/account.py` · líneas 20–48
 
@@ -820,6 +862,7 @@ class Account:
         """Equity menos margen usado."""
         return self.equity(price) - self.used_margin
 ```
+<!-- fmt: on -->
 
 `field(default_factory=list)` (línea 32) evita un error clásico de Python: si escribieras
 `history: list = []`, **todas** las cuentas compartirían la misma lista.
@@ -867,6 +910,7 @@ Comprar a 100 cuesta 100,02 y vender a 100 devuelve 99,98. La comisión taker de
 
 ### La clase base de las estrategias
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/base.py#L87-L107 -->
 `src/bybit_quant_lab/strategies/base.py` · líneas 87–107
 
@@ -893,6 +937,7 @@ class Strategy(ABC):
 
     @abstractmethod
 ```
+<!-- fmt: on -->
 
 - `class Strategy(ABC)` hereda de `ABC` (Abstract Base Class) y se convierte en abstracta.
 - `ClassVar[...]` (líneas 90–93) marca **atributos de clase**: comunes a todas las instancias,
@@ -906,6 +951,7 @@ class Strategy(ABC):
 
 ### Una estrategia hija completa
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/ema_crossover.py#L20-L74 -->
 `src/bybit_quant_lab/strategies/ema_crossover.py` · líneas 20–74
 
@@ -966,6 +1012,7 @@ class EMACrossoverStrategy(Strategy):
             conviction=(adx_df["adx"] / 50).clip(0, 1),
         )
 ```
+<!-- fmt: on -->
 
 - **Líneas 20–35:** `EMACrossoverParams` **hereda** de `StrategyParams`. Recibe los parámetros
   comunes (stop, take-profit...) y añade los suyos (`fast`, `slow`...).
@@ -988,7 +1035,7 @@ from bybit_quant_lab.strategies import Strategy, available_strategies, create_st
 datos = generate_synthetic_ohlcv(bars=600, seed=3)
 for nombre in available_strategies()[:3]:
     estrategia = create_strategy(nombre)
-    senales = estrategia.generate_signals(datos)          # misma llamada, distinto comportamiento
+    senales = estrategia.generate_signals(datos)  # misma llamada, distinto comportamiento
     print(nombre, isinstance(estrategia, Strategy), int((senales["signal"] != 0).sum()))
 try:
     Strategy()
@@ -1031,6 +1078,7 @@ modificada o "anotada" de ella. Se escribe con `@` justo encima. Ya has visto va
 
 El proyecto define uno propio, `@register`:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/registry.py#L9-L22 -->
 `src/bybit_quant_lab/strategies/registry.py` · líneas 9–22
 
@@ -1050,20 +1098,21 @@ def available_strategies() -> list[str]:
     """Nombres de estrategias registradas, en orden de registro."""
     return list(_REGISTRY)
 ```
+<!-- fmt: on -->
 
 Escribir
 
 ```python
 @register
-class EMACrossoverStrategy(Strategy):
-    ...
+class EMACrossoverStrategy(Strategy): ...
 ```
 
 equivale exactamente a
 
 ```python
-class EMACrossoverStrategy(Strategy):
-    ...
+class EMACrossoverStrategy(Strategy): ...
+
+
 EMACrossoverStrategy = register(EMACrossoverStrategy)
 ```
 
@@ -1090,6 +1139,7 @@ lanza `ValueError("Estrategia duplicada: ema_crossover")` al importar el módulo
 Una **enumeración** (enum) es un conjunto cerrado de valores con nombre. En vez de escribir
 `1`, `-1` y `0` en todas partes (y equivocarse alguna vez), se definen nombres:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/base.py#L46-L59 -->
 `src/bybit_quant_lab/strategies/base.py` · líneas 46–59
 
@@ -1109,6 +1159,7 @@ class Category(StrEnum):
     TREND = "trend"
     INDICATOR = "indicator"
 ```
+<!-- fmt: on -->
 
 - `IntEnum` hace que `Signal.LONG` **sea** también el entero `1`, así que se puede comparar y
   operar con números.
@@ -1158,6 +1209,7 @@ externa, MyPy (Módulo XIV), para detectar errores antes de ejecutar.
 Un uso avanzado es el **Protocol**: describe "cualquier objeto que tenga estos métodos", sin
 exigir que herede de nada:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L37-L42 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 37–42
 
@@ -1169,6 +1221,7 @@ class HTTPSession(Protocol):
         """Realiza una petición GET."""
         ...
 ```
+<!-- fmt: on -->
 
 El cliente acepta como sesión HTTP **cualquier** objeto con un método `get(url, params,
 timeout)`. En producción es una `requests.Session`; en las pruebas es una clase falsa que
@@ -1180,7 +1233,10 @@ llama **inyección de dependencias** y es la razón de que el cliente pueda prob
 def doble(x: int) -> int:
     return x * 2
 
-print(doble(3), doble("ab"))   # Python no impide pasar un texto: las anotaciones no se comprueban al ejecutar
+
+print(
+    doble(3), doble("ab")
+)  # Python no impide pasar un texto: las anotaciones no se comprueban al ejecutar
 ```
 <!-- salida -->
 ```text
@@ -1203,6 +1259,7 @@ antes de empezar**, en lugar de producir resultados absurdos horas después.
 
 Los parámetros comunes de todas las estrategias:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/base.py#L62-L73 -->
 `src/bybit_quant_lab/strategies/base.py` · líneas 62–73
 
@@ -1220,6 +1277,7 @@ class StrategyParams(BaseModel):
     cooldown_bars: int = Field(0, ge=0)
     allow_short: bool = True
 ```
+<!-- fmt: on -->
 
 - `BaseModel` es la clase base de Pydantic.
 - `extra="forbid"`: un parámetro desconocido (por ejemplo, una errata) es un error.
@@ -1230,6 +1288,7 @@ class StrategyParams(BaseModel):
 Las reglas que relacionan varios campos se escriben con `@model_validator`. La configuración
 global impide, por ejemplo, un apalancamiento superior al máximo de riesgo:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/config/models.py#L110-L128 -->
 `src/bybit_quant_lab/config/models.py` · líneas 110–128
 
@@ -1254,6 +1313,7 @@ class AppConfig(_Strict):
             )
         return self
 ```
+<!-- fmt: on -->
 
 <!-- ejecutar -->
 ```python
@@ -1289,6 +1349,7 @@ documenta como hallazgo B-06; desde YAML y la CLI no ocurre (Módulo XVII).
 Algunos recursos deben **liberarse** siempre, aunque ocurra un error: un archivo abierto debe
 cerrarse. La instrucción `with` garantiza que se libere al salir del bloque, pase lo que pase.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/experiment_log.py#L24-L28 -->
 `src/bybit_quant_lab/validation/experiment_log.py` · líneas 24–28
 
@@ -1299,6 +1360,7 @@ cerrarse. La instrucción `with` garantiza que se libere al salir del bloque, pa
         with self.path.open("a", encoding="utf-8") as fh:
             fh.write(json.dumps(rec, default=str, sort_keys=True) + "\n")
 ```
+<!-- fmt: on -->
 
 `self.path.open("a")` abre el archivo para **añadir** al final (`"a"` de append). Al terminar el
 bloque `with`, Python lo cierra automáticamente. Sin `with`, un error a mitad de escritura podría
@@ -1323,6 +1385,7 @@ Dos herramientas útiles que aparecen en el proyecto:
 
 El descargador usa `pairwise` para encontrar huecos entre velas consecutivas:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/downloader.py#L55-L57 -->
 `src/bybit_quant_lab/data/downloader.py` · líneas 55–57
 
@@ -1331,6 +1394,7 @@ El descargador usa `pairwise` para encontrar huecos entre velas consecutivas:
         if b - a > delta:
             ranges.append((a + delta, b))
 ```
+<!-- fmt: on -->
 
 <!-- ejecutar -->
 ```python

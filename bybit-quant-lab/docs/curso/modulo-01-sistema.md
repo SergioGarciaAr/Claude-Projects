@@ -28,6 +28,7 @@ precio que todavía no conocías para que la regla parezca mucho mejor de lo que
 
 El propio paquete lo declara en su primer archivo:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/__init__.py#L1-L13 -->
 `src/bybit_quant_lab/__init__.py` · líneas 1–13
 
@@ -46,6 +47,7 @@ DISCLAIMER = (
     "órdenes reales ni constituye recomendación de inversión."
 )
 ```
+<!-- fmt: on -->
 
 **[Hecho]** No hay ninguna función en el repositorio que envíe órdenes a un exchange. El cliente
 de Bybit solo implementa tres consultas públicas de datos de mercado (lo verás en la sección
@@ -125,6 +127,7 @@ las estrategias, y al revés.
 
 El contrato de lo que produce una estrategia está escrito al principio de su clase base:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/base.py#L1-L21 -->
 `src/bybit_quant_lab/strategies/base.py` · líneas 1–21
 
@@ -151,6 +154,7 @@ un estado persistente con reglas explícitas: conflicto de entradas en la misma 
 reversión directa si hay entrada opuesta, salida por tiempo máximo y enfriamiento.
 """
 ```
+<!-- fmt: on -->
 
 Fíjate en la frase "Nunca se ejecuta en la misma vela": es la primera defensa contra el error
 más grave del backtesting, que verás a continuación.
@@ -200,6 +204,7 @@ que es, a veces muchísimo mejor.
 El motor del proyecto documenta en su primer bloque el orden exacto en que procesa cada vela
 para evitarlo:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L1-L20 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 1–20
 
@@ -225,6 +230,7 @@ cambia a LONG/SHORT. Si un stop cierra la operación y la estrategia sigue en LO
 reabre hasta una nueva transición. Las entradas rechazadas por riesgo no se difieren.
 """
 ```
+<!-- fmt: on -->
 
 No necesitas entender aún cada paso; el Módulo X los explica uno por uno. Lo importante ahora es
 el paso 8: **la decisión se toma al cierre de la vela `i` y se ejecuta en la apertura de `i+1`**.
@@ -389,6 +395,7 @@ solo usa públicos.
 
 **[Hecho]** Ninguna parte toca dinero real. El cliente HTTP declara exactamente qué endpoints usa:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L1-L11 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 1–11
 
@@ -405,6 +412,7 @@ Este módulo no implementa, ni implementará en el flujo predeterminado, ningún
 trading. No acepta ni almacena claves API.
 """
 ```
+<!-- fmt: on -->
 
 Los tres son de la familia `/v5/market/`, que en la API de Bybit agrupa datos públicos de
 mercado. Puedes comprobarlo tú mismo buscando cualquier otra ruta en el código:
@@ -551,10 +559,10 @@ from bybit_quant_lab.config import AppConfig
 from bybit_quant_lab.data.synthetic import generate_synthetic_ohlcv
 from bybit_quant_lab.strategies import create_strategy
 
-datos = generate_synthetic_ohlcv(bars=2000, timeframe="1h", seed=1)        # sustituye a pasos 1-4
-senales = create_strategy("ema_crossover").generate_signals(datos)          # paso 5
-resultado = run_backtest(datos, senales, AppConfig(), "BTCUSDT", "1h")      # pasos 6-7
-metricas = compute_metrics(resultado)                                       # paso 8
+datos = generate_synthetic_ohlcv(bars=2000, timeframe="1h", seed=1)  # sustituye a pasos 1-4
+senales = create_strategy("ema_crossover").generate_signals(datos)  # paso 5
+resultado = run_backtest(datos, senales, AppConfig(), "BTCUSDT", "1h")  # pasos 6-7
+metricas = compute_metrics(resultado)  # paso 8
 
 print("velas simuladas:", len(resultado.equity))
 print("operaciones:", metricas["num_trades"])

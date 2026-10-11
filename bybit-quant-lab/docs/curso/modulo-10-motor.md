@@ -46,6 +46,7 @@ veces y comparando equity y operaciones (`tests/unit/test_engine.py`, líneas 12
 
 ## 10.2 El orden de los eventos dentro de una vela
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L1-L20 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 1–20
 
@@ -71,6 +72,7 @@ cambia a LONG/SHORT. Si un stop cierra la operación y la estrategia sigue en LO
 reabre hasta una nueva transición. Las entradas rechazadas por riesgo no se difieren.
 """
 ```
+<!-- fmt: on -->
 
 **Por qué importa el orden.** Una vela OHLC resume una hora (o 5 minutos, o 4 horas) en cuatro
 precios. Todo lo que ocurre dentro de ella ya pasó cuando se conoce el cierre. El motor tiene
@@ -103,6 +105,7 @@ de las 10:00.
 
 ## 10.3 Preparación: entradas, segmento y arrays
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L71-L120 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 71–120
 
@@ -158,6 +161,7 @@ de las 10:00.
         pending_entry: _PendingEntry | None = None
         prev_target = int(sig[i0 - 1]) if i0 > 0 else 0
 ```
+<!-- fmt: on -->
 
 Línea a línea:
 
@@ -188,6 +192,7 @@ Línea a línea:
 
 ## 10.4 El bucle, paso a paso
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L122-L148 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 122–148
 
@@ -220,6 +225,7 @@ Línea a línea:
                     rejected.append({"time": str(ts), "side": pending_entry.side, "reason": rej})
             pending_entry = None
 ```
+<!-- fmt: on -->
 
 - **124 (paso 1):** el gestor de riesgo detecta el cambio de día UTC (Módulo XI).
 - **127–131 (paso 2, funding):** `payment = lado × cantidad × open[i] × tasa`. Para un largo
@@ -234,6 +240,7 @@ Línea a línea:
   Si el dimensionamiento devuelve 0 (por ejemplo, cantidad por debajo del mínimo), la entrada
   se registra como **rechazada** con el motivo.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L149-L176 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 149–176
 
@@ -267,6 +274,7 @@ Línea a línea:
             if i == i1:
                 break
 ```
+<!-- fmt: on -->
 
 - **150–156 (paso 5, intravela):** con el máximo y el mínimo de la vela se comprueba si se tocó
   stop, liquidación u objetivo (sección 10.7).
@@ -280,6 +288,7 @@ Línea a línea:
 - **175–176:** en la última vela no se decide nada: no existe una apertura posterior donde
   ejecutar (`test_signal_on_last_bar_is_never_executed`).
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L177-L202 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 177–202
 
@@ -311,6 +320,7 @@ Línea a línea:
                         regime=str(regimes[i]) if regimes is not None else "",
                     )
 ```
+<!-- fmt: on -->
 
 - **178:** `target` es el estado objetivo de la estrategia al cierre de `i`.
 - **179–182:** se programa una salida si el riesgo lo exige o si el objetivo ya no coincide con
@@ -333,6 +343,7 @@ Línea a línea:
 3. La alternativa (entrar siempre que el objetivo sea +1 y no haya posición) reabriría
    posiciones justo después de cada stop, en la misma dirección que acaba de fallar.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L203-L207 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 203–207
 
@@ -343,6 +354,7 @@ Línea a línea:
             final_equity = acct.cash
             rows[-1] = (final_equity, acct.cash, 0.0, 0.0, 0.0, rows[-1][5])
 ```
+<!-- fmt: on -->
 
 - **204–207:** con `close_at_end` (por defecto activo), la posición abierta al final se cierra
   al **cierre** de la última vela con deslizamiento y comisión (`end_of_data`). La última fila
@@ -353,6 +365,7 @@ Línea a línea:
 
 ## 10.5 Costes: comisión y deslizamiento
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/execution/costs.py#L1-L39 -->
 `src/bybit_quant_lab/execution/costs.py` · líneas 1–39
 
@@ -397,6 +410,7 @@ class CostModel:
         """Comisión sobre el nocional (``qty * precio_ejecución``)."""
         return abs(notional) * (self.taker_fee if taker else self.maker_fee)
 ```
+<!-- fmt: on -->
 
 **Términos.**
 
@@ -433,6 +447,7 @@ una medición. Ambos deben contrastarse con la cuenta y el mercado reales (Módu
 largos pagan a los cortos o al revés, según la **tasa de funding**. Es lo que mantiene el precio
 del perpetuo cerca del índice al contado.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L258-L283 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 258–283
 
@@ -464,6 +479,7 @@ del perpetuo cerca del índice al contado.
                 out[int(j)] = out.get(int(j), 0.0) + float(rate)
         return out, True, warnings
 ```
+<!-- fmt: on -->
 
 - **261–271:** sin funding activado o sin datos, no se aplica y se añade una **advertencia**
   explícita. El resultado neto queda sin ese coste o ingreso; no se inventa una tasa.
@@ -489,6 +505,7 @@ apertura de las 08:00 (paso 4, después del funding) no paga ese pago.
 **El problema.** Una vela dice que el precio estuvo entre `low` y `high`, pero no **en qué
 orden**. Si una vela toca a la vez el stop y el objetivo, no se sabe cuál ocurrió primero.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/execution/fills.py#L1-L74 -->
 `src/bybit_quant_lab/execution/fills.py` · líneas 1–74
 
@@ -568,6 +585,7 @@ def check_intrabar_exit(
         return ExitCheck(take_profit, "take_profit")
     return None
 ```
+<!-- fmt: on -->
 
 Reglas, en lenguaje llano:
 
@@ -605,6 +623,7 @@ vende a `95 × (1 − 0,0002)`.
 
 ## 10.8 Trailing stop
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/portfolio/position.py#L38-L53 -->
 `src/bybit_quant_lab/portfolio/position.py` · líneas 38–53
 
@@ -626,6 +645,7 @@ vende a `95 × (1 − 0,0002)`.
             candidate = self.extreme + self.trailing_distance
             self.stop = candidate if self.stop is None else min(self.stop, candidate)
 ```
+<!-- fmt: on -->
 
 **Intuición.** Un trailing stop "persigue" al precio: para un largo, se coloca a una distancia
 fija por debajo del **máximo cierre** alcanzado y nunca baja.
@@ -646,6 +666,7 @@ no se sabe si el máximo ocurrió antes o después del mínimo.
 
 ## 10.9 Apertura y cierre de una posición
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L285-L333 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 285–333
 
@@ -700,6 +721,7 @@ no se sabe si el máximo ocurrió antes o después del mínimo.
         )
         return None
 ```
+<!-- fmt: on -->
 
 - **289:** precio de ejecución con deslizamiento.
 - **290:** la equity para dimensionar se mide al precio de referencia (la apertura).
@@ -711,6 +733,7 @@ no se sabe si el máximo ocurrió antes o después del mínimo.
 - **321–322:** stop y objetivo se fijan **respecto al precio de ejecución**, no a la apertura.
 - **325:** margen = nocional / apalancamiento.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L335-L382 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 335–382
 
@@ -764,6 +787,7 @@ no se sabe si el máximo ocurrió antes o después del mínimo.
         risk.on_trade_closed(i, ts, net)
         return record
 ```
+<!-- fmt: on -->
 
 Las magnitudes de una operación cerrada (con `L` = lado ±1, `q` = cantidad):
 
@@ -1003,13 +1027,22 @@ from bybit_quant_lab.backtesting import run_backtest
 from bybit_quant_lab.risk.instruments import InstrumentSpec
 from tests.conftest import make_bars, manual_signals, zero_cost_config
 
-spec = InstrumentSpec("TEST", tick_size=0.01, qty_step=0.001, min_qty=0.001, max_qty=1e9,
-                      min_notional=0.0)
+spec = InstrumentSpec(
+    "TEST", tick_size=0.01, qty_step=0.001, min_qty=0.001, max_qty=1e9, min_notional=0.0
+)
 datos = make_bars([100, 100, 100, 104, 104, 100, 100])
 senales = manual_signals(datos.index, {1: 1, 3: -1}, stop=5)
 res = run_backtest(datos, senales, zero_cost_config(), "TEST", "1h", spec=spec)
-columnas = ["side", "entry_time", "exit_time", "qty", "entry_price", "exit_price", "exit_reason",
-            "net_pnl"]
+columnas = [
+    "side",
+    "entry_time",
+    "exit_time",
+    "qty",
+    "entry_price",
+    "exit_price",
+    "exit_reason",
+    "net_pnl",
+]
 print(res.trades[columnas].to_string())
 ```
 <!-- salida -->
@@ -1031,6 +1064,7 @@ en `res.rejected_signals` con hora, lado y motivo. El informe HTML las resume (M
 
 ## 10.12 El resultado: `BacktestResult`
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/results.py#L11-L46 -->
 `src/bybit_quant_lab/backtesting/results.py` · líneas 11–46
 
@@ -1072,6 +1106,7 @@ class BacktestResult:
         """Última vela simulada."""
         return self.equity.index[-1] if len(self.equity) else None
 ```
+<!-- fmt: on -->
 
 - `equity`: una fila por vela; incluye `drawdown = equity / máximo_acumulado − 1` (líneas 214–215
   de `engine.py`).
@@ -1102,6 +1137,7 @@ class BacktestResult:
 La prueba de auditoría del corto calcula el resultado esperado con aritmética explícita,
 independiente del motor:
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_audit_engine.py#L49-L81 -->
 `tests/unit/test_audit_engine.py` · líneas 49–81
 
@@ -1140,6 +1176,7 @@ def test_short_trade_with_fees_slippage_and_funding_by_hand() -> None:
     assert res.final_equity == pytest.approx(10_000 + net)
     assert res.totals["funding"] == pytest.approx(funding_paid)
 ```
+<!-- fmt: on -->
 
 ---
 

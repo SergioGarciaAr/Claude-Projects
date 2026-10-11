@@ -13,8 +13,9 @@ y los números de línea.
 
 - **Si empiezas desde cero:** lee los módulos en orden. Cada uno usa lo aprendido en el anterior.
 - **Si buscas algo concreto:** usa el índice de abajo o el [glosario](glosario.md).
-- **Si estás cansado:** cada lección empieza con una sección *La idea* que puedes leer sola.
-  La profundidad técnica viene después y puedes volver a ella más tarde.
+- **Si estás cansado:** las secciones empiezan, casi siempre, por la intuición (párrafos
+  *Intuición* o *Analogía*), que se pueden leer solos. La profundidad técnica viene después y
+  puedes volver a ella más tarde.
 - **Tras cada concepto** hay una *Comprobación*: una pregunta o un ejercicio corto. La
   respuesta está plegada debajo (haz clic en "Ver respuesta"). Intenta responder antes de mirar.
 
@@ -31,6 +32,8 @@ El curso distingue con cuidado entre lo que el código **demuestra** y lo que **
 | **[Supuesto]** | Algo que el código da por cierto pero que no se ha comprobado (por ejemplo, el formato real de la API de Bybit). |
 | **[Limitación]** | Algo que el sistema no hace o hace de forma aproximada. |
 | **[Pendiente]** | Algo que debe verificarse o implementarse antes de confiar en los resultados. |
+| **[Discrepancia]** | Un texto (documentación, cabecera, informe) que no coincide con lo que hace el código. Manda el código. |
+| **[Hallazgo]** | Un problema encontrado al revisar el código para este curso que la auditoría no recogía. Está verificado, pero no corregido. |
 
 ### Citas de código verificadas
 
@@ -53,6 +56,11 @@ python scripts/curso_citas.py --fill    # actualiza citas y salidas tras cambiar
 
 Si cambias el código, `--check` te dirá qué partes del curso quedaron desfasadas.
 
+Las citas de Python van rodeadas de `<!-- fmt: off -->` y `<!-- fmt: on -->` (comentarios
+invisibles al leer). `ruff format` también formatea los bloques de Python dentro de Markdown, y
+esos marcadores impiden que altere las citas, que deben coincidir carácter a carácter con el
+código. Los ejemplos ejecutables, en cambio, sí siguen el formato de ruff.
+
 ### Ejemplos ejecutables
 
 Los bloques marcados como ejecutables se han ejecutado de verdad con el entorno del proyecto.
@@ -62,7 +70,9 @@ entorno virtual activado.
 
 ### Estado del repositorio que describe el curso
 
-- Rama `claude/festive-franklin-jqcjz2`; el curso se escribió sobre el commit `30debc4`.
+- Rama `claude/festive-franklin-jqcjz2`; el curso describe el código del commit `30debc4`.
+  Mientras se escribía, solo se añadieron el curso y `scripts/curso_citas.py`: el código de
+  producción no cambió (`git diff 30debc4 -- src tests configs` está vacío).
 - Python 3.13, pandas 3.0, numpy 2.5 y pydantic 2.14 en el entorno donde se verificó.
 - 231 pruebas superadas, ruff y mypy sin errores (las secciones 14.6, 14.7 y 14.10 explican qué significa eso).
 
@@ -85,13 +95,13 @@ entorno virtual activado.
 | [XIII. Validación y sobreajuste](modulo-13-validacion.md) | Train/validación/test, walk-forward, DSR, Holm, bootstrap, los errores de la auditoría |
 | [XIV. Tests, calidad y depuración](modulo-14-tests.md) | Pruebas unitarias y de integración, mocks, ruff, mypy, escribir la prueba antes del arreglo |
 | [XV. CLI, informes y uso práctico](modulo-15-cli.md) | Todas las órdenes `bql`, archivos que generan y un flujo completo de investigación |
-| [XVI. Modificar el proyecto con autonomía](modulo-16-modificar.md) | Ejercicios guiados: parámetros, estrategias, indicadores, métricas, pruebas, git |
+| [XVI. Modificar el proyecto con autonomía](modulo-16-modificar.md) | Cómo leer un módulo, seguir una ejecución, añadir una estrategia sin tocar `src/` y once ejercicios graduados con solución |
 | [XVII. Limitaciones y camino a un sistema más riguroso](modulo-17-limitaciones.md) | Qué está corregido, qué falta, qué hay que verificar antes de confiar |
 | [Glosario](glosario.md) | Todos los términos técnicos, con el módulo donde se explican |
 
 ## Ruta mínima si tienes poco tiempo
 
 1. Módulo I completo (el mapa mental de todo lo demás).
-2. Módulo X, secciones 10.1 a 10.6 (cómo se simula una operación).
-3. Módulo XIII, secciones 13.1 a 13.4 (por qué un buen resultado histórico puede ser falso).
+2. Módulo X, secciones 10.1 a 10.4 y 10.10 (cómo se simula una operación, calculada a mano).
+3. Módulo XIII, secciones 13.1 a 13.5 (por qué un buen resultado histórico puede ser falso).
 4. Módulo XVII (qué no debes creer todavía).

@@ -40,6 +40,7 @@ bybit_quant_lab.cli` es equivalente.
 **[Hecho] Hay que ejecutar `bql` desde `bybit-quant-lab/`.** Las rutas por defecto son
 relativas:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/cli.py#L64-L91 -->
 `src/bybit_quant_lab/cli.py` · líneas 64–91
 
@@ -73,6 +74,7 @@ def _strategy_params(args: argparse.Namespace) -> dict[str, dict[str, Any]]:
     path = Path(args.strategies_config) if args.strategies_config else DEFAULT_STRATEGIES
     return load_strategy_params(path) if path.exists() else {}
 ```
+<!-- fmt: on -->
 
 Si `configs/default.yaml` no existe en el directorio actual, se usan los valores por defecto del
 código (línea 71) **sin aviso**. Si falta `configs/strategies.yaml`, se usan los parámetros por
@@ -84,6 +86,7 @@ advierta.
 
 ## 15.2 Opciones globales y punto de entrada
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/cli.py#L692-L711 -->
 `src/bybit_quant_lab/cli.py` · líneas 692–711
 
@@ -109,6 +112,7 @@ def main(argv: list[str] | None = None) -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 ```
+<!-- fmt: on -->
 
 - **Opciones globales** (van **antes** de la suborden): `--config`, `--strategies-config`,
   `--data-dir`, `--output-dir`, `--log-level`.
@@ -231,14 +235,22 @@ from pathlib import Path
 
 
 def bql(tmp, *args):
-    base = [sys.executable, "-m", "bybit_quant_lab.cli",
-            "--data-dir", f"{tmp}/data", "--output-dir", f"{tmp}/outputs"]
+    base = [
+        sys.executable,
+        "-m",
+        "bybit_quant_lab.cli",
+        "--data-dir",
+        f"{tmp}/data",
+        "--output-dir",
+        f"{tmp}/outputs",
+    ]
     p = subprocess.run([*base, *args], capture_output=True, text=True, check=False)
     texto = (p.stdout + p.stderr).replace(tmp, "<TMP>")
     lineas = [
-        ln for ln in texto.splitlines()
-        if not re.match(r"\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,\d+ ", ln)   # registro con hora
-        and not ln.startswith("ADVERTENCIA:")                          # aviso legal
+        ln
+        for ln in texto.splitlines()
+        if not re.match(r"\d{4}-\d\d-\d\d \d\d:\d\d:\d\d,\d+ ", ln)  # registro con hora
+        and not ln.startswith("ADVERTENCIA:")  # aviso legal
     ]
     texto = "\n".join(lineas)
     texto = re.sub(r"\d{4}-\d\d-\d\dT[\d:.+]+", "<FECHA>", texto)
@@ -250,13 +262,32 @@ with tempfile.TemporaryDirectory() as tmp:
     pasos = [
         ("synth", "--symbol", "BTCUSDT", "--timeframe", "1h", "--bars", "6000"),
         ("validate-data", "--symbol", "BTCUSDT", "--timeframe", "1h"),
-        ("backtest", "--symbol", "BTCUSDT", "--timeframe", "1h",
-         "--strategy", "donchian_breakout", "--out", f"{tmp}/outputs/bt"),
+        (
+            "backtest",
+            "--symbol",
+            "BTCUSDT",
+            "--timeframe",
+            "1h",
+            "--strategy",
+            "donchian_breakout",
+            "--out",
+            f"{tmp}/outputs/bt",
+        ),
         ("compare", "--symbol", "BTCUSDT", "--timeframe", "1h", "--out", f"{tmp}/outputs/cmp"),
-        ("final-test", "--selection", f"{tmp}/outputs/cmp/selection.json",
-         "--out", f"{tmp}/outputs/ft"),
-        ("final-test", "--selection", f"{tmp}/outputs/cmp/selection.json",
-         "--out", f"{tmp}/outputs/ft2"),
+        (
+            "final-test",
+            "--selection",
+            f"{tmp}/outputs/cmp/selection.json",
+            "--out",
+            f"{tmp}/outputs/ft",
+        ),
+        (
+            "final-test",
+            "--selection",
+            f"{tmp}/outputs/cmp/selection.json",
+            "--out",
+            f"{tmp}/outputs/ft2",
+        ),
         ("report", "--run-dir", f"{tmp}/outputs/bt"),
     ]
     for args in pasos:
@@ -418,6 +449,7 @@ Sin `--out`, cada orden crea `outputs/<orden>_<símbolo>_<tf>[_<estrategia>]_<fe
 
 ## 15.6 Metadatos de reproducibilidad
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/reporting/metadata.py#L43-L67 -->
 `src/bybit_quant_lab/reporting/metadata.py` · líneas 43–67
 
@@ -448,6 +480,7 @@ def build_metadata(
         **(extra or {}),
     }
 ```
+<!-- fmt: on -->
 
 Con `metadata.json` se puede saber **exactamente** qué produjo un resultado: commit de Git (y si
 había cambios sin confirmar, `dirty`), versión de Python, hash de los datos, si eran sintéticos,

@@ -50,6 +50,7 @@ pruebas; el total ejecutado es 231):
 **2. Fixtures.** Datos o recursos que pytest crea y pasa a las pruebas que los piden por
 nombre:
 
+<!-- fmt: off -->
 <!-- cita: tests/conftest.py#L14-L17 -->
 `tests/conftest.py` · líneas 14–17
 
@@ -59,6 +60,7 @@ def synth() -> pd.DataFrame:
     """3000 velas de 1h sintéticas (semilla fija)."""
     return generate_synthetic_ohlcv(bars=3000, timeframe="1h", seed=7)
 ```
+<!-- fmt: on -->
 
 `scope="session"` crea la serie una vez para toda la ejecución. Una prueba que declara
 `synth` como parámetro la recibe. `tmp_path` (incorporada en pytest) da un directorio temporal
@@ -66,6 +68,7 @@ distinto para cada prueba: así ninguna prueba escribe en `outputs/` real.
 
 **3. Parametrización.** Una función, muchas pruebas:
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_strategies.py#L44-L50 -->
 `tests/unit/test_strategies.py` · líneas 44–50
 
@@ -78,6 +81,7 @@ def test_no_lookahead_truncation(name: str, synth: pd.DataFrame) -> None:
         part = strat.generate_signals(synth.iloc[: t + 1])
         pd.testing.assert_frame_equal(full.iloc[: t + 1], part, check_freq=False)
 ```
+<!-- fmt: on -->
 
 `ALL` es la lista de las diez estrategias: esta función genera diez pruebas.
 
@@ -116,6 +120,7 @@ filterwarnings = ["error::FutureWarning"]
 1. **Truncar** la serie después de `t` no cambia ninguna señal hasta `t`.
 2. **Alterar** los datos posteriores a `t` no cambia ninguna señal hasta `t`.
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_strategies.py#L53-L65 -->
 `tests/unit/test_strategies.py` · líneas 53–65
 
@@ -134,6 +139,7 @@ def test_no_lookahead_future_perturbation(name: str, synth: pd.DataFrame) -> Non
     b = strat.generate_signals(altered).iloc[: t + 1]
     pd.testing.assert_frame_equal(a, b)
 ```
+<!-- fmt: on -->
 
 Demostración con un indicador correcto y uno "tramposo" que usa una media centrada (mira 10
 velas hacia delante):
@@ -181,6 +187,7 @@ en 1500. No es una demostración formal para todo `t`, pero detecta los errores 
 Las pruebas no pueden depender de internet (y en este entorno, Bybit está bloqueada). El
 cliente recibe sus dependencias desde fuera (**inyección de dependencias**):
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_data.py#L36-L49 -->
 `tests/unit/test_data.py` · líneas 36–49
 
@@ -200,7 +207,9 @@ class FakeExchange:
                 raise f
             return f
 ```
+<!-- fmt: on -->
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_data.py#L90-L97 -->
 `tests/unit/test_data.py` · líneas 90–97
 
@@ -214,6 +223,7 @@ def _client(fake: FakeExchange) -> BybitPublicClient:
         min_request_interval=0,
         clock=lambda: NOW,
 ```
+<!-- fmt: on -->
 
 - `session=fake`: en lugar de `requests.Session`, un objeto con un método `get` que devuelve
   respuestas fabricadas con el formato de Bybit (lista en orden descendente, `retCode`).
@@ -298,9 +308,21 @@ import subprocess
 import sys
 
 salida = subprocess.run(
-    [sys.executable, "-m", "pytest", "-o", "addopts=", "-q", "-p", "no:cacheprovider",
-     "tests/unit/test_risk.py", "tests/unit/test_signals.py"],
-    capture_output=True, text=True, check=False,
+    [
+        sys.executable,
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_risk.py",
+        "tests/unit/test_signals.py",
+    ],
+    capture_output=True,
+    text=True,
+    check=False,
 ).stdout
 print(re.sub(r" in [\d.]+s", "", salida.strip().splitlines()[-1]))
 ```
@@ -408,9 +430,9 @@ import pandas as pd
 df = pd.DataFrame({"x": [1, -1, 2], "y": [0, 0, 0]})
 with warnings.catch_warnings(record=True) as avisos:
     warnings.simplefilter("always")
-    df[df["x"] > 0]["y"] = 1                    # encadenada: no modifica df
+    df[df["x"] > 0]["y"] = 1  # encadenada: no modifica df
 print("encadenada:", df["y"].tolist(), [type(a.message).__name__ for a in avisos])
-df.loc[df["x"] > 0, "y"] = 1                    # correcta: una sola operación .loc
+df.loc[df["x"] > 0, "y"] = 1  # correcta: una sola operación .loc
 print("con .loc:  ", df["y"].tolist())
 ```
 <!-- salida -->

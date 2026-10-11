@@ -104,6 +104,7 @@ diaria no se reiniciaba y el límite diario saltaba sin motivo. Se detectó porq
 dio resultados distintos antes y después de una optimización, y se corrigió en el commit
 `2f60aca` con un cálculo independiente de la resolución:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L109-L112 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 109–112
 
@@ -113,6 +114,7 @@ dio resultados distintos antes y después de una optimización, y se corrigió e
             idx.floor("D").as_unit("s").tz_convert(None).to_numpy().astype("int64") // 86_400
         ).tolist()
 ```
+<!-- fmt: on -->
 
 `floor("D")` lleva cada fecha a la medianoche de su día; `as_unit("s")` fija la resolución en
 segundos **antes** de convertir a número; al dividir entre 86.400 (segundos de un día) se obtiene
@@ -127,8 +129,10 @@ import pandas as pd
 idx = pd.date_range("2024-01-01 22:00", periods=4, freq="1h", tz="UTC")
 for unidad in ("ns", "ms"):
     i = idx.as_unit(unidad)
-    ingenuo = (i.asi8 // 86_400_000_000_000).tolist()         # supone nanosegundos
-    correcto = (i.floor("D").as_unit("s").tz_convert(None).to_numpy().astype("int64") // 86_400).tolist()
+    ingenuo = (i.asi8 // 86_400_000_000_000).tolist()  # supone nanosegundos
+    correcto = (
+        i.floor("D").as_unit("s").tz_convert(None).to_numpy().astype("int64") // 86_400
+    ).tolist()
     print(unidad, "ingenuo:", ingenuo, "| correcto:", correcto)
 ```
 <!-- salida -->
@@ -157,6 +161,7 @@ como filtro, solo quedan las filas `True`. Las condiciones se combinan con `&` (
 
 El cliente de Bybit usa máscaras para recortar el rango y descartar velas abiertas:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L172-L174 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 172–174
 
@@ -165,6 +170,7 @@ El cliente de Bybit usa máscaras para recortar el rango y descartar velas abier
         closed = df.index + delta <= now
         return df[closed]
 ```
+<!-- fmt: on -->
 
 <!-- ejecutar -->
 ```python
@@ -195,6 +201,7 @@ print(velas[sube & (velas["close"] > 100)])
 
 El cliente une las ventanas descargadas con exactamente esas tres operaciones:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/data/bybit_client.py#L170-L171 -->
 `src/bybit_quant_lab/data/bybit_client.py` · líneas 170–171
 
@@ -202,17 +209,22 @@ El cliente une las ventanas descargadas con exactamente esas tres operaciones:
         df = pd.concat(frames)
         df = df[~df.index.duplicated(keep="last")].sort_index()
 ```
+<!-- fmt: on -->
 
 <!-- ejecutar -->
 ```python
 import pandas as pd
 
+
 def tabla(horas, cierres):
     idx = pd.to_datetime(horas).tz_localize("UTC")
     return pd.DataFrame({"close": cierres}, index=idx)
 
+
 ventana_2 = tabla(["2024-01-01 02:00", "2024-01-01 03:00"], [102.0, 103.0])
-ventana_1 = tabla(["2024-01-01 00:00", "2024-01-01 01:00", "2024-01-01 02:00"], [100.0, 101.0, 102.5])
+ventana_1 = tabla(
+    ["2024-01-01 00:00", "2024-01-01 01:00", "2024-01-01 02:00"], [100.0, 101.0, 102.5]
+)
 unidas = pd.concat([ventana_2, ventana_1])
 print(unidas.index.strftime("%H:%M").tolist())
 limpias = unidas[~unidas.index.duplicated(keep="last")].sort_index()
@@ -243,6 +255,7 @@ NumPy (código compilado) y no en Python.
 
 El *true range* (Módulo VII) se calcula vectorizado:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L41-L48 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 41–48
 
@@ -256,6 +269,7 @@ def true_range(df: pd.DataFrame) -> pd.Series:
     ).max(axis=1)
     return tr.rename("tr")
 ```
+<!-- fmt: on -->
 
 Tres Series se calculan de una vez, `pd.concat(..., axis=1)` las pone lado a lado como columnas y
 `.max(axis=1)` toma el máximo **de cada fila**.
@@ -288,6 +302,7 @@ bucle, porque cada vela depende del estado que dejó la anterior (posición abie
 límites de riesgo). Para acelerar ese bucle, convierte las columnas a arrays de NumPy antes de
 empezar, ya que acceder a un elemento de un array es mucho más rápido que a uno de una Series:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/backtesting/engine.py#L93-L101 -->
 `src/bybit_quant_lab/backtesting/engine.py` · líneas 93–101
 
@@ -302,6 +317,7 @@ empezar, ya que acceder a un elemento de un array es mucho más rápido que a un
         tp_d = signals["take_profit_distance"].to_numpy(float)
         tr_d = signals["trailing_distance"].to_numpy(float)
 ```
+<!-- fmt: on -->
 
 ---
 
@@ -326,6 +342,7 @@ donde es `False`.
 
 El RSI usa `where` para tratar casos límite sin dividir entre cero:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L56-L66 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 56–66
 
@@ -342,6 +359,7 @@ def rsi(close: pd.Series, n: int = 14) -> pd.Series:
     out = out.where(~((gain == 0) & (loss == 0)), 50.0)
     return out.where(gain.notna() & loss.notna()).rename("rsi")
 ```
+<!-- fmt: on -->
 
 - **61–63:** `np.errstate` silencia, **solo dentro del bloque**, los avisos de división por cero
   (un context manager, Módulo II, sección 2.16).
@@ -385,6 +403,7 @@ En una estrategia, usar `shift(-1)` es casi siempre un **look-ahead bias** (Mód
 
 El canal de Donchian usa `shift(1)` para **excluir la vela actual** del canal:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L145-L150 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 145–150
 
@@ -396,12 +415,14 @@ def donchian(df: pd.DataFrame, n: int = 20) -> pd.DataFrame:
     lower = df["low"].rolling(n, min_periods=n).min().shift(1)
     return pd.DataFrame({"upper": upper, "lower": lower, "mid": (upper + lower) / 2})
 ```
+<!-- fmt: on -->
 
 Así, la pregunta "¿el cierre de hoy supera el máximo de las 20 velas **anteriores**?" no compara
 la vela consigo misma.
 
 Y la detección de cruces compara "ahora" con "antes":
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L171-L174 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 171–174
 
@@ -411,6 +432,7 @@ def crossover(a: pd.Series, b: pd.Series | float) -> pd.Series:
     bb = b if isinstance(b, pd.Series) else pd.Series(b, index=a.index)
     return ((a > bb) & (a.shift(1) <= bb.shift(1))).fillna(False).astype(bool)
 ```
+<!-- fmt: on -->
 
 Un cruce al alza en `t` ocurre si `a` está por encima de `b` en `t` **y** estaba por debajo o
 igual en `t−1`.
@@ -423,8 +445,14 @@ from bybit_quant_lab.indicators import crossover
 
 rapida = pd.Series([1.0, 2.0, 3.0, 4.0, 3.0])
 lenta = pd.Series([2.5, 2.5, 2.5, 2.5, 3.5])
-tabla = pd.DataFrame({"rapida": rapida, "rapida_ayer": rapida.shift(1), "lenta": lenta,
-                      "cruce_al_alza": crossover(rapida, lenta)})
+tabla = pd.DataFrame(
+    {
+        "rapida": rapida,
+        "rapida_ayer": rapida.shift(1),
+        "lenta": lenta,
+        "cruce_al_alza": crossover(rapida, lenta),
+    }
+)
 print(tabla)
 ```
 <!-- salida -->
@@ -453,6 +481,7 @@ cada vez. `serie.rolling(3).mean()` es la media de las 3 últimas velas en cada 
 - Sin `center=True`, la ventana de la fila `t` termina en `t`: solo usa pasado y presente.
   **[Hecho]** El proyecto nunca usa `center=True`, que incluiría filas futuras.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L23-L26 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 23–26
 
@@ -462,16 +491,23 @@ def sma(s: pd.Series, n: int) -> pd.Series:
     _check_period(n)
     return s.rolling(n, min_periods=n).mean()
 ```
+<!-- fmt: on -->
 
 <!-- ejecutar -->
 ```python
 import pandas as pd
 
 cierre = pd.Series([10.0, 11.0, 12.0, 13.0, 14.0])
-print(pd.DataFrame({"cierre": cierre,
-                    "media_3": cierre.rolling(3, min_periods=3).mean(),
-                    "max_3": cierre.rolling(3, min_periods=3).max(),
-                    "desv_3": cierre.rolling(3, min_periods=3).std(ddof=0).round(4)}))
+print(
+    pd.DataFrame(
+        {
+            "cierre": cierre,
+            "media_3": cierre.rolling(3, min_periods=3).mean(),
+            "max_3": cierre.rolling(3, min_periods=3).max(),
+            "desv_3": cierre.rolling(3, min_periods=3).std(ddof=0).round(4),
+        }
+    )
+)
 ```
 <!-- salida -->
 ```text
@@ -507,6 +543,7 @@ EMA[t] = α · x[t] + (1 − α) · EMA[t−1]
 
 `α` (alfa) es el peso del dato nuevo. Con `span=n`, pandas usa `α = 2 / (n + 1)`.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L29-L38 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 29–38
 
@@ -522,6 +559,7 @@ def wilder(s: pd.Series, n: int) -> pd.Series:
     _check_period(n)
     return s.ewm(alpha=1.0 / n, adjust=False, min_periods=n).mean()
 ```
+<!-- fmt: on -->
 
 - `adjust=False` aplica exactamente la fórmula recursiva de arriba, empezando por el primer
   valor. **[Diseño]** Garantiza que el valor en `t` dependa solo de `x[0..t]`: si recortas la serie
@@ -554,6 +592,7 @@ pandas: [10.0, 11.0, 11.0, 12.0]
 `groupby(clave).cumsum()` calcula una **suma acumulada que se reinicia** cada vez que cambia la
 clave. El VWAP de sesión (Módulo VII) la usa con la clave "día UTC":
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/indicators/core.py#L133-L142 -->
 `src/bybit_quant_lab/indicators/core.py` · líneas 133–142
 
@@ -569,6 +608,7 @@ def vwap_session(df: pd.DataFrame, session: str = "1D") -> pd.Series:
     vol = df["volume"].groupby(key).cumsum()
     return (pv / vol.replace(0, np.nan)).rename("vwap")
 ```
+<!-- fmt: on -->
 
 <!-- ejecutar -->
 ```python
@@ -577,8 +617,15 @@ import pandas as pd
 idx = pd.date_range("2024-01-01 22:00", periods=4, freq="1h", tz="UTC")
 volumen = pd.Series([1.0, 2.0, 3.0, 4.0], index=idx)
 dia = idx.floor("1D")
-print(pd.DataFrame({"volumen": volumen, "acumulado_global": volumen.cumsum(),
-                    "acumulado_por_dia": volumen.groupby(dia).cumsum()}))
+print(
+    pd.DataFrame(
+        {
+            "volumen": volumen,
+            "acumulado_global": volumen.cumsum(),
+            "acumulado_por_dia": volumen.groupby(dia).cumsum(),
+        }
+    )
+)
 ```
 <!-- salida -->
 ```text
@@ -604,12 +651,25 @@ esas 20 filas abarcan más tiempo del que crees.
 ```python
 import pandas as pd
 
-idx = pd.to_datetime(["2024-01-01 00:00", "2024-01-01 01:00", "2024-01-01 02:00",
-                      "2024-01-01 09:00", "2024-01-01 10:00"]).tz_localize("UTC")
+idx = pd.to_datetime(
+    [
+        "2024-01-01 00:00",
+        "2024-01-01 01:00",
+        "2024-01-01 02:00",
+        "2024-01-01 09:00",
+        "2024-01-01 10:00",
+    ]
+).tz_localize("UTC")
 cierre = pd.Series([100.0, 101.0, 102.0, 110.0, 111.0], index=idx)
-print(pd.DataFrame({"cierre": cierre,
-                    "ultimas_3_filas": cierre.rolling(3).mean().round(2),
-                    "ultimas_3_horas": cierre.rolling("3h").mean().round(2)}))
+print(
+    pd.DataFrame(
+        {
+            "cierre": cierre,
+            "ultimas_3_filas": cierre.rolling(3).mean().round(2),
+            "ultimas_3_horas": cierre.rolling("3h").mean().round(2),
+        }
+    )
+)
 ```
 <!-- salida -->
 ```text

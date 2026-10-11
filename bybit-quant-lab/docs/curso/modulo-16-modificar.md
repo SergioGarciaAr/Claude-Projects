@@ -64,6 +64,7 @@ bql backtest --symbol BTCUSDT --timeframe 1h --strategy ema_crossover
 
 El registro de estrategias:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/strategies/registry.py#L9-L37 -->
 `src/bybit_quant_lab/strategies/registry.py` · líneas 9–37
 
@@ -98,6 +99,7 @@ def create_strategy(name: str, params: dict[str, Any] | None = None) -> Strategy
     """Instancia una estrategia registrada con parámetros validados."""
     return get_strategy_class(name)(params or {})
 ```
+<!-- fmt: on -->
 
 `@register` es un **decorador** (Módulo II, sección 2.12): al definirse la clase, la añade al
 diccionario `_REGISTRY` con su `name`. `strategies/__init__.py` importa los diez módulos para
@@ -158,7 +160,7 @@ from bybit_quant_lab.strategies import (
 )
 
 
-class MomentumParams(StrategyParams):          # hereda stop, TP, trailing, cooldown...
+class MomentumParams(StrategyParams):  # hereda stop, TP, trailing, cooldown...
     lookback: int = Field(48, ge=2, le=1000)
 
 
@@ -175,7 +177,7 @@ class MomentumStrategy(Strategy):
 
     def compute_events(self, data: pd.DataFrame) -> Events:
         c = data["close"]
-        mom = c / c.shift(self.params.lookback) - 1          # solo datos pasados
+        mom = c / c.shift(self.params.lookback) - 1  # solo datos pasados
         up, down = mom > 0, mom < 0
         return Events(
             long_entry=up & ~up.shift(1, fill_value=False),  # transición, no nivel
@@ -192,7 +194,7 @@ estrategia = MomentumStrategy({"lookback": 48})
 senales = estrategia.generate_signals(datos)
 print("contrato:", list(senales.columns))
 
-for t in (400, 1100, 2203):                                  # misma técnica que la suite
+for t in (400, 1100, 2203):  # misma técnica que la suite
     parcial = estrategia.generate_signals(datos.iloc[: t + 1])
     pd.testing.assert_frame_equal(senales.iloc[: t + 1], parcial, check_freq=False)
 print("no look-ahead en 3 cortes: ok")
@@ -200,11 +202,18 @@ print("no look-ahead en 3 cortes: ok")
 cfg = load_config()
 res = run_backtest(datos, senales, cfg, "BTCUSDT", "1h", end=datos.index[1799])
 m = compute_metrics(res, cfg.backtest.min_trades_for_stats, cfg.backtest.min_days_for_cagr)
-print({k: round(m[k], 4) if isinstance(m[k], float) else m[k]
-       for k in ("num_trades", "net_profit", "sharpe", "max_drawdown", "exposure")})
+print(
+    {
+        k: round(m[k], 4) if isinstance(m[k], float) else m[k]
+        for k in ("num_trades", "net_profit", "sharpe", "max_drawdown", "exposure")
+    }
+)
 print("motivos de salida:", res.trades["exit_reason"].value_counts().to_dict())
 print("velas con señal distinta de 0:", int((senales["signal"].iloc[:1800] != 0).sum()), "de 1800")
-print("entradas rechazadas:", pd.Series([r["reason"] for r in res.rejected_signals]).value_counts().to_dict())
+print(
+    "entradas rechazadas:",
+    pd.Series([r["reason"] for r in res.rejected_signals]).value_counts().to_dict(),
+)
 print("eventos de riesgo:", len(res.risk_events))
 ```
 <!-- salida -->

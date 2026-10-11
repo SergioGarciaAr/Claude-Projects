@@ -30,6 +30,7 @@ Traducido al proyecto:
 estrategia individual (`signal`, `conviction`, `stop_distance`, `take_profit_distance`,
 `trailing_distance`). Por eso el motor no distingue entre una estrategia y una combinación.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L1-L29 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 1–29
 
@@ -64,6 +65,7 @@ FLAT en las velas cuyo régimen no esté permitido. Reglas por nombre de estrate
 categoría o comodín ``*``; cada regla mapea dimensión -> valores permitidos.
 """
 ```
+<!-- fmt: on -->
 
 Términos que aparecen en esa cabecera:
 
@@ -78,6 +80,7 @@ Términos que aparecen en esa cabecera:
 
 ## 9.1 La configuración de una combinación
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L42-L59 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 42–59
 
@@ -101,6 +104,7 @@ class CombinationConfig(BaseModel):
     conflict_policy: Literal["veto", "net"] = "veto"
     regime_rules: dict[str, dict[str, list[str]]] | None = None
 ```
+<!-- fmt: on -->
 
 | Campo | Significado | Lo usa |
 |---|---|---|
@@ -136,6 +140,7 @@ negativos) cumplen las restricciones, pero nada lo comprueba en ese punto.
 
 ## 9.2 El flujo de `combine_signals`, línea a línea
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L86-L110 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 86–110
 
@@ -166,6 +171,7 @@ def combine_signals(
     n = len(members)
 
 ```
+<!-- fmt: on -->
 
 - **93–98:** valida los miembros. Un nombre inexistente lanza `KeyError`; una lista vacía,
   `ValueError`.
@@ -179,6 +185,7 @@ def combine_signals(
 
 Después vienen las cuatro ramas (secciones 9.3–9.7) y el cierre común:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L136-L150 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 136–150
 
@@ -199,6 +206,7 @@ Después vienen las cuatro ramas (secciones 9.3–9.7) y el cierre común:
     result.loc[result["signal"] == 0, "conviction"] = 0.0
     return result
 ```
+<!-- fmt: on -->
 
 - **137–139:** política `veto` (sección 9.4).
 - **142:** la convicción de la combinación es la **fuerza del acuerdo** (`strength`), recortada a
@@ -215,6 +223,7 @@ Después vienen las cuatro ramas (secciones 9.3–9.7) y el cierre común:
 Para todo el módulo se usa el ejemplo de `tests/unit/test_signals.py`: cuatro estrategias
 ficticias (`a`, `b`, `c`, `d`) y seis velas.
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_signals.py#L20-L37 -->
 `tests/unit/test_signals.py` · líneas 20–37
 
@@ -238,6 +247,7 @@ FRAMES = {
     "d": _frame([0, 0, 1, 1, 0, 0], stop=7.0),
 }
 ```
+<!-- fmt: on -->
 
 Tabla de votos (categorías: `a`=volume, `b`=trend, `c` y `d`=indicator):
 
@@ -265,6 +275,7 @@ señal = −1  si  net ≤ −m
 señal =  0  en otro caso
 ```
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L111-L114 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 111–114
 
@@ -274,6 +285,7 @@ señal =  0  en otro caso
         out = np.where(net >= config.min_margin, 1, np.where(net <= -config.min_margin, -1, 0))
         strength = net.abs() / n
 ```
+<!-- fmt: on -->
 
 `np.where(cond, a, b)` elige `a` donde la condición es verdadera y `b` donde no; anidado,
 implementa el "si / si no si / si no". `strength = |net| / n` es la fracción de miembros que
@@ -323,6 +335,7 @@ combinations:
 
 La prueba que documenta la equivalencia y la que impide repetir el error:
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_audit_statistics.py#L157-L182 -->
 `tests/unit/test_audit_statistics.py` · líneas 157–182
 
@@ -354,11 +367,13 @@ def test_simple_vote_veto_equals_min_consensus_veto(synth: pd.DataFrame) -> None
     b = combine_signals(frames, cats, CombinationConfig(mode="min_consensus", min_votes=3))
     pd.testing.assert_series_equal(a["signal"], b["signal"])
 ```
+<!-- fmt: on -->
 
 **[Discrepancia]** Si `configs/strategies.yaml` no tiene sección `combinations`, la CLI crea
 una combinación por defecto llamada también `vote_all`, pero con la política por defecto
 (`veto`), es decir, la versión anterior a la corrección:
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/cli.py#L94-L98 -->
 `src/bybit_quant_lab/cli.py` · líneas 94–98
 
@@ -369,6 +384,7 @@ def _combos(args: argparse.Namespace) -> list[CombinationConfig]:
         return [CombinationConfig(name="vote_all", mode="simple_vote", min_margin=3)]
     return [CombinationConfig.model_validate(c) for c in raw]
 ```
+<!-- fmt: on -->
 
 Con el YAML del repositorio esa rama no se ejecuta.
 
@@ -381,6 +397,7 @@ reduce operaciones, y con menos operaciones las métricas son más inciertas (M�
 
 **Regla.** Con `k = min_votes`: largo si `n_long ≥ k` y **no** `n_short ≥ k`; corto en espejo.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L123-L126 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 123–126
 
@@ -390,6 +407,7 @@ reduce operaciones, y con menos operaciones las métricas son más inciertas (M�
         out = np.where(long_ok & ~short_ok, 1, np.where(short_ok & ~long_ok, -1, 0))
         strength = pd.Series(np.maximum(n_long, n_short) / n, index=index)
 ```
+<!-- fmt: on -->
 
 La condición `& ~short_ok` resuelve el empate extremo (k votos en cada dirección → 0).
 
@@ -415,6 +433,7 @@ score = Σ w_i · s_i · c_i / Σ w_i        (score ∈ [−1, 1])
 señal = +1 si score ≥ θ,  −1 si score ≤ −θ,  0 en otro caso       (θ = threshold)
 ```
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L115-L122 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 115–122
 
@@ -428,6 +447,7 @@ señal = +1 si score ≥ θ,  −1 si score ≤ −θ,  0 en otro caso       (θ
         out = np.where(score >= config.threshold, 1, np.where(score <= -config.threshold, -1, 0))
         strength = score.abs()
 ```
+<!-- fmt: on -->
 
 - **116:** un miembro sin peso explícito recibe 1.
 - **117–118:** pesos negativos o suma no positiva → `ValueError`.
@@ -449,6 +469,7 @@ La vela 5 está justo en el umbral: el `>=` la convierte en larga. Con θ = 0,51
 
 ### Cómo se ajustan los pesos (`fit_weights`)
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L153-L169 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 153–169
 
@@ -471,6 +492,7 @@ def fit_weights(
         return dict.fromkeys(train_returns, 1.0)
     return {k: v / total for k, v in weights.items()}
 ```
+<!-- fmt: on -->
 
 **Intuición.** Cada estrategia recibe un peso proporcional a su Sharpe por vela en
 entrenamiento; las de Sharpe negativo reciben 0. Luego se normaliza para que sumen 1.
@@ -494,6 +516,7 @@ implica capacidad predictiva futura (lo dice la propia cabecera, líneas 14–15
 
 ### Dónde se usan pesos y umbral: `build_combinations`
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/research.py#L196-L242 -->
 `src/bybit_quant_lab/validation/research.py` · líneas 196–242
 
@@ -546,6 +569,7 @@ implica capacidad predictiva futura (lo dice la propia cabecera, líneas 14–15
             out[cfg.name] = Candidate(cfg.name, "combination", sig, cfg.model_dump())
         return out, info
 ```
+<!-- fmt: on -->
 
 - **203–206:** la correlación de señales se calcula **solo** con las velas de entrenamiento.
 - **211–214:** las combinaciones cuyo nombre empieza por `dedup` y no tienen miembros reciben
@@ -574,6 +598,7 @@ ventaja: su mejor versión ya se escogió con esos mismos datos (doble uso del s
 Módulo XIII). La prueba que lo impide comprueba que todos los ensayos `combo_trial` están en
 `train`:
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_audit_statistics.py#L148-L154 -->
 `tests/unit/test_audit_statistics.py` · líneas 148–154
 
@@ -586,12 +611,14 @@ def test_combination_thresholds_not_tuned_on_validation(researcher: Researcher) 
     # El umbral se elige en entrenamiento; validación queda limpia para la selección.
     assert {r["segment"] for r in trials} == {"train"}
 ```
+<!-- fmt: on -->
 
 **[Discrepancia] Dos textos quedaron desactualizados tras la corrección.** El código y
 `docs/methodology.md` (punto 3 de la sección 4) dicen "entrenamiento", pero:
 
 - la cabecera del módulo `research.py` sigue diciendo "validación":
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/validation/research.py#L7-L8 -->
 `src/bybit_quant_lab/validation/research.py` · líneas 7–8
 
@@ -599,9 +626,11 @@ def test_combination_thresholds_not_tuned_on_validation(researcher: Researcher) 
 2. Redundancia y pesos de combinación se ajustan **solo con entrenamiento**; los umbrales de
    la votación ponderada se eligen **solo con validación**.
 ```
+<!-- fmt: on -->
 
 - y el informe HTML rotula esas decisiones como "validación (umbrales)":
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/reporting/html.py#L279-L282 -->
 `src/bybit_quant_lab/reporting/html.py` · líneas 279–282
 
@@ -611,6 +640,7 @@ def test_combination_thresholds_not_tuned_on_validation(researcher: Researcher) 
         "validación (umbrales):\n"
         + json.dumps(to_jsonable(out.redundancy), indent=2, ensure_ascii=False)
 ```
+<!-- fmt: on -->
 
 Manda el código: el umbral se ajusta en entrenamiento. Corregir esos dos textos es un ejercicio
 del Módulo XVI.
@@ -693,6 +723,7 @@ anula la señal larga.
 **Intuición.** En lugar de contar estrategias, se cuentan **familias**: dos estrategias de
 volumen que coinciden valen como una categoría, no como dos votos.
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L127-L134 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 127–134
 
@@ -706,6 +737,7 @@ volumen que coinciden valen como una categoría, no como dos votos.
         out = np.where(long_ok & ~short_ok, 1, np.where(short_ok & ~long_ok, -1, 0))
         strength = pd.Series(np.maximum(c_long, c_short) / max(cats.nunique(), 1), index=index)
 ```
+<!-- fmt: on -->
 
 - **128:** asigna a cada miembro su categoría (`volume`, `trend` o `indicator`).
 - **129:** `sig.T.groupby(cats).sum().T` suma los estados **dentro de cada categoría**. Se
@@ -759,11 +791,15 @@ casos = {
     "consenso k=3": CombinationConfig(mode="min_consensus", min_votes=3),
     "consenso k=2 veto": CombinationConfig(mode="min_consensus", min_votes=2),
     "ponderada net": CombinationConfig(
-        mode="weighted_vote", weights={"a": 3, "b": 1, "c": 0, "d": 0},
-        threshold=0.5, conflict_policy="net",
+        mode="weighted_vote",
+        weights={"a": 3, "b": 1, "c": 0, "d": 0},
+        threshold=0.5,
+        conflict_policy="net",
     ),
     "ponderada veto": CombinationConfig(
-        mode="weighted_vote", weights={"a": 3, "b": 1, "c": 0, "d": 0}, threshold=0.5,
+        mode="weighted_vote",
+        weights={"a": 3, "b": 1, "c": 0, "d": 0},
+        threshold=0.5,
     ),
     "categorías 2": CombinationConfig(mode="category_consensus", min_categories=2),
 }
@@ -795,6 +831,7 @@ del encargo original y no se cambió (`docs/audit_report.md`, M-05).
 
 ## 9.8 Stops, take profit y convicción de una combinación
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L143-L146 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 143–146
 
@@ -804,6 +841,7 @@ del encargo original y no se cambió (`docs/audit_report.md`, M-05).
         agree = sig.eq(out_s, axis=0) & (out_s != 0).to_numpy()[:, None]
         result[col] = values.where(agree).median(axis=1, skipna=True)
 ```
+<!-- fmt: on -->
 
 - `agree` es una matriz booleana: verdadero donde el miembro vota **igual** que la combinación y
   la combinación no está en 0. `sig.eq(out_s, axis=0)` compara cada columna con la serie
@@ -837,6 +875,7 @@ y del riesgo por operación (Módulo XI). `use_conviction` solo cambia la **punt
 cosas: desglosar resultados (¿la estrategia gana solo en tendencia?) y filtrar estrategias (no
 usar reversión a la media en plena tendencia).
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/regime.py#L1-L13 -->
 `src/bybit_quant_lab/signals/regime.py` · líneas 1–13
 
@@ -855,7 +894,9 @@ Tres dimensiones independientes, calculadas solo con datos hasta cada vela:
 Durante el calentamiento las dimensiones valen ``unknown``.
 """
 ```
+<!-- fmt: on -->
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/regime.py#L41-L60 -->
 `src/bybit_quant_lab/signals/regime.py` · líneas 41–60
 
@@ -881,6 +922,7 @@ def classify_regime(data: pd.DataFrame, config: RegimeConfig | None = None) -> p
     out["label"] = out["trend"] + "|" + out["volatility"]
     return out
 ```
+<!-- fmt: on -->
 
 Tres dimensiones independientes:
 
@@ -909,6 +951,7 @@ mide la liquidez real (diferencial, profundidad). Lo dice la cabecera (líneas 8
 **Causalidad.** `test_regime_is_causal` compara el régimen calculado con toda la serie y con
 solo las primeras 1200 velas: deben coincidir en esas 1200.
 
+<!-- fmt: off -->
 <!-- cita: tests/unit/test_signals.py#L134-L139 -->
 `tests/unit/test_signals.py` · líneas 134–139
 
@@ -920,6 +963,7 @@ def test_regime_is_causal(synth: pd.DataFrame) -> None:
     assert set(full["trend"].unique()) <= {"trend", "range", "unknown"}
     assert np.all(full["liquidity"].isin(["low_liq", "normal_liq", "unknown"]))
 ```
+<!-- fmt: on -->
 
 Distribución en la serie sintética:
 
@@ -959,6 +1003,7 @@ Lectura:
 
 ## 9.10 Filtro de régimen
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/combiners.py#L62-L79 -->
 `src/bybit_quant_lab/signals/combiners.py` · líneas 62–79
 
@@ -982,6 +1027,7 @@ def apply_regime_filter(
         out.loc[~allowed, name] = 0
     return out
 ```
+<!-- fmt: on -->
 
 - **73:** para cada estrategia se consultan tres claves de reglas, en este orden: el comodín
   `*`, el nombre de su categoría y su propio nombre.
@@ -1092,6 +1138,7 @@ repositorio incluye `unknown` en esa regla.
 
 ## 9.11 Detección de redundancia
 
+<!-- fmt: off -->
 <!-- cita: src/bybit_quant_lab/signals/redundancy.py#L1-L46 -->
 `src/bybit_quant_lab/signals/redundancy.py` · líneas 1–46
 
@@ -1143,6 +1190,7 @@ def select_non_redundant(
             dropped[name] = clash
     return kept, dropped
 ```
+<!-- fmt: on -->
 
 Dos medidas:
 
