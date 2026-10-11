@@ -64,7 +64,7 @@ entorno virtual activado.
 
 - Rama `claude/festive-franklin-jqcjz2`; el curso se escribió sobre el commit `30debc4`.
 - Python 3.13, pandas 3.0, numpy 2.5 y pydantic 2.14 en el entorno donde se verificó.
-- 231 pruebas superadas, ruff y mypy sin errores (sección 14.1 explica qué significa eso).
+- 231 pruebas superadas, ruff y mypy sin errores (las secciones 14.6, 14.7 y 14.10 explican qué significa eso).
 
 ## Índice
 
