@@ -1,0 +1,6 @@
+body{font-family:"DejaVu Sans",sans-serif;font-size:10.5pt;max-width:none;margin:0 1.2cm;line-height:1.45}
+pre,code{font-family:"DejaVu Sans Mono",monospace;font-size:8.2pt}
+pre{white-space:pre-wrap;word-break:break-word;background:#f5f5f5;padding:6px;border:1px solid #ddd}
+table{border-collapse:collapse;font-size:9pt;margin:6px 0}th,td{border:1px solid #bbb;padding:3px 5px;vertical-align:top}
+h1{page-break-before:always}h1:first-of-type{page-break-before:avoid}
+blockquote{border-left:3px solid #999;margin-left:0;padding-left:10px;color:#333}
