@@ -1,6 +1,6 @@
 # Glosario terminológico de Atlas Quant (español–inglés)
 
-Versión 1.2 · Entrega 1c · 2026-10-16
+Versión 1.3 · Entrega 1d · 2026-10-16
 
 Este glosario fija la terminología española de la colección. Un término fijado no se alterna con sinónimos dentro de la obra. La columna «Observaciones» registra alternativas usadas en otras regiones o textos, que pueden mencionarse pero no emplearse como término principal. Las entregas 1b a 1d ampliarán el glosario e indicarán el libro y capítulo de primera aparición.
 
@@ -287,4 +287,30 @@ Este glosario fija la terminología española de la colección. Un término fija
 | filtración | L16 §10.1 |
 | martingala | L16 §10.2 |
 | medida martingala equivalente | L16 §12.4 |
+
+## Primera aparición de términos en L17–L23
+
+| Término | Primera aparición |
+|---|---|
+| valor en riesgo | L17 §6.2 |
+| Expected Shortfall | L17 §6.4 |
+| cópula | L17 §9.1 |
+| prueba de estrés | L17 §11.1 |
+| proceso de Poisson | L18 §2.1 |
+| movimiento browniano | L18 §3.1 |
+| ecuación diferencial estocástica; deriva | L18 §7.1 |
+| numerario (general) | L19 §4.1 |
+| griegas | L19 §5.1 |
+| volatilidad implícita | L19 §6.1 |
+| sonrisa de volatilidad; superficie de volatilidad | L19 §6.3 |
+| sesgo de supervivencia | L20 §2.3 |
+| prueba retrospectiva | L20 §5.1 |
+| deslizamiento | L20 §5.2 |
+| purga; embargo | L20 §7.3 y L20 §7.4 |
+| impacto de mercado | L10 §3.3 (definición) y L20 §10.1 (modelos) |
+| variable explicativa | L21 §1.1 |
+| regularización | L12 §8.5 (Tikhonov) y L21 §2.1 (aprendizaje) |
+| bosque aleatorio | L21 §6.2 |
+| potenciación del gradiente | L21 §6.4 |
+| red neuronal | L21 §9.1 |
 

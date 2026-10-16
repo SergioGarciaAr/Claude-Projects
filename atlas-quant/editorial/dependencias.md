@@ -311,3 +311,133 @@ Requisitos declarados en el plan: L8, L11.
 | 10. Martingalas en tiempo discreto y tiempos de parada | L8 c. 9, L8 c. 14, L16 c. 9 |
 | 11. Convergencia de martingalas y desigualdades de Doob | L16 c. 7, L16 c. 10 |
 | 12. Cambio de medida y teorema fundamental de valoración en tiempo discreto | L7 c. 7, L10 c. 8 (aplic.), L13 c. 5 (aplic.), L16 c. 9, L16 c. 10 |
+
+## L17
+
+Requisitos declarados en el plan: L9, L10, L12, L14.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Error de estimación de los insumos | L7 c. 4, L9 c. 13, L9 c. 14, L10 c. 6 |
+| 2. Inestabilidad de la optimización media-varianza y estimadores de contracción | L9 c. 13, L9 c. 14, L12 c. 7, L17 c. 1 |
+| 3. Modelo de Black-Litterman | L8 c. 9, L9 c. 11, L10 c. 7, L17 c. 2 |
+| 4. Paridad de riesgo y contribuciones al riesgo | L7 c. 4, L10 c. 6, L12 c. 7 |
+| 5. Modelos de factores de riesgo | L9 c. 13, L10 c. 10, L14 c. 12 |
+| 6. Medidas de riesgo coherentes | L7 c. 7, L8 c. 5, L8 c. 6 |
+| 7. Estimación del VaR y del Expected Shortfall | L8 c. 11, L9 c. 13, L12 c. 9, L14 c. 8, L17 c. 6 |
+| 8. Teoría de valores extremos | L8 c. 10, L8 c. 12, L9 c. 4, L16 c. 8 (aplic.), L17 c. 7 |
+| 9. Cópulas | L8 c. 7, L8 c. 12, L9 c. 4 |
+| 10. Backtesting de modelos de riesgo | L8 c. 14, L9 c. 6, L17 c. 7 |
+| 11. Escenarios y pruebas de estrés | L8 c. 9, L17 c. 5, L17 c. 7 |
+| 12. Riesgo de liquidez y riesgo de modelo | L10 c. 3, L10 c. 12, L17 c. 7 |
+| 13. Rebalanceo | L10 c. 4, L12 c. 11, L17 c. 2 |
+
+## L18
+
+Requisitos declarados en el plan: L7, L11, L12, L15, L16.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Cadenas de Markov en espacios numerables y en tiempo continuo | L8 c. 14, L15 c. 2, L16 c. 10 |
+| 2. Procesos de Poisson, procesos con saltos y cambio de variables con saltos | L8 c. 5, L11 c. 6, L16 c. 6, L18 c. 1 |
+| 3. Movimiento browniano | L8 c. 7, L11 c. 10, L16 c. 6, L16 c. 8 |
+| 4. Martingalas en tiempo continuo y principio de reflexión | L16 c. 10, L16 c. 11, L18 c. 3 |
+| 5. La integral de Itô | L11 c. 10, L16 c. 4, L18 c. 3, L18 c. 4 |
+| 6. Fórmula de Itô | L7 c. 5, L11 c. 10, L18 c. 5 |
+| 7. Ecuaciones diferenciales estocásticas | L15 c. 1, L18 c. 6 |
+| 8. Generador infinitesimal, Feynman-Kac y ecuaciones de Kolmogorov | L15 c. 5, L15 c. 7, L18 c. 7 |
+| 9. Teorema de Girsanov | L16 c. 9, L16 c. 12, L18 c. 6 |
+| 10. Representación de martingalas | L18 c. 5, L18 c. 9 |
+| 11. Simulación de ecuaciones diferenciales estocásticas | L12 c. 9, L15 c. 4, L18 c. 7 |
+
+## L19
+
+Requisitos declarados en el plan: L9, L12, L13, L15, L16, L18.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. El mercado de Black-Scholes y las estrategias autofinanciadas | L13 c. 5, L18 c. 6, L18 c. 7 |
+| 2. Replicación y valoración neutral al riesgo | L15 c. 8, L18 c. 8, L18 c. 9, L18 c. 10, L19 c. 1 |
+| 3. Fórmula de Black-Scholes-Merton y extensiones | L8 c. 5, L13 c. 8, L19 c. 2 |
+| 4. Cambio de numerario | L16 c. 12, L18 c. 9, L19 c. 2 |
+| 5. Griegas y cobertura | L13 c. 7, L19 c. 3 |
+| 6. Volatilidad implícita | L12 c. 2, L13 c. 3, L19 c. 3 |
+| 7. Opciones americanas como problema de frontera libre | L9 c. 8, L13 c. 6, L16 c. 10, L19 c. 2 |
+| 8. Opciones exóticas | L18 c. 4, L19 c. 3 |
+| 9. Métodos numéricos de valoración | L12 c. 9, L12 c. 12, L15 c. 9, L16 c. 8, L19 c. 3 |
+| 10. Volatilidad local | L18 c. 8, L19 c. 6 |
+| 11. Modelos de Heston y de Merton con saltos | L15 c. 2, L18 c. 2, L18 c. 7, L19 c. 9 |
+| 12. Calibración y riesgo de modelo | L9 c. 4, L12 c. 8, L19 c. 11 |
+| 13. Mercados incompletos | L13 c. 7, L16 c. 12, L19 c. 11 |
+
+## L20
+
+Requisitos declarados en el plan: L9, L10, L12, L14, L17.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. El método científico aplicado a las finanzas | L9 c. 6, L9 c. 7, L10 c. 11 |
+| 2. Datos financieros | L3 c. 12, L10 c. 2, L10 c. 13, L20 c. 1 |
+| 3. Señales y carteras de investigación | L9 c. 13, L14 c. 12, L17 c. 5, L20 c. 2 |
+| 4. Estudios de eventos | L9 c. 8, L14 c. 2, L20 c. 2 |
+| 5. Diseño de backtests | L10 c. 3, L17 c. 12, L20 c. 3 |
+| 6. Sobreajuste y pruebas múltiples en backtests | L9 c. 7, L14 c. 7, L20 c. 5 |
+| 7. Validación progresiva, purga y embargo | L9 c. 12, L14 c. 7, L20 c. 6 |
+| 8. Evaluación del desempeño | L9 c. 4, L10 c. 10, L14 c. 2, L20 c. 6 |
+| 9. Microestructura del mercado | L7 c. 6, L8 c. 3, L8 c. 9, L10 c. 3, L20 c. 2 |
+| 10. Impacto de mercado y ejecución óptima | L7 c. 11, L12 c. 11, L15 c. 2 (aplic.), L17 c. 12, L20 c. 9 |
+| 11. Riesgo operativo de los sistemas cuantitativos | L3 c. 12, L20 c. 5 |
+| 12. Reproducibilidad y comunicación de resultados | L3 c. 12, L20 c. 5, L20 c. 8 |
+
+## L21
+
+Requisitos declarados en el plan: L6, L7, L9, L12, L14, L20.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Riesgo, sesgo-varianza y generalización | L8 c. 10, L9 c. 12 |
+| 2. Regularización: ridge, lasso y red elástica | L6 c. 11, L9 c. 11, L12 c. 7, L21 c. 1 |
+| 3. Validación con datos dependientes | L14 c. 7, L20 c. 7, L21 c. 2 |
+| 4. Clasificación y calibración | L9 c. 4, L12 c. 6, L21 c. 1 |
+| 5. Árboles de decisión | L21 c. 1, L21 c. 4 |
+| 6. Ensambles y *boosting* | L12 c. 6, L21 c. 5 |
+| 7. Métodos de núcleo (\*) | L6 c. 10, L7 c. 9, L21 c. 2 |
+| 8. Aprendizaje no supervisado | L6 c. 11, L9 c. 13, L21 c. 1 |
+| 9. Fundamentos de redes neuronales | L7 c. 4, L12 c. 6, L21 c. 1 |
+| 10. Interpretabilidad y estabilidad | L21 c. 6, L21 c. 9 |
+| 11. Métodos bayesianos y MCMC | L8 c. 14, L9 c. 11, L12 c. 9, L21 c. 2 |
+| 12. Aplicaciones con escepticismo metodológico | L20 c. 8, L21 c. 3, L21 c. 6 |
+| 13. Replicación crítica de un artículo | L20 c. 12, L21 c. 12 |
+
+## L22
+
+Requisitos declarados en el plan: L5, L12, L13, L17, L18, L19.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Instrumentos de tasa de interés | L5 c. 10, L13 c. 2 |
+| 2. Construcción de curvas en la práctica | L12 c. 4, L12 c. 8, L22 c. 1 |
+| 3. Modelos de tasa corta y estructura afín | L15 c. 2, L18 c. 7, L18 c. 8, L19 c. 4 |
+| 4. Marco de Heath-Jarrow-Morton | L18 c. 9, L22 c. 3 |
+| 5. Medidas forward, fórmula de Black y modelo de mercado | L19 c. 4, L22 c. 4 |
+| 6. Modelo estructural de Merton | L5 c. 8, L19 c. 3, L19 c. 8 |
+| 7. Modelos de intensidad | L18 c. 2, L22 c. 3 |
+| 8. Swaps de incumplimiento crediticio | L22 c. 7 |
+| 9. Riesgo de crédito de cartera | L8 c. 11, L17 c. 9, L22 c. 7 |
+| 10. Riesgo de contraparte y CVA | L19 c. 9, L22 c. 8 |
+
+## L23
+
+Requisitos declarados en el plan: L9, L14, L17, L20, L21.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Cómo leer un artículo académico | L9 c. 6, L20 c. 1 |
+| 2. Caso: factores al estilo Fama-French | L14 c. 12, L17 c. 5, L20 c. 3, L23 c. 1 |
+| 3. Caso: *momentum* según Jegadeesh-Titman | L20 c. 3, L20 c. 5, L20 c. 8, L23 c. 1 |
+| 4. Caso: volatilidad y VaR de una cartera | L14 c. 8, L17 c. 7, L17 c. 10, L23 c. 1 |
+| 5. Caso: valoración y cobertura de opciones con datos reales | L9 c. 4, L19 c. 5 (aplic.), L19 c. 6 (aplic.), L23 c. 1 |
+| 6. Caso: aprendizaje automático sin fuga de información | L20 c. 7, L21 c. 3, L21 c. 12, L23 c. 1 |
+| 7. Diseño de una investigación original | L20 c. 1, L23 c. 6 |
+| 8. Redacción y defensa del informe | L20 c. 12, L23 c. 7 |
+| 9. Rutas de especialización | L23 c. 8 |

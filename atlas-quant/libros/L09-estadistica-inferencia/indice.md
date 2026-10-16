@@ -361,14 +361,14 @@ Portada; créditos; prefacio; guía de lectura y prerrequisitos; notación del l
 
 **Prerrequisitos:** L9 c. 5, L9 c. 10, L9 c. 11, L9 c. 13.
 
-**Objetivos:** demostrar que el error estándar de la media de rendimientos depende de la longitud del período observado y no de la frecuencia de muestreo, mientras que la precisión de la volatilidad mejora con la frecuencia; cuantificar los años de datos necesarios para detectar primas de riesgo realistas; demostrar el resultado de James-Stein (sección opcional); explicar por qué la teoría económica y la información previa son necesarias.
+**Objetivos:** demostrar que el error estándar de la media de rendimientos depende de la longitud del período observado y no de la frecuencia de muestreo, mientras que la precisión de la volatilidad mejora con la frecuencia; cuantificar los años de datos necesarios para detectar primas de riesgo realistas; demostrar el teorema de James-Stein; explicar por qué la teoría económica y la información previa son necesarias.
 
 **Secciones:**
 
 - **14.1** Error estándar de la media de rendimientos.
 - **14.2** Frecuencia de muestreo: la volatilidad mejora, la media no.
 - **14.3** Consecuencias para la construcción de carteras (anticipo de L17 c. 1).
-- **14.4\*** Estimadores de contracción para medias: teorema de James-Stein.
+- **14.4** Estimadores de contracción para medias: teorema de James-Stein (requerido por L17 c. 2).
 - **14.5** Información previa y teoría económica.
 - **14.6** Estudio integrador con datos.
 

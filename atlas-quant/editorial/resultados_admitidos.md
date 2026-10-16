@@ -1,12 +1,12 @@
 # Registro de resultados admitidos
 
-Versión 1.2 · Entrega 1c · 2026-10-16
+Versión 1.3 · Entrega 1d · 2026-10-16
 
-Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cuya demostración completa está fuera del alcance de la colección. Las reglas están en `LIBRO_DE_ESTILO.md`, sección 4. Las ubicaciones de L1 a L16 están confirmadas por los índices detallados de las entregas 1b y 1c; las de L17 a L23 se confirmarán en la entrega 1d.
+Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cuya demostración completa está fuera del alcance de la colección. Las reglas están en `LIBRO_DE_ESTILO.md`, sección 4. Todas las ubicaciones están confirmadas por los índices detallados de las entregas 1b, 1c y 1d. Las referencias externas se fijarán y verificarán en la entrega 1e.
 
 **Estados:** *previsto* (identificado en el diseño, ubicación por confirmar); *confirmado* (ubicaciones fijadas en los índices detallados); *cerrado en el diseño* (ya no es un resultado admitido porque el diseño incluye su demostración antes de usarlo); *en uso* (aparece en un capítulo redactado); *cerrado* (la demostración está redactada y verificada).
 
-## Resultados usados en L1–L16
+## Resultados usados en L1–L16 (continuación de la tabla en la sección siguiente)
 
 | ID | Enunciado (resumen) | Se usa en | Se demuestra en | Estado |
 |---|---|---|---|---|
@@ -49,15 +49,39 @@ Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cu
 | RA-43 | Orden 4 del método de Runge-Kutta clásico | L15 §4.2 | Referencia externa; verificación simbólica como comprobación, no como demostración | Confirmado |
 | RA-44 | Ejemplo de Tychonoff de no unicidad para la ecuación del calor en la recta | L15 §7.3 | Referencia externa | Confirmado |
 
-## Resultados usados en L17–L23 (por confirmar en la entrega 1d)
+## Resultados usados en L17–L23
 
 | ID | Enunciado (resumen) | Se usa en | Se demuestra en | Estado |
 |---|---|---|---|---|
-| RA-15 | Teoremas de Fisher-Tippett-Gnedenko y de Pickands-Balkema-de Haan | L17 c. 8 | Demostración parcial; referencia externa | Previsto |
-| RA-16 | Teorema de representación de martingalas (demostración completa) | L18 c. 10; L19 | Demostración parcial en L18 c. 10; referencia externa | Previsto |
-| RA-17 | Condición de Novikov | L18 c. 9; L19 | Referencia externa | Previsto |
-| RA-18 | Existencia y unicidad fuerte de soluciones para EDE de raíz cuadrada (Yamada-Watanabe) | L19 c. 11; L22 c. 3 | Referencia externa | Previsto |
-| RA-20 | Caracterización de la opción americana en tiempo continuo como problema de frontera libre | L19 c. 7 | Referencia externa | Previsto |
-| RA-21 | Convergencia del descenso de gradiente estocástico | L21 c. 9 | Referencia externa | Previsto |
+| RA-15 | Teoremas de Fisher-Tippett-Gnedenko y de Pickands-Balkema-de Haan | L17 §8.2, L17 §8.4 | Caso de colas de tipo Pareto demostrado en L17 §8.2; caso general: referencia externa | Confirmado |
+| RA-16 | Teorema de representación de martingalas brownianas (cierre de la demostración general) | L18 §10.2, L19 §2.6 | Representación de exponenciales estocásticas y densidad de su espacio generado en L18 §10.2; cierre general: referencia externa | Confirmado |
+| RA-17 | Condición de Novikov | L18 §9.4, L19 §2.2 | Referencia externa | Confirmado |
+| RA-18 | Existencia y unicidad fuerte de soluciones para EDE de raíz cuadrada (Yamada-Watanabe) | L18 §7.6, L19 §11.1, L22 §3.3 | Referencia externa | Confirmado |
+| RA-20 | Caracterización de la opción americana en tiempo continuo como problema de parada óptima y de frontera libre | L19 §7.1, L19 §7.2 | Referencia externa; caso perpetuo demostrado en L19 §7.3 | Confirmado |
+| RA-21 | Convergencia del descenso de gradiente estocástico | L21 §9.4 | Referencia externa | Confirmado |
+| RA-45 | Consistencia del estimador de contracción de Ledoit-Wolf | L17 §2.2 | Intensidad óptima con parámetros conocidos demostrada en L17 §2.2; consistencia: referencia externa | Confirmado |
+| RA-46 | Ley de Marchenko-Pastur | L17 §2.6\* | Referencia externa | Confirmado |
+| RA-47 | El Expected Shortfall no es elicitable; el par (VaR, ES) es conjuntamente elicitable | L17 §6.6, L17 §10.5 | Referencia externa | Confirmado |
+| RA-48 | Consistencia del estimador de Hill bajo variación regular | L17 §8.5 | Caso de colas Pareto exactas demostrado en L17 §8.5; caso general: referencia externa | Confirmado |
+| RA-49 | Teorema de Donsker (principio de invariancia) | L18 §3.6 | Convergencia finito-dimensional demostrada en L18 §3.6; convergencia funcional: referencia externa | Confirmado |
+| RA-50 | Propiedad de Markov de las soluciones de EDE con coeficientes de Lipschitz | L18 §7.7 | Referencia externa | Confirmado |
+| RA-51 | Existencia de soluciones clásicas de la ecuación asociada a una difusión (regularidad de la esperanza) | L18 §8.3 | Referencia externa; la representación de Feynman-Kac (dirección inversa) se demuestra en L18 §8.2 | Confirmado |
+| RA-52 | Orden débil 1 de Euler-Maruyama y orden fuerte 1 de Milstein | L18 §11.2, L18 §11.3 | Referencia externa; orden fuerte 1/2 de Euler-Maruyama demostrado en L18 §11.2 | Confirmado |
+| RA-53 | Teoremas fundamentales de valoración en tiempo continuo (Delbaen-Schachermayer) | L19 §2.5 | Referencia externa; caso finito en L16 §12.4 | Confirmado |
+| RA-54 | Convergencia del método de Longstaff-Schwartz | L19 §7.5 | Referencia externa | Confirmado |
+| RA-55 | Condición de Feller para la positividad estricta del proceso de raíz cuadrada | L19 §11.1, L22 §3.3 | Referencia externa | Confirmado |
+| RA-56 | Representación dual del precio de súper replicación en tiempo continuo | L19 §13.3 | Referencia externa; caso de un período en L10 §8.7 | Confirmado |
+| RA-57 | Validez asintótica del *reality check* de White y de la prueba SPA de Hansen | L20 §6.3, L20 §6.4 | Referencia externa | Confirmado |
+| RA-58 | Cotas de generalización basadas en la dimensión de Vapnik-Chervonenkis | L21 §1.5 | Referencia externa; cota para clases finitas demostrada en L21 §1.4 | Confirmado |
+| RA-59 | Teorema de aproximación universal para redes neuronales | L21 §9.2 | Referencia externa | Confirmado |
+| RA-60 | Convergencia de Metropolis-Hastings en espacios generales | L21 §11.3 | Referencia externa; caso finito demostrado en L21 §11.3 con L8 §14.6 | Confirmado |
+
+## Resumen
+
+| Categoría | Resultados |
+|---|---|
+| Cerrados en el diseño: la obra los demuestra antes de usarlos | RA-01 |
+| Demostrados más adelante en la obra, en un lugar identificado | RA-02 a RA-06, RA-08 a RA-10, RA-22, RA-24, RA-26 |
+| Admitidos con referencia externa, total o parcialmente (con la versión accesible demostrada cuando existe) | RA-07, RA-11 a RA-21, RA-23, RA-25, RA-27 a RA-60 |
 
 Las referencias externas se fijarán y verificarán en la entrega 1e.

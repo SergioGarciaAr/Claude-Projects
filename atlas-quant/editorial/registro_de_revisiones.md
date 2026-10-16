@@ -95,6 +95,23 @@ Hallazgos surgidos al redactar los índices por sección de L9 a L16 (entrega 1c
 
 Sin ajustes de numeración respecto del plan aprobado.
 
+## Revisión R-0005 · Índices detallados de L17–L23 · 2026-10-16
+
+Hallazgos surgidos al redactar los índices por sección de L17 a L23 (entrega 1d). Resultado final de `herramientas/verificar_indices.py` sobre toda la colección: 23 libros, 277 capítulos (igual al plan), 0 errores, 1 aviso esperado (el de R-0003).
+
+| ID | Severidad | Hallazgo | Resolución | Estado |
+|---|---|---|---|---|
+| H-21 | Importante | Dieciséis resultados usados en L17–L23 no estaban registrados (consistencia de Ledoit-Wolf, Marchenko-Pastur, elicitabilidad del ES, estimador de Hill, Donsker, propiedad de Markov de las EDE, regularidad en Feynman-Kac, órdenes de Euler-Maruyama y Milstein, teoremas fundamentales en tiempo continuo, Longstaff-Schwartz, condición de Feller, dualidad de la súper replicación, validez del *reality check*, cotas VC, aproximación universal, convergencia de Metropolis-Hastings) | Registrados como RA-45 a RA-60; en cada caso se demuestra la versión accesible cuando existe | Resuelto |
+| H-22 | Importante | L17 c. 2 usa el teorema de James-Stein, que estaba en una sección opcional de L9 (detectado por el verificador) | L9 §14.4 pasa a ser obligatoria | Resuelto |
+| H-23 | Importante | Los métodos de núcleo (L21 c. 7) requerían espacios de Hilbert generales (L11), que no están en la clausura de requisitos de L21 | L21 c. 7 se desarrolla en espacios de características de dimensión finita con L6 y L7; el capítulo sigue siendo opcional | Resuelto |
+| H-24 | Menor | La explicación de por qué la integral de Stieltjes no sirve para el browniano (L18 §5.1) citaba la sección opcional L11 §10.3 | La referencia pasa a L11 c. 10; el resultado de la sección opcional se presenta como complemento | Resuelto |
+| H-25 | Menor | La convención del nivel α del VaR estaba pendiente | Fijada en L17 §6.2: pérdida L, α nivel de confianza; actualizada en `NOTACION.md` | Resuelto |
+| H-26 | Menor | La propiedad fuerte de Markov del browniano y la ley 0-1 de Blumenthal parecían requerir referencia externa | Se demuestran en L18 §4.1 y L18 §4.3 | Resuelto |
+| H-27 | Menor | El caso de opciones de L23 depende de L19, que no es requisito de L23 | Se declara como aplicación (L23 c. 5) y la ficha del libro indica que el capítulo puede omitirse | Resuelto |
+| H-28 | Menor | Algunas fórmulas prácticas de L19 (error de cobertura discreta, ajuste de Leland) no son teoremas | Se presentan como aproximaciones con derivación heurística y verificación por simulación | Resuelto |
+
+Sin ajustes de numeración respecto del plan aprobado.
+
 ## Pendientes de verificación
 
 | ID | Asunto | Situación |

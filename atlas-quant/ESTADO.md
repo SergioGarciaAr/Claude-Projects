@@ -12,8 +12,8 @@ Rama de trabajo: `claude/magical-shannon-afvwc6`
 | 0 | Auditoría del entorno y propuesta editorial | Aprobada |
 | 1a | Plan editorial, libro de estilo, notación, glosario, registros internos | Aprobada (2026-10-16) |
 | 1b | Índices detallados por sección de L1–L8 | Aprobada (2026-10-16) |
-| 1c | Índices detallados de L9–L16 | **Entregada; pendiente de revisión** |
-| 1d | Índices detallados de L17–L23 | No iniciada |
+| 1c | Índices detallados de L9–L16 | Aprobada (2026-10-16) |
+| 1d | Índices detallados de L17–L23 | **Entregada; pendiente de revisión** |
 | 1e | Bibliografía verificada y auditoría de coherencia | No iniciada |
 | 2 | Plan de prueba de composición; capítulo piloto L1 c. 8 | No iniciada |
 
@@ -21,8 +21,8 @@ No existe ningún capítulo redactado.
 
 ## 2. Próximo paso exacto
 
-1. Obtener la revisión de la entrega 1c (índices de L9–L16, revisión R-0004).
-2. Con la aprobación, iniciar la entrega 1d: índices detallados de L17 a L23 con el mismo formato, verificados con `herramientas/verificar_indices.py`; confirmar las entradas RA-15 a RA-18, RA-20 y RA-21; extender los registros de primera aparición de `NOTACION.md` y `GLOSARIO.md`.
+1. Obtener la revisión de la entrega 1d (índices de L17–L23, revisión R-0005).
+2. Con la aprobación, iniciar la entrega 1e: (a) bibliografía de la colección en `bibliografia/atlas.bib`, verificada por búsqueda web, con los textos de contraste del plan, las referencias externas de los resultados admitidos (RA-07 a RA-60) y las fuentes de los resultados empíricos y convenciones citados en los índices; (b) verificación de las fuentes de datos (licencias) de L20 y L23; (c) resolución de V-01 a V-03; (d) auditoría de coherencia de la Fase 1 (`editorial/auditoria_fase1.md`), incluida la comparación entre las extensiones de los índices y las del plan.
 3. Al cerrar cada entrega: ejecutar el verificador, regenerar los PDF con `herramientas/generar_pdf.mjs`, hacer commit y push.
 
 ## 3. Decisiones aprobadas
@@ -41,6 +41,7 @@ No existe ningún capítulo redactado.
 | Aprobación | Capítulo por capítulo durante la primera etapa de producción | 2026-10-15 |
 | Ajustes A-01 a A-09 | Reubicación de capítulos nuevos (`editorial/registro_de_revisiones.md`, R-0002) | 2026-10-16 |
 | Entrega 1b y ajustes A-10, A-11 | Índices de L1–L8; revisión R-0003 | 2026-10-16 |
+| Entrega 1c | Índices de L9–L16; revisión R-0004 | 2026-10-16 |
 | Formato de entrega | Todo entregable se entrega en PDF, generado desde las fuentes Markdown con `herramientas/generar_pdf.mjs` (pandoc y Chromium) y guardado en `pdf/`. Los PDF de trabajo no son la composición final de los libros, que sigue pendiente del plan de prueba de la Fase 2 | 2026-10-16 |
 | Piloto | L1 c. 8, «Potencias, raíces y logaritmos»; después, un piloto avanzado (L18 c. 6 o L16 c. 9) | 2026-10-15 |
 

@@ -18,7 +18,7 @@ La obra está en la **Fase 1 (diseño editorial)**. Todavía no existe ningún c
 | `GLOSARIO.md` | Terminología española fijada y su equivalente en inglés | Interna |
 | `ESTADO.md` | Avance, decisiones aprobadas, pendientes y próximo paso | Interna |
 | `editorial/` | Registro de revisiones, resultados admitidos y mapa de dependencias por capítulo (generado) | Interna |
-| `libros/` | Un directorio por libro; por ahora contiene los índices detallados (`indice.md`) de L1 a L16 | **Producto** |
+| `libros/` | Un directorio por libro; por ahora contiene los índices detallados (`indice.md`) de los 23 libros | **Producto** |
 | `bibliografia/` | Bibliografía verificada de la colección (se crea en la Fase 1e) | **Producto** |
 | `pdf/` | Versión PDF de todos los documentos, generada desde las fuentes Markdown; `pdf/entregas/` reúne cada entrega en un solo archivo | Entrega |
 | `herramientas/` | Generación de los PDF de trabajo y verificador de coherencia de los índices (`verificar_indices.py`) | Interna |

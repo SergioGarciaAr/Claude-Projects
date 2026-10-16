@@ -1,6 +1,6 @@
 # Convenciones de notación de Atlas Quant
 
-Versión 1.2 · Entrega 1c · 2026-10-16
+Versión 1.3 · Entrega 1d · 2026-10-16
 
 Este documento fija la notación común a toda la colección. Cada libro introduce los símbolos gradualmente, en el capítulo donde se necesitan, y su índice de símbolos remite a ese lugar. Las entregas 1b a 1d completarán, para cada símbolo, la columna «primera aparición». Un símbolo fijado aquí no se redefine en otro sentido sin advertencia explícita y sin registrar la excepción.
 
@@ -147,7 +147,7 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 | **w** | Vector de pesos de cartera | |
 | **μ**, **Σ** | Vector de rendimientos esperados y matriz de covarianzas | |
 | β | Beta de un activo | Colisión con **β** de regresión resuelta por contexto |
-| $\mathrm{VaR}_\alpha$, $\mathrm{ES}_\alpha$ | Valor en riesgo y Expected Shortfall al nivel α | La convención de α (cola o confianza) se fija en L17 c. 6 |
+| $\mathrm{VaR}_\alpha$, $\mathrm{ES}_\alpha$ | Valor en riesgo y Expected Shortfall al nivel α | Definidos sobre la pérdida L, con α nivel de confianza (por ejemplo, α = 0,99); L17 §6.2 |
 
 ### 8.3 Derivados y tiempo continuo
 
@@ -289,4 +289,17 @@ Lugar donde cada símbolo se define por primera vez en la colección. Cada libro
 | →ᶜ·ˢ· | L16 §7.1 |
 | 𝔼[X \| 𝒢] | L16 §9.1 |
 | (ℱₜ) | L16 §10.1 |
+
+## 13. Primera aparición de los símbolos en L17–L23
+
+| Símbolo | Primera aparición |
+|---|---|
+| L (pérdida), $\mathrm{VaR}_\alpha$ | L17 §6.2 |
+| $\mathrm{ES}_\alpha$ | L17 §6.4 |
+| $N_t$ (proceso de Poisson) | L18 §2.1 |
+| $W_t$ | L18 §3.1 |
+| ∫ H dW (integral de Itô) | L18 §5.2 |
+| ⟨X⟩ₜ, ⟨X, Y⟩ₜ (variación y covariación cuadráticas) | L18 §5.4 y L18 §6.4 |
+| r (tasa corta en tiempo continuo) | L19 §1.1 |
+| ν, Θ, ρ (griegas) | L19 §5.1 |
 
