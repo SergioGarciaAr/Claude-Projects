@@ -112,10 +112,28 @@ Hallazgos surgidos al redactar los índices por sección de L17 a L23 (entrega 1
 
 Sin ajustes de numeración respecto del plan aprobado.
 
+## Revisión R-0006 · Bibliografía, fuentes de datos y auditoría de coherencia de la Fase 1 · 2026-10-16
+
+Entrega 1e. El informe completo está en `editorial/auditoria_fase1.md`. Resultado de `herramientas/verificar_indices.py`: 23 libros, 277 capítulos, 0 errores, 5 avisos (el de R-0003 y cuatro libros cuya suma de capítulos queda por debajo del extremo inferior del plan; véase la sección 5 de la auditoría). Resultado de `herramientas/bib_a_md.py`: 178 entradas (145 verificadas, 33 parciales), sin claves duplicadas, y los 48 resultados admitidos con referencia externa tienen referencia.
+
+| ID | Severidad | Hallazgo | Resolución | Estado |
+|---|---|---|---|---|
+| H-29 | Menor | La extensión de la ficha de cada libro no derivaba de una regla (diferencias de 6 a 78 páginas respecto de la suma de capítulos) | Regla única y comprobación automática 6 del verificador; 23 fichas recalculadas | Resuelto |
+| H-30 | Importante | Los términos de FRED prohíben usar sus datos para entrenar sistemas de aprendizaje automático | FRED excluida de L21 y de L23 c. 6; registrado en `fuentes_de_datos.md` | Resuelto |
+| H-31 | Importante | Las réplicas de L23 c. 2 y c. 3 requieren datos comerciales de acciones individuales | Propuesta: carteras y factores de French y datos sintéticos para la construcción. Los índices no se modifican hasta la decisión D-05 | Pendiente de decisión |
+| H-32 | Importante | No hay fuente gratuita y con licencia verificable de datos de opciones para L23 c. 5 | Propuesta: datos sintéticos de un modelo calibrado; ajustar el título del capítulo. Pendiente de D-05 | Pendiente de decisión |
+| H-33 | Menor | Tres artículos citados tienen correcciones publicadas y uno tiene un vacío de demostración señalado en la literatura | Registrados en las notas de `atlas.bib`; se citarán junto con el original | Resuelto |
+| H-34 | Menor | 33 entradas bibliográficas no pudieron verificarse por completo por las restricciones de red | Marcadas como parciales, con la causa; resolución antes de la composición (D-06) | Abierto |
+| H-35 | Menor | En el campo `uso` de la bibliografía, 60 entradas apuntaban a capítulos no idóneos | Reasignadas tras revisar los títulos de capítulo de los índices | Resuelto |
+
+Ajuste de los índices: la extensión de la ficha de los 23 libros se recalculó con la regla de H-29. No cambian capítulos, secciones ni prerrequisitos.
+
 ## Pendientes de verificación
+
+Las tres verificaciones abiertas en la Fase 1a se resolvieron en R-0006 (detalle en `editorial/auditoria_fase1.md`, sección 6).
 
 | ID | Asunto | Situación |
 |---|---|---|
-| V-01 | Normas sobre separador de millares (espacio, sin separador en cuatro cifras) | Verificado solo en fuentes secundarias; el sitio de la RAE no es accesible desde el entorno de trabajo |
-| V-02 | Espacio entre cifra y % | Verificado mediante resultado de búsqueda que reproduce la entrada «porcentajes» del *Diccionario panhispánico de dudas*, 2.ª edición; acceso directo bloqueado |
-| V-03 | Sintaxis de entornos y referencias cruzadas de Quarto | Prefijos de etiqueta confirmados en la documentación de Quarto mediante búsqueda; acceso directo a quarto.org bloqueado; comportamiento en PDF por probar en la Fase 2 |
+| V-01 | Normas sobre separador de millares (espacio, sin separador en cuatro cifras) | Resuelta (2026-10-16): el *Diccionario panhispánico de dudas*, entrada «números», admite el espacio y lo considera opcional en cuatro cifras. La convención de la obra es conforme |
+| V-02 | Espacio entre cifra y % | Resuelta (2026-10-16): *Diccionario panhispánico de dudas*, entrada «porcentajes», y *Libro de estilo de la lengua española* |
+| V-03 | Sintaxis de entornos y referencias cruzadas de Quarto | Resuelta en cuanto a sintaxis (2026-10-16): documentación oficial de referencias cruzadas de Quarto. El comportamiento en PDF se probará en la Fase 2 |

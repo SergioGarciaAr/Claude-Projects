@@ -8,7 +8,7 @@
 - **Requisitos:** L9, L10, L12, L14.
 - **Uso como aplicación:** L16 (capítulo 8).
 - **Capítulos:** 13, más un apéndice.
-- **Extensión estimada:** 370–450 páginas.
+- **Extensión estimada:** 364–452 páginas.
 
 **Propósito.** Este libro lleva la teoría de carteras de L10 a la práctica, donde los insumos se estiman con error, y desarrolla la medición y gestión cuantitativa del riesgo. Trata el error de estimación y sus remedios (contracción, restricciones, Black-Litterman), la paridad de riesgo, los modelos de factores de riesgo, las medidas de riesgo coherentes, la estimación y el backtesting del VaR y del Expected Shortfall, la teoría de valores extremos, las cópulas, las pruebas de estrés, el riesgo de liquidez y de modelo, y el rebalanceo. Las normas regulatorias se mencionan con fecha de verificación y nunca como contenido permanente.
 

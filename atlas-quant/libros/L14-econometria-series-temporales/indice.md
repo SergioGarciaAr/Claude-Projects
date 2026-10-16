@@ -7,7 +7,7 @@
 - **Serie:** III. Teoría financiera y modelización.
 - **Requisitos:** L3, L6, L9, L10, L12.
 - **Capítulos:** 15, más un apéndice.
-- **Extensión estimada:** 430–520 páginas.
+- **Extensión estimada:** 436–536 páginas.
 
 **Propósito.** Este libro desarrolla la econometría necesaria para el trabajo empírico en finanzas: regresión con errores no esféricos, endogeneidad, procesos estacionarios y no estacionarios, modelos ARMA, volatilidad condicional, modelos multivariantes, cointegración, cambios de régimen, regresiones de corte transversal, método generalizado de momentos, contraste de modelos de valoración y filtro de Kalman. La teoría asintótica para datos dependientes se usa extensamente; sus resultados generales se admiten con referencia y se demuestran los casos que el lector puede seguir con sus prerrequisitos.
 

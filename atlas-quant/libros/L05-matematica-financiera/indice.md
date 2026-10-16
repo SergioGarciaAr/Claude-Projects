@@ -7,7 +7,7 @@
 - **Serie:** II. Matemática para las finanzas.
 - **Requisitos:** L3, L4.
 - **Capítulos:** 11, más un apéndice.
-- **Extensión estimada:** 290–360 páginas.
+- **Extensión estimada:** 314–390 páginas.
 
 **Propósito.** Este libro desarrolla la teoría del interés y la valoración de flujos de caja ciertos: tasas, descuento, anualidades, amortización, valor presente neto y tasa interna de retorno, inflación, bonos, duración, convexidad y estructura temporal de tasas. Cada fórmula se deriva a partir de definiciones explícitas y se distinguen con cuidado los resultados matemáticos de las convenciones de mercado, que se presentan con su fuente y fecha de verificación. El libro no trata todavía el riesgo ni la incertidumbre: los flujos son ciertos, salvo menciones explícitas que anticipan libros posteriores.
 

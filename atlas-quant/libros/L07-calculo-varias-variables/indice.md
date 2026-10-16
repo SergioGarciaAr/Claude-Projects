@@ -7,7 +7,7 @@
 - **Serie:** II. Matemática para las finanzas.
 - **Requisitos:** L4, L6.
 - **Capítulos:** 11, más un apéndice.
-- **Extensión estimada:** 320–400 páginas.
+- **Extensión estimada:** 322–398 páginas.
 
 **Propósito.** Este libro extiende el cálculo a funciones de varias variables y desarrolla la teoría de la optimización que usa toda la colección: condiciones de primer y segundo orden, convexidad, teorema de separación y lema de Farkas, multiplicadores de Lagrange, condiciones de Karush-Kuhn-Tucker y dualidad. Demuestra los teoremas de la función inversa y de la función implícita mediante contracciones en ℝⁿ, y desarrolla la integración múltiple necesaria para la probabilidad con densidades. La interpretación probabilística del problema de Markowitz se deja para L10; aquí se estudia su forma algebraica.
 

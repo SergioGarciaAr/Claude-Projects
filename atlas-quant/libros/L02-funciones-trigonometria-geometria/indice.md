@@ -7,7 +7,7 @@
 - **Serie:** I. Fundamentos.
 - **Requisitos:** L1.
 - **Capítulos:** 13, más un apéndice.
-- **Extensión estimada:** 340–420 páginas.
+- **Extensión estimada:** 354–442 páginas.
 
 **Propósito.** Este libro introduce el concepto de función y estudia las familias de funciones que usa toda la colección: lineales, polinómicas, racionales, exponenciales, logarítmicas y trigonométricas. Introduce con rigor la convergencia de sucesiones y el número *e*, sobre la base del axioma del supremo de L1. Desarrolla la geometría analítica del plano, los vectores y los números complejos, que preparan el álgebra lineal y el análisis de Fourier. Las aplicaciones financieras incluyen la función de pago de una opción, las anualidades como sumas geométricas, las perpetuidades como series y los rendimientos logarítmicos.
 

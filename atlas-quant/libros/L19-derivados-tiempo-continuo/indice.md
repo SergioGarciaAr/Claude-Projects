@@ -7,7 +7,7 @@
 - **Serie:** IV. Matemática avanzada y tiempo continuo.
 - **Requisitos:** L9, L12, L13, L15, L16, L18.
 - **Capítulos:** 13, más un apéndice.
-- **Extensión estimada:** 370–450 páginas.
+- **Extensión estimada:** 370–458 páginas.
 
 **Propósito.** Este libro desarrolla la valoración de derivados en tiempo continuo: el mercado de Black-Scholes, la equivalencia entre replicación y valoración neutral al riesgo, la fórmula de Black-Scholes-Merton y sus extensiones, el cambio de numerario, las griegas y la cobertura, la volatilidad implícita, las opciones americanas y exóticas, los métodos numéricos, la volatilidad local, los modelos de Heston y de Merton con saltos, la calibración y los mercados incompletos. Las derivaciones se apoyan en L18; las convenciones y la evidencia empírica se presentan como tales.
 

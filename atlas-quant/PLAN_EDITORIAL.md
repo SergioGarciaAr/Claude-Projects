@@ -49,7 +49,7 @@ La colección se organiza en cinco series y 23 libros. La numeración de los lib
 
 ## 5. Índice provisional por libro
 
-Índice a nivel de capítulo. Los índices por sección, con prerrequisitos por capítulo y extensión, son los entregables 1b (L1–L8), 1c (L9–L16) y 1d (L17–L23). Los textos de contraste se usarán para comparar cobertura y profundidad; sus metadatos se verificarán en la entrega 1e y aquí se consignan solo por autor y título.
+Índice a nivel de capítulo. Los índices por sección, con prerrequisitos por capítulo y extensión, son los entregables 1b (L1–L8), 1c (L9–L16) y 1d (L17–L23). Los textos de contraste se usarán para comparar cobertura y profundidad; aquí se consignan solo por autor y título, y sus datos completos y verificados están en `bibliografia/atlas.bib` (entrega 1e).
 
 ### Serie I. Fundamentos
 
@@ -540,6 +540,8 @@ Las cifras siguientes son escenarios, no compromisos de producción. El capítul
 | L10 | 13 | 325–520 | L22 | 10 | 250–400 |
 | L11 | 10 | 250–400 | L23 | 9 | 225–360 |
 | L12 | 12 | 300–480 | **Total** | **277** | **6925–11 080** |
+
+**Estimación revisada con los índices (entrega 1e).** La suma de las extensiones de los capítulos en los índices detallados es de 7 260 a 8 922 páginas, dentro del intervalo anterior; con preliminares y apéndices, de 7 960 a 9 862 páginas. En L2, L3, L21 y L23 la suma de capítulos queda entre 1 y 17 páginas por debajo del extremo inferior de la tabla. El detalle está en `editorial/auditoria_fase1.md`, sección 5.
 
 Escenario agregado: texto principal de 6900 a 11 100 páginas más unas 460 de preliminares; entre 2,2 y 4,4 millones de palabras; solucionarios de 3000 a 8000 páginas; entre 600 y 1500 sesiones de trabajo; entre 3500 y 4500 horas de estudio para el lector.
 

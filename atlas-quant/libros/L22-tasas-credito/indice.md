@@ -7,7 +7,7 @@
 - **Serie:** V. Investigación (especialización).
 - **Requisitos:** L5, L12, L13, L17, L18, L19.
 - **Capítulos:** 10, más un apéndice.
-- **Extensión estimada:** 280–350 páginas.
+- **Extensión estimada:** 282–352 páginas.
 
 **Propósito.** Este libro de especialización desarrolla los modelos de tasas de interés y de riesgo de crédito: instrumentos, construcción de curvas con varias curvas, modelos de tasa corta y estructura afín, el marco de Heath-Jarrow-Morton, las medidas forward y el modelo de mercado, los modelos estructurales y de intensidad, los swaps de incumplimiento crediticio, el crédito de cartera y los ajustes de valoración por riesgo de contraparte. Las convenciones de mercado y la transición de tasas de referencia cambian con el tiempo; se presentan con fecha de verificación.
 

@@ -8,7 +8,7 @@
 - **Requisitos:** L3, L6, L7, L8.
 - **Uso como aplicación:** L5.
 - **Capítulos:** 14, más un apéndice.
-- **Extensión estimada:** 400–480 páginas.
+- **Extensión estimada:** 402–496 páginas.
 
 **Propósito.** Este libro desarrolla la inferencia estadística clásica y una introducción a la bayesiana, con la atención puesta en los problemas que aparecen con datos financieros: muestras cortas respecto de la señal, colas pesadas, búsqueda de muchas hipótesis y sobreajuste. Demuestra los resultados centrales (Cramér-Rao, Neyman-Pearson, Gauss-Markov, método delta, Bonferroni, Holm, Benjamini-Hochberg, normalidad asintótica de la máxima verosimilitud bajo condiciones simplificadas) y declara con precisión los que se admiten. El libro termina con un capítulo dedicado a la dificultad de estimar rendimientos esperados, que motiva gran parte de los libros posteriores.
 

@@ -7,7 +7,7 @@
 - **Serie:** I. Fundamentos.
 - **Requisitos:** L2, L3 (y L1 a través de L2).
 - **Capítulos:** 14, más un apéndice.
-- **Extensión estimada:** 420–500 páginas.
+- **Extensión estimada:** 416–510 páginas.
 
 **Propósito.** Este libro desarrolla el cálculo diferencial e integral de una variable con demostraciones completas, desde la completitud de los reales hasta las series de Taylor. Cierra los resultados admitidos de L1 y L2 sobre exponenciales, logaritmos y funciones trigonométricas, construyendo el logaritmo como integral y el seno y el coseno como series. Las aplicaciones financieras incluyen la optimización, la capitalización continua, el valor presente de flujos continuos, las perpetuidades y las aproximaciones de primer y segundo orden que preparan la duración y la convexidad de L5.
 

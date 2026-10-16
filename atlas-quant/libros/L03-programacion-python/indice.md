@@ -7,7 +7,7 @@
 - **Serie:** I. Fundamentos.
 - **Requisitos:** L1, L2.
 - **Capítulos:** 12, más un apéndice.
-- **Extensión estimada:** 300–380 páginas.
+- **Extensión estimada:** 326–408 páginas.
 
 **Propósito.** Este libro convierte la programación en una herramienta de trabajo matemático. Enseña Python con ejemplos tomados de la matemática y las finanzas, y presta atención especial a lo que suele omitirse en los cursos introductorios: la aritmética de punto flotante y sus consecuencias, la corrección y complejidad de los algoritmos, las pruebas, el manejo de datos temporales y la reproducibilidad. No es un manual de referencia del lenguaje: cubre lo que la colección necesita y explica por qué.
 

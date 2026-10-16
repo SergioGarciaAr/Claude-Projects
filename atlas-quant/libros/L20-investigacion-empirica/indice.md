@@ -8,7 +8,7 @@
 - **Requisitos:** L9, L10, L12, L14, L17.
 - **Uso como aplicación:** L15 (capítulo 10).
 - **Capítulos:** 12, más un apéndice.
-- **Extensión estimada:** 330–410 páginas.
+- **Extensión estimada:** 330–412 páginas.
 
 **Propósito.** Este libro enseña a hacer investigación empírica en finanzas que resista el escrutinio: formular hipótesis antes de mirar los datos, construir bases de datos sin sesgos de supervivencia ni de anticipación, construir señales y carteras, diseñar estudios de eventos y backtests realistas, controlar el sobreajuste y las pruebas múltiples, validar con datos temporales sin fugas, evaluar el desempeño con su incertidumbre, entender la microestructura y la ejecución, gestionar el riesgo operativo y comunicar resultados de forma reproducible. Los resultados empíricos citados se presentan con su fuente y se verifican en la entrega 1e.
 

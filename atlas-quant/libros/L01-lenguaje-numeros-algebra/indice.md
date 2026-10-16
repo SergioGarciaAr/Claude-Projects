@@ -8,7 +8,7 @@
 - **Requisitos:** ninguno.
 - **Conocimientos de entrada:** lectura comprensiva en español y operaciones aritméticas elementales con números naturales (sumar, restar, multiplicar y dividir números pequeños). Todo lo demás se desarrolla en el libro.
 - **Capítulos:** 14, más dos apéndices.
-- **Extensión estimada:** 390–470 páginas.
+- **Extensión estimada:** 424–528 páginas.
 
 **Propósito.** Este libro enseña a leer, escribir y verificar matemática. Parte de la idea de afirmación matemática, construye la lógica y el lenguaje de conjuntos, enseña los métodos de demostración y los aplica a la construcción ordenada de los sistemas numéricos hasta los números reales. Sobre esa base desarrolla las potencias, los logaritmos y el álgebra elemental, y termina con los primeros algoritmos programados en Python. Las finanzas aparecen como aplicación elemental: porcentajes, interés simple y compuesto, préstamos sencillos.
 

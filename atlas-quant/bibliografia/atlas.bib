@@ -1,0 +1,2857 @@
+% Bibliografía de la colección Atlas Quant.
+% Cada entrada lleva campos propios de control editorial:
+%   verificacion        = verificada | parcial | pendiente
+%   fuente_verificacion = URL de la fuente donde se confirmaron los metadatos (búsqueda web)
+%   fecha_verificacion  = fecha de la verificación
+%   nota_verificacion   = discrepancias o datos no confirmados
+%   uso                 = libros y capítulos, o resultado admitido, donde se cita
+%   nivel               = textos de contraste: fundamental | complementaria;
+%                         artículos y monografías: intermedia | avanzada | investigacion
+% Herramienta: herramientas/bib_a_md.py genera bibliografia/bibliografia.md y las estadísticas.
+% Método: búsqueda web; los catálogos con API (Crossref, OpenAlex, Open Library) no son
+% accesibles desde el entorno de trabajo. Ver editorial/auditoria_fase1.md.
+
+% ---------------------------------------------------------------------------
+% Textos de contraste
+% ---------------------------------------------------------------------------
+
+@book{velleman2019,
+  author    = {Velleman, Daniel J.},
+  title     = {How to Prove It: A Structured Approach},
+  edition   = {3},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2019},
+  isbn      = {978-1-108-43953-4},
+  uso       = {L1 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://assets.cambridge.org/97811084/24189/copyright/9781108424189_copyright_info.pdf},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {ISBN de la edición en rústica; tapa dura 978-1-108-42418-9.}
+}
+
+@book{spivak2008,
+  author    = {Spivak, Michael},
+  title     = {Calculus},
+  edition   = {4},
+  publisher = {Publish or Perish},
+  address   = {Houston},
+  year      = {2008},
+  isbn      = {978-0-914098-91-1},
+  uso       = {L1, L4 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://mathpop.com/products/calculus-4th-edition-digital-edition},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Lugar de edición no confirmado en la fuente.}
+}
+
+@book{apostol1967,
+  author    = {Apostol, Tom M.},
+  title     = {Calculus, Volume 1: One-Variable Calculus, with an Introduction to Linear Algebra},
+  edition   = {2},
+  publisher = {John Wiley \& Sons},
+  address   = {New York},
+  year      = {1967},
+  isbn      = {0-471-00005-1},
+  uso       = {L4 (contraste)},
+  nivel     = {complementaria},
+  verificacion = {parcial},
+  fuente_verificacion = {https://lmbp.uca.fr/biblio/notice.php?num=7827},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Algunas fuentes atribuyen la impresión de 1967 a Blaisdell; el mismo ISBN figura en reimpresiones de Wiley.}
+}
+
+@book{kellison2009,
+  author    = {Kellison, Stephen G.},
+  title     = {The Theory of Interest},
+  edition   = {3},
+  publisher = {McGraw-Hill/Irwin},
+  address   = {Boston},
+  year      = {2009},
+  isbn      = {978-0-07-338244-9},
+  uso       = {L5 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://search.worldcat.org/oclc/182552985},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{strang2023,
+  author    = {Strang, Gilbert},
+  title     = {Introduction to Linear Algebra},
+  edition   = {6},
+  publisher = {Wellesley-Cambridge Press},
+  address   = {Wellesley, MA},
+  year      = {2023},
+  isbn      = {978-1-7331466-7-8},
+  uso       = {L6 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://math.mit.edu/~gs/linearalgebra/ila6/indexila6.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{axler2024,
+  author    = {Axler, Sheldon},
+  title     = {Linear Algebra Done Right},
+  edition   = {4},
+  series    = {Undergraduate Texts in Mathematics},
+  publisher = {Springer},
+  address   = {Cham},
+  year      = {2024},
+  isbn      = {978-3-031-41026-0},
+  doi       = {10.1007/978-3-031-41026-0},
+  uso       = {L6 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://link.springer.com/book/10.1007/978-3-031-41026-0},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Acceso abierto (CC BY-NC 4.0). ISBN del libro electrónico; tapa dura 978-3-031-41025-3. Publicado en línea en 2023 con copyright 2024.}
+}
+
+@book{ross2019,
+  author    = {Ross, Sheldon},
+  title     = {A First Course in Probability},
+  edition   = {10},
+  publisher = {Pearson},
+  address   = {Hoboken, NJ},
+  year      = {2019},
+  isbn      = {978-0-13-475311-9},
+  uso       = {L8 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www.tenlong.com.tw/products/9780134753119},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Copyright 2018, impresión 2019. Pearson lista además reediciones de la 10.ª edición con otros ISBN (2022). Lugar de edición no confirmado.}
+}
+
+@book{blitzstein2019,
+  author    = {Blitzstein, Joseph K. and Hwang, Jessica},
+  title     = {Introduction to Probability},
+  edition   = {2},
+  series    = {Chapman \& Hall/CRC Texts in Statistical Science},
+  publisher = {CRC Press},
+  address   = {Boca Raton, FL},
+  year      = {2019},
+  isbn      = {978-1-138-36991-7},
+  uso       = {L8 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://eld.bl.uk/catalog/019255504},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{casella2002,
+  author    = {Casella, George and Berger, Roger L.},
+  title     = {Statistical Inference},
+  edition   = {2},
+  publisher = {Duxbury},
+  address   = {Pacific Grove, CA},
+  year      = {2002},
+  isbn      = {978-0-534-24312-8},
+  uso       = {L9 (contraste); RA-14},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://is.muni.cz/publication/668879?lang=en},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Algunos libreros indican 2001; los catálogos de bibliotecas indican 2002.}
+}
+
+@book{wasserman2004,
+  author    = {Wasserman, Larry},
+  title     = {All of Statistics: A Concise Course in Statistical Inference},
+  series    = {Springer Texts in Statistics},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {2004},
+  isbn      = {978-0-387-40272-7},
+  doi       = {10.1007/978-0-387-21736-9},
+  uso       = {L9 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://library.holycross.edu/Record/b3208225/Details},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{cochrane2005,
+  author    = {Cochrane, John H.},
+  title     = {Asset Pricing},
+  edition   = {Revised},
+  publisher = {Princeton University Press},
+  address   = {Princeton, NJ},
+  year      = {2005},
+  isbn      = {978-0-691-12137-6},
+  uso       = {L10 (contraste); L10 c. 9; L14 c. 13--14},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.schweitzer-online.de/buch/Cochrane/Asset-Pricing/9780691121376/A3025715/},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{luenberger2013,
+  author    = {Luenberger, David G.},
+  title     = {Investment Science},
+  edition   = {2},
+  publisher = {Oxford University Press},
+  address   = {New York},
+  year      = {2013},
+  isbn      = {978-0-19-974008-6},
+  uso       = {L10 (contraste); L5},
+  nivel     = {fundamental},
+  verificacion = {parcial},
+  fuente_verificacion = {https://exclusivebooks.co.za/products/9780199740086},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Publicado en junio de 2013; un catálogo de biblioteca indica copyright 2014.}
+}
+
+@book{rudin1976,
+  author    = {Rudin, Walter},
+  title     = {Principles of Mathematical Analysis},
+  edition   = {3},
+  series    = {International Series in Pure and Applied Mathematics},
+  publisher = {McGraw-Hill},
+  address   = {New York},
+  year      = {1976},
+  isbn      = {978-0-07-054235-8},
+  uso       = {L11 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ci.nii.ac.jp/ncid/BA03713445?l=en},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{abbott2015,
+  author    = {Abbott, Stephen},
+  title     = {Understanding Analysis},
+  edition   = {2},
+  series    = {Undergraduate Texts in Mathematics},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {2015},
+  isbn      = {978-1-4939-2711-1},
+  doi       = {10.1007/978-1-4939-2712-8},
+  uso       = {L11 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://link.springer.com/978-1-4939-2712-8},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{glasserman2003,
+  author    = {Glasserman, Paul},
+  title     = {Monte Carlo Methods in Financial Engineering},
+  series    = {Stochastic Modelling and Applied Probability},
+  volume    = {53},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {2003},
+  isbn      = {978-0-387-00451-8},
+  uso       = {L12 (contraste); L12 c. 9--10; L18 c. 11; L19 c. 9},
+  nivel     = {fundamental},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www.springer.com/978-0-387-00451-8},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI del libro electrónico no confirmado explícitamente; no se registra.}
+}
+
+@book{nocedal2006,
+  author    = {Nocedal, Jorge and Wright, Stephen J.},
+  title     = {Numerical Optimization},
+  edition   = {2},
+  series    = {Springer Series in Operations Research and Financial Engineering},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {2006},
+  isbn      = {978-0-387-30303-1},
+  uso       = {L12 (contraste); RA-34},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://karla.hds.hebis.de/Record/HEB192023780},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado en la página del editor; no se registra.}
+}
+
+@book{hull2022,
+  author    = {Hull, John C.},
+  title     = {Options, Futures, and Other Derivatives},
+  edition   = {11},
+  publisher = {Pearson},
+  address   = {Hoboken, NJ},
+  year      = {2022},
+  isbn      = {978-0-13-693997-9},
+  uso       = {L13 (contraste); L19; L22},
+  nivel     = {fundamental},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www-2.rotman.utoronto.ca/~hull/AmazonPage.htm},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Una referencia previa del proyecto citaba 2021; las fuentes indican copyright 2022. ISBN impreso tomado de una librería universitaria; edición global 978-1-292-41065-4. Lugar de edición no confirmado.}
+}
+
+@book{shreve2004a,
+  author    = {Shreve, Steven E.},
+  title     = {Stochastic Calculus for Finance I: The Binomial Asset Pricing Model},
+  series    = {Springer Finance},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {2004},
+  isbn      = {978-0-387-40100-3},
+  uso       = {L13 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.springer.com/978-0-387-40100-3},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{shreve2004b,
+  author    = {Shreve, Steven E.},
+  title     = {Stochastic Calculus for Finance II: Continuous-Time Models},
+  series    = {Springer Finance},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {2004},
+  isbn      = {978-0-387-40101-0},
+  uso       = {L18, L19 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://link.springer.com/book/9780387401010},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{hamilton1994,
+  author    = {Hamilton, James D.},
+  title     = {Time Series Analysis},
+  publisher = {Princeton University Press},
+  address   = {Princeton, NJ},
+  year      = {1994},
+  isbn      = {978-0-691-04289-3},
+  uso       = {L14 (contraste); RA-11; RA-13},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://is.muni.cz/publication/260992?lang=en},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{tsay2010,
+  author    = {Tsay, Ruey S.},
+  title     = {Analysis of Financial Time Series},
+  edition   = {3},
+  series    = {Wiley Series in Probability and Statistics},
+  publisher = {Wiley},
+  address   = {Hoboken, NJ},
+  year      = {2010},
+  isbn      = {978-0-470-41435-4},
+  uso       = {L14 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://faculty.chicagobooth.edu/ruey-s-tsay/research/analysis-of-financial-time-series-3rd-edition},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{campbell1997,
+  author    = {Campbell, John Y. and Lo, Andrew W. and MacKinlay, A. Craig},
+  title     = {The Econometrics of Financial Markets},
+  publisher = {Princeton University Press},
+  address   = {Princeton, NJ},
+  year      = {1997},
+  isbn      = {978-0-691-04301-2},
+  uso       = {L14 (contraste); L20 c. 4},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://web.mit.edu/Alo/www/Books/efm_1.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{williams1991,
+  author    = {Williams, David},
+  title     = {Probability with Martingales},
+  series    = {Cambridge Mathematical Textbooks},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {1991},
+  isbn      = {978-0-521-40605-5},
+  uso       = {L16 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.biblio.com/9780521406055},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado explícitamente; no se registra.}
+}
+
+@book{durrett2019,
+  author    = {Durrett, Rick},
+  title     = {Probability: Theory and Examples},
+  edition   = {5},
+  series    = {Cambridge Series in Statistical and Probabilistic Mathematics},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2019},
+  isbn      = {978-1-108-47368-2},
+  doi       = {10.1017/9781108591034},
+  uso       = {L16 (contraste); RA-27},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://scholars.duke.edu/publication/1632506},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{mcneil2015,
+  author    = {McNeil, Alexander J. and Frey, R{\"u}diger and Embrechts, Paul},
+  title     = {Quantitative Risk Management: Concepts, Techniques and Tools},
+  edition   = {Revised},
+  series    = {Princeton Series in Finance},
+  publisher = {Princeton University Press},
+  address   = {Princeton, NJ},
+  year      = {2015},
+  isbn      = {978-0-691-16627-8},
+  uso       = {L17 (contraste); RA-15; L22 c. 9},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.springerprofessional.de/en/review-of-a-j-mcneil-r-frey-p-embrechts-quantitative-risk-manage/10879018},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{oksendal2003,
+  author    = {{\O}ksendal, Bernt},
+  title     = {Stochastic Differential Equations: An Introduction with Applications},
+  edition   = {6},
+  series    = {Universitext},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {2003},
+  isbn      = {978-3-540-04758-2},
+  uso       = {L18 (contraste); RA-16; RA-50},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://katalog.bibliothek.kit.edu/bib/257409},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI del libro no confirmado; no se registra.}
+}
+
+@book{bjork2020,
+  author    = {Bj{\"o}rk, Tomas},
+  title     = {Arbitrage Theory in Continuous Time},
+  edition   = {4},
+  publisher = {Oxford University Press},
+  address   = {Oxford},
+  year      = {2020},
+  isbn      = {978-0-19-885161-5},
+  uso       = {L19 (contraste); L22},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://academic.oup.com/book/43511/chapter/364183588},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {El editor indica publicación impresa el 5 de diciembre de 2019; se cita habitualmente como 2020.}
+}
+
+@book{harris2003,
+  author    = {Harris, Larry},
+  title     = {Trading and Exchanges: Market Microstructure for Practitioners},
+  publisher = {Oxford University Press},
+  address   = {New York},
+  year      = {2003},
+  isbn      = {978-0-19-514470-3},
+  uso       = {L20 (contraste); L10 c. 3},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://academic.oup.com/book/52292},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {El editor indica publicación el 24 de octubre de 2002; copyright 2003 no confirmado. Se mantiene la clave; el año a citar debe revisarse en la composición.}
+}
+
+@book{lopezdeprado2018,
+  author    = {L{\'o}pez de Prado, Marcos},
+  title     = {Advances in Financial Machine Learning},
+  publisher = {Wiley},
+  address   = {Hoboken, NJ},
+  year      = {2018},
+  isbn      = {978-1-119-48208-6},
+  uso       = {L20 (contraste); L20 c. 7; L21},
+  nivel     = {complementaria},
+  verificacion = {verificada},
+  fuente_verificacion = {https://eld.bl.uk/catalog/018674674},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{hastie2009,
+  author    = {Hastie, Trevor and Tibshirani, Robert and Friedman, Jerome},
+  title     = {The Elements of Statistical Learning: Data Mining, Inference, and Prediction},
+  edition   = {2},
+  series    = {Springer Series in Statistics},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {2009},
+  isbn      = {978-0-387-84857-0},
+  uso       = {L21 (contraste); L9 c. 12},
+  nivel     = {fundamental},
+  verificacion = {parcial},
+  fuente_verificacion = {https://is.muni.cz/publication/867146?lang=en},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Dos DOI distintos en las fuentes (10.1007/b94608 y 10.1007/978-0-387-84858-7); no se registra ninguno hasta confirmar.}
+}
+
+@book{brigo2006,
+  author    = {Brigo, Damiano and Mercurio, Fabio},
+  title     = {Interest Rate Models -- Theory and Practice: With Smile, Inflation and Credit},
+  edition   = {2},
+  series    = {Springer Finance},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {2006},
+  isbn      = {978-3-540-22149-4},
+  doi       = {10.1007/978-3-540-34604-3},
+  uso       = {L22 (contraste)},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://link.springer.com/10.1007/978-3-540-34604-3},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{karatzas1991,
+  author    = {Karatzas, Ioannis and Shreve, Steven E.},
+  title     = {Brownian Motion and Stochastic Calculus},
+  edition   = {2},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {113},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {1991},
+  isbn      = {978-0-387-97655-6},
+  uso       = {L18; RA-16; RA-17; RA-18; RA-50; RA-51},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.springer.com/978-0-387-97655-6},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Springer muestra copyright 1998 en su página actual (reimpresión); los catálogos fechan la 2.ª edición en 1991. DOI no registrado.}
+}
+
+% ---------------------------------------------------------------------------
+% Referencias externas de los resultados admitidos
+% ---------------------------------------------------------------------------
+
+@article{dickey1979,
+  author    = {Dickey, David A. and Fuller, Wayne A.},
+  title     = {Distribution of the Estimators for Autoregressive Time Series with a Unit Root},
+  journal   = {Journal of the American Statistical Association},
+  volume    = {74},
+  number    = {366},
+  pages     = {427--431},
+  year      = {1979},
+  doi       = {10.2307/2286348},
+  uso       = {RA-11; L14 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://bigenc.ru/b/distribution-of-the-estimators-for-autoregressive-024b8d},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{newey1987,
+  author    = {Newey, Whitney K. and West, Kenneth D.},
+  title     = {A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix},
+  journal   = {Econometrica},
+  volume    = {55},
+  number    = {3},
+  pages     = {703--708},
+  year      = {1987},
+  url       = {https://www.jstor.org/stable/1913610},
+  uso       = {RA-12; L14 c. 2},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://intouch.econometricsociety.org/publications/econometrica/1987/05/01/notes-and-comments-simple-positive-semi-definite},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado; se registra el enlace estable de JSTOR.}
+}
+
+@book{vandervaart1998,
+  author    = {van der Vaart, A. W.},
+  title     = {Asymptotic Statistics},
+  series    = {Cambridge Series in Statistical and Probabilistic Mathematics},
+  volume    = {3},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {1998},
+  isbn      = {978-0-521-49603-2},
+  uso       = {RA-14; RA-29; RA-31; L9},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://lmbp.uca.fr/biblio/notice.php?num=5060},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI del libro no confirmado; no se registra.}
+}
+
+@book{embrechts1997,
+  author    = {Embrechts, Paul and Kl{\"u}ppelberg, Claudia and Mikosch, Thomas},
+  title     = {Modelling Extremal Events for Insurance and Finance},
+  series    = {Applications of Mathematics},
+  volume    = {33},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {1997},
+  isbn      = {978-3-540-60931-5},
+  uso       = {RA-15; RA-48; L17 c. 8},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://lmbp.uca.fr/biblio/notice.php?num=11033},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{yamada1971,
+  author    = {Yamada, Toshio and Watanabe, Shinzo},
+  title     = {On the Uniqueness of Solutions of Stochastic Differential Equations},
+  journal   = {Journal of Mathematics of Kyoto University},
+  volume    = {11},
+  number    = {1},
+  pages     = {155--167},
+  year      = {1971},
+  doi       = {10.1215/kjm/1250523691},
+  uso       = {RA-18},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www.iam.uni-bonn.de/fileadmin/user_upload/gubinelli/stochastic-analysis-ss22/Yamada_and_Watanabe_-_1971_-_On_the_uniqueness_of_solutions_of_stochastic_diffe.pdf},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Revista, volumen y páginas confirmados en la copia escaneada; el DOI proviene de una fuente secundaria.}
+}
+
+@article{dalang1990,
+  author    = {Dalang, Robert C. and Morton, Andrew and Willinger, Walter},
+  title     = {Equivalent Martingale Measures and No-Arbitrage in Stochastic Securities Market Models},
+  journal   = {Stochastics and Stochastic Reports},
+  volume    = {29},
+  number    = {2},
+  pages     = {185--201},
+  year      = {1990},
+  doi       = {10.1080/17442509008833613},
+  uso       = {RA-19; L16 c. 12},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://infoscience.epfl.ch/record/129915},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{peskir2006,
+  author    = {Peskir, Goran and Shiryaev, Albert},
+  title     = {Optimal Stopping and Free-Boundary Problems},
+  series    = {Lectures in Mathematics ETH Z{\"u}rich},
+  publisher = {Birkh{\"a}user},
+  address   = {Basel},
+  year      = {2006},
+  isbn      = {978-3-7643-2419-3},
+  doi       = {10.1007/978-3-7643-7390-0},
+  uso       = {RA-20; L19 c. 7},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://link.springer.com/10.1007/978-3-7643-7390-0},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{robbins1951,
+  author    = {Robbins, Herbert and Monro, Sutton},
+  title     = {A Stochastic Approximation Method},
+  journal   = {The Annals of Mathematical Statistics},
+  volume    = {22},
+  number    = {3},
+  pages     = {400--407},
+  year      = {1951},
+  doi       = {10.1214/aoms/1177729586},
+  uso       = {RA-21; L21 c. 9},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org/euclid.aoms/1177729586},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{fine1997,
+  author    = {Fine, Benjamin and Rosenberger, Gerhard},
+  title     = {The Fundamental Theorem of Algebra},
+  series    = {Undergraduate Texts in Mathematics},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {1997},
+  isbn      = {978-0-387-94657-3},
+  uso       = {RA-07; L6 c. 9},
+  nivel     = {complementaria},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.springer.com/us/book/9780387946573},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{wang2004,
+  author    = {Wang, Xiaoshen},
+  title     = {A Simple Proof of {Descartes}'s Rule of Signs},
+  journal   = {The American Mathematical Monthly},
+  volume    = {111},
+  number    = {6},
+  pages     = {525--526},
+  year      = {2004},
+  doi       = {10.2307/4145072},
+  uso       = {RA-23; L5 c. 6},
+  nivel     = {complementaria},
+  verificacion = {parcial},
+  fuente_verificacion = {https://en.wikipedia.org/wiki/Descartes%27_rule_of_signs},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Datos tomados de citas secundarias; DOI y páginas por confirmar en la fuente primaria.}
+}
+
+@book{hartshorne2000,
+  author    = {Hartshorne, Robin},
+  title     = {Geometry: Euclid and Beyond},
+  series    = {Undergraduate Texts in Mathematics},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {2000},
+  isbn      = {978-0-387-98650-0},
+  doi       = {10.1007/978-0-387-22676-7},
+  uso       = {RA-25; L2 c. 2, 9, 10; L6 c. 6},
+  nivel     = {complementaria},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.springer.com/gp/book/9780387986500},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{samorodnitsky1994,
+  author    = {Samorodnitsky, Gennady and Taqqu, Murad S.},
+  title     = {Stable Non-Gaussian Random Processes: Stochastic Models with Infinite Variance},
+  publisher = {Chapman \& Hall},
+  address   = {New York},
+  year      = {1994},
+  isbn      = {978-0-412-05171-5},
+  uso       = {RA-28; L8 c. 12},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://lmbp.uca.fr/biblio/notice.php?num=10964},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Lugar de edición no confirmado.}
+}
+
+@article{wilks1938,
+  author    = {Wilks, S. S.},
+  title     = {The Large-Sample Distribution of the Likelihood Ratio for Testing Composite Hypotheses},
+  journal   = {The Annals of Mathematical Statistics},
+  volume    = {9},
+  number    = {1},
+  pages     = {60--62},
+  year      = {1938},
+  doi       = {10.1214/aoms/1177732360},
+  uso       = {RA-29; L9 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org/euclid.aoms/1177732360},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{bickel1981,
+  author    = {Bickel, Peter J. and Freedman, David A.},
+  title     = {Some Asymptotic Theory for the Bootstrap},
+  journal   = {The Annals of Statistics},
+  volume    = {9},
+  number    = {6},
+  pages     = {1196--1217},
+  year      = {1981},
+  doi       = {10.1214/aos/1176345637},
+  uso       = {RA-30; L9 c. 10},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org/journals/annals-of-statistics/volume-9/issue-6/Some-Asymptotic-Theory-for-the-Bootstrap/10.1214/aos/1176345637.full},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{anderson2003,
+  author    = {Anderson, T. W.},
+  title     = {An Introduction to Multivariate Statistical Analysis},
+  edition   = {3},
+  series    = {Wiley Series in Probability and Statistics},
+  publisher = {Wiley-Interscience},
+  address   = {Hoboken, NJ},
+  year      = {2003},
+  isbn      = {978-0-471-36091-9},
+  uso       = {RA-32; L9 c. 13},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.wiley-vch.de/de/fachgebiete/mathematik-und-statistik/an-introduction-to-multivariate-statistical-analysis-978-0-471-36091-9},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{ross1976,
+  author    = {Ross, Stephen A.},
+  title     = {The Arbitrage Theory of Capital Asset Pricing},
+  journal   = {Journal of Economic Theory},
+  volume    = {13},
+  number    = {3},
+  pages     = {341--360},
+  year      = {1976},
+  doi       = {10.1016/0022-0531(76)90046-6},
+  uso       = {RA-33; L10 c. 10},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://bibsonomy.org/bibtex/c623fca755ebb8fc29ff53a245e1097b},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Número 3 inferido del mes de publicación (mayo de 1976); por confirmar.}
+}
+
+@article{huberman1982,
+  author    = {Huberman, Gur},
+  title     = {A Simple Approach to Arbitrage Pricing Theory},
+  journal   = {Journal of Economic Theory},
+  volume    = {28},
+  number    = {1},
+  pages     = {183--191},
+  year      = {1982},
+  uso       = {RA-33; L10 c. 10},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/eee/jetheo/v28y1982i1p183-191.html},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado (inferido del PII de ScienceDirect); no se registra.}
+}
+
+@book{niederreiter1992,
+  author    = {Niederreiter, Harald},
+  title     = {Random Number Generation and Quasi-{Monte} {Carlo} Methods},
+  series    = {CBMS-NSF Regional Conference Series in Applied Mathematics},
+  volume    = {63},
+  publisher = {Society for Industrial and Applied Mathematics},
+  address   = {Philadelphia},
+  year      = {1992},
+  isbn      = {978-0-89871-295-7},
+  uso       = {RA-35; L12 c. 10},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://opac.lib.kit.ac.jp/opac/opac_link/bibid/TY20017546},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado; lugar de edición no confirmado en la fuente.}
+}
+
+@article{kunsch1989,
+  author    = {K{\"u}nsch, Hans R.},
+  title     = {The Jackknife and the Bootstrap for General Stationary Observations},
+  journal   = {The Annals of Statistics},
+  volume    = {17},
+  number    = {3},
+  pages     = {1217--1241},
+  year      = {1989},
+  doi       = {10.1214/aos/1176347265},
+  uso       = {RA-36; L14 c. 7},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org/euclid.aos/1176347265},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{politis1994,
+  author    = {Politis, Dimitris N. and Romano, Joseph P.},
+  title     = {The Stationary Bootstrap},
+  journal   = {Journal of the American Statistical Association},
+  volume    = {89},
+  number    = {428},
+  pages     = {1303--1313},
+  year      = {1994},
+  url       = {https://www.jstor.org/stable/2290993},
+  uso       = {RA-36; L14 c. 7},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://gnosis.library.ucy.ac.cy/handle/7/57533},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado; se registra el enlace estable de JSTOR.}
+}
+
+@article{bollerslev1992,
+  author    = {Bollerslev, Tim and Wooldridge, Jeffrey M.},
+  title     = {Quasi-Maximum Likelihood Estimation and Inference in Dynamic Models with Time-Varying Covariances},
+  journal   = {Econometric Reviews},
+  volume    = {11},
+  number    = {2},
+  pages     = {143--172},
+  year      = {1992},
+  doi       = {10.1080/07474939208800229},
+  uso       = {RA-37; L14 c. 8},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://scholars.duke.edu/publication/651646},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{engle1987,
+  author    = {Engle, Robert F. and Granger, C. W. J.},
+  title     = {Co-Integration and Error Correction: Representation, Estimation, and Testing},
+  journal   = {Econometrica},
+  volume    = {55},
+  number    = {2},
+  pages     = {251--276},
+  year      = {1987},
+  url       = {https://www.jstor.org/stable/1913236},
+  uso       = {RA-38; L14 c. 10},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://econometricsociety.org/publications/econometrica/1987/03/01/co-integration-and-error-correction-representation-estimation},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado; se registra el enlace estable de JSTOR.}
+}
+
+@article{andrews1993,
+  author    = {Andrews, Donald W. K.},
+  title     = {Tests for Parameter Instability and Structural Change with Unknown Change Point},
+  journal   = {Econometrica},
+  volume    = {61},
+  number    = {4},
+  pages     = {821--856},
+  year      = {1993},
+  doi       = {10.2307/2951764},
+  uso       = {RA-39; L14 c. 11},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/ecm/emetrp/v61y1993i4p821-56.html},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Existe un corrigendum (Econometrica 71(1), 2003, 395--397) que corrige valores críticos de la tabla I para p = 8; debe citarse junto con el artículo.}
+}
+
+@article{hansen1982,
+  author    = {Hansen, Lars Peter},
+  title     = {Large Sample Properties of Generalized Method of Moments Estimators},
+  journal   = {Econometrica},
+  volume    = {50},
+  number    = {4},
+  pages     = {1029--1054},
+  year      = {1982},
+  url       = {https://www.jstor.org/stable/1912775},
+  uso       = {RA-40; RA-41 (prueba J); L14 c. 13},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.econometricsociety.org/publications/econometrica/1982/07/01/large-sample-properties-generalized-method-moments-estimators},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado; se registra el enlace estable de JSTOR.}
+}
+
+@article{ljung1978,
+  author    = {Ljung, G. M. and Box, G. E. P.},
+  title     = {On a Measure of Lack of Fit in Time Series Models},
+  journal   = {Biometrika},
+  volume    = {65},
+  number    = {2},
+  pages     = {297--303},
+  year      = {1978},
+  doi       = {10.2307/2335207},
+  uso       = {RA-41; L14 c. 5},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://svn.r-project.org/browse/R/trunk/src/library/stats/man/box.test.Rd?peg=77458},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Páginas y DOI tomados de la documentación de R; una revisión antigua de esa documentación da otras páginas. Por confirmar en la fuente primaria.}
+}
+
+@article{kwiatkowski1992,
+  author    = {Kwiatkowski, Denis and Phillips, Peter C. B. and Schmidt, Peter and Shin, Yongcheol},
+  title     = {Testing the Null Hypothesis of Stationarity against the Alternative of a Unit Root},
+  journal   = {Journal of Econometrics},
+  volume    = {54},
+  pages     = {159--178},
+  year      = {1992},
+  uso       = {RA-41; L14 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://en.wikipedia.org/wiki/KPSS_test},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado; no se registra.}
+}
+
+@article{diebold1995,
+  author    = {Diebold, Francis X. and Mariano, Roberto S.},
+  title     = {Comparing Predictive Accuracy},
+  journal   = {Journal of Business \& Economic Statistics},
+  volume    = {13},
+  number    = {3},
+  pages     = {253--263},
+  year      = {1995},
+  uso       = {RA-41; L14 c. 7},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.econbiz.de/Record/comparing-predictive-accuracy/10005170846},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {DOI no confirmado; no se registra.}
+}
+
+@book{strikwerda2004,
+  author    = {Strikwerda, John C.},
+  title     = {Finite Difference Schemes and Partial Differential Equations},
+  edition   = {2},
+  publisher = {Society for Industrial and Applied Mathematics},
+  address   = {Philadelphia},
+  year      = {2004},
+  isbn      = {978-0-89871-567-5},
+  uso       = {RA-42; L15 c. 9},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://catalog.lib.kyushu-u.ac.jp/ja/recordID/1001241044},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Las fuentes asocian dos ISBN a esta edición (978-0-89871-567-5 y 978-0-89871-639-9); DOI no confirmado.}
+}
+
+@book{hairer1993,
+  author    = {Hairer, Ernst and N{\o}rsett, Syvert P. and Wanner, Gerhard},
+  title     = {Solving Ordinary Differential Equations {I}: Nonstiff Problems},
+  edition   = {2},
+  series    = {Springer Series in Computational Mathematics},
+  volume    = {8},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {1993},
+  isbn      = {978-3-540-56670-0},
+  doi       = {10.1007/978-3-540-78862-1},
+  uso       = {RA-43; L15 c. 4},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://link.springer.com/978-3-540-56670-0},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Número de volumen en la serie no confirmado en la fuente. El DOI indicado corresponde al registro electrónico de Springer.}
+}
+
+@book{john1982,
+  author    = {John, Fritz},
+  title     = {Partial Differential Equations},
+  edition   = {4},
+  series    = {Applied Mathematical Sciences},
+  volume    = {1},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {1982},
+  isbn      = {978-0-387-90609-6},
+  uso       = {RA-44; L15 c. 7},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.springer.com/978-0-387-90609-6},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{ledoit2004,
+  author    = {Ledoit, Olivier and Wolf, Michael},
+  title     = {A Well-Conditioned Estimator for Large-Dimensional Covariance Matrices},
+  journal   = {Journal of Multivariate Analysis},
+  volume    = {88},
+  number    = {2},
+  pages     = {365--411},
+  year      = {2004},
+  doi       = {10.1016/S0047-259X(03)00096-4},
+  uso       = {RA-45; L17 c. 2},
+  nivel     = {fundamental},
+  verificacion = {verificada},
+  fuente_verificacion = {https://econpapers.repec.org/RePEc:eee:jmvana:v:88:y:2004:i:2:p:365-411},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{marchenko1967,
+  author    = {Mar{\v{c}}enko, V. A. and Pastur, L. A.},
+  title     = {Distribution of Eigenvalues for Some Sets of Random Matrices},
+  journal   = {Mathematics of the USSR-Sbornik},
+  volume    = {1},
+  number    = {4},
+  pages     = {457--483},
+  year      = {1967},
+  doi       = {10.1070/SM1967v001n04ABEH001994},
+  uso       = {RA-46; L17 c. 2},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://mathnet.ru/eng/sm4101},
+  fecha_verificacion = {2026-10-16}
+}
+
+% ---------------------------------------------------------------------------
+% Referencias externas de los resultados admitidos
+% ---------------------------------------------------------------------------
+
+@article{gneiting2011,
+  author    = {Gneiting, Tilmann},
+  title     = {Making and Evaluating Point Forecasts},
+  journal   = {Journal of the American Statistical Association},
+  volume    = {106},
+  number    = {494},
+  pages     = {746--762},
+  year      = {2011},
+  doi       = {10.1198/jasa.2011.r10138},
+  uso       = {RA-47; L17 c. 6; L17 c. 10},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/bes/jnlasa/v106i494y2011p746-762.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{fissler2016,
+  author    = {Fissler, Tobias and Ziegel, Johanna F.},
+  title     = {Higher Order Elicitability and {Osband}'s Principle},
+  journal   = {The Annals of Statistics},
+  volume    = {44},
+  number    = {4},
+  pages     = {1680--1707},
+  year      = {2016},
+  doi       = {10.1214/16-AOS1439},
+  uso       = {RA-47; L17 c. 6; L17 c. 10},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://boris.unibe.ch/84467},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Existe una corrección publicada en The Annals of Statistics 49(1), 2021, p. 614.}
+}
+
+@article{hill1975,
+  author    = {Hill, Bruce M.},
+  title     = {A Simple General Approach to Inference About the Tail of a Distribution},
+  journal   = {The Annals of Statistics},
+  volume    = {3},
+  number    = {5},
+  pages     = {1163--1174},
+  year      = {1975},
+  doi       = {10.1214/aos/1176343247},
+  uso       = {RA-48; L17 c. 8},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org/euclid.aos/1176343247},
+  fecha_verificacion = {2026-10-16}
+}
+
+@incollection{donsker1951,
+  author    = {Donsker, Monroe D.},
+  title     = {An Invariance Principle for Certain Probability Limit Theorems},
+  booktitle = {Four Papers on Probability},
+  series    = {Memoirs of the American Mathematical Society},
+  number    = {6},
+  publisher = {American Mathematical Society},
+  address   = {Providence, RI},
+  pages     = {1--12},
+  year      = {1951},
+  uso       = {RA-49; L18 c. 3},
+  nivel     = {investigacion},
+  verificacion = {parcial},
+  fuente_verificacion = {https://bookstore.ams.org/MEMO/1/6},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Volumen y año confirmados; páginas tomadas de la Encyclopedia of Mathematics, no del volumen.}
+}
+
+@book{billingsley1999,
+  author    = {Billingsley, Patrick},
+  title     = {Convergence of Probability Measures},
+  edition   = {2},
+  publisher = {Wiley},
+  address   = {New York},
+  series    = {Wiley Series in Probability and Statistics},
+  year      = {1999},
+  isbn      = {978-0-471-19745-4},
+  uso       = {RA-49; L18 c. 3; L16},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.wiley-vch.de/en/areas-interest/mathematics-statistics/convergence-of-probability-measures-978-0-471-19745-4},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{kloeden1992,
+  author    = {Kloeden, Peter E. and Platen, Eckhard},
+  title     = {Numerical Solution of Stochastic Differential Equations},
+  series    = {Applications of Mathematics},
+  volume    = {23},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {1992},
+  isbn      = {978-3-540-54062-5},
+  doi       = {10.1007/978-3-662-12616-5},
+  uso       = {RA-50; RA-51; RA-52; L18 c. 7; L18 c. 8; L18 c. 11},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://link.springer.com/book/10.1007/978-3-662-12616-5},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {La serie se denomina hoy Stochastic Modelling and Applied Probability.}
+}
+
+@article{delbaen1994,
+  author    = {Delbaen, Freddy and Schachermayer, Walter},
+  title     = {A General Version of the Fundamental Theorem of Asset Pricing},
+  journal   = {Mathematische Annalen},
+  volume    = {300},
+  pages     = {463--520},
+  year      = {1994},
+  uso       = {RA-53; L19 c. 2},
+  nivel     = {investigacion},
+  verificacion = {parcial},
+  fuente_verificacion = {https://mat.univie.ac.at/~schachermayer/pubs/pubabs.php?id=84},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Autores, título, revista, volumen y año confirmados; el intervalo de páginas no apareció en las fuentes consultadas.}
+}
+
+@book{delbaen2006,
+  author    = {Delbaen, Freddy and Schachermayer, Walter},
+  title     = {The Mathematics of Arbitrage},
+  series    = {Springer Finance},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {2006},
+  isbn      = {978-3-540-21992-7},
+  doi       = {10.1007/978-3-540-31299-4},
+  uso       = {RA-53; L19 c. 2; L16 c. 12},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://link.springer.com/10.1007/978-3-540-31299-4},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{longstaff2001,
+  author    = {Longstaff, Francis A. and Schwartz, Eduardo S.},
+  title     = {Valuing {American} Options by Simulation: A Simple Least-Squares Approach},
+  journal   = {The Review of Financial Studies},
+  volume    = {14},
+  number    = {1},
+  pages     = {113--147},
+  year      = {2001},
+  uso       = {RA-54; L19 c. 7},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/oup/rfinst/v14y2001i1p113-47.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{clement2002,
+  author    = {Cl{\'e}ment, Emmanuelle and Lamberton, Damien and Protter, Philip},
+  title     = {An Analysis of a Least Squares Regression Method for {American} Option Pricing},
+  journal   = {Finance and Stochastics},
+  volume    = {6},
+  number    = {4},
+  pages     = {449--471},
+  year      = {2002},
+  uso       = {RA-54; L19 c. 7},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/spr/finsto/v6y2002i4p449-471.html},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Liu, Schellhorn y Peng (2019) señalan un pequeño vacío en la demostración y lo completan; conviene citarlo junto con este artículo al redactar L19 c. 7.}
+}
+
+@article{feller1951,
+  author    = {Feller, William},
+  title     = {Two Singular Diffusion Problems},
+  journal   = {Annals of Mathematics},
+  volume    = {54},
+  number    = {1},
+  pages     = {173--182},
+  year      = {1951},
+  uso       = {RA-55; L19 c. 11; L22 c. 3},
+  nivel     = {investigacion},
+  verificacion = {parcial},
+  fuente_verificacion = {https://arxiv.org/pdf/1905.10737},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Datos tomados de listas de referencias secundarias concordantes; no se consultó el registro de la revista. El número 1 no fue confirmado.}
+}
+
+@article{cox1985,
+  author    = {Cox, John C. and Ingersoll, Jr., Jonathan E. and Ross, Stephen A.},
+  title     = {A Theory of the Term Structure of Interest Rates},
+  journal   = {Econometrica},
+  volume    = {53},
+  number    = {2},
+  pages     = {385--407},
+  year      = {1985},
+  uso       = {RA-55; L22 c. 3; L19 c. 11},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www.econometricsociety.org/publications/econometrica/1985/03/01/theory-term-structure-interest-rates},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {RePEc da pp. 385-407; la Econometric Society da pp. 385-408. Revisar contra el original antes de la composición final.}
+}
+
+@article{elkaroui1995,
+  author    = {El Karoui, Nicole and Quenez, Marie-Claire},
+  title     = {Dynamic Programming and Pricing of Contingent Claims in an Incomplete Market},
+  journal   = {SIAM Journal on Control and Optimization},
+  volume    = {33},
+  number    = {1},
+  pages     = {29--66},
+  year      = {1995},
+  doi       = {10.1137/S0363012992232579},
+  uso       = {RA-56; L19 c. 13},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://epubs.siam.org/doi/10.1137/S0363012992232579},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{kramkov1996,
+  author    = {Kramkov, Dmitry O.},
+  title     = {Optional Decomposition of Supermartingales and Hedging Contingent Claims in Incomplete Security Markets},
+  journal   = {Probability Theory and Related Fields},
+  volume    = {105},
+  pages     = {459--479},
+  year      = {1996},
+  uso       = {RA-56; L19 c. 13},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.math.cmu.edu/users/kramkov/publications/PTRF_96.pdf},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{follmer2016,
+  author    = {F{\"o}llmer, Hans and Schied, Alexander},
+  title     = {Stochastic Finance: An Introduction in Discrete Time},
+  edition   = {4},
+  publisher = {De Gruyter},
+  address   = {Berlin},
+  year      = {2016},
+  isbn      = {978-3-11-046344-6},
+  doi       = {10.1515/9783110463453},
+  uso       = {RA-56; L10 c. 8; L16 c. 12; L17 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.math.hu-berlin.de/~foellmer/publications.html},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Existe una quinta edición (2025, ISBN 978-3-11-104481-1); se decidirá cuál citar al redactar.}
+}
+
+@article{white2000,
+  author    = {White, Halbert},
+  title     = {A Reality Check for Data Snooping},
+  journal   = {Econometrica},
+  volume    = {68},
+  number    = {5},
+  pages     = {1097--1126},
+  year      = {2000},
+  doi       = {10.1111/1468-0262.00152},
+  uso       = {RA-57; L20 c. 6},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.econometricsociety.org/publications/econometrica/2000/09/01/reality-check-data-snooping},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{hansen2005,
+  author    = {Hansen, Peter Reinhard},
+  title     = {A Test for Superior Predictive Ability},
+  journal   = {Journal of Business \& Economic Statistics},
+  volume    = {23},
+  number    = {4},
+  pages     = {365--380},
+  year      = {2005},
+  uso       = {RA-57; L20 c. 6},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/bes/jnlbes/v23y2005p365-380.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{vapnik1998,
+  author    = {Vapnik, Vladimir N.},
+  title     = {Statistical Learning Theory},
+  publisher = {Wiley},
+  address   = {New York},
+  year      = {1998},
+  isbn      = {978-0-471-03003-4},
+  uso       = {RA-58; L21 c. 1},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://gov.wiley.com/WileyCDA/WileyTitle/productCd-0471030031,descCd-authorInfo.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{shalevshwartz2014,
+  author    = {Shalev-Shwartz, Shai and Ben-David, Shai},
+  title     = {Understanding Machine Learning: From Theory to Algorithms},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2014},
+  isbn      = {978-1-107-05713-5},
+  uso       = {RA-58; L21 c. 1},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.cambridge.org/gb/universitypress/subjects/computer-science/pattern-recognition-and-machine-learning/understanding-machine-learning-theory-algorithms},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{cybenko1989,
+  author    = {Cybenko, George},
+  title     = {Approximation by Superpositions of a Sigmoidal Function},
+  journal   = {Mathematics of Control, Signals, and Systems},
+  volume    = {2},
+  number    = {4},
+  pages     = {303--314},
+  year      = {1989},
+  doi       = {10.1007/BF02551274},
+  uso       = {RA-59; L21 c. 9},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://mlanthology.org/misc/1989/cybenko1989misc-approximation},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{hornik1989,
+  author    = {Hornik, Kurt and Stinchcombe, Maxwell and White, Halbert},
+  title     = {Multilayer Feedforward Networks Are Universal Approximators},
+  journal   = {Neural Networks},
+  volume    = {2},
+  number    = {5},
+  pages     = {359--366},
+  year      = {1989},
+  uso       = {RA-59; L21 c. 9},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://hero.epa.gov/hero/index.cfm/reference/details/reference_id/47565},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{tierney1994,
+  author    = {Tierney, Luke},
+  title     = {Markov Chains for Exploring Posterior Distributions},
+  journal   = {The Annals of Statistics},
+  volume    = {22},
+  number    = {4},
+  pages     = {1701--1728},
+  year      = {1994},
+  doi       = {10.1214/aos/1176325750},
+  uso       = {RA-60; L21 c. 11},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.projecteuclid.org/euclid.aos/1176325750},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Publicado con discusión y réplica en el mismo número (pp. 1728-1762).}
+}
+
+@article{roberts2004,
+  author    = {Roberts, Gareth O. and Rosenthal, Jeffrey S.},
+  title     = {General State Space {Markov} Chains and {MCMC} Algorithms},
+  journal   = {Probability Surveys},
+  volume    = {1},
+  pages     = {20--71},
+  year      = {2004},
+  doi       = {10.1214/154957804100000024},
+  uso       = {RA-60; L21 c. 11; L8 c. 14},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://arxiv.org/abs/math/0404033},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Acceso abierto.}
+}
+
+% ---------------------------------------------------------------------------
+% Fuentes originales de modelos, métodos y resultados empíricos
+% ---------------------------------------------------------------------------
+
+@article{blackscholes1973,
+  author    = {Black, Fischer and Scholes, Myron},
+  title     = {The Pricing of Options and Corporate Liabilities},
+  journal   = {Journal of Political Economy},
+  volume    = {81},
+  number    = {3},
+  pages     = {637--654},
+  year      = {1973},
+  uso       = {L19 c. 1; L19 c. 3; L13 c. 8},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{merton1973,
+  author    = {Merton, Robert C.},
+  title     = {Theory of Rational Option Pricing},
+  journal   = {The Bell Journal of Economics and Management Science},
+  volume    = {4},
+  number    = {1},
+  pages     = {141--183},
+  year      = {1973},
+  uso       = {L19 c. 3; L13 c. 3},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/rje/bellje/v4y1973ispringp141-183.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{merton1974,
+  author    = {Merton, Robert C.},
+  title     = {On the Pricing of Corporate Debt: The Risk Structure of Interest Rates},
+  journal   = {The Journal of Finance},
+  volume    = {29},
+  number    = {2},
+  pages     = {449--470},
+  year      = {1974},
+  doi       = {10.2307/2978814},
+  uso       = {L22 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://dspace.mit.edu/handle/1721.1/1874},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{merton1976,
+  author    = {Merton, Robert C.},
+  title     = {Option Pricing When Underlying Stock Returns Are Discontinuous},
+  journal   = {Journal of Financial Economics},
+  volume    = {3},
+  number    = {1--2},
+  pages     = {125--144},
+  year      = {1976},
+  uso       = {L19 c. 11},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/p/mit/sloanp/1899.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{cox1979,
+  author    = {Cox, John C. and Ross, Stephen A. and Rubinstein, Mark},
+  title     = {Option Pricing: A Simplified Approach},
+  journal   = {Journal of Financial Economics},
+  volume    = {7},
+  number    = {3},
+  pages     = {229--263},
+  year      = {1979},
+  doi       = {10.1016/0304-405X(79)90015-1},
+  uso       = {L13 c. 4; L13 c. 5; L13 c. 8},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://bibbase.org/network/publication/cox-ross-rubinstein-optionpricingasimplifiedapproach-1979},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{vasicek1977,
+  author    = {Vasicek, Oldrich},
+  title     = {An Equilibrium Characterization of the Term Structure},
+  journal   = {Journal of Financial Economics},
+  volume    = {5},
+  number    = {2},
+  pages     = {177--188},
+  year      = {1977},
+  doi       = {10.1016/0304-405X(77)90016-2},
+  uso       = {L15 c. 3; L22 c. 3; L22 c. 9},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://rpc.cfainstitute.org/research/financial-analysts-journal/2001/from-the-editor},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Datos de volumen, páginas y DOI tomados de fuentes secundarias concordantes.}
+}
+
+@article{heston1993,
+  author    = {Heston, Steven L.},
+  title     = {A Closed-Form Solution for Options with Stochastic Volatility with Applications to Bond and Currency Options},
+  journal   = {The Review of Financial Studies},
+  volume    = {6},
+  number    = {2},
+  pages     = {327--343},
+  year      = {1993},
+  uso       = {L19 c. 11},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/oup/rfinst/v6y1993i2p327-43.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{heath1992,
+  author    = {Heath, David and Jarrow, Robert and Morton, Andrew},
+  title     = {Bond Pricing and the Term Structure of Interest Rates: A New Methodology for Contingent Claims Valuation},
+  journal   = {Econometrica},
+  volume    = {60},
+  number    = {1},
+  pages     = {77--105},
+  year      = {1992},
+  uso       = {L22 c. 4},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/ecm/emetrp/v60y1992i1p77-105.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{harrison1981,
+  author    = {Harrison, J. Michael and Pliska, Stanley R.},
+  title     = {Martingales and Stochastic Integrals in the Theory of Continuous Trading},
+  journal   = {Stochastic Processes and their Applications},
+  volume    = {11},
+  number    = {3},
+  pages     = {215--260},
+  year      = {1981},
+  doi       = {10.1016/0304-4149(81)90026-0},
+  uso       = {L16 c. 12; L19 c. 2},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/eee/spapps/v11y1981i3p215-260.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{breeden1978,
+  author    = {Breeden, Douglas T. and Litzenberger, Robert H.},
+  title     = {Prices of State-Contingent Claims Implicit in Option Prices},
+  journal   = {The Journal of Business},
+  volume    = {51},
+  number    = {4},
+  pages     = {621--651},
+  year      = {1978},
+  doi       = {10.1086/296025},
+  uso       = {L19 c. 6; L19 c. 10},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://scholars.duke.edu/publication/1112733},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Página final no confirmada (el registro de Duke muestra un intervalo truncado).}
+}
+
+@article{dupire1994,
+  author    = {Dupire, Bruno},
+  title     = {Pricing with a Smile},
+  journal   = {Risk},
+  volume    = {7},
+  number    = {1},
+  pages     = {18--20},
+  year      = {1994},
+  uso       = {L19 c. 10},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.risk.net/derivatives/equity-derivatives/1500211/pricing-with-a-smile},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{carr1999,
+  author    = {Carr, Peter and Madan, Dilip B.},
+  title     = {Option Valuation Using the Fast {Fourier} Transform},
+  journal   = {Journal of Computational Finance},
+  volume    = {2},
+  number    = {4},
+  pages     = {61--73},
+  year      = {1999},
+  uso       = {L19 c. 9; L12 c. 12},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www.risk.net/journal-of-computational-finance/2160495/option-valuation-using-the-fast-fourier-transform},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Autores, título y revista confirmados; volumen, número y páginas no aparecieron en las fuentes consultadas.}
+}
+
+@article{margrabe1978,
+  author    = {Margrabe, William},
+  title     = {The Value of an Option to Exchange One Asset for Another},
+  journal   = {The Journal of Finance},
+  volume    = {33},
+  number    = {1},
+  pages     = {177--186},
+  year      = {1978},
+  uso       = {L19 c. 4},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://search.r-project.org/CRAN/refmans/FER/html/SwitchMargrabe.html},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Datos confirmados solo por fuentes secundarias concordantes.}
+}
+
+@article{garman1983,
+  author    = {Garman, Mark B. and Kohlhagen, Steven W.},
+  title     = {Foreign Currency Option Values},
+  journal   = {Journal of International Money and Finance},
+  volume    = {2},
+  number    = {3},
+  pages     = {231--237},
+  year      = {1983},
+  uso       = {L19 c. 3},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://econbiz.de/Record/foreign-currency-option-values-garman-mark/10002406775},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Un documento del BIS cita pp. 231-238; revisar contra el original.}
+}
+
+@article{black1976,
+  author    = {Black, Fischer},
+  title     = {The Pricing of Commodity Contracts},
+  journal   = {Journal of Financial Economics},
+  volume    = {3},
+  number    = {1--2},
+  pages     = {167--179},
+  year      = {1976},
+  uso       = {L19 c. 3; L22 c. 5},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://econpapers.repec.org/article/eeejfinec/default62.htm},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{blackcox1976,
+  author    = {Black, Fischer and Cox, John C.},
+  title     = {Valuing Corporate Securities: Some Effects of Bond Indenture Provisions},
+  journal   = {The Journal of Finance},
+  volume    = {31},
+  number    = {2},
+  pages     = {351--367},
+  year      = {1976},
+  doi       = {10.1111/j.1540-6261.1976.tb01891.x},
+  uso       = {L22 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://afajof.org/issue/volume-31-issue-2/},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{fama1992,
+  author    = {Fama, Eugene F. and French, Kenneth R.},
+  title     = {The Cross-Section of Expected Stock Returns},
+  journal   = {The Journal of Finance},
+  volume    = {47},
+  number    = {2},
+  pages     = {427--465},
+  year      = {1992},
+  uso       = {L10 c. 10; L10 c. 11; L23 c. 2},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.casact.org/abstract/cross-section-expected-stock-returns},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{fama1993,
+  author    = {Fama, Eugene F. and French, Kenneth R.},
+  title     = {Common Risk Factors in the Returns on Stocks and Bonds},
+  journal   = {Journal of Financial Economics},
+  volume    = {33},
+  number    = {1},
+  pages     = {3--56},
+  year      = {1993},
+  doi       = {10.1016/0304-405X(93)90023-5},
+  uso       = {L10 c. 10; L14 c. 14; L23 c. 2},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://casact.org/abstract/common-risk-factors-returns-stocks-and-bonds},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{fama2015,
+  author    = {Fama, Eugene F. and French, Kenneth R.},
+  title     = {A Five-Factor Asset Pricing Model},
+  journal   = {Journal of Financial Economics},
+  volume    = {116},
+  number    = {1},
+  pages     = {1--22},
+  year      = {2015},
+  doi       = {10.1016/j.jfineco.2014.10.010},
+  uso       = {L10 c. 10; L23 c. 2},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://rpc.cfainstitute.org/research/cfa-digest/2015/04/a-five-factor-asset-pricing-model-digest-summary},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{fama1973,
+  author    = {Fama, Eugene F. and MacBeth, James D.},
+  title     = {Risk, Return, and Equilibrium: Empirical Tests},
+  journal   = {Journal of Political Economy},
+  volume    = {81},
+  number    = {3},
+  pages     = {607--636},
+  year      = {1973},
+  doi       = {10.1086/260061},
+  uso       = {L14 c. 12; L23 c. 2},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/ucp/jpolec/v81y1973i3p607-36.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{jegadeesh1993,
+  author    = {Jegadeesh, Narasimhan and Titman, Sheridan},
+  title     = {Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency},
+  journal   = {The Journal of Finance},
+  volume    = {48},
+  number    = {1},
+  pages     = {65--91},
+  year      = {1993},
+  doi       = {10.1111/j.1540-6261.1993.tb04702.x},
+  uso       = {L10 c. 11; L23 c. 3},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/bla/jfinan/v48y1993i1p65-91.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{roll1977,
+  author    = {Roll, Richard},
+  title     = {A Critique of the Asset Pricing Theory's Tests. {Part I}: On Past and Potential Testability of the Theory},
+  journal   = {Journal of Financial Economics},
+  volume    = {4},
+  number    = {2},
+  pages     = {129--176},
+  year      = {1977},
+  doi       = {10.1016/0304-405X(77)90009-5},
+  uso       = {L10 c. 7; L14 c. 14},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://authors.library.caltech.edu/records/hr9t3-hnb18},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{roll1984,
+  author    = {Roll, Richard},
+  title     = {A Simple Implicit Measure of the Effective Bid-Ask Spread in an Efficient Market},
+  journal   = {The Journal of Finance},
+  volume    = {39},
+  number    = {4},
+  pages     = {1127--1139},
+  year      = {1984},
+  doi       = {10.1111/j.1540-6261.1984.tb03897.x},
+  uso       = {L20 c. 9},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://authors.library.caltech.edu/records/afwsc-6bb61},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{hansen1991,
+  author    = {Hansen, Lars Peter and Jagannathan, Ravi},
+  title     = {Implications of Security Market Data for Models of Dynamic Economies},
+  journal   = {Journal of Political Economy},
+  volume    = {99},
+  number    = {2},
+  pages     = {225--262},
+  year      = {1991},
+  doi       = {10.1086/261749},
+  uso       = {L10 c. 9; L14 c. 14},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+% ---------------------------------------------------------------------------
+% Fuentes originales de modelos, métodos y resultados empíricos
+% ---------------------------------------------------------------------------
+
+@article{mehra1985,
+  author    = {Mehra, Rajnish and Prescott, Edward C.},
+  title     = {The Equity Premium: A Puzzle},
+  journal   = {Journal of Monetary Economics},
+  volume    = {15},
+  number    = {2},
+  pages     = {145--161},
+  year      = {1985},
+  uso       = {L10 c. 9},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://econbiz.de/Record/the-equity-premium-a-puzzle-mehra-rajnish/10003654829},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{mclean2016,
+  author    = {McLean, R. David and Pontiff, Jeffrey},
+  title     = {Does Academic Research Destroy Stock Return Predictability?},
+  journal   = {The Journal of Finance},
+  volume    = {71},
+  number    = {1},
+  pages     = {5--32},
+  year      = {2016},
+  doi       = {10.1111/jofi.12365},
+  uso       = {L20 c. 1; L10 c. 11},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://Www.Gwern.net/doc/economics/2016-mclean.pdf},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{harvey2016,
+  author    = {Harvey, Campbell R. and Liu, Yan and Zhu, Heqing},
+  title     = {\ldots{} and the Cross-Section of Expected Returns},
+  journal   = {The Review of Financial Studies},
+  volume    = {29},
+  number    = {1},
+  pages     = {5--68},
+  year      = {2016},
+  doi       = {10.1093/rfs/hhv059},
+  uso       = {L20 c. 1; L20 c. 6; L9 c. 7},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://sfs.org/?p=2432},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Algunas fuentes dan pp. 5-72; revisar contra el original.}
+}
+
+@article{hou2020,
+  author    = {Hou, Kewei and Xue, Chen and Zhang, Lu},
+  title     = {Replicating Anomalies},
+  journal   = {The Review of Financial Studies},
+  volume    = {33},
+  number    = {5},
+  pages     = {2019--2133},
+  year      = {2020},
+  doi       = {10.1093/rfs/hhy131},
+  uso       = {L20 c. 1; L10 c. 11},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/oup/rfinst/v33y2020i5p2019-2133..html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{cont2001,
+  author    = {Cont, Rama},
+  title     = {Empirical Properties of Asset Returns: Stylized Facts and Statistical Issues},
+  journal   = {Quantitative Finance},
+  volume    = {1},
+  number    = {2},
+  pages     = {223--236},
+  year      = {2001},
+  doi       = {10.1080/713665670},
+  uso       = {L14 c. 1; L17 c. 8},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/taf/quantf/v1y2001i2p223-236.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{shleifer1997,
+  author    = {Shleifer, Andrei and Vishny, Robert W.},
+  title     = {The Limits of Arbitrage},
+  journal   = {The Journal of Finance},
+  volume    = {52},
+  number    = {1},
+  pages     = {35--55},
+  year      = {1997},
+  uso       = {L10 c. 12},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://shleifer.scholars.harvard.edu/publications/limits-arbitrage},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{kyle1985,
+  author    = {Kyle, Albert S.},
+  title     = {Continuous Auctions and Insider Trading},
+  journal   = {Econometrica},
+  volume    = {53},
+  number    = {6},
+  pages     = {1315--1335},
+  year      = {1985},
+  uso       = {L20 c. 9},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://econometricsociety.org/publications/econometrica/1985/11/01/continuous-auctions-and-insider-trading},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {JSTOR da pp. 1315-1335; la Econometric Society, pp. 1315-1336.}
+}
+
+@article{glosten1985,
+  author    = {Glosten, Lawrence R. and Milgrom, Paul R.},
+  title     = {Bid, Ask and Transaction Prices in a Specialist Market with Heterogeneously Informed Traders},
+  journal   = {Journal of Financial Economics},
+  volume    = {14},
+  number    = {1},
+  pages     = {71--100},
+  year      = {1985},
+  uso       = {L20 c. 9},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://business.columbia.edu/faculty/people/lawrence-glosten},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{almgren2000,
+  author    = {Almgren, Robert and Chriss, Neil},
+  title     = {Optimal Execution of Portfolio Transactions},
+  journal   = {Journal of Risk},
+  volume    = {3},
+  number    = {2},
+  pages     = {5--39},
+  year      = {2000},
+  doi       = {10.21314/JOR.2001.041},
+  uso       = {L20 c. 10},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www.risk.net/journal-risk/2161150/optimal-execution-portfolio-transactions},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Número fechado en invierno 2000/2001 (el DOI indica 2001); páginas no confirmadas.}
+}
+
+@article{amihud2002,
+  author    = {Amihud, Yakov},
+  title     = {Illiquidity and Stock Returns: Cross-Section and Time-Series Effects},
+  journal   = {Journal of Financial Markets},
+  volume    = {5},
+  number    = {1},
+  pages     = {31--56},
+  year      = {2002},
+  uso       = {L20 c. 9},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.casact.org/abstract/illiquidity-and-stock-returns-cross-section-and-time-series-effects},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{bailey2014,
+  author    = {Bailey, David H. and L{\'o}pez de Prado, Marcos},
+  title     = {The Deflated {Sharpe} Ratio: Correcting for Selection Bias, Backtest Overfitting and Non-Normality},
+  journal   = {The Journal of Portfolio Management},
+  volume    = {40},
+  number    = {5},
+  pages     = {94--107},
+  year      = {2014},
+  doi       = {10.3905/jpm.2014.40.5.094},
+  uso       = {L20 c. 6; L23},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://papers.ssrn.com/abstract=2460551},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{bailey2017,
+  author    = {Bailey, David H. and Borwein, Jonathan M. and L{\'o}pez de Prado, Marcos and Zhu, Qiji Jim},
+  title     = {The Probability of Backtest Overfitting},
+  journal   = {Journal of Computational Finance},
+  volume    = {20},
+  number    = {4},
+  pages     = {39--69},
+  year      = {2017},
+  doi       = {10.21314/JCF.2016.322},
+  uso       = {L20 c. 6; L23},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://escholarship.org/content/qt4w1110bb/qt4w1110bb.pdf},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Volumen, número, año y DOI confirmados; páginas no confirmadas.}
+}
+
+@article{gu2020,
+  author    = {Gu, Shihao and Kelly, Bryan and Xiu, Dacheng},
+  title     = {Empirical Asset Pricing via Machine Learning},
+  journal   = {The Review of Financial Studies},
+  volume    = {33},
+  number    = {5},
+  pages     = {2223--2273},
+  year      = {2020},
+  doi       = {10.1093/rfs/hhaa009},
+  uso       = {L21 c. 12; L23 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://nber.org/papers/w25398},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{demiguel2009,
+  author    = {DeMiguel, Victor and Garlappi, Lorenzo and Uppal, Raman},
+  title     = {Optimal Versus Naive Diversification: How Inefficient Is the 1/{N} Portfolio Strategy?},
+  journal   = {The Review of Financial Studies},
+  volume    = {22},
+  number    = {5},
+  pages     = {1915--1953},
+  year      = {2009},
+  uso       = {L17 c. 1; L17 c. 2},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/oup/rfinst/v22y2009i5p1915-1953.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{jagannathan2003,
+  author    = {Jagannathan, Ravi and Ma, Tongshu},
+  title     = {Risk Reduction in Large Portfolios: Why Imposing the Wrong Constraints Helps},
+  journal   = {The Journal of Finance},
+  volume    = {58},
+  number    = {4},
+  pages     = {1651--1684},
+  year      = {2003},
+  uso       = {L17 c. 2},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://nber.org/papers/w8922},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Fuentes discrepan entre pp. 1651-1683 y 1651-1684. Existe una nota de corrección: Jagannathan, Ma y Zhang, Journal of Finance 74(5), 2019.}
+}
+
+@article{black1992,
+  author    = {Black, Fischer and Litterman, Robert},
+  title     = {Global Portfolio Optimization},
+  journal   = {Financial Analysts Journal},
+  volume    = {48},
+  number    = {5},
+  pages     = {28--43},
+  year      = {1992},
+  doi       = {10.2469/faj.v48.n5.28},
+  uso       = {L17 c. 3; L8 c. 9; L9 c. 11},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://people.duke.edu/~charvey/Teaching/BA453_2006/Black_Litterman_Global_Portfolio_Optimization_1992.pdf},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{artzner1999,
+  author    = {Artzner, Philippe and Delbaen, Freddy and Eber, Jean-Marc and Heath, David},
+  title     = {Coherent Measures of Risk},
+  journal   = {Mathematical Finance},
+  volume    = {9},
+  number    = {3},
+  pages     = {203--228},
+  year      = {1999},
+  doi       = {10.1111/1467-9965.00068},
+  uso       = {L17 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/bla/mathfi/v9y1999i3p203-228.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{rockafellar2000,
+  author    = {Rockafellar, R. Tyrrell and Uryasev, Stanislav},
+  title     = {Optimization of Conditional Value-at-Risk},
+  journal   = {Journal of Risk},
+  volume    = {2},
+  number    = {3},
+  pages     = {21--41},
+  year      = {2000},
+  uso       = {L17 c. 6; L17 c. 7; L12 c. 7},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://risk.net/journal-risk/2161159/optimization-conditional-value-risk},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Algunas fuentes dan pp. 21-42 y número 1; revisar contra el original.}
+}
+
+@article{kupiec1995,
+  author    = {Kupiec, Paul H.},
+  title     = {Techniques for Verifying the Accuracy of Risk Measurement Models},
+  journal   = {The Journal of Derivatives},
+  volume    = {3},
+  number    = {2},
+  pages     = {73--84},
+  year      = {1995},
+  uso       = {L17 c. 10},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://fedinprint.org/item/fedgfe/34596/original},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Versión de trabajo: FEDS 95-24, Junta de la Reserva Federal. Datos de la revista solo por citas secundarias; el título aparece también como "... Risk Management Models".}
+}
+
+@article{christoffersen1998,
+  author    = {Christoffersen, Peter F.},
+  title     = {Evaluating Interval Forecasts},
+  journal   = {International Economic Review},
+  volume    = {39},
+  number    = {4},
+  pages     = {841--862},
+  year      = {1998},
+  uso       = {L17 c. 10},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/ier/iecrev/v39y1998i4p841-62.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{engle1982,
+  author    = {Engle, Robert F.},
+  title     = {Autoregressive Conditional Heteroscedasticity with Estimates of the Variance of {United Kingdom} Inflation},
+  journal   = {Econometrica},
+  volume    = {50},
+  number    = {4},
+  pages     = {987--1007},
+  year      = {1982},
+  doi       = {10.2307/1912773},
+  uso       = {L14 c. 8; L23 c. 4},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.econometricsociety.org/publications/econometrica/1982/07/01/autoregressive-conditional-heteroscedasticity-estimates},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{bollerslev1986,
+  author    = {Bollerslev, Tim},
+  title     = {Generalized Autoregressive Conditional Heteroskedasticity},
+  journal   = {Journal of Econometrics},
+  volume    = {31},
+  number    = {3},
+  pages     = {307--327},
+  year      = {1986},
+  doi       = {10.1016/0304-4076(86)90063-1},
+  uso       = {L14 c. 8; L23 c. 4},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://scholars.duke.edu/publication/1227936},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{gibbons1989,
+  author    = {Gibbons, Michael R. and Ross, Stephen A. and Shanken, Jay},
+  title     = {A Test of the Efficiency of a Given Portfolio},
+  journal   = {Econometrica},
+  volume    = {57},
+  number    = {5},
+  pages     = {1121--1152},
+  year      = {1989},
+  uso       = {L14 c. 14; L23 c. 2},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/ecm/emetrp/v57y1989i5p1121-52.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{shanken1992,
+  author    = {Shanken, Jay},
+  title     = {On the Estimation of Beta-Pricing Models},
+  journal   = {The Review of Financial Studies},
+  volume    = {5},
+  number    = {1},
+  pages     = {1--33},
+  year      = {1992},
+  doi       = {10.1093/rfs/5.1.1},
+  uso       = {L14 c. 12},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/oup/rfinst/v5y1992i1p1-33.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+% ---------------------------------------------------------------------------
+% Fuentes originales de modelos, métodos y resultados empíricos
+% ---------------------------------------------------------------------------
+
+@incollection{follmer1981,
+  author    = {F{\"o}llmer, Hans},
+  title     = {Calcul d'It{\^o} sans probabilit{\'e}s},
+  booktitle = {S{\'e}minaire de Probabilit{\'e}s XV, Lecture Notes in Mathematics 850},
+  pages     = {143--150},
+  year      = {1981},
+  uso       = {L11 c. 10; L18 c. 6},
+  nivel     = {investigacion},
+  verificacion = {parcial},
+  fuente_verificacion = {https://numdam.org/item/SPS_1981__15__143_0/},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Volumen, año y páginas confirmados en Numdam; el número 850 de la serie LNM no fue confirmado.}
+}
+
+@article{leland1985,
+  author    = {Leland, Hayne E.},
+  title     = {Option Pricing and Replication with Transactions Costs},
+  journal   = {The Journal of Finance},
+  volume    = {40},
+  number    = {5},
+  pages     = {1283--1301},
+  year      = {1985},
+  uso       = {L19 c. 5},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org:443/p/fam/rpseri/rp8.html},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Un trabajo posterior (edoc.hu-berlin.de/18452/8956) señala un error en el teorema principal; la obra presenta el ajuste de Leland como aproximación (L19 c. 5).}
+}
+
+@article{hull1990,
+  author    = {Hull, John and White, Alan},
+  title     = {Pricing Interest-Rate-Derivative Securities},
+  journal   = {The Review of Financial Studies},
+  volume    = {3},
+  number    = {4},
+  pages     = {573--592},
+  year      = {1990},
+  doi       = {10.1093/rfs/3.4.573},
+  uso       = {L22 c. 3; L22 c. 4},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://cd-www.rotman.utoronto.ca/FacultyAndResearch/Faculty/FacultyBios/Hull},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{ho1986,
+  author    = {Ho, Thomas S. Y. and Lee, Sang-Bin},
+  title     = {Term Structure Movements and Pricing Interest Rate Contingent Claims},
+  journal   = {The Journal of Finance},
+  volume    = {41},
+  number    = {5},
+  pages     = {1011--1029},
+  year      = {1986},
+  uso       = {L22 c. 4},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://en.wikipedia.org/wiki/Ho%E2%80%93Lee_model},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Revista, volumen y año confirmados; número y páginas no confirmados.}
+}
+
+@article{hagan2002,
+  author    = {Hagan, Patrick S. and Kumar, Deep and Lesniewski, Andrew S. and Woodward, Diana E.},
+  title     = {Managing Smile Risk},
+  journal   = {Wilmott Magazine},
+  number    = {July},
+  pages     = {84--108},
+  year      = {2002},
+  uso       = {L19 c. 11},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://wilmott.com/?p=3482},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Autores, revista y fecha confirmados; páginas no confirmadas.}
+}
+
+@article{redington1952,
+  author    = {Redington, Frank M.},
+  title     = {Review of the Principles of Life-Office Valuations},
+  journal   = {Journal of the Institute of Actuaries},
+  volume    = {78},
+  number    = {3},
+  pages     = {286--340},
+  year      = {1952},
+  uso       = {L5 c. 9},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.actuaries.org.uk/system/files/documents/pdf/0286-0340.pdf},
+  fecha_verificacion = {2026-10-16}
+}
+
+@book{macaulay1938,
+  author    = {Macaulay, Frederick R.},
+  title     = {Some Theoretical Problems Suggested by the Movements of Interest Rates, Bond Yields and Stock Prices in the {United States} since 1856},
+  publisher = {National Bureau of Economic Research, New York},
+  year      = {1938},
+  uso       = {L5 c. 9},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.nber.org/books-and-chapters/some-theoretical-problems-suggested-movements-interest-rates-bond-yields-and-stock-prices-united},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Texto completo disponible en el sitio del NBER.}
+}
+
+@article{nelson1987,
+  author    = {Nelson, Charles R. and Siegel, Andrew F.},
+  title     = {Parsimonious Modeling of Yield Curves},
+  journal   = {The Journal of Business},
+  volume    = {60},
+  number    = {4},
+  pages     = {473--489},
+  year      = {1987},
+  uso       = {L5 c. 10; L12 c. 8; L14 c. 15; L22 c. 2},
+  nivel     = {intermedia},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www.nber.org/papers/w1594},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Volumen, páginas y año confirmados; el número aparece como 3 o 4 según la fuente.}
+}
+
+@article{markowitz1952,
+  author    = {Markowitz, Harry},
+  title     = {Portfolio Selection},
+  journal   = {The Journal of Finance},
+  volume    = {7},
+  number    = {1},
+  pages     = {77--91},
+  year      = {1952},
+  uso       = {L10 c. 6; L7 c. 11; L17 c. 2},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://econpapers.repec.org/RAS/pma73.htm},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{sharpe1964,
+  author    = {Sharpe, William F.},
+  title     = {Capital Asset Prices: A Theory of Market Equilibrium under Conditions of Risk},
+  journal   = {The Journal of Finance},
+  volume    = {19},
+  number    = {3},
+  pages     = {425--442},
+  year      = {1964},
+  uso       = {L10 c. 7},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://eis.hu.edu.jo/acuploads/11196/CAPM-1964.pdf},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{benjamini1995,
+  author    = {Benjamini, Yoav and Hochberg, Yosef},
+  title     = {Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing},
+  journal   = {Journal of the Royal Statistical Society: Series B (Methodological)},
+  volume    = {57},
+  number    = {1},
+  pages     = {289--300},
+  year      = {1995},
+  doi       = {10.1111/j.2517-6161.1995.tb02031.x},
+  uso       = {L9 c. 7; L20 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://cris.tau.ac.il/en/publications/controlling-the-false-discovery-rate-a-practical-and-powerful-app-2/},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{holm1979,
+  author    = {Holm, Sture},
+  title     = {A Simple Sequentially Rejective Multiple Test Procedure},
+  journal   = {Scandinavian Journal of Statistics},
+  volume    = {6},
+  number    = {2},
+  pages     = {65--70},
+  year      = {1979},
+  uso       = {L9 c. 7},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://data.gesis.org/gesiskg/resource/zis-Holm1979A},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{benjamini2001,
+  author    = {Benjamini, Yoav and Yekutieli, Daniel},
+  title     = {The Control of the False Discovery Rate in Multiple Testing under Dependency},
+  journal   = {The Annals of Statistics},
+  volume    = {29},
+  number    = {4},
+  pages     = {1165--1188},
+  year      = {2001},
+  doi       = {10.1214/aos/1013699998},
+  uso       = {L9 c. 7; L20 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org/euclid.aos/1013699998},
+  fecha_verificacion = {2026-10-16}
+}
+
+@inproceedings{james1961,
+  author    = {James, W. and Stein, Charles},
+  title     = {Estimation with Quadratic Loss},
+  booktitle = {Proceedings of the Fourth Berkeley Symposium on Mathematical Statistics and Probability, Vol. 1},
+  volume    = {1},
+  pages     = {361--379},
+  year      = {1961},
+  uso       = {L9 c. 14; L17 c. 2},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org/download/pdf_1/euclid.bsmsp/1200512173},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Editado por J. Neyman; University of California Press.}
+}
+
+@article{efron1979,
+  author    = {Efron, Bradley},
+  title     = {Bootstrap Methods: Another Look at the Jackknife},
+  journal   = {The Annals of Statistics},
+  volume    = {7},
+  number    = {1},
+  pages     = {1--26},
+  year      = {1979},
+  doi       = {10.1214/aos/1176344552},
+  uso       = {L9 c. 10; L14 c. 7},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org:443/euclid.aos/1176344552},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{tibshirani1996,
+  author    = {Tibshirani, Robert},
+  title     = {Regression Shrinkage and Selection via the Lasso},
+  journal   = {Journal of the Royal Statistical Society: Series B (Methodological)},
+  volume    = {58},
+  number    = {1},
+  pages     = {267--288},
+  year      = {1996},
+  doi       = {10.1111/j.2517-6161.1996.tb02080.x},
+  uso       = {L21 c. 2; L12 c. 7},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://sites.stat.washington.edu/courses/stat527/s13/readings/j_royal_stat_soc_b1996.pdf},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{hoerl1970,
+  author    = {Hoerl, Arthur E. and Kennard, Robert W.},
+  title     = {Ridge Regression: Biased Estimation for Nonorthogonal Problems},
+  journal   = {Technometrics},
+  volume    = {12},
+  number    = {1},
+  pages     = {55--67},
+  year      = {1970},
+  uso       = {L21 c. 2},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.stat.cmu.edu/technometrics/70-79/VOL-12-01/v1201055.pdf},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{breiman2001,
+  author    = {Breiman, Leo},
+  title     = {Random Forests},
+  journal   = {Machine Learning},
+  volume    = {45},
+  number    = {1},
+  pages     = {5--32},
+  year      = {2001},
+  doi       = {10.1023/A:1010933404324},
+  uso       = {L21 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://mlanthology.org/mlj/2001/breiman2001mlj-random},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{friedman2001,
+  author    = {Friedman, Jerome H.},
+  title     = {Greedy Function Approximation: A Gradient Boosting Machine},
+  journal   = {The Annals of Statistics},
+  volume    = {29},
+  number    = {5},
+  pages     = {1189--1232},
+  year      = {2001},
+  doi       = {10.1214/aos/1013203451},
+  uso       = {L21 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org/euclid.aos/1013203451},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{freund1997,
+  author    = {Freund, Yoav and Schapire, Robert E.},
+  title     = {A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting},
+  journal   = {Journal of Computer and System Sciences},
+  volume    = {55},
+  number    = {1},
+  pages     = {119--139},
+  year      = {1997},
+  doi       = {10.1006/jcss.1997.1504},
+  uso       = {L21 c. 6},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://collaborate.princeton.edu/en/publications/a-decision-theoretic-generalization-of-on-line-learning-and-an-ap/},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{metropolis1953,
+  author    = {Metropolis, Nicholas and Rosenbluth, Arianna W. and Rosenbluth, Marshall N. and Teller, Augusta H. and Teller, Edward},
+  title     = {Equation of State Calculations by Fast Computing Machines},
+  journal   = {The Journal of Chemical Physics},
+  volume    = {21},
+  number    = {6},
+  pages     = {1087--1092},
+  year      = {1953},
+  doi       = {10.1063/1.1699114},
+  uso       = {L21 c. 11; L8 c. 14},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.aps.org/apsnews/2022/03/rosenbluth-metropolis-monte-carlo-algorithm},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{hastings1970,
+  author    = {Hastings, W. K.},
+  title     = {Monte Carlo Sampling Methods Using {Markov} Chains and Their Applications},
+  journal   = {Biometrika},
+  volume    = {57},
+  number    = {1},
+  pages     = {97--109},
+  year      = {1970},
+  doi       = {10.1093/biomet/57.1.97},
+  uso       = {L21 c. 11},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://academic.oup.com/biomet/issue/57/1},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{kalman1960,
+  author    = {Kalman, Rudolph E.},
+  title     = {A New Approach to Linear Filtering and Prediction Problems},
+  journal   = {Journal of Basic Engineering (Transactions of the ASME, Series D)},
+  volume    = {82},
+  number    = {1},
+  pages     = {35--45},
+  year      = {1960},
+  uso       = {L14 c. 15},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.cs.unc.edu/~welch/kalman/kalmanPaper.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{rauch1965,
+  author    = {Rauch, H. E. and Tung, F. and Striebel, C. T.},
+  title     = {Maximum Likelihood Estimates of Linear Dynamic Systems},
+  journal   = {AIAA Journal},
+  volume    = {3},
+  number    = {8},
+  pages     = {1445--1450},
+  year      = {1965},
+  doi       = {10.2514/3.3166},
+  uso       = {L14 c. 15},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://scinapse.io/papers/2094227853},
+  fecha_verificacion = {2026-10-16}
+}
+
+% ---------------------------------------------------------------------------
+% Fuentes originales de modelos, métodos y resultados empíricos
+% ---------------------------------------------------------------------------
+
+@article{white1980,
+  author    = {White, Halbert},
+  title     = {A Heteroskedasticity-Consistent Covariance Matrix Estimator and a Direct Test for Heteroskedasticity},
+  journal   = {Econometrica},
+  volume    = {48},
+  number    = {4},
+  pages     = {817--838},
+  year      = {1980},
+  uso       = {L14 c. 2; L9 c. 9},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.econometricsociety.org/publications/econometrica/1980/05/01/heteroskedasticity-consistent-covariance-matrix-estimator-and},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{granger1969,
+  author    = {Granger, Clive W. J.},
+  title     = {Investigating Causal Relations by Econometric Models and Cross-Spectral Methods},
+  journal   = {Econometrica},
+  volume    = {37},
+  number    = {3},
+  pages     = {424--438},
+  year      = {1969},
+  uso       = {L14 c. 9},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.econometricsociety.org/publications/econometrica/1969/08/01/investigating-causal-relations-econometric-models-and-cross},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{sims1980,
+  author    = {Sims, Christopher A.},
+  title     = {Macroeconomics and Reality},
+  journal   = {Econometrica},
+  volume    = {48},
+  number    = {1},
+  pages     = {1--48},
+  year      = {1980},
+  uso       = {L14 c. 9},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.econometricsociety.org/publications/econometrica/1980/01/01/macroeconomics-and-reality},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{mackinlay1997,
+  author    = {MacKinlay, A. Craig},
+  title     = {Event Studies in Economics and Finance},
+  journal   = {Journal of Economic Literature},
+  volume    = {35},
+  number    = {1},
+  pages     = {13--39},
+  year      = {1997},
+  uso       = {L20 c. 4},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/aea/jeclit/v35y1997i1p13-39.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{hamilton1989,
+  author    = {Hamilton, James D.},
+  title     = {A New Approach to the Economic Analysis of Nonstationary Time Series and the Business Cycle},
+  journal   = {Econometrica},
+  volume    = {57},
+  number    = {2},
+  pages     = {357--384},
+  year      = {1989},
+  uso       = {L14 c. 11},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/ecm/emetrp/v57y1989i2p357-84.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{johansen1991,
+  author    = {Johansen, S{\o}ren},
+  title     = {Estimation and Hypothesis Testing of Cointegration Vectors in {Gaussian} Vector Autoregressive Models},
+  journal   = {Econometrica},
+  volume    = {59},
+  number    = {6},
+  pages     = {1551--1580},
+  year      = {1991},
+  uso       = {L14 c. 10},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/ecm/emetrp/v59y1991i6p1551-80.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{petersen2009,
+  author    = {Petersen, Mitchell A.},
+  title     = {Estimating Standard Errors in Finance Panel Data Sets: Comparing Approaches},
+  journal   = {The Review of Financial Studies},
+  volume    = {22},
+  number    = {1},
+  pages     = {435--480},
+  year      = {2009},
+  doi       = {10.1093/rfs/hhn053},
+  uso       = {L14 c. 12; L14 c. 2},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://academic.oup.com/rfs/article-abstract/22/1/435/1585940},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{li2000,
+  author    = {Li, David X.},
+  title     = {On Default Correlation: A Copula Function Approach},
+  journal   = {The Journal of Fixed Income},
+  volume    = {9},
+  number    = {4},
+  pages     = {43--54},
+  year      = {2000},
+  doi       = {10.3905/jfi.2000.319253},
+  uso       = {L22 c. 9},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.bibsonomy.org/bibtex/b3d157f1b5cc962df121f4a303c10d6c},
+  fecha_verificacion = {2026-10-16}
+}
+
+@incollection{black1972,
+  author    = {Black, Fischer and Jensen, Michael C. and Scholes, Myron},
+  title     = {The Capital Asset Pricing Model: Some Empirical Tests},
+  booktitle = {Studies in the Theory of Capital Markets (M. C. Jensen, ed.), Praeger, New York},
+  pages     = {79--121},
+  year      = {1972},
+  uso       = {L14 c. 14},
+  nivel     = {avanzada},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www.hbs.edu/faculty/Pages/item.aspx?num=9024},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Capítulo, libro, editor y año confirmados; páginas no confirmadas.}
+}
+
+@article{fama2010,
+  author    = {Fama, Eugene F. and French, Kenneth R.},
+  title     = {Luck versus Skill in the Cross-Section of Mutual Fund Returns},
+  journal   = {The Journal of Finance},
+  volume    = {65},
+  number    = {5},
+  pages     = {1915--1947},
+  year      = {2010},
+  uso       = {L20 c. 8},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org/a/bla/jfinan/v65y2010i5p1915-1947.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{barber1997,
+  author    = {Barber, Brad M. and Lyon, John D.},
+  title     = {Detecting Long-Run Abnormal Stock Returns: The Empirical Power and Specification of Test Statistics},
+  journal   = {Journal of Financial Economics},
+  volume    = {43},
+  number    = {3},
+  pages     = {341--372},
+  year      = {1997},
+  doi       = {10.1016/S0304-405X(96)00890-2},
+  uso       = {L20 c. 4},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://ideas.repec.org:443/a/eee/jfinec/v43y1997i3p341-372.html},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{pratt1964,
+  author    = {Pratt, John W.},
+  title     = {Risk Aversion in the Small and in the Large},
+  journal   = {Econometrica},
+  volume    = {32},
+  number    = {1--2},
+  pages     = {122--136},
+  year      = {1964},
+  uso       = {L10 c. 5},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.econometricsociety.org/publications/econometrica/1964/01/01/risk-aversion-small-and-large},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{bachelier1900,
+  author    = {Bachelier, Louis},
+  title     = {Th{\'e}orie de la sp{\'e}culation},
+  journal   = {Annales scientifiques de l'{\'E}cole Normale Sup{\'e}rieure},
+  volume    = {17},
+  pages     = {21--86},
+  year      = {1900},
+  doi       = {10.24033/asens.476},
+  uso       = {L18 c. 3},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://numdam.org/item/ASENS_1900_3_17__21_0/},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Serie 3, tomo 17. Traducciones al inglés en Cootner (1964) y en Davis y Etheridge (2006).}
+}
+
+@article{gnedenko1943,
+  author    = {Gnedenko, Boris V.},
+  title     = {Sur la distribution limite du terme maximum d'une s{\'e}rie al{\'e}atoire},
+  journal   = {Annals of Mathematics},
+  volume    = {44},
+  number    = {3},
+  pages     = {423--453},
+  year      = {1943},
+  uso       = {L17 c. 8},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://proofwiki.org/wiki/Mathematician:Boris_Vladimirovich_Gnedenko},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{pickands1975,
+  author    = {Pickands, James, III},
+  title     = {Statistical Inference Using Extreme Order Statistics},
+  journal   = {The Annals of Statistics},
+  volume    = {3},
+  number    = {1},
+  pages     = {119--131},
+  year      = {1975},
+  doi       = {10.1214/aos/1176343003},
+  uso       = {L17 c. 8},
+  nivel     = {avanzada},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.projecteuclid.org/euclid.aos/1176343003},
+  fecha_verificacion = {2026-10-16}
+}
+
+@article{balkema1974,
+  author    = {Balkema, A. A. and de Haan, Laurens},
+  title     = {Residual Life Time at Great Age},
+  journal   = {The Annals of Probability},
+  volume    = {2},
+  number    = {5},
+  pages     = {792--804},
+  year      = {1974},
+  doi       = {10.1214/aop/1176996548},
+  uso       = {L17 c. 8},
+  nivel     = {investigacion},
+  verificacion = {verificada},
+  fuente_verificacion = {https://projecteuclid.org/euclid.aop/1176996548},
+  fecha_verificacion = {2026-10-16}
+}
+
+% ---------------------------------------------------------------------------
+% Convenciones de mercado y hechos institucionales
+% ---------------------------------------------------------------------------
+
+@misc{isda2006,
+  author    = {{International Swaps and Derivatives Association}},
+  title     = {2006 {ISDA} Definitions},
+  howpublished = {International Swaps and Derivatives Association, New York},
+  year      = {2006},
+  uso       = {L5 c. 2; L22 c. 1},
+  nivel     = {intermedia},
+  verificacion = {parcial},
+  fuente_verificacion = {https://strata.opengamma.io/day_counts/},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Texto oficial no consultado (acceso restringido). La sección 4.16 (fracciones de conteo de días: Actual/365 Fixed, Actual/360, 30/360, Actual/Actual ISDA) se confirma solo mediante documentación técnica secundaria.}
+}
+
+@misc{fca2021,
+  author    = {{Financial Conduct Authority}},
+  title     = {Announcements on the End of {LIBOR}},
+  howpublished = {Comunicado de prensa, 5 de marzo de 2021; resumen del Banco de Inglaterra},
+  year      = {2021},
+  uso       = {L22 c. 1},
+  nivel     = {intermedia},
+  verificacion = {verificada},
+  fuente_verificacion = {https://www.bankofengland.co.uk/news/2021/march/announcements-on-the-end-of-libor},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Fechas de cese o pérdida de representatividad de las 35 tasas LIBOR; para USD a 1, 3 y 6 meses, después del 30 de junio de 2023.}
+}
+
+@misc{arrc2017,
+  author    = {{Alternative Reference Rates Committee}},
+  title     = {Selección de {SOFR} como tasa alternativa recomendada a la {LIBOR} en dólares},
+  howpublished = {Federal Reserve Bank of New York},
+  year      = {2017},
+  uso       = {L22 c. 1},
+  nivel     = {intermedia},
+  verificacion = {parcial},
+  fuente_verificacion = {https://www.newyorkfed.org/medialibrary/Microsites/arrc/files/2020/ARRC_Factsheet_1.pdf},
+  fecha_verificacion = {2026-10-16},
+  nota_verificacion = {Junio de 2017; confirmado por la hoja informativa del ARRC y por fuentes secundarias; no se consultó el comunicado original.}
+}

@@ -7,7 +7,7 @@
 - **Serie:** III. Teoría financiera y modelización.
 - **Requisitos:** L5, L6, L7, L8, L9.
 - **Capítulos:** 13, más un apéndice.
-- **Extensión estimada:** 370–450 páginas.
+- **Extensión estimada:** 374–462 páginas.
 
 **Propósito.** Este libro presenta los mercados y los instrumentos financieros y desarrolla la teoría de la valoración en tiempo discreto: rendimientos, utilidad esperada, teoría de carteras, CAPM, arbitraje y precios de estado, factor de descuento estocástico y modelos de factores. Cada modelo se presenta con sus hipótesis, su derivación completa y la evidencia empírica disponible, que se distingue explícitamente de los resultados matemáticos. Los capítulos finales tratan la eficiencia de mercado, las fricciones y la información contable, como puente hacia la investigación empírica de la Serie V.
 

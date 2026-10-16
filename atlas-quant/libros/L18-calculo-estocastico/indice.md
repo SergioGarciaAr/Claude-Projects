@@ -7,7 +7,7 @@
 - **Serie:** IV. Matemática avanzada y tiempo continuo.
 - **Requisitos:** L7, L11, L12, L15, L16.
 - **Capítulos:** 11, más un apéndice.
-- **Extensión estimada:** 370–450 páginas.
+- **Extensión estimada:** 336–412 páginas.
 
 **Propósito.** Este libro desarrolla el cálculo estocástico con demostraciones, sobre la base de la teoría de la medida de L16, el análisis de L11 y las ecuaciones diferenciales de L15. Estudia cadenas de Markov, procesos de Poisson y de saltos, movimiento browniano, martingalas en tiempo continuo, la integral de Itô, la fórmula de Itô, las ecuaciones diferenciales estocásticas, su relación con las ecuaciones en derivadas parciales, el teorema de Girsanov, la representación de martingalas y la simulación. Cada resultado que se admite tiene justificación de alcance y referencia; los centrales (isometría, fórmula de Itô, existencia y unicidad bajo Lipschitz, Feynman-Kac, Girsanov) se demuestran.
 

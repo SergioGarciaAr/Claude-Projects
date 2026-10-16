@@ -7,7 +7,7 @@
 - **Serie:** II. Matemática para las finanzas.
 - **Requisitos:** L3, L4, L6, L7.
 - **Capítulos:** 14, más un apéndice.
-- **Extensión estimada:** 400–480 páginas.
+- **Extensión estimada:** 424–518 páginas.
 
 **Propósito.** Este libro desarrolla la teoría de la probabilidad sin teoría de la medida, con el rigor que permiten el cálculo y el álgebra lineal: espacios de probabilidad, variables y vectores aleatorios, esperanza, distribuciones fundamentales, esperanza condicional elemental, leyes de los grandes números, teorema central del límite para arreglos triangulares, colas pesadas, simulación y cadenas de Markov finitas. Señala con precisión qué resultados requieren la teoría de la medida y dónde se demuestran (L16). Las aplicaciones financieras incluyen la varianza de una cartera, la diversificación, la actualización bayesiana, las matrices de transición de calificaciones y el valor esperado de pagos de opciones.
 

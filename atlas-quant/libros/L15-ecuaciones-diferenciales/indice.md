@@ -7,7 +7,7 @@
 - **Serie:** IV. Matemática avanzada y tiempo continuo.
 - **Requisitos:** L6, L7, L11, L12.
 - **Capítulos:** 9, más un apéndice.
-- **Extensión estimada:** 260–320 páginas.
+- **Extensión estimada:** 268–332 páginas.
 
 **Propósito.** Este libro desarrolla las ecuaciones diferenciales que necesita la valoración en tiempo continuo: existencia y unicidad de soluciones de ecuaciones ordinarias, sistemas lineales y exponencial de matrices, ecuaciones de Riccati, estabilidad, métodos numéricos, ecuación del calor, análisis de Fourier, principio del máximo y diferencias finitas para ecuaciones parabólicas. La ecuación de Black-Scholes aparece como objeto analítico dado, cuya derivación financiera se hace en L19.
 

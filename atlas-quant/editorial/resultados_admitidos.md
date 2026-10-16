@@ -2,7 +2,7 @@
 
 Versión 1.3 · Entrega 1d · 2026-10-16
 
-Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cuya demostración completa está fuera del alcance de la colección. Las reglas están en `LIBRO_DE_ESTILO.md`, sección 4. Todas las ubicaciones están confirmadas por los índices detallados de las entregas 1b, 1c y 1d. Las referencias externas se fijarán y verificarán en la entrega 1e.
+Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cuya demostración completa está fuera del alcance de la colección. Las reglas están en `LIBRO_DE_ESTILO.md`, sección 4. Todas las ubicaciones están confirmadas por los índices detallados de las entregas 1b, 1c y 1d. Las referencias externas se fijaron y verificaron en la entrega 1e: cada resultado de la última fila tiene al menos una entrada en `bibliografia/atlas.bib` cuyo campo `uso` lo cita (comprobación automática de `herramientas/bib_a_md.py`).
 
 **Estados:** *previsto* (identificado en el diseño, ubicación por confirmar); *confirmado* (ubicaciones fijadas en los índices detallados); *cerrado en el diseño* (ya no es un resultado admitido porque el diseño incluye su demostración antes de usarlo); *en uso* (aparece en un capítulo redactado); *cerrado* (la demostración está redactada y verificada).
 
@@ -84,4 +84,4 @@ Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cu
 | Demostrados más adelante en la obra, en un lugar identificado | RA-02 a RA-06, RA-08 a RA-10, RA-22, RA-24, RA-26 |
 | Admitidos con referencia externa, total o parcialmente (con la versión accesible demostrada cuando existe) | RA-07, RA-11 a RA-21, RA-23, RA-25, RA-27 a RA-60 |
 
-Las referencias externas se fijarán y verificarán en la entrega 1e.
+Las referencias externas se fijaron y verificaron en la entrega 1e: cada resultado de la última fila tiene al menos una entrada en `bibliografia/atlas.bib` cuyo campo `uso` lo cita (comprobación automática de `herramientas/bib_a_md.py`).

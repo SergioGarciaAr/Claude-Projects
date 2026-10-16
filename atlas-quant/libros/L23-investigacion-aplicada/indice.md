@@ -8,7 +8,7 @@
 - **Requisitos:** L9, L14, L17, L20, L21.
 - **Uso como aplicación:** L19 (capítulo 5).
 - **Capítulos:** 9, más un apéndice.
-- **Extensión estimada:** 250–310 páginas.
+- **Extensión estimada:** 238–302 páginas.
 
 **Propósito.** Este libro integra la colección mediante estudios de caso completos y conduce al lector hasta el diseño y la defensa de una investigación propia. Cada caso parte de una pregunta publicada, reconstruye datos y métodos, replica los resultados principales, prueba su robustez y discute sus limitaciones. La elección final de los artículos y de las fuentes de datos depende de la verificación de su disponibilidad y licencia en la entrega 1e. El proyecto del lector no forma parte del libro: el libro lo prepara.
 

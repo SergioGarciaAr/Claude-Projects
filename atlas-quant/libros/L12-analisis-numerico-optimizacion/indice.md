@@ -8,7 +8,7 @@
 - **Requisitos:** L3, L4, L6, L7, L8.
 - **Uso como aplicación:** L5, L10.
 - **Capítulos:** 12, más un apéndice.
-- **Extensión estimada:** 340–420 páginas.
+- **Extensión estimada:** 350–432 páginas.
 
 **Propósito.** Este libro estudia los métodos numéricos que sostienen la práctica cuantitativa: ecuaciones no lineales, sistemas lineales, interpolación, cuadratura, optimización sin restricciones y convexa, calibración, Monte Carlo con reducción de varianza, cuasi-Monte Carlo, programación dinámica y transformada rápida de Fourier. Cada método se presenta con su derivación, su análisis de convergencia o de error, sus condiciones de falla y una implementación verificada. Los métodos numéricos para ecuaciones diferenciales se estudian en L15.
 

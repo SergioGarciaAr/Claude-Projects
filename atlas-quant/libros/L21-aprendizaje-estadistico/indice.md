@@ -7,7 +7,7 @@
 - **Serie:** V. Investigación.
 - **Requisitos:** L6, L7, L9, L12, L14, L20.
 - **Capítulos:** 13, más un apéndice.
-- **Extensión estimada:** 360–440 páginas.
+- **Extensión estimada:** 346–434 páginas.
 
 **Propósito.** Este libro presenta el aprendizaje estadístico como continuación de la inferencia de L9 y de la metodología de L20, no como un conjunto de herramientas autónomas. Desarrolla la teoría de la generalización, la regularización, la validación con datos dependientes, la clasificación y su calibración, los árboles y ensambles, los métodos de núcleo, el aprendizaje no supervisado, los fundamentos de las redes neuronales, la interpretabilidad y los métodos bayesianos con MCMC. Las aplicaciones financieras se evalúan con escepticismo: relación señal-ruido baja, no estacionariedad, costos de transacción y riesgo de sobreajuste.
 

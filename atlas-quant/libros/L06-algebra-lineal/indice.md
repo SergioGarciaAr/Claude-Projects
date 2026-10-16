@@ -8,7 +8,7 @@
 - **Requisitos:** L2, L3 (y L1 a través de L2).
 - **Uso como aplicación:** L5 (capítulos 11 y 13).
 - **Capítulos:** 13, más un apéndice.
-- **Extensión estimada:** 370–450 páginas.
+- **Extensión estimada:** 382–470 páginas.
 
 **Propósito.** Este libro desarrolla el álgebra lineal necesaria para la estadística multivariante, la optimización, la teoría de carteras, las ecuaciones diferenciales y el análisis numérico. Combina la teoría abstracta (espacios vectoriales, transformaciones lineales, teorema espectral) con el cálculo matricial efectivo (eliminación, factorizaciones LU, QR, Cholesky y en valores singulares) y su comportamiento numérico. Las aplicaciones financieras se limitan a lo que no requiere probabilidad: replicación de pagos, precios de estado como funcional lineal, carteras como vectores y la matriz de covarianza muestral como objeto descriptivo.
 

@@ -7,7 +7,7 @@
 - **Serie:** III. Teoría financiera y modelización.
 - **Requisitos:** L3, L5, L8, L10, L12.
 - **Capítulos:** 9, más un apéndice.
-- **Extensión estimada:** 260–320 páginas.
+- **Extensión estimada:** 256–320 páginas.
 
 **Propósito.** Este libro desarrolla la valoración de derivados por arbitraje sin cálculo estocástico. Comienza con contratos a plazo, futuros y swaps, que se valoran por replicación estática; sigue con las cotas de arbitraje y la paridad put-call; y construye el modelo binomial de uno y varios períodos, con replicación dinámica, medida neutral al riesgo, martingalas discretas y opciones americanas como problema de parada óptima. Demuestra la convergencia del modelo de Cox-Ross-Rubinstein a la fórmula de Black-Scholes mediante el teorema central del límite de L8. El tratamiento en tiempo continuo se deja para L19.
 

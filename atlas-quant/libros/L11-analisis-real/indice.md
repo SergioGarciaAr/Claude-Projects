@@ -7,7 +7,7 @@
 - **Serie:** III. Teoría financiera y modelización.
 - **Requisitos:** L4, L6, L7.
 - **Capítulos:** 10, más un apéndice.
-- **Extensión estimada:** 290–360 páginas.
+- **Extensión estimada:** 292–362 páginas.
 
 **Propósito.** Este libro proporciona el análisis riguroso que necesitan la probabilidad con teoría de la medida, las ecuaciones diferenciales y el cálculo estocástico. Construye los números reales, estudia espacios métricos, completitud y el teorema del punto fijo de Banach, la integral de Riemann-Stieltjes, la convergencia uniforme y los espacios normados y con producto interno. Termina con la variación cuadrática de funciones deterministas y la fórmula de cambio de variables de Föllmer, que anticipa la fórmula de Itô sin probabilidad.
 

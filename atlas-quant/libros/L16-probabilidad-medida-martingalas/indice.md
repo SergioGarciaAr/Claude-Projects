@@ -8,7 +8,7 @@
 - **Requisitos:** L8, L11.
 - **Uso como aplicación:** L10, L13.
 - **Capítulos:** 12, más un apéndice.
-- **Extensión estimada:** 340–420 páginas.
+- **Extensión estimada:** 354–436 páginas.
 
 **Propósito.** Este libro reconstruye la probabilidad sobre la teoría de la medida y cierra los resultados que L8 y L15 admitieron: existencia de espacios de probabilidad y de sucesiones independientes, esperanza de funciones generales, unicidad por la función característica, completitud de L² y cambio de variables en ℝⁿ. Desarrolla la integral de Lebesgue, los espacios L^p, el teorema de Fubini, los modos de convergencia, la ley fuerte de los grandes números, la convergencia en distribución con funciones características, la esperanza condicional respecto de σ-álgebras y la teoría de martingalas en tiempo discreto. Termina con el teorema fundamental de valoración en tiempo discreto, que conecta con L10 y L13 y prepara L18.
 

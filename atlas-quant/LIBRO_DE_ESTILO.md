@@ -242,6 +242,8 @@ Ningún capítulo se aprueba con hallazgos críticos abiertos.
 
 - [ ] La página de presentación declara prerrequisitos exactos y objetivos verificables, coherentes con el índice detallado del libro.
 - [ ] `herramientas/verificar_indices.py` no informa errores.
+- [ ] Toda referencia citada está en `bibliografia/atlas.bib` y `herramientas/bib_a_md.py` no informa claves duplicadas ni resultados admitidos sin referencia.
+- [ ] Los datos usados respetan `bibliografia/fuentes_de_datos.md` (fuente, licencia, fecha de consulta y código que regenera cada cifra).
 - [ ] Todo término y símbolo está definido en el capítulo o en sus prerrequisitos.
 - [ ] Los resultados admitidos están marcados, referenciados y registrados.
 - [ ] Cada teorema enuncia todas sus hipótesis; cada demostración está completa o declarada parcial.

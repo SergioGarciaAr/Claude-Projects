@@ -18,7 +18,7 @@ const FILTRO = join(RAIZ, "herramientas", "md_a_pdf.lua");
 const SALIDA = join(RAIZ, "pdf");
 const EXCLUIDOS = new Set(["herramientas", "pdf", ".git"]);
 // Documentos largos que llevan índice de contenidos al comienzo.
-const CON_INDICE = new Set(["PLAN_EDITORIAL.md", "LIBRO_DE_ESTILO.md", "NOTACION.md", "GLOSARIO.md"]);
+const CON_INDICE = new Set(["PLAN_EDITORIAL.md", "LIBRO_DE_ESTILO.md", "NOTACION.md", "GLOSARIO.md", "bibliografia/bibliografia.md", "editorial/auditoria_fase1.md"]);
 
 function buscarMarkdown(dir) {
   const encontrados = [];
