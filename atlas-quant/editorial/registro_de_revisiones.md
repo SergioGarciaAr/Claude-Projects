@@ -43,7 +43,7 @@ Auditoría del plan editorial previa a la Fase 1, realizada razonando sobre los 
 
 ## Revisión R-0002 · Ajustes al incorporar la auditoría en el plan escrito · 2026-10-15
 
-Al redactar `PLAN_EDITORIAL.md` (entrega 1a), la ubicación de algunos capítulos nuevos se fijó de forma distinta a la indicada en la propuesta aprobada. Ningún ajuste cambia el contenido aprobado; todos se someten a revisión junto con la entrega 1a.
+Al redactar `PLAN_EDITORIAL.md` (entrega 1a), la ubicación de algunos capítulos nuevos se fijó de forma distinta a la indicada en la propuesta aprobada. Ningún ajuste cambia el contenido aprobado. Aprobados por la dirección editorial el 2026-10-16.
 
 | ID | Ajuste | Motivo |
 |---|---|---|

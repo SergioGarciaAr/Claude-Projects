@@ -1,0 +1,58 @@
+/* Hoja de estilo para los PDF de trabajo de Atlas Quant.
+   Uso exclusivo con herramientas/generar_pdf.mjs. No es la composición final de los libros. */
+
+@page { size: A4; margin: 24mm 20mm 22mm 20mm; }
+
+:root {
+  --texto: #1a1a1a;
+  --tenue: #555;
+  --linea: #c8c8c8;
+  --fondo-tabla: #f3f3f3;
+  --acento: #1f3a5f;
+}
+
+html { font-size: 10.5pt; }
+body {
+  font-family: "Bitstream Charter", "FreeSerif", "DejaVu Serif", serif;
+  color: var(--texto);
+  background: #fff;
+  line-height: 1.45;
+  margin: 0;
+  hyphens: auto;
+  text-align: justify;
+}
+math { font-family: "FreeSerif", "DejaVu Serif", serif; }
+
+header#title-block-header { margin-bottom: 1.6em; border-bottom: 1.5px solid var(--acento); padding-bottom: .6em; }
+h1.title { font-size: 1.9em; color: var(--acento); margin: 0 0 .2em; text-align: left; }
+
+h1, h2, h3, h4 { font-family: "Bitstream Charter", "FreeSerif", serif; color: var(--acento); text-align: left; hyphens: none; break-after: avoid; }
+h1 { font-size: 1.45em; margin: 1.4em 0 .5em; border-bottom: .5px solid var(--linea); padding-bottom: .15em; }
+h2 { font-size: 1.2em; margin: 1.2em 0 .4em; }
+h3 { font-size: 1.05em; margin: 1em 0 .3em; }
+h4 { font-size: 1em; margin: .9em 0 .3em; font-style: italic; }
+
+p { margin: .45em 0; orphans: 3; widows: 3; }
+ul, ol { margin: .4em 0 .4em 1.4em; padding: 0; }
+li { margin: .15em 0; }
+li > p { margin: .15em 0; }
+blockquote { margin: .8em 1.5em; padding: .3em .9em; border-left: 3px solid var(--linea); color: #333; }
+hr { border: none; border-top: .5px solid var(--linea); margin: 1.2em 0; }
+a { color: var(--acento); text-decoration: none; }
+
+code { font-family: "DejaVu Sans Mono", "Liberation Mono", monospace; font-size: .86em; }
+pre { background: var(--fondo-tabla); border: .5px solid var(--linea); padding: .6em .8em; font-size: .92em; line-height: 1.35; white-space: pre-wrap; break-inside: avoid; text-align: left; }
+
+table { box-sizing: border-box; border-collapse: collapse; width: 100%; margin: .8em 0; font-size: .88em; line-height: 1.3; text-align: left; hyphens: auto; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th { background: var(--fondo-tabla); font-weight: bold; }
+th, td { border: .5px solid var(--linea); padding: .3em .45em; vertical-align: top; }
+
+nav#TOC { margin: 0 0 1.5em; padding: .6em 1em; border: .5px solid var(--linea); box-sizing: border-box; }
+nav#TOC > h2 { margin-top: .2em; font-size: 1.15em; }
+nav#TOC ul { list-style: none; margin-left: 1em; }
+nav#TOC > ul { margin-left: 0; }
+
+ul.task-list { list-style: none; margin-left: .4em; }
+input[type="checkbox"] { margin-right: .45em; }

@@ -1,6 +1,7 @@
 # Libro de estilo de Atlas Quant
 
-Versión 1.0 · Fase 1a · 2026-10-15
+Versión 1.0 · Fase 1a · 2026-10-15 · Aprobado el 2026-10-16
+
 Este documento fija las normas de redacción de toda la colección. Se revisará después del capítulo piloto; los cambios se registrarán en `editorial/registro_de_revisiones.md`.
 
 ---

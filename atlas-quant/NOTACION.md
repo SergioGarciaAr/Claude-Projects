@@ -21,11 +21,11 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 | := | Igual por definición | El lado definido va a la izquierda |
 | ∈, ∉ | Pertenencia | |
 | A ⊆ B, A ⊊ B | Inclusión, inclusión estricta | No se usa ⊂ para evitar ambigüedad |
-| A ∪ B, A ∩ B, A \ B, Aᶜ | Unión, intersección, diferencia, complemento | |
+| A ∪ B, A ∩ B, A ∖ B, Aᶜ | Unión, intersección, diferencia, complemento | |
 | A × B | Producto cartesiano | |
 | ∅ | Conjunto vacío | |
 | \|A\| | Cardinal de un conjunto finito | |
-| 𝟙_A | Función indicadora de A | |
+| $\mathbb{1}_A$ | Función indicadora de A | |
 
 ## 3. Conjuntos numéricos
 
@@ -49,7 +49,7 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 | f ∘ g | Composición | |
 | f⁻¹ | Función inversa | Nunca significa 1/f |
 | ln x | Logaritmo natural | Se usa siempre ln; no se escribe log sin base |
-| log_b x | Logaritmo en base b | log₁₀ se escribe con la base explícita |
+| $\log_b x$ | Logaritmo en base b | log₁₀ se escribe con la base explícita |
 | exp(x), eˣ | Función exponencial | exp se prefiere con argumentos largos |
 | lim, lim sup, lim inf | Límites | |
 | f′, f″, f⁽ⁿ⁾ | Derivadas de una variable | |
@@ -59,7 +59,7 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 | ∇²f | Matriz hessiana | |
 | D f | Matriz jacobiana | |
 | ∫ₐᵇ f(x) dx | Integral | |
-| C^k(A) | Funciones k veces continuamente diferenciables en A | |
+| $C^k(A)$ | Funciones k veces continuamente diferenciables en A | |
 | o(·), O(·) | Notaciones de Landau | Se definen en L4 |
 | ‖·‖ | Norma | Se indica cuál cuando hay ambigüedad |
 | ⟨·, ·⟩ | Producto interno | |
@@ -78,7 +78,7 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 | ker **A**, im **A** | Núcleo e imagen | |
 | **A** ≻ 0, **A** ⪰ 0 | Definida positiva, semidefinida positiva | |
 | λ | Valor propio | |
-| ℝⁿ, ℝ^{m×n} | Vectores y matrices reales | |
+| $\mathbb{R}^n$, $\mathbb{R}^{m\times n}$ | Vectores y matrices reales | |
 
 ## 6. Probabilidad
 
@@ -88,17 +88,17 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 | ℙ(A) | Probabilidad de A | |
 | X, Y, Z | Variables aleatorias (mayúsculas) | |
 | x, y, z | Valores observados (minúsculas) | |
-| F_X, f_X, p_X | Función de distribución, densidad, función de masa | |
+| $F_X$, $f_X$, $p_X$ | Función de distribución, densidad, función de masa | |
 | 𝔼[X], Var(X), Cov(X, Y), Corr(X, Y) | Esperanza, varianza, covarianza, correlación | |
 | 𝔼[X \| Y], 𝔼[X \| 𝒢] | Esperanza condicional | La segunda forma desde L16 |
-| X ~ N(μ, σ²) | Distribución normal con media μ y **varianza** σ² | Nunca con desviación típica como segundo parámetro |
+| X ~ N(μ, σ²) | Distribución normal con media μ y **varianza** σ² | Nunca con la desviación estándar como segundo parámetro |
 | N(**μ**, **Σ**) | Normal multivariante | |
 | Φ, φ | Función de distribución y densidad normal estándar | |
 | →ᴾ, →ᵈ, →ᶜ·ˢ· | Convergencia en probabilidad, en distribución, casi segura | |
 | i.i.d. | Independientes e idénticamente distribuidas | |
 | (ℱₜ) | Filtración | |
-| W_t | Movimiento browniano | Se usa W, no B |
-| N_t | Proceso de Poisson | |
+| $W_t$ | Movimiento browniano | Se usa W, no B |
+| $N_t$ | Proceso de Poisson | |
 | ℚ | Medida neutral al riesgo | Colisión con el conjunto de racionales resuelta por contexto (véase la sección 9) |
 
 ## 7. Estadística
@@ -140,14 +140,14 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 
 | Símbolo | Significado | Observaciones |
 |---|---|---|
-| S_t | Precio de un activo con riesgo | |
-| R_t | Rendimiento simple en (t − 1, t] | |
-| r_t | Rendimiento logarítmico, r_t = ln(S_t / S_{t−1}) | Solo en contextos empíricos (véase la sección 9) |
-| r_f | Tasa libre de riesgo en contextos empíricos y de un período | |
+| $S_t$ | Precio de un activo con riesgo | |
+| $R_t$ | Rendimiento simple en (t − 1, t] | |
+| $r_t$ | Rendimiento logarítmico, $r_t = \ln(S_t / S_{t-1})$ | Solo en contextos empíricos (véase la sección 9) |
+| $r_f$ | Tasa libre de riesgo en contextos empíricos y de un período | |
 | **w** | Vector de pesos de cartera | |
 | **μ**, **Σ** | Vector de rendimientos esperados y matriz de covarianzas | |
 | β | Beta de un activo | Colisión con **β** de regresión resuelta por contexto |
-| VaR_α, ES_α | Valor en riesgo y Expected Shortfall al nivel α | La convención de α (cola o confianza) se fija en L17 c. 6 |
+| $\mathrm{VaR}_\alpha$, $\mathrm{ES}_\alpha$ | Valor en riesgo y Expected Shortfall al nivel α | La convención de α (cola o confianza) se fija en L17 c. 6 |
 
 ### 8.3 Derivados y tiempo continuo
 
@@ -161,8 +161,8 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 | σ | Volatilidad | Anual |
 | μ | Deriva | Anual |
 | q | Tasa de dividendo continua | |
-| B_t | Cuenta bancaria (numerario) | |
-| V_t, C_t, P_t | Valor de un derivado, de una opción de compra, de una opción de venta | P_t no se confunde con P(t, T), que siempre lleva dos argumentos |
+| $B_t$ | Cuenta bancaria (numerario) | |
+| $V_t$, $C_t$, $P_t$ | Valor de un derivado, de una opción de compra, de una opción de venta | $P_t$ no se confunde con P(t, T), que siempre lleva dos argumentos |
 | Δ, Γ, ν, Θ, ρ | Griegas | ν (vega) se escribe con nu |
 
 ## 9. Colisiones de notación y su resolución
@@ -170,10 +170,10 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 | Colisión | Resolución |
 |---|---|
 | i como unidad imaginaria y como tasa de interés | La unidad imaginaria se escribe con letra recta (i, `\mathrm{i}` en LaTeX) y la tasa en cursiva (*i*). Se advierte en L2 c. 12, L5 y L12 c. 12. |
-| r como rendimiento logarítmico y como tasa libre de riesgo | En contextos empíricos (L9, L14, L17, L20, L21, L23), r_t es rendimiento logarítmico y la tasa libre de riesgo es r_f. En modelos de valoración (L13, L18, L19, L22), r es la tasa libre de riesgo y los rendimientos logarítmicos se escriben ln(S_t / S_s). |
+| r como rendimiento logarítmico y como tasa libre de riesgo | En contextos empíricos (L9, L14, L17, L20, L21, L23), $r_t$ es rendimiento logarítmico y la tasa libre de riesgo es $r_f$. En modelos de valoración (L13, L18, L19, L22), r es la tasa libre de riesgo y los rendimientos logarítmicos se escriben $\ln(S_t / S_s)$. |
 | ℚ como racionales y como medida | El sentido es inequívoco por contexto; se advierte en la primera aparición de la medida neutral al riesgo. |
 | β de regresión y beta de un activo | Coinciden conceptualmente en el modelo de mercado; se explicita la relación en L10. |
-| P precio de opción de venta y P(t, T) precio de bono | P(t, T) siempre lleva dos argumentos; la opción de venta se escribe P_t o P(t, S). |
+| P precio de opción de venta y P(t, T) precio de bono | P(t, T) siempre lleva dos argumentos; la opción de venta se escribe $P_t$ o $P(t, S)$. |
 | C capital y C convexidad | La convexidad solo aparece en L5 c. 9, donde el capital se escribe con subíndice. |
 | τ tiempo hasta el vencimiento y tiempo de parada | El sentido se declara en cada capítulo. |
 

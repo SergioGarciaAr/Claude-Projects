@@ -20,6 +20,8 @@ La obra está en la **Fase 1 (diseño editorial)**. Todavía no existe ningún c
 | `editorial/` | Registro de revisiones, resultados admitidos y, más adelante, dependencias por capítulo y auditorías | Interna |
 | `libros/` | Manuscritos de los libros (se crea a partir de la Fase 1b con los índices detallados) | **Producto** |
 | `bibliografia/` | Bibliografía verificada de la colección (se crea en la Fase 1e) | **Producto** |
+| `pdf/` | Versión PDF de todos los documentos, generada desde las fuentes Markdown | Entrega |
+| `herramientas/` | Script y hoja de estilo para generar los PDF de trabajo | Interna |
 
 ## Principios
 

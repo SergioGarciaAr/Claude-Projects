@@ -1,7 +1,7 @@
 # Plan editorial de la colección Atlas Quant
 
-Versión 1.0 · Fase 1a · 2026-10-15
-Estado: propuesta aprobada en principio por la dirección editorial; los índices detallados por sección se elaboran en las entregas 1b a 1d.
+Versión 1.0 · Fase 1a · 2026-10-15\
+Estado: aprobado por la dirección editorial el 2026-10-16. Los índices detallados por sección se elaboran en las entregas 1b a 1d.
 
 ---
 
@@ -116,7 +116,7 @@ Textos de contraste: Velleman, *How to Prove It*; Spivak, *Calculus* (capítulos
 7. Optimización y método de Newton.
 8. La integral de Riemann.
 9. Teorema fundamental del cálculo y técnicas de integración.
-10. Construcción rigurosa del logaritmo y la exponencial: ln x = ∫₁ˣ dt/t, exponencial como inversa, a^x = exp(x ln a), coherencia con L1 y L2; capitalización continua.
+10. Construcción rigurosa del logaritmo y la exponencial: $\ln x = \int_1^x dt/t$, exponencial como inversa, $a^x = \exp(x \ln a)$, coherencia con L1 y L2; capitalización continua.
 11. Integrales impropias; función Gamma; valor presente de flujos continuos.
 12. Series numéricas; perpetuidades.
 13. Series de potencias, Taylor con resto, fórmula de Euler.
@@ -319,7 +319,7 @@ Textos de contraste: Hamilton, *Time Series Analysis*; Tsay, *Analysis of Financ
 1. σ-álgebras y medidas; teorema de extensión de Carathéodory.
 2. Funciones medibles y variables aleatorias.
 3. Integral de Lebesgue y teoremas de convergencia.
-4. Espacios L^p y su completitud.
+4. Espacios $L^p$ y su completitud.
 5. Medida producto; teorema de Fubini-Tonelli.
 6. Independencia, lemas de Borel-Cantelli, ley 0-1 de Kolmogorov.
 7. Modos de convergencia; ley fuerte de los grandes números.
@@ -491,7 +491,7 @@ Los datos de los casos dependen de la disponibilidad de fuentes con licencia ver
 - *Optimización:* L4 c. 7 → L7 c. 6–9 → L12 c. 6–8, 11 → L10, L13, L17, L21.
 - *Econometría:* L8 → L9 → L14 → L17, L20, L21.
 
-**Fundamento del número *e*.** L1 c. 7 enuncia el axioma del supremo y deduce la propiedad arquimediana; L1 c. 10 demuestra el teorema del binomio. L2 c. 7 demuestra la convergencia monótona a partir del axioma del supremo y, con el binomio y la suma geométrica de L2 c. 6, prueba que (1 + 1/n)^n es creciente y acotada por 3. La convergencia de (1 + x/n)^n a e^x para x real y la existencia de exponentes reales y logaritmos son resultados admitidos hasta L4 c. 10, cuyas demostraciones no dependen de ellos.
+**Fundamento del número *e*.** L1 c. 7 enuncia el axioma del supremo y deduce la propiedad arquimediana; L1 c. 10 demuestra el teorema del binomio. L2 c. 7 demuestra la convergencia monótona a partir del axioma del supremo y, con el binomio y la suma geométrica de L2 c. 6, prueba que $(1 + 1/n)^n$ es creciente y acotada por 3. La convergencia de $(1 + x/n)^n$ a $e^x$ para $x$ real y la existencia de exponentes reales y logaritmos son resultados admitidos hasta L4 c. 10, cuyas demostraciones no dependen de ellos.
 
 ---
 
@@ -551,7 +551,7 @@ Escenario agregado: texto principal de 6900 a 11 100 páginas más unas 460 de p
 
 **Créditos (texto aprobado en principio; falta el nombre):**
 
-> Dirección editorial, alcance y aprobación de contenidos: [nombre del director de la obra].
+> Dirección editorial, alcance y aprobación de contenidos: [nombre del director de la obra].\
 > Redacción con asistencia de inteligencia artificial (Claude, de Anthropic) bajo dicha dirección.
 
 Cada libro incluirá en su prefacio una «Nota sobre la elaboración de esta obra» que describa el método de verificación, sus límites y la forma de reportar erratas.
