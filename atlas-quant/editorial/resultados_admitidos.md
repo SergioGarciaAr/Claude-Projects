@@ -1,22 +1,36 @@
 # Registro de resultados admitidos
 
-Versión 1.0 · Fase 1a · 2026-10-15
+Versión 1.1 · Entrega 1b · 2026-10-16
 
-Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cuya demostración completa está fuera del alcance de la colección. Las reglas están en `LIBRO_DE_ESTILO.md`, sección 4. Este registro se completará en las entregas 1b a 1d con la ubicación exacta (sección y número de elemento) de cada uso y de cada demostración.
+Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cuya demostración completa está fuera del alcance de la colección. Las reglas están en `LIBRO_DE_ESTILO.md`, sección 4. Las ubicaciones de L1 a L8 están confirmadas por los índices detallados de la entrega 1b; las de L9 a L23 se confirmarán en las entregas 1c y 1d.
 
-**Estados:** *previsto* (identificado en el diseño, ubicación por confirmar); *confirmado* (ubicación fijada en un índice detallado); *en uso* (aparece en un capítulo redactado); *cerrado* (la demostración fue redactada y verificada).
+**Estados:** *previsto* (identificado en el diseño, ubicación por confirmar); *confirmado* (ubicaciones fijadas en los índices detallados); *cerrado en el diseño* (ya no es un resultado admitido porque el diseño incluye su demostración antes de usarlo); *en uso* (aparece en un capítulo redactado); *cerrado* (la demostración está redactada y verificada).
+
+## Resultados usados en L1–L8
 
 | ID | Enunciado (resumen) | Se usa en | Se demuestra en | Estado |
 |---|---|---|---|---|
-| RA-01 | Existencia y unicidad de la raíz n-ésima positiva de un real positivo, para n ≥ 3 | L1 c. 8 | L1 c. 7–8 a partir del axioma del supremo, o, si se decide no demostrarlo en L1, L4 c. 3 (teorema de Bolzano) | Previsto; decisión en 1b |
-| RA-02 | Existencia, continuidad y monotonía de x ↦ aˣ para x real y a > 0; leyes de los exponentes reales | L1 c. 8; L2 c. 8; ejemplos de L4 c. 4–9 | L4 c. 10 | Previsto |
-| RA-03 | Existencia del logaritmo en base a como inversa de la exponencial | L1 c. 8; L2 c. 8 | L4 c. 10 | Previsto |
-| RA-04 | (1 + x/n)ⁿ → eˣ para todo x real | L2 c. 7–8 | L4 c. 10 | Previsto |
-| RA-05 | ln(1 + x) ≤ x para x > −1 y cota del error de la regla del 72 | L1 c. 8 (exploración numérica) | L4 c. 6 y c. 13 | Previsto |
-| RA-06 | Derivadas de exp y ln | Ejemplos de L4 c. 4–9 | L4 c. 10 | Previsto |
-| RA-07 | Teorema fundamental del álgebra | L6 c. 9 | Fuera del alcance (requiere análisis complejo); referencia externa | Previsto |
-| RA-08 | Teorema de cambio de variables en integrales múltiples (demostración completa) | L7 c. 10; L8 | Demostración parcial en L7 c. 10; completa: referencia externa | Previsto |
-| RA-09 | Una distribución queda determinada por su función característica (y por su función generadora cuando existe en un entorno de 0) | L8 c. 8 | L16 c. 8 | Previsto |
+| RA-01 | Existencia y unicidad de la raíz n-ésima positiva de un real positivo | L1 §8.3 | L1 §8.4\* (sección opcional) y de nuevo en L4 §3.7 | Cerrado en el diseño |
+| RA-02 | Existencia, continuidad y monotonía de x ↦ aˣ para x real y a > 0; leyes de los exponentes reales | L1 §8.8, L1 §11.7, L2 §8.1, ejemplos de L4 c. 4–9 | L4 §10.4 | Confirmado |
+| RA-03 | Existencia del logaritmo en base a como inversa de la exponencial | L1 §8.9, L1 §11.7, L2 §8.3 | L4 §10.4 | Confirmado |
+| RA-04 | (1 + x/n)ⁿ → eˣ para todo x real | L2 §7.10, L2 c. 8 | L4 §10.6 | Confirmado |
+| RA-05 | ln(1 + x) ≤ x para x > −1, y cota del error de la regla del 72 | L1 §8.10 (exploración numérica) | L4 §10.8 (desigualdad) y L4 §13.3 (cota) | Confirmado |
+| RA-06 | Derivadas de exp y ln | Ejemplos de L4 c. 4–9 | L4 §10.7 | Confirmado |
+| RA-07 | Teorema fundamental del álgebra | L6 §9.2 (y a través de él, L6 §10.1) | Fuera del alcance (requiere análisis complejo); referencia externa | Confirmado |
+| RA-08 | Teorema de cambio de variables en integrales múltiples para transformaciones no lineales | L7 §10.5, L8 §8.2, L8 §13.4 | Demostración para transformaciones lineales en L7 §10.5; caso general: referencia externa | Confirmado |
+| RA-09 | Una distribución queda determinada por su función característica (y por su función generadora de momentos cuando existe en un entorno de 0) | L8 §8.6 | L16 c. 8 | Confirmado |
+| RA-22 | Medida de ángulos en radianes como longitud de arco y propiedades geométricas de seno y coseno (incluido el argumento de áreas para sen x / x → 1) | L2 c. 10, L4 §2.6, L4 §4.5 | L4 §9.8\* (longitud de arco) y L4 §13.7 (definición analítica y coherencia) | Confirmado |
+| RA-23 | Regla de los signos de Descartes | L5 §6.3 | Referencia externa | Confirmado |
+| RA-24 | Existencia de espacios de probabilidad que soportan variables con densidad dada y sucesiones de variables independientes con distribuciones dadas | L8 §1.2, L8 c. 5, L8 §10.1 y capítulos posteriores | L16 c. 1, c. 5 y c. 6 | Confirmado |
+| RA-25 | Geometría euclídea elemental: teorema de Pitágoras y semejanza de triángulos | L2 §2.3, L2 c. 9, L2 c. 10, L6 §6.6 | Fuera del alcance (la colección no desarrolla axiomáticamente la geometría euclídea); referencia externa | Confirmado |
+| RA-26 | Fórmula de la esperanza de una función de una variable aleatoria continua para funciones generales | L8 §6.2 | L16 c. 3 (caso discreto y funciones monótonas por tramos demostrados en L8 §6.2) | Confirmado |
+| RA-27 | Cota de Berry-Esseen | L8 §11.5 | Referencia externa | Confirmado |
+| RA-28 | Distribuciones estables y teorema central del límite generalizado | L8 §12.4\* | Referencia externa | Confirmado |
+
+## Resultados usados en L9–L23 (por confirmar en las entregas 1c y 1d)
+
+| ID | Enunciado (resumen) | Se usa en | Se demuestra en | Estado |
+|---|---|---|---|---|
 | RA-10 | Teoría L² de series de Fourier: completitud del sistema trigonométrico, identidad de Parseval | L15 c. 6 | L16 c. 4 (completitud de L²) más un resultado de densidad por fijar en 1c | Previsto |
 | RA-11 | Distribución asintótica del estadístico de Dickey-Fuller como funcional del movimiento browniano | L14 c. 6 | Fuera del alcance (requiere el teorema central del límite funcional); referencia externa | Previsto |
 | RA-12 | Consistencia de los estimadores de varianza HAC | L14 c. 2 | Referencia externa | Previsto |

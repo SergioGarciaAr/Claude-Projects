@@ -11,7 +11,7 @@ Rama de trabajo: `claude/magical-shannon-afvwc6`
 |---|---|---|
 | 0 | Auditoría del entorno y propuesta editorial | Aprobada |
 | 1a | Plan editorial, libro de estilo, notación, glosario, registros internos | Aprobada (2026-10-16) |
-| 1b | Índices detallados por sección de L1–L8 | **En curso** |
+| 1b | Índices detallados por sección de L1–L8 | **Entregada; pendiente de revisión** |
 | 1c | Índices detallados de L9–L16 | No iniciada |
 | 1d | Índices detallados de L17–L23 | No iniciada |
 | 1e | Bibliografía verificada y auditoría de coherencia | No iniciada |
@@ -21,7 +21,9 @@ No existe ningún capítulo redactado.
 
 ## 2. Próximo paso exacto
 
-1. Completar la entrega 1b: crear `libros/L01-…/indice.md` a `libros/L08-…/indice.md` con índice por sección, prerrequisitos por capítulo (libro, capítulo y sección), objetivos de aprendizaje y extensión estimada; crear `editorial/dependencias.md` para L1–L8; completar la primera aparición de símbolos y términos en `NOTACION.md` y `GLOSARIO.md` para esos libros; confirmar las entradas RA-01 a RA-09 de `editorial/resultados_admitidos.md`.
+1. Obtener la revisión de la entrega 1b (índices de L1–L8, ajustes A-10 y A-11, revisión R-0003).
+2. Con la aprobación, iniciar la entrega 1c: índices detallados de L9 a L16 con el mismo formato, verificados con `herramientas/verificar_indices.py`; confirmar las entradas RA-10 a RA-14 y RA-19; extender los registros de primera aparición de `NOTACION.md` y `GLOSARIO.md`.
+3. Al cerrar cada entrega: ejecutar el verificador, regenerar los PDF con `herramientas/generar_pdf.mjs`, hacer commit y push.
 
 ## 3. Decisiones aprobadas
 

@@ -55,7 +55,7 @@ La colección se organiza en cinco series y 23 libros. La numeración de los lib
 
 #### L1. Lenguaje matemático, números y álgebra (14 capítulos)
 
-Incluye prefacio y guía del lector: cómo estudiar matemáticas, cómo leer una demostración, cómo usar los ejercicios.
+Incluye prefacio y guía del lector: cómo estudiar matemáticas, cómo leer una demostración, cómo usar los ejercicios. Apéndice A: Python como calculadora científica, utilizable desde el capítulo 6.
 
 1. Qué es una afirmación matemática: definición, enunciado, demostración, contraejemplo.
 2. Lógica proposicional y cuantificadores; negación de enunciados.
@@ -81,7 +81,7 @@ Textos de contraste: Velleman, *How to Prove It*; Spivak, *Calculus* (capítulos
 3. Funciones cuadráticas y polinómicas.
 4. Funciones racionales y asíntotas.
 5. Transformaciones y simetrías.
-6. Sucesiones y sumas: progresiones, notación sigma, inducción en sumas, suma geométrica; la anualidad como suma geométrica.
+6. Sucesiones y sumas: progresiones, notación sigma, inducción en sumas, suma geométrica; la anualidad como suma geométrica; recurrencias lineales de primer orden.
 7. Convergencia de sucesiones: definición con ε y N, álgebra de límites, convergencia monótona deducida del axioma del supremo, el número *e*.
 8. Funciones exponenciales y logarítmicas: base *e*, logaritmo natural, crecimiento y escalas, rendimientos logarítmicos (introducción).
 9. Geometría analítica del plano y cónicas.
@@ -109,17 +109,17 @@ Textos de contraste: Velleman, *How to Prove It*; Spivak, *Calculus* (capítulos
 
 1. Completitud y sucesiones: repaso de L2, Bolzano-Weierstrass, sucesiones de Cauchy, límites superior e inferior.
 2. Límites de funciones (definición ε-δ).
-3. Continuidad: teoremas de Bolzano y de Weierstrass; método de bisección.
+3. Continuidad: teoremas de Bolzano y de Weierstrass; método de bisección; continuidad uniforme (teorema de Heine); continuidad de la inversa.
 4. La derivada y sus reglas, demostradas.
 5. Regla de la cadena, derivación implícita, derivada de la función inversa.
 6. Teorema del valor medio, monotonía, convexidad, regla de L'Hôpital.
 7. Optimización y método de Newton.
 8. La integral de Riemann.
-9. Teorema fundamental del cálculo y técnicas de integración.
+9. Teorema fundamental del cálculo y técnicas de integración; longitud de arco (\*).
 10. Construcción rigurosa del logaritmo y la exponencial: $\ln x = \int_1^x dt/t$, exponencial como inversa, $a^x = \exp(x \ln a)$, coherencia con L1 y L2; capitalización continua.
 11. Integrales impropias; función Gamma; valor presente de flujos continuos.
 12. Series numéricas; perpetuidades.
-13. Series de potencias, Taylor con resto, fórmula de Euler.
+13. Series de potencias, Taylor con resto, definición analítica de seno y coseno, fórmula de Euler.
 14. Derivación e integración numéricas: error de truncamiento y de redondeo.
 
 Textos de contraste: Spivak, *Calculus*; Apostol, *Calculus*, vol. 1.
@@ -140,7 +140,7 @@ Textos de contraste: Spivak, *Calculus*; Apostol, *Calculus*, vol. 1.
 10. Estructura temporal de tasas: tasas cero, tasas a plazo, factores de descuento, *bootstrapping*, interpolación.
 11. Implementación y verificación computacional de los cálculos del libro.
 
-Ruta temprana opcional: los capítulos 1–3, 5, 7 y 8 pueden leerse después de L2.
+Ruta temprana opcional: los capítulos 1–3, 5 y 7 pueden leerse después de L2, omitiendo las secciones que usan cálculo (detalle en el índice de L5).
 
 Texto de contraste: Kellison, *The Theory of Interest*.
 
@@ -154,7 +154,7 @@ Texto de contraste: Kellison, *The Theory of Interest*.
 6. Determinantes y permutaciones.
 7. Producto interno, Gram-Schmidt, factorización QR.
 8. Proyecciones ortogonales y mínimos cuadrados.
-9. Valores y vectores propios, diagonalización, forma de Jordan (demostración opcional), exponencial de matrices.
+9. Valores y vectores propios, diagonalización, forma de Jordan (demostración opcional), potencias de matrices y recurrencias lineales, teorema de Cayley-Hamilton.
 10. Teorema espectral, formas cuadráticas, matrices definidas positivas.
 11. Descomposición en valores singulares y componentes principales (versión algebraica); aplicación a curvas de tasas.
 12. Álgebra lineal numérica: condicionamiento, factorización de Cholesky.
@@ -183,11 +183,11 @@ Textos de contraste: Strang, *Introduction to Linear Algebra*; Axler, *Linear Al
 3. Probabilidad condicional, independencia, teorema de Bayes.
 4. Variables aleatorias discretas.
 5. Variables aleatorias continuas: uniforme, exponencial, Gamma, normal, lognormal.
-6. Esperanza y momentos; desigualdades de Markov, Chebyshev, Jensen y Hoeffding.
+6. Esperanza y momentos; desigualdades de Markov, Chebyshev y Jensen.
 7. Vectores aleatorios, covarianza, correlación, normal multivariante.
 8. Transformaciones de variables; funciones generadoras de momentos y funciones características (unicidad admitida).
 9. Esperanza condicional (versión elemental).
-10. Modos de convergencia y leyes débiles de los grandes números.
+10. Modos de convergencia, leyes débiles de los grandes números, desigualdad de Hoeffding, lema de Slutsky.
 11. Teorema central del límite para arreglos triangulares bajo condición de tercer momento (método de Lindeberg).
 12. Colas pesadas y dependencia más allá de la correlación.
 13. Simulación y método Monte Carlo.
@@ -463,7 +463,7 @@ Los datos de los casos dependen de la disponibilidad de fuentes con licencia ver
 | L4 | L2, L3 | Sucesiones y convergencia monótona (L2 c. 6–7); funciones elementales (L2 c. 1–8); Python para secciones computacionales y c. 14 (L3 c. 1–4, 8) | — |
 | L5 | L3, L4 | Anualidades continuas (L4 c. 9–11); existencia y cálculo de la TIR (L4 c. 3, 7); duración y convexidad (L4 c. 13); cálculo numérico (L3) | — |
 | L6 | L2, L3 | Vectores (L2 c. 11); complejos para valores propios (L2 c. 12); demostración (L1); computación (L3 c. 8) | L5 (c. 11 y 13) |
-| L7 | L4, L6 | Cálculo en una variable; matrices, formas cuadráticas y teorema espectral (L6 c. 10) | — |
+| L7 | L4, L6 | Cálculo en una variable; matrices, formas cuadráticas y teorema espectral (L6 c. 10) | L5 (c. 3) |
 | L8 | L3, L4, L6, L7 | Integrales (L4 c. 9–11); covarianza y normal multivariante (L6 c. 10, 12); integrales múltiples y cambio de variables (L7 c. 10); simulación (L3) | — |
 | L9 | L3, L6, L7, L8 | Probabilidad, incluidos TCL (L8 c. 10–11) y esperanza condicional (L8 c. 9); verosimilitud multivariante (L7 c. 3, 5–6); proyección y formas cuadráticas (L6 c. 8, 10); bootstrap (L3) | L5 |
 | L10 | L5, L6, L7, L8, L9 | Descuento (L5); lema de Farkas (L7 c. 7); Lagrange (L7 c. 8); varianza de cartera (L8 c. 7); contrastes empíricos (L9 c. 8–9) | — |
@@ -471,7 +471,7 @@ Los datos de los casos dependen de la disponibilidad de fuentes con licencia ver
 | L12 | L3, L4, L6, L7, L8 | Errores de truncamiento (L4 c. 14); álgebra lineal numérica (L6 c. 12); KKT (L7 c. 9); error Monte Carlo (L8 c. 11); esperanza condicional (L8 c. 9) | L5, L10 |
 | L13 | L3, L5, L8, L10, L12 | Descuento y curvas (L5 c. 3, 10); arbitraje (L10 c. 8); TCL para arreglos triangulares (L8 c. 11); paseo aleatorio (L8 c. 14); parada óptima (L12 c. 11) | — |
 | L14 | L3, L6, L9, L10, L12 | Inferencia asintótica (L9); polinomios de rezagos y matriz compañera (L6 c. 9; L2 c. 12); verosimilitud numérica y simulación (L12); modelos de valoración (L10) | — |
-| L15 | L6, L7, L11, L12 | Jordan y exponencial de matrices (L6 c. 9); punto fijo y convergencia uniforme (L11 c. 3, 7); producto interno (L11 c. 8); sistemas tridiagonales (L12 c. 3) | — |
+| L15 | L6, L7, L11, L12 | Forma de Jordan (L6 c. 9), base de la exponencial de matrices de L15 c. 2; punto fijo y convergencia uniforme (L11 c. 3, 7); producto interno (L11 c. 8); sistemas tridiagonales (L12 c. 3) | — |
 | L16 | L8, L11 | Probabilidad elemental; análisis riguroso y completitud (L11) | L13 (c. 12) |
 | L17 | L9, L10, L12, L14 | Contracción de covarianzas (L9); Markowitz (L10); optimización convexa (L12 c. 7); GARCH y factores (L14 c. 8, 12) | L16 (c. 8, valores extremos) |
 | L18 | L7, L11, L12, L15, L16 | Stieltjes y variación cuadrática (L11 c. 6, 10); L², martingalas, Borel-Cantelli (L16); Gronwall y Picard (L15 c. 1); EDP (L15 c. 5, 7); esquemas numéricos (L12) | — |

@@ -1,6 +1,6 @@
 # Convenciones de notación de Atlas Quant
 
-Versión 1.0 · Fase 1a · 2026-10-15
+Versión 1.1 · Entrega 1b · 2026-10-16
 
 Este documento fija la notación común a toda la colección. Cada libro introduce los símbolos gradualmente, en el capítulo donde se necesitan, y su índice de símbolos remite a ese lugar. Las entregas 1b a 1d completarán, para cada símbolo, la columna «primera aparición». Un símbolo fijado aquí no se redefine en otro sentido sin advertencia explícita y sin registrar la excepción.
 
@@ -60,7 +60,7 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 | D f | Matriz jacobiana | |
 | ∫ₐᵇ f(x) dx | Integral | |
 | $C^k(A)$ | Funciones k veces continuamente diferenciables en A | |
-| o(·), O(·) | Notaciones de Landau | Se definen en L4 |
+| o(·), O(·) | Notaciones de Landau | O(·) se define en L3 §5.3 para algoritmos; o(·) en L4 §4.7 |
 | ‖·‖ | Norma | Se indica cuál cuando hay ambigüedad |
 | ⟨·, ·⟩ | Producto interno | |
 
@@ -183,3 +183,83 @@ Este documento fija la notación común a toda la colección. Cada libro introdu
 - El seno se escribe **sen** (no sin).
 - Coma decimal en fórmulas con `{,}`; separador de millares con `\,`.
 - Diferencial en las integrales con letra recta o cursiva de manera uniforme dentro de cada libro (se fijará en la prueba de composición).
+
+## 11. Primera aparición de los símbolos en L1–L8
+
+Lugar donde cada símbolo se define por primera vez en la colección. Cada libro lo vuelve a definir en su primera aparición propia (principio 2 de la sección 1).
+
+| Símbolo | Primera aparición |
+|---|---|
+| := | L1 §1.2 |
+| ¬, ∧, ∨ | L1 §2.1 |
+| ⇒, ⇔ | L1 §2.3 |
+| ∀, ∃ | L1 §2.5 |
+| ∃! | L1 §4.5 |
+| ∈, ⊆, ⊊ | L1 §3.1 |
+| ∪, ∩, ∖, Aᶜ, ∅ | L1 §3.2 |
+| A × B | L1 §3.3 |
+| f: A → B, f ∘ g | L1 §3.6 |
+| f⁻¹ | L1 §3.7 |
+| \|A\| | L1 §3.8\* y L8 §2.1 |
+| ℕ, ℕ₀ | L1 §5.1 |
+| ℤ | L1 §5.2 |
+| ℚ | L1 §6.1 |
+| ℝ | L1 §7.2 |
+| \|x\| | L1 §7.3 |
+| Intervalos | L1 §7.4 |
+| sup A, inf A | L1 §7.5 |
+| $\log_b x$ | L1 §8.9 |
+| ⌊x⌋ | L2 §1.6 |
+| lim (sucesiones) | L2 §7.2 |
+| e, eˣ | L2 §7.8 y L2 §8.2 |
+| ln x | L2 §8.3 |
+| ‖·‖ | L2 §11.3 |
+| ℂ, unidad imaginaria i | L2 §12.1 |
+| O(·) | L3 §5.3 |
+| lim sup, lim inf | L4 §1.5 |
+| f′, f″ | L4 §4.2 |
+| df/dx, o(·) | L4 §4.7 |
+| ∫ₐᵇ f(x) dx | L4 §8.2 |
+| exp(x) | L4 §10.3 |
+| $C^k(A)$ | L4 §13.1 |
+| Negritas para vectores y matrices | L6, preliminares |
+| **A**⁻¹ | L6 §2.4 |
+| **A**ᵀ | L6 §2.5 |
+| rg **A** | L6 §4.4 |
+| ker **A**, im **A** | L6 §5.3 |
+| det **A** | L6 §6.2 |
+| ⟨·, ·⟩ (general) | L6 §7.1 |
+| λ, tr **A** | L6 §9.1 |
+| **A** ≻ 0, **A** ⪰ 0 | L6 §10.4 |
+| ∂f/∂xᵢ | L7 §3.1 |
+| ∇f | L7 §3.4 |
+| D f | L7 §3.5 |
+| ∇²f | L7 §5.2 |
+| (Ω, ℱ, ℙ), ℙ(A) | L8 §1.2 |
+| $p_X$, $F_X$ | L8 §4.1 y L8 §4.2 |
+| 𝔼[X] | L8 §4.3 |
+| $\mathbb{1}_A$ | L8 §4.4 |
+| $f_X$ | L8 §5.1 |
+| N(μ, σ²), Φ, φ | L8 §5.5 |
+| Var(X) | L8 §6.3 |
+| Cov(X, Y), Corr(X, Y) | L8 §7.4 |
+| N(**μ**, **Σ**) | L8 §7.6 |
+| 𝔼[X \| Y] | L8 §9.2 |
+| i.i.d. | L8 §10.1 |
+| →ᴾ, →ᵈ | L8 §10.2 |
+| i (tasa de interés) | L1 §6.8 |
+| C₀, Cₙ | L1 §8.10 |
+| VP, VF | L2 §6.6 |
+| d | L2 §4.5 |
+| v | L2 §3.5 |
+| K, función de pago | L2 §1.7 |
+| $S_t$, $R_t$, $r_t$ | L2 §8.7 |
+| δ | L4 §10.9 |
+| i⁽ᵐ⁾ | L5 §2.2 |
+| VPN, TIR | L5 §6.1 |
+| y | L5 §8.3 |
+| D, C (duración, convexidad) | L5 §9.2 y L5 §9.3 |
+| P(t, T) | L5 §10.1 |
+| **w** (pesos de cartera) | L6 §13.4 |
+| **μ**, **Σ** | L7 §11.2 (forma algebraica) y L8 §7.5 (probabilística) |
+

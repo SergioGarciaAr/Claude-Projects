@@ -240,7 +240,8 @@ Ningún capítulo se aprueba con hallazgos críticos abiertos.
 
 ## 18. Lista de verificación del capítulo
 
-- [ ] La página de presentación declara prerrequisitos exactos y objetivos verificables.
+- [ ] La página de presentación declara prerrequisitos exactos y objetivos verificables, coherentes con el índice detallado del libro.
+- [ ] `herramientas/verificar_indices.py` no informa errores.
 - [ ] Todo término y símbolo está definido en el capítulo o en sus prerrequisitos.
 - [ ] Los resultados admitidos están marcados, referenciados y registrados.
 - [ ] Cada teorema enuncia todas sus hipótesis; cada demostración está completa o declarada parcial.

@@ -1,6 +1,6 @@
 # Glosario terminológico de Atlas Quant (español–inglés)
 
-Versión 1.0 · Fase 1a · 2026-10-15
+Versión 1.1 · Entrega 1b · 2026-10-16
 
 Este glosario fija la terminología española de la colección. Un término fijado no se alterna con sinónimos dentro de la obra. La columna «Observaciones» registra alternativas usadas en otras regiones o textos, que pueden mencionarse pero no emplearse como término principal. Las entregas 1b a 1d ampliarán el glosario e indicarán el libro y capítulo de primera aparición.
 
@@ -175,3 +175,64 @@ Este glosario fija la terminología española de la colección. Un término fija
 | sonrisa de volatilidad | volatility smile | |
 | superficie de volatilidad | volatility surface | |
 | opción americana, europea | American, European option | |
+
+## Primera aparición de términos en L1–L8
+
+| Término | Primera aparición |
+|---|---|
+| contraejemplo | L1 §1.5 |
+| contrarrecíproco | L1 §2.3 |
+| función inyectiva, sobreyectiva, biyectiva | L1 §3.7 |
+| demostración por inducción | L1 §4.6 |
+| tasa de interés; interés simple | L1 §6.8 |
+| rendimiento | L1 §6.7 |
+| cota superior, cota inferior, supremo, ínfimo | L1 §7.5 |
+| axioma del supremo; completitud | L1 §7.6 |
+| propiedad arquimediana | L1 §7.7 |
+| interés compuesto; tasa equivalente | L1 §8.10 |
+| error de redondeo | L1 §9.3 |
+| punto flotante | L1 §9.6 (introducción) y L3 §2.3 |
+| cartera; replicación | L1 §12.6 |
+| función de pago; opción de compra; precio de ejercicio | L2 §1.7 |
+| valor presente; anualidad | L2 §6.6 |
+| perpetuidad | L2 §7.7 |
+| rendimiento logarítmico | L2 §8.7 |
+| norma | L2 §11.3 |
+| vectorización | L3 §8.2 |
+| prueba unitaria | L3 §6.3 |
+| depuración | L3 §6.5 |
+| semilla | L3 §11.4 |
+| sucesión de Cauchy | L4 §1.4 |
+| fuerza de interés | L4 §10.9 |
+| convergencia uniforme | L4 §13.5 |
+| error de truncamiento | L4 §14.1 |
+| tasa nominal | L5 §2.2 |
+| convención de conteo de días | L5 §2.6 |
+| amortización | L5 §5.2 |
+| valor presente neto; tasa interna de retorno | L5 §6.1 |
+| rendimiento al vencimiento | L5 §8.3 |
+| interés corrido; precio limpio; precio sucio | L5 §8.5 |
+| bono cupón cero | L5 §8.6 |
+| duración | L5 §9.2 |
+| convexidad | L5 §9.3 |
+| estructura temporal de tasas | L5 §10.1 |
+| tasa a plazo | L5 §10.2 |
+| curva de rendimientos | L5 §10.5 |
+| producto interno | L6 §7.1 |
+| valor propio, vector propio | L6 §9.1 |
+| matriz definida positiva | L6 §10.4 |
+| condicionamiento | L6 §12.2 |
+| estabilidad numérica | L6 §12.3 |
+| precio de estado | L6 §13.3 |
+| matriz jacobiana | L7 §3.5 |
+| matriz hessiana | L7 §5.2 |
+| punto fijo | L7 §8.1 |
+| multiplicadores de Lagrange | L7 §8.5 |
+| función generadora de momentos | L8 §8.4 |
+| función característica | L8 §8.5 |
+| esperanza condicional | L8 §9.2 |
+| martingala (idea) | L8 §9.7 |
+| convergencia en distribución | L8 §10.2 |
+| colas pesadas | L8 §12.2 |
+| paseo aleatorio | L8 §14.1 |
+

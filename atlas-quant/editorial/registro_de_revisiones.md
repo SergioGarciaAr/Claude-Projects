@@ -57,6 +57,25 @@ Al redactar `PLAN_EDITORIAL.md` (entrega 1a), la ubicación de algunos capítulo
 | A-08 | L20: estudios de eventos es el c. 4; purga y embargo pasa a c. 7 | Metodología antes del diseño de backtests |
 | A-09 | L23: el caso de opciones es el c. 5 (la propuesta lo llamaba «caso 4») | Corrección de numeración |
 
+## Revisión R-0003 · Índices detallados de L1–L8 · 2026-10-16
+
+Hallazgos surgidos al redactar los índices por sección de L1 a L8 (entrega 1b) y al ejecutar `herramientas/verificar_indices.py`, que comprueba la existencia y el orden de todos los prerrequisitos citados. Resultado final del verificador: 8 libros, 102 capítulos, 0 errores, 1 aviso esperado (L4 c. 13 depende de la sección opcional L4 §9.8 para cerrar RA-22).
+
+| ID | Severidad | Hallazgo | Resolución | Estado |
+|---|---|---|---|---|
+| H-01 | Importante | La exponencial de matrices figuraba en L6 c. 9 y en L15 c. 2; en L6 requería series (L4), que no es requisito de L6 | Ajuste A-10: se estudia solo en L15 c. 2; L6 c. 9 desarrolla la forma de Jordan, las potencias de matrices y Cayley-Hamilton | Resuelto |
+| H-02 | Importante | La desigualdad de Hoeffding estaba en L8 c. 6, pero trata sumas de variables independientes, que se definen en L8 c. 7 | Ajuste A-11: pasa a L8 c. 10, junto con el lema de Slutsky | Resuelto |
+| H-03 | Importante | L7 c. 3 usa sensibilidades a tasas cero de L5 sin que L5 figurara como aplicación de L7 (detectado por el verificador) | L5 agregado en la columna «Aplicación» de L7 en el plan | Resuelto |
+| H-04 | Importante | La ruta temprana de L5 incluía el capítulo 8, que depende del capítulo 6, que usa L4 | Ruta temprana corregida: capítulos 1–3, 5 y 7 | Resuelto |
+| H-05 | Importante | Siete resultados usados en L1–L8 no estaban registrados: medida de ángulos y trigonometría geométrica, regla de Descartes, existencia de espacios de probabilidad, geometría euclídea elemental, esperanza de funciones en el caso continuo general, Berry-Esseen, leyes estables | Registrados como RA-22 a RA-28 con ubicación de uso y de demostración | Resuelto |
+| H-06 | Menor | RA-01 (raíces n-ésimas) puede demostrarse en L1 | Demostración en L1 §8.4\* (opcional) y de nuevo en L4 §3.7; RA-01 deja de ser admitido | Resuelto |
+| H-07 | Menor | La desigualdad de Bernoulli estaba prevista en L1 c. 4, antes de los números reales | Trasladada a L1 §8.7, donde además motiva la comparación entre interés simple y compuesto | Resuelto |
+| H-08 | Menor | L1 c. 6 a c. 13 usan cálculos con Python antes de L1 c. 14 | Apéndice A de L1: Python como calculadora, utilizable desde el capítulo 6 | Resuelto |
+| H-09 | Menor | La notación O(·) aparece en L3 §5.3, antes de L4 | Corregida la primera aparición en `NOTACION.md` | Resuelto |
+| H-10 | Menor | La integral gaussiana dependía del cambio de variables general (admitido) | L7 §10.6 la demuestra con Fubini y una sustitución en una variable | Resuelto |
+
+Ajustes A-10 y A-11, sometidos a aprobación junto con la entrega 1b.
+
 ## Pendientes de verificación
 
 | ID | Asunto | Situación |

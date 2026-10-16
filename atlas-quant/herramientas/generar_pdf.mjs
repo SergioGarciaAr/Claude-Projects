@@ -1,7 +1,7 @@
 // Genera los PDF de trabajo de Atlas Quant a partir de las fuentes Markdown.
 // Uso (desde atlas-quant/):  NODE_PATH=/opt/node22/lib/node_modules node herramientas/generar_pdf.mjs [archivo.md ...]
 // Sin argumentos convierte todos los .md del proyecto, salvo los de herramientas/ y pdf/.
-// Salida: pdf/<misma ruta relativa>.pdf
+// Salida: pdf/<misma ruta relativa>.pdf; los índices libros/<carpeta>/indice.md salen como pdf/libros/<carpeta>-indice.pdf
 // Requisitos: pandoc (HTML con MathML) y Playwright con Chromium, ambos presentes en el entorno.
 
 import { execFileSync } from "node:child_process";
@@ -47,7 +47,7 @@ function aHtml(ruta, destinoHtml) {
     "--metadata=lang:es",
     "-o", destinoHtml,
   ];
-  if (CON_INDICE.has(relative(RAIZ, ruta))) args.push("--toc", "--toc-depth=2", "--metadata=toc-title:Contenido");
+  if (CON_INDICE.has(relative(RAIZ, ruta)) || ruta.endsWith("indice.md")) args.push("--toc", "--toc-depth=2", "--metadata=toc-title:Contenido");
   execFileSync("pandoc", args, { cwd: dirname(ruta) });
 }
 
@@ -62,7 +62,7 @@ const navegador = await chromium.launch();
 try {
   for (const ruta of fuentes) {
     const rel = relative(RAIZ, ruta);
-    const destinoPdf = join(SALIDA, rel.replace(/\.md$/, ".pdf"));
+    const destinoPdf = join(SALIDA, rel.replace(/\/indice\.md$/, "-indice.md").replace(/\.md$/, ".pdf"));
     const html = destinoPdf.replace(/\.pdf$/, ".tmp.html");
     mkdirSync(dirname(destinoPdf), { recursive: true });
     aHtml(ruta, html);
