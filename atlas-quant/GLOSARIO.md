@@ -1,6 +1,6 @@
 # Glosario terminológico de Atlas Quant (español–inglés)
 
-Versión 1.1 · Entrega 1b · 2026-10-16
+Versión 1.2 · Entrega 1c · 2026-10-16
 
 Este glosario fija la terminología española de la colección. Un término fijado no se alterna con sinónimos dentro de la obra. La columna «Observaciones» registra alternativas usadas en otras regiones o textos, que pueden mencionarse pero no emplearse como término principal. Las entregas 1b a 1d ampliarán el glosario e indicarán el libro y capítulo de primera aparición.
 
@@ -235,4 +235,56 @@ Este glosario fija la terminología española de la colección. Un término fija
 | convergencia en distribución | L8 §10.2 |
 | colas pesadas | L8 §12.2 |
 | paseo aleatorio | L8 §14.1 |
+
+## Primera aparición de términos en L9–L16
+
+| Término | Primera aparición |
+|---|---|
+| estimador | L9 §2.2 |
+| sesgo; error cuadrático medio | L9 §2.3 |
+| máxima verosimilitud | L9 §4.2 |
+| potencia | L9 §6.3 |
+| valor p | L9 §6.6 |
+| tasa de falsos descubrimientos | L9 §7.3 |
+| heterocedasticidad | L9 §9.4 |
+| remuestreo; bootstrap | L9 §10.2 |
+| sobreajuste | L9 §12.2 |
+| validación cruzada | L9 §12.4 |
+| contracción | L9 §14.4 |
+| activo; derivado | L10 §2.1 y L10 §2.5 |
+| orden limitada, orden de mercado | L10 §3.1 |
+| libro de órdenes | L10 §3.2 |
+| diferencial de compraventa; liquidez | L10 §3.3 |
+| venta en corto; apalancamiento | L10 §3.6 |
+| frontera eficiente | L10 §6.3 |
+| ley del precio único | L10 §8.2 |
+| medida neutral al riesgo | L10 §8.5 |
+| factor de descuento estocástico | L10 §9.1 |
+| sesgo de anticipación | L10 §13.6 |
+| variación acotada | L11 §6.1 |
+| variación cuadrática | L11 §10.1 |
+| reducción de varianza | L12 §9.1 |
+| variables antitéticas | L12 §9.2 |
+| variable de control | L12 §9.3 |
+| muestreo por importancia | L12 §9.4 |
+| programación dinámica | L12 §11.1 |
+| parada óptima; tiempo de parada | L12 §11.5 |
+| contrato a plazo; activo subyacente | L13 §1.1 |
+| futuro | L13 §1.4 |
+| cobertura | L13 §1.6 |
+| swap | L13 §2.1 |
+| opción de venta; opción americana, europea | L13 §3.1 |
+| paridad put-call | L13 §3.4 |
+| estrategia autofinanciada; numerario (cuenta bancaria) | L13 §5.2 |
+| autocorrelación | L14 §4.3 |
+| raíz unitaria | L14 §6.1 |
+| validación progresiva | L14 §7.3 |
+| fuga de información | L14 §7.6 |
+| cointegración | L14 §10.1 |
+| método generalizado de momentos | L14 §13.2 |
+| filtro de Kalman | L14 §15.2 |
+| casi seguramente | L16 §7.1 |
+| filtración | L16 §10.1 |
+| martingala | L16 §10.2 |
+| medida martingala equivalente | L16 §12.4 |
 

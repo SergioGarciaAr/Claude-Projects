@@ -309,7 +309,7 @@ Textos de contraste: Hamilton, *Time Series Analysis*; Tsay, *Analysis of Financ
 3. Estabilidad y comportamiento cualitativo.
 4. Métodos numéricos para EDO.
 5. La ecuación del calor; separación de variables.
-6. Series y transformada de Fourier; solución fundamental (resultados de Riemann; teoría L² admitida).
+6. Series y transformada de Fourier; teoremas de Dirichlet y Fejér; identidad de Parseval para funciones integrables según Riemann; solución fundamental (la completitud de L² se admite hasta L16).
 7. Ecuaciones parabólicas: principio del máximo y unicidad.
 8. Reducción de la ecuación de Black-Scholes a la ecuación del calor (la derivación financiera se hace en L19).
 9. Diferencias finitas para ecuaciones parabólicas: esquemas explícito, implícito y de Crank-Nicolson; estabilidad de von Neumann.
@@ -472,7 +472,7 @@ Los datos de los casos dependen de la disponibilidad de fuentes con licencia ver
 | L13 | L3, L5, L8, L10, L12 | Descuento y curvas (L5 c. 3, 10); arbitraje (L10 c. 8); TCL para arreglos triangulares (L8 c. 11); paseo aleatorio (L8 c. 14); parada óptima (L12 c. 11) | — |
 | L14 | L3, L6, L9, L10, L12 | Inferencia asintótica (L9); polinomios de rezagos y matriz compañera (L6 c. 9; L2 c. 12); verosimilitud numérica y simulación (L12); modelos de valoración (L10) | — |
 | L15 | L6, L7, L11, L12 | Forma de Jordan (L6 c. 9), base de la exponencial de matrices de L15 c. 2; punto fijo y convergencia uniforme (L11 c. 3, 7); producto interno (L11 c. 8); sistemas tridiagonales (L12 c. 3) | — |
-| L16 | L8, L11 | Probabilidad elemental; análisis riguroso y completitud (L11) | L13 (c. 12) |
+| L16 | L8, L11 | Probabilidad elemental; análisis riguroso y completitud (L11) | L10, L13 (c. 12) |
 | L17 | L9, L10, L12, L14 | Contracción de covarianzas (L9); Markowitz (L10); optimización convexa (L12 c. 7); GARCH y factores (L14 c. 8, 12) | L16 (c. 8, valores extremos) |
 | L18 | L7, L11, L12, L15, L16 | Stieltjes y variación cuadrática (L11 c. 6, 10); L², martingalas, Borel-Cantelli (L16); Gronwall y Picard (L15 c. 1); EDP (L15 c. 5, 7); esquemas numéricos (L12) | — |
 | L19 | L9, L12, L13, L15, L16, L18 | Tiempo discreto (L13); Itô y Girsanov (L18); EDP y diferencias finitas (L15); funciones características (L16 c. 8); FFT (L12 c. 12); regresión para Longstaff-Schwartz (L9) | — |

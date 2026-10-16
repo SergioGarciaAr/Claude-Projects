@@ -161,3 +161,153 @@ Requisitos declarados en el plan: L3, L4, L6, L7.
 | 12. Colas pesadas y dependencia más allá de la correlación | L8 c. 7, L8 c. 8, L8 c. 11 |
 | 13. Simulación y método Monte Carlo | L3 c. 11, L8 c. 7, L8 c. 10, L8 c. 11 |
 | 14. Paseos aleatorios y cadenas de Markov finitas | L6 c. 9, L7 c. 1, L8 c. 3, L8 c. 9, L8 c. 10 |
+
+## L9
+
+Requisitos declarados en el plan: L3, L6, L7, L8.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Datos, muestras y estadística descriptiva de rendimientos | L2 c. 8, L3 c. 9, L3 c. 10, L5 c. 2 (aplic.), L8 c. 6, L8 c. 7 |
+| 2. Estimadores | L8 c. 10, L9 c. 1 |
+| 3. Distribuciones muestrales | L6 c. 7, L6 c. 10, L8 c. 7, L8 c. 8, L9 c. 2 |
+| 4. Método de los momentos y máxima verosimilitud | L7 c. 5, L7 c. 6, L8 c. 10, L8 c. 11, L9 c. 3 |
+| 5. Intervalos de confianza | L9 c. 4 |
+| 6. Contrastes de hipótesis | L9 c. 5 |
+| 7. Pruebas múltiples | L8 c. 3, L9 c. 6 |
+| 8. Regresión lineal y teorema de Gauss-Markov | L6 c. 8, L8 c. 9, L9 c. 3 |
+| 9. Inferencia y diagnóstico en regresión | L9 c. 4, L9 c. 6, L9 c. 8 |
+| 10. Bootstrap y remuestreo | L3 c. 11, L8 c. 13, L9 c. 5 |
+| 11. Inferencia bayesiana introductoria | L8 c. 3, L8 c. 9, L9 c. 4 |
+| 12. Validación y sobreajuste | L9 c. 7, L9 c. 8 |
+| 13. Estadística multivariante, no paramétrica y robusta | L6 c. 11, L8 c. 7, L9 c. 4, L9 c. 6 |
+| 14. El problema de estimar rendimientos esperados | L9 c. 5, L9 c. 10, L9 c. 11, L9 c. 13 |
+
+## L10
+
+Requisitos declarados en el plan: L5, L6, L7, L8, L9.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Sistema financiero e intermediarios | L5 c. 1 |
+| 2. Instrumentos financieros | L5 c. 8, L10 c. 1 |
+| 3. Mecanismos de negociación y liquidez | L10 c. 2 |
+| 4. Rendimientos | L2 c. 8, L8 c. 6, L8 c. 7, L9 c. 1, L10 c. 2 |
+| 5. Utilidad esperada y aversión al riesgo | L4 c. 6, L4 c. 13, L7 c. 6, L8 c. 6, L8 c. 8 |
+| 6. Teoría de carteras de Markowitz | L7 c. 11, L8 c. 7, L10 c. 4, L10 c. 5 |
+| 7. CAPM | L9 c. 8, L9 c. 9, L10 c. 6 |
+| 8. Arbitraje en un período | L6 c. 13, L7 c. 7, L7 c. 9, L8 c. 1 |
+| 9. Factor de descuento estocástico | L6 c. 7, L8 c. 9, L10 c. 5, L10 c. 8 |
+| 10. APT y modelos de factores | L6 c. 11, L9 c. 8, L9 c. 13, L10 c. 7, L10 c. 9 |
+| 11. Eficiencia de mercado y anomalías | L8 c. 9, L8 c. 14, L9 c. 6, L9 c. 7, L10 c. 7, L10 c. 10 |
+| 12. Fricciones y límites al arbitraje | L10 c. 3, L10 c. 8 |
+| 13. Estados contables y valoración por flujos descontados | L4 c. 12, L5 c. 4, L5 c. 6, L10 c. 2, L10 c. 7 |
+
+## L11
+
+Requisitos declarados en el plan: L4, L6, L7.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Construcción de los números reales | L1 c. 3, L1 c. 6, L1 c. 7, L4 c. 1 |
+| 2. Espacios métricos, compacidad y conexión | L1 c. 3, L7 c. 1 |
+| 3. Espacios completos y teorema del punto fijo de Banach | L4 c. 1, L11 c. 2 |
+| 4. Continuidad y continuidad uniforme | L4 c. 3, L11 c. 2 |
+| 5. Diferenciabilidad rigurosa | L7 c. 3, L7 c. 8, L11 c. 3, L11 c. 4 |
+| 6. Integral de Riemann-Stieltjes y variación acotada | L4 c. 8, L4 c. 9, L11 c. 4 |
+| 7. Convergencia uniforme e intercambio de límites | L4 c. 13, L11 c. 3, L11 c. 6 |
+| 8. Espacios normados y con producto interno | L6 c. 7, L11 c. 3, L11 c. 7 |
+| 9. Funciones convexas y desigualdades | L4 c. 6, L7 c. 7, L11 c. 8 |
+| 10. Variación cuadrática de funciones deterministas | L4 c. 6, L7 c. 5, L11 c. 6, L11 c. 7 |
+
+## L12
+
+Requisitos declarados en el plan: L3, L4, L6, L7, L8.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Condicionamiento y estabilidad | L3 c. 2, L4 c. 14, L6 c. 12 |
+| 2. Ecuaciones no lineales | L4 c. 3, L4 c. 7, L5 c. 6 (aplic.), L5 c. 8 (aplic.), L7 c. 3, L12 c. 1 |
+| 3. Sistemas lineales numéricos | L6 c. 12, L12 c. 1 |
+| 4. Interpolación y *splines* | L1 c. 10, L4 c. 13, L5 c. 10 (aplic.), L12 c. 3 |
+| 5. Derivación e integración numéricas | L4 c. 14, L12 c. 4 |
+| 6. Optimización sin restricciones | L7 c. 6, L7 c. 7, L12 c. 2 |
+| 7. Optimización convexa | L7 c. 9, L10 c. 6 (aplic.), L12 c. 6 |
+| 8. Calibración por mínimos cuadrados no lineales | L5 c. 10 (aplic.), L6 c. 8, L6 c. 11, L12 c. 6 |
+| 9. Monte Carlo y reducción de varianza | L8 c. 9, L8 c. 11, L8 c. 13, L12 c. 5 |
+| 10. Cuasi-Monte Carlo | L12 c. 5, L12 c. 9 |
+| 11. Programación dinámica y parada óptima en tiempo discreto | L7 c. 6, L7 c. 8, L8 c. 9, L8 c. 14 |
+| 12. Transformada discreta de Fourier y FFT | L2 c. 12, L3 c. 5, L4 c. 13, L6 c. 7 |
+
+## L13
+
+Requisitos declarados en el plan: L3, L5, L8, L10, L12.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Contratos a plazo y futuros | L5 c. 2, L5 c. 10, L8 c. 7, L10 c. 2, L10 c. 8 |
+| 2. Swaps | L5 c. 10, L13 c. 1 |
+| 3. Opciones: cotas de arbitraje y paridad put-call | L2 c. 1, L10 c. 8, L13 c. 1 |
+| 4. Modelo binomial de un período | L10 c. 8, L13 c. 3 |
+| 5. Modelo binomial de varios períodos y martingalas discretas | L3 c. 6, L8 c. 2, L8 c. 9, L8 c. 14, L13 c. 4 |
+| 6. Opciones americanas como problema de parada óptima | L12 c. 11, L13 c. 5 |
+| 7. Cobertura en tiempo discreto | L8 c. 7, L8 c. 9, L13 c. 5 |
+| 8. Convergencia del modelo de Cox-Ross-Rubinstein a la fórmula de Black-Scholes | L4 c. 10, L8 c. 11, L13 c. 3, L13 c. 5 |
+| 9. Opciones exóticas en árboles y límites del modelo | L12 c. 9, L13 c. 6, L13 c. 8 |
+
+## L14
+
+Requisitos declarados en el plan: L3, L6, L9, L10, L12.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Hechos estilizados de los rendimientos financieros | L3 c. 9, L9 c. 1, L9 c. 13, L10 c. 4 |
+| 2. Regresión matricial, mínimos cuadrados generalizados y errores HAC | L6 c. 10, L9 c. 8, L9 c. 9 |
+| 3. Endogeneidad, variables instrumentales y causalidad | L14 c. 2 |
+| 4. Procesos estocásticos en tiempo discreto | L2 c. 12, L6 c. 9, L8 c. 10, L9 c. 2 |
+| 5. Modelos ARMA | L9 c. 4, L9 c. 12, L14 c. 4 |
+| 6. Raíces unitarias y regresiones espurias | L12 c. 9, L14 c. 5 |
+| 7. Pronóstico, validación temporal y bootstrap para datos dependientes | L8 c. 9, L9 c. 10, L9 c. 12, L14 c. 5 |
+| 8. Volatilidad condicional: ARCH y GARCH | L9 c. 4, L12 c. 6, L14 c. 5 |
+| 9. Vectores autorregresivos y causalidad de Granger | L6 c. 9, L14 c. 5 |
+| 10. Cointegración | L14 c. 6, L14 c. 9 |
+| 11. Rupturas estructurales y cambios de régimen | L8 c. 3, L8 c. 14, L12 c. 6, L14 c. 5 |
+| 12. Regresiones de corte transversal y procedimiento de Fama-MacBeth | L10 c. 7, L10 c. 10, L14 c. 2 |
+| 13. Método generalizado de momentos | L9 c. 4, L12 c. 6, L14 c. 2 |
+| 14. Contraste de modelos de valoración de activos | L9 c. 3, L10 c. 9, L14 c. 12, L14 c. 13 |
+| 15. Modelos de espacio de estados y filtro de Kalman | L8 c. 9, L9 c. 4, L12 c. 6, L14 c. 4 |
+
+## L15
+
+Requisitos declarados en el plan: L6, L7, L11, L12.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. Ecuaciones de primer orden: existencia, unicidad y desigualdad de Gronwall | L4 c. 9, L4 c. 10, L11 c. 3, L11 c. 7 |
+| 2. Sistemas lineales, exponencial de matrices y ecuaciones de Riccati | L4 c. 12, L6 c. 9, L6 c. 12, L11 c. 7, L15 c. 1 |
+| 3. Estabilidad y comportamiento cualitativo | L7 c. 5, L15 c. 2 |
+| 4. Métodos numéricos para ecuaciones ordinarias | L4 c. 13, L12 c. 1, L15 c. 1 |
+| 5. La ecuación del calor y la separación de variables | L4 c. 13, L7 c. 5, L11 c. 7, L15 c. 2 |
+| 6. Series y transformada de Fourier | L4 c. 11, L11 c. 7, L11 c. 8, L15 c. 5 |
+| 7. Ecuaciones parabólicas: principio del máximo | L7 c. 6, L15 c. 5, L15 c. 6 |
+| 8. Reducción de la ecuación de Black-Scholes a la ecuación del calor | L7 c. 4, L15 c. 6, L15 c. 7 |
+| 9. Diferencias finitas para ecuaciones parabólicas | L12 c. 3, L15 c. 4, L15 c. 5, L15 c. 7, L15 c. 8 |
+
+## L16
+
+Requisitos declarados en el plan: L8, L11.
+
+| Capítulo | Depende de |
+|---|---|
+| 1. σ-álgebras, medidas y teorema de extensión de Carathéodory | L4 c. 12, L8 c. 1, L11 c. 2 |
+| 2. Funciones medibles y variables aleatorias | L8 c. 5, L16 c. 1 |
+| 3. Integral de Lebesgue | L4 c. 8, L16 c. 2 |
+| 4. Espacios L^p | L11 c. 8, L11 c. 9, L16 c. 3 |
+| 5. Medida producto y teorema de Fubini-Tonelli | L7 c. 10, L16 c. 1, L16 c. 3 |
+| 6. Independencia, lemas de Borel-Cantelli y ley 0-1 | L16 c. 2, L16 c. 5 |
+| 7. Modos de convergencia y ley fuerte de los grandes números | L16 c. 4, L16 c. 6 |
+| 8. Convergencia en distribución y funciones características | L8 c. 8, L8 c. 11, L11 c. 7, L16 c. 5, L16 c. 7 |
+| 9. Esperanza condicional y teorema de Radon-Nikodym | L8 c. 9, L16 c. 4, L16 c. 5 |
+| 10. Martingalas en tiempo discreto y tiempos de parada | L8 c. 9, L8 c. 14, L16 c. 9 |
+| 11. Convergencia de martingalas y desigualdades de Doob | L16 c. 7, L16 c. 10 |
+| 12. Cambio de medida y teorema fundamental de valoración en tiempo discreto | L7 c. 7, L10 c. 8 (aplic.), L13 c. 5 (aplic.), L16 c. 9, L16 c. 10 |

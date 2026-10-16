@@ -74,7 +74,26 @@ Hallazgos surgidos al redactar los índices por sección de L1 a L8 (entrega 1b)
 | H-09 | Menor | La notación O(·) aparece en L3 §5.3, antes de L4 | Corregida la primera aparición en `NOTACION.md` | Resuelto |
 | H-10 | Menor | La integral gaussiana dependía del cambio de variables general (admitido) | L7 §10.6 la demuestra con Fubini y una sustitución en una variable | Resuelto |
 
-Ajustes A-10 y A-11, sometidos a aprobación junto con la entrega 1b.
+Ajustes A-10 y A-11 aprobados por la dirección editorial el 2026-10-16, junto con la entrega 1b.
+
+## Revisión R-0004 · Índices detallados de L9–L16 · 2026-10-16
+
+Hallazgos surgidos al redactar los índices por sección de L9 a L16 (entrega 1c). Resultado final de `herramientas/verificar_indices.py` sobre L1–L16: 16 libros, 196 capítulos, 0 errores, 1 aviso esperado (el mismo de R-0003).
+
+| ID | Severidad | Hallazgo | Resolución | Estado |
+|---|---|---|---|---|
+| H-11 | Importante | RA-10 admitía toda la teoría L² de Fourier en L15, aunque la identidad de Parseval para funciones integrables según Riemann puede demostrarse con las herramientas de L11 | L15 §6.4–6.5 demuestran Fejér y Parseval; solo se admite el teorema de Riesz-Fischer, que L16 §4.3 demuestra; descripción de L15 c. 6 actualizada en el plan | Resuelto |
+| H-12 | Importante | RA-08 (cambio de variables general) quedaba como referencia externa | L16 §5.5\* lo demuestra (sección opcional); RA-08 queda cerrado en la obra | Resuelto |
+| H-13 | Importante | L16 c. 12 usa el arbitraje en un período de L10 sin que L10 figurara como aplicación de L16 | L10 agregado a la columna «Aplicación» de L16 en el plan | Resuelto |
+| H-14 | Importante | Dieciséis resultados usados en L9–L15 no estaban registrados (teoría asintótica de datos dependientes, bootstrap, BFGS, Koksma-Hlawka, Lax, Runge-Kutta y otros) | Registrados como RA-29 a RA-44; en cada caso se demuestra la versión accesible (un parámetro, caso bivariado, condiciones simplificadas) cuando existe | Resuelto |
+| H-15 | Menor | L13 declaraba L3 como requisito sin que ningún capítulo lo citara (detectado por el verificador) | L13 c. 5 cita L3 c. 6, que usa en su sección de implementación con pruebas | Resuelto |
+| H-16 | Menor | La función continua no derivable en ningún punto estaba prevista en L11 c. 5, pero su demostración usa convergencia uniforme (L11 c. 7) | Trasladada a L11 §7.7\* | Resuelto |
+| H-17 | Menor | La completitud de ℓ^p para p general requiere Hölder y Minkowski, que están en L11 c. 9 | L11 §8.2 trata p = 1, 2, ∞; el caso general está en L11 §9.4 | Resuelto |
+| H-18 | Menor | La inferencia estadística sobre parámetros calibrados requiere L9, que no es requisito de L12 | L12 c. 8 se limita a los aspectos numéricos; la inferencia se trata en L14 y L19 c. 12 | Resuelto |
+| H-19 | Menor | La convergencia de las soluciones en serie de la ecuación del calor (L15 c. 5) precedía a la teoría de Fourier (L15 c. 6) | L15 §5.4 la justifica para coeficientes absolutamente sumables mediante el criterio M (L11 §7.5) | Resuelto |
+| H-20 | Menor | La demostración de Bernstein del teorema de aproximación de Weierstrass usa probabilidad (L8), que no es requisito de L11 | L11 §7.6 usa núcleos de Landau | Resuelto |
+
+Sin ajustes de numeración respecto del plan aprobado.
 
 ## Pendientes de verificación
 

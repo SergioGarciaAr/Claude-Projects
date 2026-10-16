@@ -1,12 +1,12 @@
 # Registro de resultados admitidos
 
-Versión 1.1 · Entrega 1b · 2026-10-16
+Versión 1.2 · Entrega 1c · 2026-10-16
 
-Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cuya demostración completa está fuera del alcance de la colección. Las reglas están en `LIBRO_DE_ESTILO.md`, sección 4. Las ubicaciones de L1 a L8 están confirmadas por los índices detallados de la entrega 1b; las de L9 a L23 se confirmarán en las entregas 1c y 1d.
+Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cuya demostración completa está fuera del alcance de la colección. Las reglas están en `LIBRO_DE_ESTILO.md`, sección 4. Las ubicaciones de L1 a L16 están confirmadas por los índices detallados de las entregas 1b y 1c; las de L17 a L23 se confirmarán en la entrega 1d.
 
 **Estados:** *previsto* (identificado en el diseño, ubicación por confirmar); *confirmado* (ubicaciones fijadas en los índices detallados); *cerrado en el diseño* (ya no es un resultado admitido porque el diseño incluye su demostración antes de usarlo); *en uso* (aparece en un capítulo redactado); *cerrado* (la demostración está redactada y verificada).
 
-## Resultados usados en L1–L8
+## Resultados usados en L1–L16
 
 | ID | Enunciado (resumen) | Se usa en | Se demuestra en | Estado |
 |---|---|---|---|---|
@@ -17,30 +17,46 @@ Un resultado admitido es un enunciado que la obra usa antes de demostrarlo, o cu
 | RA-05 | ln(1 + x) ≤ x para x > −1, y cota del error de la regla del 72 | L1 §8.10 (exploración numérica) | L4 §10.8 (desigualdad) y L4 §13.3 (cota) | Confirmado |
 | RA-06 | Derivadas de exp y ln | Ejemplos de L4 c. 4–9 | L4 §10.7 | Confirmado |
 | RA-07 | Teorema fundamental del álgebra | L6 §9.2 (y a través de él, L6 §10.1) | Fuera del alcance (requiere análisis complejo); referencia externa | Confirmado |
-| RA-08 | Teorema de cambio de variables en integrales múltiples para transformaciones no lineales | L7 §10.5, L8 §8.2, L8 §13.4 | Demostración para transformaciones lineales en L7 §10.5; caso general: referencia externa | Confirmado |
-| RA-09 | Una distribución queda determinada por su función característica (y por su función generadora de momentos cuando existe en un entorno de 0) | L8 §8.6 | L16 c. 8 | Confirmado |
+| RA-08 | Teorema de cambio de variables en integrales múltiples para transformaciones no lineales | L7 §10.5, L8 §8.2, L8 §13.4 | Caso lineal en L7 §10.5; caso general en L16 §5.5\* (sección opcional) | Confirmado |
+| RA-09 | Una distribución queda determinada por su función característica (y por su función generadora de momentos cuando existe en un entorno de 0) | L8 §8.6 | L16 §8.4 | Confirmado |
 | RA-22 | Medida de ángulos en radianes como longitud de arco y propiedades geométricas de seno y coseno (incluido el argumento de áreas para sen x / x → 1) | L2 c. 10, L4 §2.6, L4 §4.5 | L4 §9.8\* (longitud de arco) y L4 §13.7 (definición analítica y coherencia) | Confirmado |
 | RA-23 | Regla de los signos de Descartes | L5 §6.3 | Referencia externa | Confirmado |
-| RA-24 | Existencia de espacios de probabilidad que soportan variables con densidad dada y sucesiones de variables independientes con distribuciones dadas | L8 §1.2, L8 c. 5, L8 §10.1 y capítulos posteriores | L16 c. 1, c. 5 y c. 6 | Confirmado |
+| RA-24 | Existencia de espacios de probabilidad que soportan variables con densidad dada y sucesiones de variables independientes con distribuciones dadas | L8 §1.2, L8 c. 5, L8 §10.1 y capítulos posteriores | L16 §1.7, L16 §5.6 y L16 §6.2 | Confirmado |
 | RA-25 | Geometría euclídea elemental: teorema de Pitágoras y semejanza de triángulos | L2 §2.3, L2 c. 9, L2 c. 10, L6 §6.6 | Fuera del alcance (la colección no desarrolla axiomáticamente la geometría euclídea); referencia externa | Confirmado |
-| RA-26 | Fórmula de la esperanza de una función de una variable aleatoria continua para funciones generales | L8 §6.2 | L16 c. 3 (caso discreto y funciones monótonas por tramos demostrados en L8 §6.2) | Confirmado |
+| RA-26 | Fórmula de la esperanza de una función de una variable aleatoria continua para funciones generales | L8 §6.2 | L16 §3.6 (caso discreto y funciones monótonas por tramos demostrados en L8 §6.2) | Confirmado |
 | RA-27 | Cota de Berry-Esseen | L8 §11.5 | Referencia externa | Confirmado |
 | RA-28 | Distribuciones estables y teorema central del límite generalizado | L8 §12.4\* | Referencia externa | Confirmado |
+| RA-10 | Teorema de Riesz-Fischer: completitud de L² (y, con él, la completitud del sistema trigonométrico en L²) | L15 §6.5 | L16 §4.3 | Confirmado |
+| RA-11 | Distribución asintótica del estadístico de Dickey-Fuller como funcional del movimiento browniano | L14 §6.4 | Fuera del alcance (requiere el teorema central del límite funcional); referencia externa; valores críticos obtenidos por simulación en el libro | Confirmado |
+| RA-12 | Consistencia de los estimadores de varianza HAC (Newey-West) | L14 §2.5 | Referencia externa | Confirmado |
+| RA-13 | Leyes de los grandes números y teorema central del límite para procesos estacionarios débilmente dependientes; teorema ergódico | L14 §4.5 y capítulos posteriores de L14 | Referencia externa | Confirmado |
+| RA-14 | Consistencia y normalidad asintótica de la máxima verosimilitud bajo condiciones generales | L9 §4.5, L14 | Condiciones simplificadas en L9 §4.5; caso general: referencia externa | Confirmado |
+| RA-19 | Teorema fundamental de valoración en tiempo discreto, caso general (Dalang-Morton-Willinger) | L16 §12.6 | Referencia externa; el caso finito se demuestra en L16 §12.4 | Confirmado |
+| RA-29 | Distribución asintótica chi-cuadrado de la razón de verosimilitud en el caso multiparamétrico (teorema de Wilks) | L9 §6.5 | Caso de un parámetro demostrado en L9 §6.5; caso general: referencia externa | Confirmado |
+| RA-30 | Consistencia del bootstrap no paramétrico para estadísticos suaves de la media | L9 §10.3 | Referencia externa | Confirmado |
+| RA-31 | Distribución asintótica del estadístico de Kolmogorov-Smirnov | L9 §13.6 | Referencia externa (la distribución libre bajo la hipótesis nula se demuestra) | Confirmado |
+| RA-32 | Densidad de la distribución de Wishart | L9 §13.1 | Referencia externa | Confirmado |
+| RA-33 | APT asintótica (versiones de Ross y Huberman) | L10 §10.3 | Referencia externa; la APT exacta se demuestra en L10 §10.2 | Confirmado |
+| RA-34 | Convergencia superlineal del método BFGS | L12 §6.4 | Referencia externa | Confirmado |
+| RA-35 | Desigualdad de Koksma-Hlawka | L12 §10.2 | Referencia externa | Confirmado |
+| RA-36 | Consistencia del bootstrap por bloques móviles y del bootstrap estacionario | L14 §7.5 | Referencia externa | Confirmado |
+| RA-37 | Consistencia y normalidad asintótica de la cuasi máxima verosimilitud en modelos GARCH | L14 §8.4 | Referencia externa | Confirmado |
+| RA-38 | Teorema de representación de Granger, caso general | L14 §10.2 | Caso bivariado demostrado en L14 §10.2; caso general: referencia externa | Confirmado |
+| RA-39 | Distribución asintótica de los estadísticos de supremo para rupturas con fecha desconocida (Andrews) | L14 §11.3 | Referencia externa | Confirmado |
+| RA-40 | Teoría asintótica del MGM bajo condiciones generales | L14 §13.3 | Condiciones simplificadas en L14 §13.3; caso general: referencia externa | Confirmado |
+| RA-41 | Distribuciones asintóticas de estadísticos de diagnóstico y comparación: Ljung-Box, KPSS, Diebold-Mariano y prueba J | L14 §5.6, L14 §6.5, L14 §7.4, L14 §13.5 | Referencia externa | Confirmado |
+| RA-42 | Teorema de equivalencia de Lax | L15 §9.4 | Referencia externa | Confirmado |
+| RA-43 | Orden 4 del método de Runge-Kutta clásico | L15 §4.2 | Referencia externa; verificación simbólica como comprobación, no como demostración | Confirmado |
+| RA-44 | Ejemplo de Tychonoff de no unicidad para la ecuación del calor en la recta | L15 §7.3 | Referencia externa | Confirmado |
 
-## Resultados usados en L9–L23 (por confirmar en las entregas 1c y 1d)
+## Resultados usados en L17–L23 (por confirmar en la entrega 1d)
 
 | ID | Enunciado (resumen) | Se usa en | Se demuestra en | Estado |
 |---|---|---|---|---|
-| RA-10 | Teoría L² de series de Fourier: completitud del sistema trigonométrico, identidad de Parseval | L15 c. 6 | L16 c. 4 (completitud de L²) más un resultado de densidad por fijar en 1c | Previsto |
-| RA-11 | Distribución asintótica del estadístico de Dickey-Fuller como funcional del movimiento browniano | L14 c. 6 | Fuera del alcance (requiere el teorema central del límite funcional); referencia externa | Previsto |
-| RA-12 | Consistencia de los estimadores de varianza HAC | L14 c. 2 | Referencia externa | Previsto |
-| RA-13 | Leyes de los grandes números y TCL para procesos estacionarios débilmente dependientes; teorema ergódico | L14 c. 4 en adelante | Referencia externa | Previsto |
-| RA-14 | Consistencia y normalidad asintótica de la máxima verosimilitud bajo condiciones generales | L9 c. 4; L14 | Demostración bajo condiciones simplificadas en L9 c. 4; caso general: referencia externa | Previsto |
 | RA-15 | Teoremas de Fisher-Tippett-Gnedenko y de Pickands-Balkema-de Haan | L17 c. 8 | Demostración parcial; referencia externa | Previsto |
 | RA-16 | Teorema de representación de martingalas (demostración completa) | L18 c. 10; L19 | Demostración parcial en L18 c. 10; referencia externa | Previsto |
 | RA-17 | Condición de Novikov | L18 c. 9; L19 | Referencia externa | Previsto |
 | RA-18 | Existencia y unicidad fuerte de soluciones para EDE de raíz cuadrada (Yamada-Watanabe) | L19 c. 11; L22 c. 3 | Referencia externa | Previsto |
-| RA-19 | Teorema fundamental de valoración en tiempo discreto, caso general (Dalang-Morton-Willinger) | L16 c. 12 | Referencia externa | Previsto |
 | RA-20 | Caracterización de la opción americana en tiempo continuo como problema de frontera libre | L19 c. 7 | Referencia externa | Previsto |
 | RA-21 | Convergencia del descenso de gradiente estocástico | L21 c. 9 | Referencia externa | Previsto |
 

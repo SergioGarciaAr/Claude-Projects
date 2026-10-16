@@ -1,6 +1,6 @@
 # Convenciones de notación de Atlas Quant
 
-Versión 1.1 · Entrega 1b · 2026-10-16
+Versión 1.2 · Entrega 1c · 2026-10-16
 
 Este documento fija la notación común a toda la colección. Cada libro introduce los símbolos gradualmente, en el capítulo donde se necesitan, y su índice de símbolos remite a ese lugar. Las entregas 1b a 1d completarán, para cada símbolo, la columna «primera aparición». Un símbolo fijado aquí no se redefine en otro sentido sin advertencia explícita y sin registrar la excepción.
 
@@ -262,4 +262,31 @@ Lugar donde cada símbolo se define por primera vez en la colección. Cada libro
 | P(t, T) | L5 §10.1 |
 | **w** (pesos de cartera) | L6 §13.4 |
 | **μ**, **Σ** | L7 §11.2 (forma algebraica) y L8 §7.5 (probabilística) |
+
+## 12. Primera aparición de los símbolos en L9–L16
+
+| Símbolo | Primera aparición |
+|---|---|
+| X̄, S² (estadísticos muestrales) | L9 §1.2 |
+| θ, θ̂ | L9 §2.1 y L9 §2.2 |
+| L(θ), ℓ(θ) | L9 §4.2 |
+| I(θ) | L9 §4.4 |
+| H₀, H₁, α | L9 §6.1 |
+| **β** (coeficientes de regresión), ε | L9 §8.1 |
+| $r_f$ | L10 §4.3 |
+| β (beta de un activo) | L10 §7.2 |
+| ℚ (medida neutral al riesgo) | L10 §8.5 |
+| m (factor de descuento estocástico) | L10 §9.1 |
+| ℓ^p | L11 §8.1 |
+| τ (tiempo de parada) | L12 §11.5 |
+| K, T, q | L13 §1.2 y L13 §3.1 |
+| $V_t$, $C_t$, $P_t$ | L13 §3.1 |
+| Δ | L13 §4.2 |
+| $B_t$ | L13 §5.2 |
+| σ (volatilidad) | L13 §8.1 |
+| Γ | L13 §7.3 |
+| $L^p$ | L16 §4.1 |
+| →ᶜ·ˢ· | L16 §7.1 |
+| 𝔼[X \| 𝒢] | L16 §9.1 |
+| (ℱₜ) | L16 §10.1 |
 
