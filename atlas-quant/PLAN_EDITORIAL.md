@@ -441,13 +441,13 @@ Texto de contraste: Brigo y Mercurio, *Interest Rate Models*.
 2. Caso: factores al estilo Fama-French.
 3. Caso: *momentum* según Jegadeesh-Titman.
 4. Caso: volatilidad y VaR de una cartera.
-5. Caso: valoración y cobertura de opciones con datos reales.
+5. Caso: valoración y cobertura de opciones con datos sintéticos calibrados.
 6. Caso: aprendizaje automático sin fuga de información.
 7. Diseño de una investigación original.
 8. Redacción y defensa del informe.
 9. Rutas de especialización.
 
-Los datos de los casos dependen de la disponibilidad de fuentes con licencia verificable.
+Los datos de los casos siguen la política aprobada en `bibliografia/fuentes_de_datos.md` (decisión D-05): carteras y factores publicados por Kenneth French para los casos 2 y 3, con datos sintéticos para la construcción a partir de acciones individuales, y datos sintéticos calibrados para el caso 5.
 
 ---
 

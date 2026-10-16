@@ -120,13 +120,19 @@ Entrega 1e. El informe completo está en `editorial/auditoria_fase1.md`. Resulta
 |---|---|---|---|---|
 | H-29 | Menor | La extensión de la ficha de cada libro no derivaba de una regla (diferencias de 6 a 78 páginas respecto de la suma de capítulos) | Regla única y comprobación automática 6 del verificador; 23 fichas recalculadas | Resuelto |
 | H-30 | Importante | Los términos de FRED prohíben usar sus datos para entrenar sistemas de aprendizaje automático | FRED excluida de L21 y de L23 c. 6; registrado en `fuentes_de_datos.md` | Resuelto |
-| H-31 | Importante | Las réplicas de L23 c. 2 y c. 3 requieren datos comerciales de acciones individuales | Propuesta: carteras y factores de French y datos sintéticos para la construcción. Los índices no se modifican hasta la decisión D-05 | Pendiente de decisión |
-| H-32 | Importante | No hay fuente gratuita y con licencia verificable de datos de opciones para L23 c. 5 | Propuesta: datos sintéticos de un modelo calibrado; ajustar el título del capítulo. Pendiente de D-05 | Pendiente de decisión |
+| H-31 | Importante | Las réplicas de L23 c. 2 y c. 3 requieren datos comerciales de acciones individuales | Aprobado en D-05: carteras y factores de French y datos sintéticos para la construcción. Índice de L23 actualizado (versión 1.1) | Resuelto |
+| H-32 | Importante | No hay fuente gratuita y con licencia verificable de datos de opciones para L23 c. 5 | Aprobado en D-05: datos sintéticos de un modelo calibrado; capítulo retitulado y reestructurado en el índice de L23 | Resuelto |
 | H-33 | Menor | Tres artículos citados tienen correcciones publicadas y uno tiene un vacío de demostración señalado en la literatura | Registrados en las notas de `atlas.bib`; se citarán junto con el original | Resuelto |
 | H-34 | Menor | 33 entradas bibliográficas no pudieron verificarse por completo por las restricciones de red | Marcadas como parciales, con la causa; resolución antes de la composición (D-06) | Abierto |
 | H-35 | Menor | En el campo `uso` de la bibliografía, 60 entradas apuntaban a capítulos no idóneos | Reasignadas tras revisar los títulos de capítulo de los índices | Resuelto |
 
-Ajuste de los índices: la extensión de la ficha de los 23 libros se recalculó con la regla de H-29. No cambian capítulos, secciones ni prerrequisitos.
+Ajuste de los índices: la extensión de la ficha de los 23 libros se recalculó con la regla de H-29. Tras la aprobación de D-05 (2026-10-16), el índice de L23 pasó a la versión 1.1:
+
+- c. 2: datos de French; construcción de factores con datos sintéticos; nuevo prerrequisito L14 c. 14 para la prueba GRS.
+- c. 3: siete secciones, con las carteras superpuestas construidas con datos sintéticos.
+- c. 5: retitulado «con datos sintéticos calibrados», seis secciones, y nuevo uso como aplicación de L19 c. 11.
+
+El número de capítulos y la extensión no cambian.
 
 ## Pendientes de verificación
 

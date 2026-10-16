@@ -21,7 +21,7 @@ No existe ningún capítulo redactado.
 
 ## 2. Próximo paso exacto
 
-1. Obtener la revisión de la entrega 1e (revisión R-0006): `bibliografia/atlas.bib` y su versión legible `bibliografia/bibliografia.md`, `bibliografia/fuentes_de_datos.md` y `editorial/auditoria_fase1.md`. También obtener las decisiones D-05 y D-06.
+1. Obtener la revisión de la entrega 1e (revisión R-0006): `bibliografia/atlas.bib` y su versión legible `bibliografia/bibliografia.md`, `bibliografia/fuentes_de_datos.md` y `editorial/auditoria_fase1.md`. También obtener la decisión D-06.
 2. Con la aprobación, iniciar la Fase 2 presentando el plan de prueba de composición (D-04). No se instala nada antes de su aprobación.
 3. Después, redactar el capítulo piloto L1 c. 8.
 4. Al cerrar cada entrega: ejecutar `herramientas/verificar_indices.py` y `herramientas/bib_a_md.py`, regenerar los PDF con `herramientas/generar_pdf.mjs`, hacer commit y push.
@@ -45,6 +45,7 @@ No existe ningún capítulo redactado.
 | Entrega 1c | Índices de L9–L16; revisión R-0004 | 2026-10-16 |
 | Entrega 1d | Índices de L17–L23; revisión R-0005 | 2026-10-16 |
 | Formato de entrega | Todo entregable se entrega en PDF, generado desde las fuentes Markdown con `herramientas/generar_pdf.mjs` (pandoc y Chromium) y guardado en `pdf/`. Los PDF de trabajo no son la composición final de los libros, que sigue pendiente del plan de prueba de la Fase 2 | 2026-10-16 |
+| Política de datos (D-05) | Aprobada la política de `bibliografia/fuentes_de_datos.md`, sección 3: la obra no redistribuye datos de terceros; cifras empíricas fechadas y regenerables; datos sintéticos con semilla fija cuando no hay fuente libre con licencia verificable; FRED excluida del aprendizaje automático. Aplicada al índice de L23 (c. 2, c. 3 y c. 5). Requisito previo a la publicación: revisión legal | 2026-10-16 |
 | Piloto | L1 c. 8, «Potencias, raíces y logaritmos»; después, un piloto avanzado (L18 c. 6 o L16 c. 9) | 2026-10-15 |
 
 ## 4. Pendientes que requieren decisión del director
@@ -55,7 +56,6 @@ No existe ningún capítulo redactado.
 | D-02 | Licencia de la obra (todos los derechos reservados o Creative Commons, por ejemplo CC BY-NC-SA 4.0) |
 | D-03 | Hitos con revisión humana externa (propuesta: piloto, primer capítulo de cada serie, capítulos de L16, L18 y L19) |
 | D-04 | Aprobación del plan de prueba de composición (se presentará al inicio de la Fase 2) |
-| D-05 | Política de datos de la obra y casos de L23 que dependen de datos con licencia restringida (`bibliografia/fuentes_de_datos.md`; auditoría, H-31 y H-32) |
 | D-06 | Verificación en fuente primaria de las 33 entradas bibliográficas parciales: ampliar la red del entorno a `doi.org` y `api.crossref.org`, o verificación manual antes de componer cada libro |
 
 ## 5. Restricciones del entorno de trabajo
@@ -70,3 +70,7 @@ Observadas el 2026-10-15:
 ## 6. Verificaciones pendientes
 
 V-01 a V-03 quedaron resueltas en R-0006. Quedan abiertas las 33 entradas bibliográficas parciales (H-34, decisión D-06), cuya causa se registra en `bibliografia/atlas.bib`.
+
+## 7. Requisitos previos a la publicación
+
+- Revisión legal de la política de datos (redistribución y reproducción de cifras) según la licencia que se elija en D-02.

@@ -1,6 +1,6 @@
 # L23. Investigación cuantitativa aplicada: estudios de caso y replicación
 
-Índice detallado · Versión 1.0 · Entrega 1d · 2026-10-16
+Índice detallado · Versión 1.1 · Entrega 1d; casos 2, 3 y 5 ajustados a la política de datos (D-05) · 2026-10-16
 
 ## Ficha editorial
 
@@ -10,7 +10,7 @@
 - **Capítulos:** 9, más un apéndice.
 - **Extensión estimada:** 238–302 páginas.
 
-**Propósito.** Este libro integra la colección mediante estudios de caso completos y conduce al lector hasta el diseño y la defensa de una investigación propia. Cada caso parte de una pregunta publicada, reconstruye datos y métodos, replica los resultados principales, prueba su robustez y discute sus limitaciones. La elección final de los artículos y de las fuentes de datos depende de la verificación de su disponibilidad y licencia en la entrega 1e. El proyecto del lector no forma parte del libro: el libro lo prepara.
+**Propósito.** Este libro integra la colección mediante estudios de caso completos y conduce al lector hasta el diseño y la defensa de una investigación propia. Cada caso parte de una pregunta publicada, reconstruye datos y métodos, replica los resultados principales, prueba su robustez y discute sus limitaciones. Los datos siguen la política aprobada en `bibliografia/fuentes_de_datos.md`: la obra no redistribuye datos de terceros, toda cifra empírica lleva fecha y el código que la regenera, y cuando no existe una fuente libre con licencia verificable se usan datos sintéticos con semilla fija y parámetros publicados. El proyecto del lector no forma parte del libro: el libro lo prepara.
 
 **Lectura del caso de opciones.** El capítulo 5 requiere L19; quien no haya estudiado L19 puede omitirlo sin afectar el resto del libro.
 
@@ -47,16 +47,16 @@ Portada; créditos; prefacio; guía de lectura y prerrequisitos.
 
 ### Capítulo 2. Caso: factores al estilo Fama-French
 
-**Prerrequisitos:** L23 c. 1, L14 c. 12, L20 c. 3, L17 c. 5.
+**Prerrequisitos:** L23 c. 1, L14 c. 12, L14 c. 14, L20 c. 3, L17 c. 5.
 
-**Objetivos:** reconstruir el diseño original; obtener y validar los datos; construir factores; replicar los resultados principales; probar robustez por subperíodos y mercados; discutir los resultados.
+**Objetivos:** reconstruir el diseño original; obtener y validar las carteras y factores publicados en la biblioteca de datos de Kenneth French; construir factores a partir de acciones individuales con datos sintéticos; replicar las pruebas principales sobre las carteras publicadas; probar robustez por subperíodos y mercados; discutir lo que la réplica puede y no puede establecer sin los datos originales.
 
 **Secciones:**
 
 - **2.1** Pregunta y diseño original.
-- **2.2** Datos: fuente, licencia y validación.
-- **2.3** Construcción de factores.
-- **2.4** Replicación de los resultados.
+- **2.2** Datos: carteras y factores publicados por Kenneth French; licencia, versiones y validación.
+- **2.3** Construcción de factores a partir de acciones individuales, con datos sintéticos.
+- **2.4** Replicación sobre las carteras publicadas: regresiones de series de tiempo, Fama-MacBeth y prueba GRS.
 - **2.5** Robustez: subperíodos y mercados.
 - **2.6** Discusión.
 
@@ -74,16 +74,17 @@ Portada; créditos; prefacio; guía de lectura y prerrequisitos.
 
 **Prerrequisitos:** L23 c. 1, L20 c. 3, L20 c. 5, L20 c. 8.
 
-**Objetivos:** reconstruir el diseño de carteras superpuestas; definir datos y universo; replicar los resultados; incorporar costos y capacidad; analizar los colapsos documentados del *momentum*; discutir los resultados.
+**Objetivos:** reconstruir el diseño de carteras superpuestas J/K; construirlo con datos sintéticos; replicar con las carteras de *momentum* publicadas (definición 2-12) y explicar en qué difieren del diseño original; incorporar costos y capacidad; analizar los colapsos documentados del *momentum*; discutir los resultados.
 
 **Secciones:**
 
 - **3.1** Diseño original.
-- **3.2** Datos y universo.
-- **3.3** Replicación.
-- **3.4** Costos de transacción y capacidad.
-- **3.5** Colapsos del *momentum* (resultados empíricos).
-- **3.6** Discusión.
+- **3.2** Datos: carteras de *momentum* publicadas y diferencias con el diseño J/K.
+- **3.3** Carteras superpuestas con datos sintéticos.
+- **3.4** Replicación con las carteras publicadas.
+- **3.5** Costos de transacción y capacidad.
+- **3.6** Colapsos del *momentum* (resultados empíricos).
+- **3.7** Discusión.
 
 **Resultados principales:** no corresponde; estudio de caso.
 
@@ -120,19 +121,20 @@ Portada; créditos; prefacio; guía de lectura y prerrequisitos.
 
 **Extensión estimada:** 24–30 páginas; proyecto guiado.
 
-### Capítulo 5. Caso: valoración y cobertura de opciones con datos reales
+### Capítulo 5. Caso: valoración y cobertura de opciones con datos sintéticos calibrados
 
 **Prerrequisitos:** L23 c. 1, L9 c. 4.
 
-**Objetivos:** formular la pregunta; obtener, limpiar y validar datos de opciones; construir una superficie de volatilidad implícita; medir el error de cobertura delta con datos; discutir los resultados.
+**Objetivos:** formular la pregunta; explicar por qué no hay datos de opciones libres con licencia verificable y cómo se accede a ellos con licencia; generar un mercado sintético con un modelo de volatilidad estocástica calibrado a parámetros publicados, incluido el ruido de cotización; limpiar y validar esos datos; construir una superficie de volatilidad implícita; medir el error de cobertura delta; discutir qué cambia con datos reales.
 
 **Secciones:**
 
 - **5.1** Pregunta.
-- **5.2** Datos de opciones: fuentes, licencias y limpieza.
-- **5.3** Superficie de volatilidad implícita.
-- **5.4** Cobertura delta con datos: error de cobertura.
-- **5.5** Discusión.
+- **5.2** Datos de opciones: fuentes, licencias y por qué se usan datos sintéticos.
+- **5.3** Generación del mercado sintético y limpieza de los datos.
+- **5.4** Superficie de volatilidad implícita.
+- **5.5** Cobertura delta: error de cobertura.
+- **5.6** Discusión: qué cambia con datos reales.
 
 **Resultados principales:** no corresponde; estudio de caso.
 
@@ -140,7 +142,7 @@ Portada; créditos; prefacio; guía de lectura y prerrequisitos.
 
 **Aplicaciones financieras:** todo el capítulo.
 
-**Usa como aplicación:** L19 c. 5, L19 c. 6.
+**Usa como aplicación:** L19 c. 5, L19 c. 6, L19 c. 11.
 
 **Computación:** todo el capítulo.
 

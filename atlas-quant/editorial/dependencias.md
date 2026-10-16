@@ -433,10 +433,10 @@ Requisitos declarados en el plan: L9, L14, L17, L20, L21.
 | Capítulo | Depende de |
 |---|---|
 | 1. Cómo leer un artículo académico | L9 c. 6, L20 c. 1 |
-| 2. Caso: factores al estilo Fama-French | L14 c. 12, L17 c. 5, L20 c. 3, L23 c. 1 |
+| 2. Caso: factores al estilo Fama-French | L14 c. 12, L14 c. 14, L17 c. 5, L20 c. 3, L23 c. 1 |
 | 3. Caso: *momentum* según Jegadeesh-Titman | L20 c. 3, L20 c. 5, L20 c. 8, L23 c. 1 |
 | 4. Caso: volatilidad y VaR de una cartera | L14 c. 8, L17 c. 7, L17 c. 10, L23 c. 1 |
-| 5. Caso: valoración y cobertura de opciones con datos reales | L9 c. 4, L19 c. 5 (aplic.), L19 c. 6 (aplic.), L23 c. 1 |
+| 5. Caso: valoración y cobertura de opciones con datos sintéticos calibrados | L9 c. 4, L19 c. 5 (aplic.), L19 c. 6 (aplic.), L19 c. 11 (aplic.), L23 c. 1 |
 | 6. Caso: aprendizaje automático sin fuga de información | L20 c. 7, L21 c. 3, L21 c. 12, L23 c. 1 |
 | 7. Diseño de una investigación original | L20 c. 1, L23 c. 6 |
 | 8. Redacción y defensa del informe | L20 c. 12, L23 c. 7 |

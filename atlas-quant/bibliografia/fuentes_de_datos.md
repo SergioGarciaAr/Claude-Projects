@@ -1,8 +1,8 @@
 # Fuentes de datos y licencias
 
-Entrega 1e · Versión 1.0 · 2026-10-16
+Entrega 1e · Versión 1.1 · 2026-10-16 · Política de datos aprobada por el director (D-05, 2026-10-16)
 
-Este documento registra las fuentes de datos previstas para los capítulos con datos reales, en particular L20 y los casos de L23. Para cada fuente indica sus condiciones de uso, el nivel de verificación y sus consecuencias para la obra. No es asesoramiento jurídico. La redistribución de datos y la reproducción de cifras en una obra publicada deberían confirmarse con asesoría legal antes de la publicación (decisión D-05 en `ESTADO.md`).
+Este documento registra las fuentes de datos previstas para los capítulos con datos reales, en particular L20 y los casos de L23. Para cada fuente indica sus condiciones de uso, el nivel de verificación y sus consecuencias para la obra. No es asesoramiento jurídico. La redistribución de datos y la reproducción de cifras en una obra publicada deben confirmarse con asesoría legal antes de la publicación; este punto queda como requisito previo a la publicación en `ESTADO.md`.
 
 **Método.** Búsqueda web el 2026-10-16. El entorno de trabajo no puede abrir directamente los sitios de las fuentes, de modo que las condiciones se tomaron de los fragmentos que devuelve la búsqueda. Cuando la búsqueda solo devolvió fuentes secundarias, se indica.
 
@@ -13,7 +13,7 @@ Este documento registra las fuentes de datos previstas para los capítulos con d
 | Kenneth R. French Data Library (Tuck School, Dartmouth) | Factores de Fama-French, carteras ordenadas por tamaño, valor, *momentum*, industria; diarios y mensuales desde 1926 | Las páginas llevan aviso de copyright de Fama y French. Muchas series derivan de CRSP y Compustat. No se encontraron términos explícitos de redistribución | Parcial | L14, L17, L20, L23 c. 2, c. 3, c. 4 |
 | FRED (Banco de la Reserva Federal de San Luis) | Series macroeconómicas y de tasas | Algunas series tienen copyright de terceros: sin permiso de su titular, solo se permite el uso personal o educativo no comercial. Desde junio de 2024 los términos prohíben usar el contenido o la API de FRED para desarrollar o entrenar sistemas de aprendizaje automático | Verificada (anuncio oficial y páginas legales) | L14, L20; **excluida** de L21 y L23 c. 6 |
 | Departamento del Tesoro de EE. UU. | Curvas diarias de rendimientos a la par (CMT), tasas de letras | Las obras del Gobierno federal no tienen protección de copyright en EE. UU. (17 U.S.C. § 105). No se encontró el texto de uso propio del Tesoro | Parcial | L5, L12 c. 8, L22, L23 c. 4 |
-| Cboe DataShop / LiveVol | Opciones: cotizaciones de fin de día, datos *open-close* | Producto de pago, con descuento académico (50 % del precio estándar, mínimo de 500 USD). Hay una muestra gratuita de fin de día (julio–diciembre de 2022). La distribución externa de datos derivados tiene tarifa propia. Los datos de profundidad son solo de uso interno | Verificada en presentaciones regulatorias de tarifas de Cboe ante la SEC | L23 c. 5 (pendiente de decisión) |
+| Cboe DataShop / LiveVol | Opciones: cotizaciones de fin de día, datos *open-close* | Producto de pago, con descuento académico (50 % del precio estándar, mínimo de 500 USD). Hay una muestra gratuita de fin de día (julio–diciembre de 2022). La distribución externa de datos derivados tiene tarifa propia. Los datos de profundidad son solo de uso interno | Verificada en presentaciones regulatorias de tarifas de Cboe ante la SEC | Solo como vía de acceso del lector con licencia propia (L23 §5.2) |
 | CRSP / Compustat | Rendimientos y contables de acciones individuales | No verificado en esta entrega. Son la base de casi todas las series de French y de los artículos replicados | — | Solo como referencia del método original |
 
 ## 2. Detalle por fuente
@@ -51,25 +51,25 @@ Este documento registra las fuentes de datos previstas para los capítulos con d
 - Cboe DataShop ofrece datos de fin de día de pago, con descuento académico, y una muestra gratuita de seis meses (julio–diciembre de 2022) de datos *open-close*.
 - Las condiciones de la muestra no se pudieron leer, y la distribución externa de datos derivados tiene tarifa propia. OptionMetrics, la fuente habitual en la investigación académica, no pudo verificarse.
 
-**Opciones para L23 c. 5** (decisión D-05):
+**Opciones consideradas para L23 c. 5.** Se aprobó la opción 1 (D-05):
 
 1. **Datos sintéticos** generados con un modelo de volatilidad estocástica calibrado a parámetros publicados, con el código que los genera. Es reproducible y sin restricciones, pero no son datos reales. Esta es la opción recomendada.
 2. **Muestra gratuita de Cboe**, si sus condiciones permiten el uso descrito. Hay que verificarlas directamente con Cboe.
 3. **Licencia académica** adquirida por el lector. El libro daría el código y el procedimiento, pero no los datos.
 
-El título del capítulo («con datos reales») debería ajustarse si se elige la opción 1.
+El capítulo pasa a titularse «Caso: valoración y cobertura de opciones con datos sintéticos calibrados». La sección 5.2 explica el acceso a datos reales con licencia (opción 3), y la 5.6 discute qué cambia con ellos.
 
 ### 2.5 Acciones individuales (CRSP, Compustat)
 
 Los artículos que replica L23 (Fama-French 1993, Jegadeesh-Titman 1993) usan acciones individuales de CRSP y datos contables de Compustat. Esta entrega no verificó sus condiciones de licencia; se trata de bases comerciales, habitualmente accesibles mediante suscripción institucional.
 
-**Consecuencias para L23.**
+**Consecuencias para L23** (aprobadas en D-05 y aplicadas al índice, versión 1.1).
 
 - **L23 c. 2 (factores).** La réplica se hará sobre las carteras y factores publicados por French: pruebas de series de tiempo, regresiones de Fama-MacBeth sobre carteras y prueba GRS. La construcción de factores a partir de acciones individuales se explicará y se ilustrará con datos sintéticos o con un universo pequeño de fuente libre.
 - **L23 c. 3 (*momentum*).** La réplica usará las diez carteras de *momentum* y el factor Mom de French, que siguen la definición 2-12, distinta de las estrategias superpuestas J/K de Jegadeesh y Titman. El capítulo explicará la diferencia y construirá las carteras superpuestas con datos sintéticos.
 - **Sección 2.2 de L23** («Datos: fuente, licencia y validación») y **sección 2.1 de L20** («Fuentes de datos y licencias»). Usarán este documento como caso de estudio.
 
-## 3. Política propuesta para la obra
+## 3. Política de datos de la obra (aprobada, D-05)
 
 1. La obra no redistribuye datos de terceros. El código descarga los datos de la fuente original y el texto indica la fuente, la serie, la fecha de consulta y el estado de licencia.
 2. Toda cifra empírica impresa lleva fecha y el código que la regenera. Si la fuente revisa los datos, la diferencia se documenta en la siguiente edición.
