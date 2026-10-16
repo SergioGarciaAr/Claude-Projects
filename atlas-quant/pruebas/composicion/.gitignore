@@ -9,3 +9,12 @@ libro.aux
 *.quarto_ipynb
 resultados/*.log
 resultados/escala-*.pdf
+/*.tex
+/*.log
+/*.aux
+/*.idx
+/*.ind
+/*.ilg
+/*.toc
+/*.out
+_freeze/
