@@ -1,0 +1,14 @@
+book:
+  title: "Muestra de composición · Solucionario"
+solucionario: true
+toc: false
+execute:
+  eval: false
+format:
+  typst:
+    include-after-body: []
+  pdf:
+    include-after-body: []
+    include-in-header:
+      - latex/preambulo.tex
+      - latex/solucionario.tex

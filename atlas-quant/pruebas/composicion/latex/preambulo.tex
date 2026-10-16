@@ -1,0 +1,15 @@
+% Preámbulo de prueba para la salida LaTeX (LuaLaTeX).
+\usepackage{imakeidx}
+\makeindex[title=Índice analítico, columns=2, intoc]
+\addtokomafont{disposition}{\rmfamily}
+\KOMAoptions{numbers=noenddot}
+% Entornos propios (filtros/entornos.lua): sin numerar, cuerpo en redonda, sangría a la izquierda.
+% El filtro escribe el título en línea al comienzo del primer párrafo (\atlasnotatitulo).
+% No se usa amsthm con nota opcional: provoca un error de babel (bidi) en LuaLaTeX con TeX Live 2023.
+\newenvironment{atlasnota}{\par\medskip\begin{list}{}{\leftmargin=1.2em\rightmargin=0pt}\item\relax}{\end{list}\medskip}
+\newcommand{\atlasnotatitulo}[1]{\textbf{#1.}\enspace}
+% Números de sección sin punto final (el español de babel lo añade por omisión).
+\renewcommand*{\autodot}{}
+% Corte de líneas largas en los bloques de código.
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}

@@ -1,0 +1,89 @@
+# La fórmula de Itô {#sec-ito}
+
+Este segundo capítulo de muestra prueba la composición de matemática avanzada: alineaciones de varias líneas, matrices, definiciones por casos, una simulación con salida verificada y referencias cruzadas al capítulo anterior. Sigue la exposición de @oksendal2003 y @shreve2004b; los detalles técnicos están en @karatzas1991.
+
+## Procesos de Itô {#sec-procesos-ito}
+
+Sea $W = (W_t)_{t \geq 0}$ un [movimiento browniano]{.idx} estándar sobre un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \mathbb{P})$.
+
+::: {#def-proceso-ito}
+## Proceso de Itô
+Un [proceso de Itô]{.idx} es un proceso adaptado $X$ de la forma
+$$
+X_t = X_0 + \int_0^t \mu_s \, \mathrm{d}s + \int_0^t \sigma_s \, \mathrm{d}W_s , \qquad t \geq 0,
+$$ {#eq-proceso-ito}
+donde $\mu$ y $\sigma$ son procesos adaptados con $\int_0^t \lvert \mu_s \rvert \, \mathrm{d}s < \infty$ y $\int_0^t \sigma_s^{2} \, \mathrm{d}s < \infty$ casi seguramente. En forma diferencial se escribe $\mathrm{d}X_t = \mu_t \, \mathrm{d}t + \sigma_t \, \mathrm{d}W_t$.
+:::
+
+En dimensión dos, un browniano $\mathbf{W}_t = (W^{1}_t, W^{2}_t)^{\top}$ con correlación $\rho \in [-1, 1]$ tiene matriz de covarianza
+$$
+\operatorname{Cov}(\mathbf{W}_t) = t \begin{pmatrix} 1 & \rho \\ \rho & 1 \end{pmatrix},
+$$ {#eq-covarianza}
+y la función indicadora de un evento $A$, que se usará en L18, se define por casos:
+$$
+\mathbf{1}_A(\omega) = \begin{cases} 1, & \omega \in A, \\ 0, & \omega \notin A. \end{cases}
+$$
+
+::: {#thm-ito}
+## Fórmula de Itô
+Sea $X$ un proceso de Itô como en la @eq-proceso-ito y sea $f \in C^{1,2}([0, \infty) \times \mathbb{R})$. Entonces $Y_t = f(t, X_t)$ es un proceso de Itô y, casi seguramente para todo $t \geq 0$,
+$$
+\begin{aligned}
+f(t, X_t) = f(0, X_0)
+  &+ \int_0^t \Bigl( \partial_t f(s, X_s) + \mu_s \, \partial_x f(s, X_s) + \tfrac{1}{2} \sigma_s^{2} \, \partial_{xx} f(s, X_s) \Bigr) \mathrm{d}s \\
+  &+ \int_0^t \sigma_s \, \partial_x f(s, X_s) \, \mathrm{d}W_s .
+\end{aligned}
+$$ {#eq-ito}
+:::
+
+::: {.proof}
+Esbozo. Se aproxima $f$ por un desarrollo de Taylor de segundo orden sobre una partición de $[0, t]$ de malla que tiende a cero. Los términos de primer orden convergen a las integrales de la @eq-ito; el término $\tfrac{1}{2} \partial_{xx} f \, (\Delta X)^{2}$ converge a $\tfrac{1}{2} \int_0^t \sigma_s^{2} \partial_{xx} f \, \mathrm{d}s$ porque la variación cuadrática del browniano en $[0, t]$ es $t$; los restantes tienden a cero. La demostración completa está en L18 c. 6.
+:::
+
+::: {.admitido}
+## RA-49, Teorema de Donsker
+El paseo aleatorio reescalado converge en distribución al movimiento browniano en el espacio de Skorokhod. La convergencia de las distribuciones finito-dimensionales se demuestra en L18 §3.6; la convergencia funcional se admite con referencia a @billingsley1999.
+:::
+
+## Aplicación: el movimiento browniano geométrico {#sec-mbg}
+
+::: {#exm-mbg}
+Sea $\mathrm{d}S_t = \mu S_t \, \mathrm{d}t + \sigma S_t \, \mathrm{d}W_t$ con $S_0 > 0$. Aplicando el @thm-ito a $f(t, x) = \ln x$, y usando que el logaritmo convierte productos en sumas (@thm-log-producto),
+$$
+\mathrm{d} \ln S_t = \Bigl( \mu - \tfrac{1}{2} \sigma^{2} \Bigr) \mathrm{d}t + \sigma \, \mathrm{d}W_t ,
+\qquad
+S_t = S_0 \exp\Bigl( \bigl(\mu - \tfrac{1}{2}\sigma^{2}\bigr) t + \sigma W_t \Bigr).
+$$ {#eq-mbg}
+En particular, $\mathbb{E}[S_t] = S_0 e^{\mu t}$.
+:::
+
+La celda siguiente simula $100\,000$ trayectorias con el esquema de Euler-Maruyama [@glasserman2003] y compara la media muestral de $S_T$ con el valor exacto. La semilla está fijada para que la salida sea reproducible.
+
+```{python}
+#| label: simulacion-mbg
+import numpy as np
+
+def coma(x, decimales):
+    texto = f"{x:,.{decimales}f}"
+    return texto.replace(",", " ").replace(".", ",")
+
+rng = np.random.default_rng(20261016)
+S0, mu, sigma, T, pasos, n = 100.0, 0.08, 0.20, 1.0, 252, 100_000
+dt = T / pasos
+S = np.full(n, S0)
+for _ in range(pasos):
+    S = S + mu * S * dt + sigma * S * np.sqrt(dt) * rng.standard_normal(n)
+media, error = S.mean(), S.std(ddof=1) / np.sqrt(n)
+print(f"Media simulada de S_T: {coma(media, 3)} (error estándar {coma(error, 3)})")
+print(f"Valor exacto S0·e^(μT): {coma(S0 * np.exp(mu * T), 3)}")
+```
+
+## Ejercicios {#sec-ito-ejercicios}
+
+::: {#exr-ito-1}
+Use el @thm-ito para calcular $\mathrm{d}(W_t^{2})$ y deduzca que $W_t^{2} - t$ es una martingala.
+:::
+
+::: {.solucion}
+Con $f(t, x) = x^{2}$, $\mu = 0$ y $\sigma = 1$, la @eq-ito da $\mathrm{d}(W_t^{2}) = \mathrm{d}t + 2 W_t \, \mathrm{d}W_t$. Por tanto $W_t^{2} - t = \int_0^t 2 W_s \, \mathrm{d}W_s$, que es una martingala porque $\mathbb{E}\int_0^t W_s^{2} \, \mathrm{d}s = t^{2}/2 < \infty$.
+:::

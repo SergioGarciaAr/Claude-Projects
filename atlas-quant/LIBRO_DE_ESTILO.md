@@ -92,7 +92,7 @@ La distinción entre teorema, hipótesis de modelización, resultado empírico y
 
 ### 6.2 Sintaxis en el archivo fuente
 
-La sintaxis sigue las convenciones de libros de Quarto para referencias cruzadas. Su funcionamiento en la composición a PDF se verificará en la prueba de composición de la Fase 2; hasta entonces, esta sección es provisional.
+La sintaxis sigue las convenciones de libros de Quarto para referencias cruzadas. La prueba de composición de la Fase 2 la verificó con la cadena elegida, Quarto → LuaLaTeX (`editorial/informe_composicion.md`); esta sección es definitiva desde el 2026-10-16.
 
 ```markdown
 ::: {#def-interes-compuesto}
@@ -116,7 +116,26 @@ $$ {#eq-capital-compuesto}
 Como muestra la @eq-capital-compuesto, …
 ```
 
-Prefijos de etiqueta: `def`, `thm`, `prp`, `lem`, `cor`, `exm`, `exr`, `eq`, `sec`, `fig`, `tbl`. Las etiquetas usan minúsculas, sin tildes y con guiones, nunca guiones bajos (los guiones bajos causan problemas en la composición con LaTeX). Los entornos sin equivalente nativo en Quarto (Hipótesis de modelización, Resultado empírico, Resultado admitido, Convención de mercado) se marcan provisionalmente con las clases `.hipotesis`, `.empirico`, `.admitido` y `.convencion`; su presentación final se resolverá en la prueba de composición.
+Prefijos de etiqueta: `def`, `thm`, `prp`, `lem`, `cor`, `exm`, `exr`, `eq`, `sec`, `fig`, `tbl`. Las etiquetas usan minúsculas, sin tildes y con guiones, nunca guiones bajos (los guiones bajos causan problemas en la composición con LaTeX). Los entornos sin equivalente nativo en Quarto (Hipótesis de modelización, Resultado empírico, Resultado admitido, Convención de mercado) se marcan con las clases `.hipotesis`, `.empirico`, `.admitido` y `.convencion`. Un encabezado `##` dentro del bloque, si existe, es su título. Se componen sin numerar, con el nombre del entorno en negrita y el cuerpo en redonda.
+
+```markdown
+::: {.admitido}
+## RA-49, Teorema de Donsker
+Enunciado y referencia.
+:::
+
+::: {#exr-tasa-doble}
+Enunciado del ejercicio.
+:::
+
+::: {.solucion}
+Solución, que el perfil del libro omite y el del solucionario conserva.
+:::
+
+El [logaritmo natural]{.idx} … y una entrada invisible []{.idx entrada="función exponencial"}.
+```
+
+Cada solución va en un bloque `.solucion` inmediatamente después de su ejercicio. Las marcas de índice analítico usan `[término]{.idx}`, que muestra el término y crea la entrada, o `[]{.idx entrada="…"}`, que solo crea la entrada. En las fórmulas, la coma decimal se escribe `0{,}5`.
 
 ## 7. Demostraciones
 

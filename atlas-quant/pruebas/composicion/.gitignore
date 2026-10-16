@@ -1,0 +1,11 @@
+# Productos intermedios de la prueba de composición
+_salida/
+.quarto/
+*_files/
+escala/
+_quarto-escala.yml
+index.*
+libro.aux
+*.quarto_ipynb
+resultados/*.log
+resultados/escala-*.pdf

@@ -134,6 +134,21 @@ Ajuste de los índices: la extensión de la ficha de los 23 libros se recalculó
 
 El número de capítulos y la extensión no cambian.
 
+## Revisión R-0007 · Prueba de composición · 2026-10-16
+
+Ejecución del plan aprobado (D-04). El informe completo está en `editorial/informe_composicion.md`.
+
+| ID | Severidad | Hallazgo | Resolución | Estado |
+|---|---|---|---|---|
+| H-36 | Importante | Quarto no puede instalarse por los medios habituales: GitHub y quarto.org están bloqueados, y el paquete de PyPI descarga desde GitHub | Instalación desde conda-forge con un extractor propio verificado por SHA-256 (`herramientas/conda_extraer.py`) | Resuelto |
+| H-37 | Importante | Sin Quarto (pandoc solo), las referencias a teoremas se leen como citas y no hay ejecución de código | C3 y C4 descartadas | Resuelto |
+| H-38 | Importante | En Typst el solucionario no puede referirse a elementos del libro | C1 no elegida; en LaTeX se resuelve con `xr` | Resuelto |
+| H-39 | Menor | En Typst la coma decimal recibe espacio de puntuación y la plantilla de libro escribe «Chapter» | Registrado; afecta solo a C1 | Cerrado |
+| H-40 | Menor | En LuaLaTeX, `amsthm` con nota opcional en entornos sin numerar provoca un error de babel (bidi) | Entornos propios definidos como lista con título en línea | Resuelto |
+| H-41 | Menor | Títulos en sans serif, punto final en números de sección, desbordes de código, guion en lugar de menos, glifos ausentes en la fuente de código | Corregidos en el preámbulo y en el formateador | Resuelto |
+| H-42 | Menor | El PDF de LuaLaTeX no está etiquetado (R-12) | Pendiente de verificar en la plantilla común | Abierto |
+| H-43 | Menor | APA 7 usa «&» entre autores | Copia adaptada del estilo en la plantilla común | Abierto |
+
 ## Pendientes de verificación
 
 Las tres verificaciones abiertas en la Fase 1a se resolvieron en R-0006 (detalle en `editorial/auditoria_fase1.md`, sección 6).

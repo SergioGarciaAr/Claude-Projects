@@ -1,0 +1,80 @@
+# Versiones de las herramientas de composición (generado el 2026-10-16 por herramientas/instalar_composicion.sh)
+
+## conda-forge (nombre, versión, archivo, sha256)
+_openmp_mutex	4.5	_openmp_mutex-4.5-20_gnu.conda	1dd3fffd892081df9726d7eb7e0dea6198962ba775bd88842135a4ddb4deb3c9
+ca-certificates	2026.7.22	ca-certificates-2026.7.22-h4c7d964_0.conda	95e8e74062a5fe5f870ac8c90302b6e89945165fdaed7810606e84ddee6aac12
+dart-sass	1.105.2	dart-sass-1.105.2-hfc2019e_0.conda	5ff014e72da7255ecf4ea9c0ce46ac51380479667e907f51e0ca72c772110452
+deno	2.4.5	deno-2.4.5-h6046fbb_0.conda	3638c08b977b694b1f459da6ad2ba61e956f367e69e9893633b0270e068cb73e
+deno-dom	0.1.41	deno-dom-0.1.41-h4768de7_1.conda	b3696e24feb52d6a3edc78c9969d6efcc9e2ad76b7a922903c3ab6e3a28578d9
+esbuild	0.28.1	esbuild-0.28.1-hfc2019e_0.conda	2ff0603150014c840474d0ddc8813569d91f9ab20e83cb49b1019eb4155c0a63
+libgcc	16.2.0	libgcc-16.2.0-ha9f2e26_7.conda	e031634c3a928f9594eba868bc46ef5230d6571a364a0c63215b06c4563bfcea
+libgomp	16.2.0	libgomp-16.2.0-he0feb66_7.conda	92a0bb350c7be6a4eedcb4e111c60aefd176018e6b1c009a6e025dbe9bbcd758
+openssl	3.6.5	openssl-3.6.5-h781a0a9_0.conda	9c1533f1cf784f0e250919c0c9762d0b0e6bc727a79290ffb7cea1ceca1d038c
+pandoc	3.8.3	pandoc-3.8.3-ha770c72_0.conda	87ec986d1e0d16d9d2aa149653abeb73d1ac4bd9e6d7dc13ba33ec00134c8a7a
+quarto	1.9.38	quarto-1.9.38-h2efe8d1_0.conda	0ee132464a88891538528d9837b9f7c3df360b3b4eaffdd40da0b3e5eefa3228
+typst	0.14.2	typst-0.14.2-h4c46f8d_0.conda	2051dee6a67d43a0ff0fd2ff9dacd8ef533e89d0b30feedf87613fc84b00c247
+
+## Ubuntu 24.04 (apt)
+biber	2.19-2
+fonts-stix	1.1.1-5
+texlive-bibtex-extra	2023.20240207-1
+texlive-fonts-extra	2023.20240207-1
+texlive-fonts-recommended	2023.20240207-1
+texlive-lang-spanish	2023.20240207-1
+texlive-latex-extra	2023.20240207-1
+texlive-latex-recommended	2023.20240207-1
+texlive-luatex	2023.20240207-1
+texlive-science	2023.20240207-1
+
+## PyPI (entorno virtual)
+asttokens==3.0.2
+attrs==26.1.0
+comm==0.2.3
+contourpy==1.4.0
+cycler==0.12.1
+debugpy==1.8.22
+executing==2.3.0
+fastjsonschema==2.22.2
+fonttools==4.67.0
+ipykernel==7.4.0
+ipython==9.17.1
+ipython_pygments_lexers==1.1.1
+jedi==0.20.1
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+jupyter_client==8.10.0
+jupyter_core==5.9.1
+kiwisolver==1.5.1
+matplotlib==3.11.2
+matplotlib-inline==0.2.2
+mpmath==1.3.0
+nbclient==0.11.0
+nbformat==5.11.1
+nest-asyncio2==1.7.4
+numpy==2.5.4
+packaging==26.3
+pandas==3.0.6
+parso==0.8.7
+pexpect==4.9.0
+pillow==12.3.0
+platformdirs==4.13.3
+prompt_toolkit==3.0.53
+psutil==7.2.2
+ptyprocess==0.7.0
+pure_eval==0.2.4
+Pygments==2.21.0
+pyparsing==3.3.3
+python-dateutil==2.9.0.post0
+PyYAML==6.0.3
+pyzmq==27.2.0
+referencing==0.37.0
+rpds-py==2026.9.1
+scipy==1.18.1
+six==1.17.0
+stack-data==0.6.3
+sympy==1.14.0
+tornado==6.5.10
+traitlets==5.16.1
+typing_extensions==4.16.0
+wcwidth==0.9.2
+zstandard==0.25.0

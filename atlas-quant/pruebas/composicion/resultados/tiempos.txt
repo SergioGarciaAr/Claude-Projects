@@ -1,0 +1,13 @@
+C2-libro	18.7 s
+C2-solucionario	14.1 s
+C1-libro	6.8 s
+C1-solucionario	4.1 s
+escala-typst (80 capítulos, con ejecución de código)	228.2 s	263 páginas
+escala-lualatex (80 capítulos, con ejecución de código)	266.5 s	260 páginas
+escala-typst sin ejecución (resultados congelados)	28.0 s
+escala-lualatex sin ejecución (resultados congelados)	66.2 s
+--- 2026-10-16 21:36:26
+C2-libro	18.3 s
+C2-solucionario	14.7 s
+C1-libro	7.4 s
+C1-solucionario	4.2 s

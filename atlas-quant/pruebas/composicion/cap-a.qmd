@@ -1,0 +1,157 @@
+# Logaritmos {#sec-logaritmos}
+
+Este capítulo de muestra existe solo para probar la composición. Reproduce, en pequeño, los elementos de un capítulo de la serie I: definiciones, teoremas con demostración, un ejemplo financiero con cálculo verificado por código, una tabla, una figura y ejercicios con solución. Los textos de contraste para este tema son @spivak2008 y @apostol1967; la aplicación financiera sigue a @kellison2009.
+
+## Definición y primeras propiedades {#sec-log-definicion}
+
+Sea $b$ un número real positivo distinto de $1$. La función exponencial de base $b$ es estrictamente monótona y toma todos los valores positivos, de modo que para cada $x > 0$ existe exactamente un número real $y$ tal que $b^{y} = x$. Ese número recibe un nombre propio.
+
+::: {#def-logaritmo}
+## Logaritmo
+Sean $b > 0$, $b \neq 1$ y $x > 0$. El [logaritmo]{.idx} de $x$ en base $b$, denotado $\log_b x$, es el único número real $y$ que cumple
+$$
+b^{y} = x .
+$$ {#eq-def-log}
+:::
+
+La definición traduce una pregunta sobre exponentes en una cantidad con nombre: $\log_{2} 1024 = 10$ porque $2^{10} = 1024$, y $\log_{10} 0{,}001 = -3$ porque $10^{-3} = 0{,}001$. Cuando la base es el número $e$ se escribe $\ln x$ y se habla de [logaritmo natural]{.idx}.^[La existencia de $e$ y de la función exponencial real se establece en L2 c. 7; aquí se usan sin demostración porque el capítulo es una muestra tipográfica.]
+
+::: {#thm-log-producto}
+## Logaritmo de un producto
+Para todo $b > 0$ con $b \neq 1$ y todos $x, y > 0$,
+$$
+\log_b (xy) = \log_b x + \log_b y .
+$$ {#eq-log-producto}
+:::
+
+::: {.proof}
+Sean $u = \log_b x$ y $v = \log_b y$. Por la definición [-@eq-def-log], $b^{u} = x$ y $b^{v} = y$. La ley de los exponentes da $b^{u+v} = b^{u} b^{v} = xy$. Como $\log_b(xy)$ es el único número cuyo exponencial de base $b$ es $xy$, se concluye que $\log_b(xy) = u + v$.
+:::
+
+::: {#cor-log-potencia}
+Para todo entero $n \geq 1$ y todo $x > 0$, $\log_b (x^{n}) = n \log_b x$.
+:::
+
+::: {.proof}
+Por inducción sobre $n$. El caso $n = 1$ es inmediato. Si la igualdad vale para $n$, el @thm-log-producto aplicado a $x^{n}$ y $x$ da $\log_b(x^{n+1}) = \log_b(x^{n}) + \log_b x = (n+1) \log_b x$.
+:::
+
+::: {.callout-warning}
+## Error frecuente
+El logaritmo de una suma no es la suma de los logaritmos. Por ejemplo, $\log_{10}(10 + 10) = \log_{10} 20 \approx 1{,}301$, mientras que $\log_{10} 10 + \log_{10} 10 = 2$.
+:::
+
+::: {#thm-cambio-base}
+## Cambio de base
+Si $a, b > 0$, $a \neq 1$, $b \neq 1$ y $x > 0$, entonces
+$$
+\log_b x = \frac{\log_a x}{\log_a b} .
+$$ {#eq-cambio-base}
+:::
+
+::: {.proof}
+Sea $y = \log_b x$, de modo que $b^{y} = x$. Aplicando $\log_a$ y el @cor-log-potencia (extendido a exponentes reales en L2), $y \log_a b = \log_a x$. Como $b \neq 1$, $\log_a b \neq 0$ y basta dividir.
+:::
+
+## Aplicación: tiempo de duplicación de un capital {#sec-duplicacion}
+
+Un capital de $C_0 = 15\,000$ dólares invertido a una tasa efectiva anual $r$ vale $C_0 (1 + r)^{t}$ al cabo de $t$ años. El capital se duplica cuando $(1 + r)^{t} = 2$, es decir, por la @eq-def-log y la @eq-cambio-base,
+$$
+t^{*} = \log_{1+r} 2 = \frac{\ln 2}{\ln(1 + r)} .
+$$ {#eq-duplicacion}
+
+::: {#exm-duplicacion}
+Con $r = 5$ %, la @eq-duplicacion da $t^{*} = \ln 2 / \ln 1{,}05$. El valor se calcula en la celda siguiente, que se ejecuta al componer el documento.
+:::
+
+```{python}
+#| label: duplicacion
+import math
+
+def coma(x, decimales):
+    """Formatea un número con coma decimal y espacio fino como separador de millares."""
+    texto = f"{x:,.{decimales}f}"
+    return texto.replace(",", "\u202f").replace(".", ",").replace("-", "\u2212")
+
+r = 0.05
+t = math.log(2) / math.log(1 + r)
+print(f"t* = {coma(t, 4)} años; regla del 72: {coma(72 / (100 * r), 4)} años")
+```
+
+::: {.convencion}
+## Tasa efectiva anual
+Salvo indicación contraria, una tasa anual expresada en porcentaje es efectiva: el capital crece en el factor $1 + r$ por año. Las convenciones de capitalización y de conteo de días se estudian en L5 c. 2.
+:::
+
+La llamada *regla del 72* aproxima $t^{*}$ por $72 / (100 r)$. La @tbl-regla-72 compara ambos valores; la diferencia relativa crece con la tasa.
+
+```{python}
+#| label: tbl-regla-72
+#| tbl-cap: "Tiempo de duplicación exacto y regla del 72 (años)."
+#| output: asis
+tasas = [0.01, 0.02, 0.05, 0.08, 0.10]
+filas = ["| Tasa | Exacto | Regla del 72 | Diferencia |", "|---:|---:|---:|---:|"]
+for r in tasas:
+    exacto = math.log(2) / math.log(1 + r)
+    aprox = 72 / (100 * r)
+    filas.append(f"| {coma(100 * r, 0)} % | {coma(exacto, 3)} | {coma(aprox, 3)} | {coma(aprox - exacto, 3)} |")
+print("\n".join(filas))
+```
+
+La @fig-logaritmos muestra $\log_b x$ para tres bases. Todas las curvas pasan por $(1; 0)$, como exige la @def-logaritmo.
+
+```{python}
+#| label: fig-logaritmos
+#| fig-cap: "Gráfica de $\\log_b x$ para $b = 2$, $e$ y $10$."
+#| fig-alt: "Tres curvas crecientes que pasan por el punto (1; 0); la de base 2 es la más empinada."
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
+import matplotlib.font_manager as fm
+
+# Tipografía de las figuras: la misma familia que el texto (Libertinus).
+FUENTES = "/usr/share/texlive/texmf-dist/fonts/opentype/public/libertinus-fonts/"
+for nombre in ("LibertinusSerif-Regular.otf", "LibertinusSerif-Italic.otf"):
+    fm.fontManager.addfont(FUENTES + nombre)
+plt.rcParams.update({"font.family": "Libertinus Serif", "mathtext.fontset": "stix"})
+
+eje_coma = FuncFormatter(lambda v, _: f"{v:g}".replace(".", ",").replace("-", "\u2212"))
+x = np.linspace(0.1, 8, 400)
+fig, ax = plt.subplots(figsize=(5.5, 3.2))
+for base, nombre in [(2, "$b = 2$"), (np.e, "$b = e$"), (10, "$b = 10$")]:
+    ax.plot(x, np.log(x) / np.log(base), label=nombre)
+ax.axhline(0, color="0.6", lw=0.8)
+ax.xaxis.set_major_formatter(eje_coma)
+ax.yaxis.set_major_formatter(eje_coma)
+ax.set_xlabel("$x$")
+ax.set_ylabel(r"$\log_b x$")
+ax.legend(frameon=False)
+fig.tight_layout()
+plt.show()
+```
+
+## Ejercicios {#sec-log-ejercicios}
+
+::: {#exr-log-1}
+Calcule $\log_{3} 81$ y $\log_{1/2} 8$ sin calculadora.
+:::
+
+::: {.solucion}
+Como $3^{4} = 81$, $\log_{3} 81 = 4$. Como $(1/2)^{-3} = 8$, $\log_{1/2} 8 = -3$.
+:::
+
+::: {#exr-log-2}
+Demuestre que $\log_b (x / y) = \log_b x - \log_b y$ para $x, y > 0$.
+:::
+
+::: {.solucion}
+Por el @thm-log-producto, $\log_b x = \log_b\bigl((x/y) \, y\bigr) = \log_b (x/y) + \log_b y$. Basta despejar.
+:::
+
+::: {#exr-log-3}
+¿Cuántos años tarda en triplicarse un capital al $8$ % efectivo anual? Dé el resultado con dos decimales.
+:::
+
+::: {.solucion}
+Se busca $t$ con $1{,}08^{t} = 3$, es decir, $t = \ln 3 / \ln 1{,}08 \approx 14{,}27$ años, por el mismo razonamiento que llevó a la @eq-duplicacion.
+:::

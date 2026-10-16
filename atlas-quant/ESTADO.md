@@ -15,16 +15,16 @@ Rama de trabajo: `claude/magical-shannon-afvwc6`
 | 1c | Índices detallados de L9–L16 | Aprobada (2026-10-16) |
 | 1d | Índices detallados de L17–L23 | Aprobada (2026-10-16) |
 | 1e | Bibliografía verificada, fuentes de datos y auditoría de coherencia | Aprobada (2026-10-16) |
-| 2 | Plan de prueba de composición; capítulo piloto L1 c. 8 | **En curso**: plan de prueba presentado (`editorial/plan_prueba_composicion.md`), pendiente de aprobación (D-04) |
+| 2 | Plan de prueba de composición; capítulo piloto L1 c. 8 | **En curso**: prueba de composición ejecutada y cadena elegida (D-04b, `editorial/informe_composicion.md`); siguiente: piloto L1 c. 8 |
 
 No existe ningún capítulo redactado.
 
 ## 2. Próximo paso exacto
 
-1. Obtener la aprobación del plan de prueba de composición (D-04) y, opcionalmente, la ampliación de red (D-07).
-2. Con la aprobación, ejecutar la prueba: guion de instalación versionado, muestra en `pruebas/composicion/`, compilación con las candidatas C1–C4, informe comparativo `editorial/informe_composicion.md` y propuesta de decisión D-04b.
-3. Con la cadena aprobada, redactar el capítulo piloto L1 c. 8.
-4. Al cerrar cada entrega: ejecutar `herramientas/verificar_indices.py` y `herramientas/bib_a_md.py`, regenerar los PDF con `herramientas/generar_pdf.mjs`, hacer commit y push.
+1. Montar la plantilla común de composición en `composicion/`, a partir de `pruebas/composicion/`: filtros, preámbulo, estilo de cita adaptado y módulo de código común del lector.
+2. Crear el proyecto del libro L1 y redactar el capítulo piloto L1 c. 8, «Potencias, raíces y logaritmos», según su índice. Después, revisarlo según el libro de estilo (sección 17), componerlo con la cadena C2, registrar la revisión y entregar el PDF.
+3. Continuar la producción según el modo de trabajo de la sección 4.
+4. Al cerrar cada entrega: ejecutar `herramientas/verificar_indices.py` y `herramientas/bib_a_md.py`, regenerar los PDF de trabajo con `herramientas/generar_pdf.mjs`, componer los capítulos con Quarto, hacer commit y push. Las herramientas se reinstalan con `herramientas/instalar_composicion.sh` si el contenedor se recicló.
 
 ## 3. Decisiones aprobadas
 
@@ -37,9 +37,10 @@ No existe ningún capítulo redactado.
 | Idioma y números | Español latinoamericano; coma decimal en la prosa, punto en el código; espacio fino como separador de millares (sujeto a V-01) | 2026-10-15 |
 | Solucionarios | Volúmenes separados; soluciones completas para demostraciones y aplicaciones; respuesta y paso clave para ejercicios rutinarios; orientaciones para problemas abiertos; selección dentro de cada libro | 2026-10-15 |
 | Composición | Quarto como opción principal, a evaluar; no se instala nada hasta aprobar el plan de prueba | 2026-10-15 |
+| Cadena de composición (D-04b) | Quarto 1.9.38 → LuaLaTeX (TeX Live 2023), Libertinus Serif y Libertinus Math; solucionario desde la misma fuente con `xr`; sintaxis definitiva en `LIBRO_DE_ESTILO.md` §6.2 (`editorial/informe_composicion.md`) | 2026-10-16 |
 | Créditos | Texto de `PLAN_EDITORIAL.md`, sección 9, con nombre pendiente | 2026-10-15 |
 | Revisión | Procedimiento de `LIBRO_DE_ESTILO.md`, sección 17; revisor adversarial autorizado para el piloto | 2026-10-15 |
-| Aprobación | Capítulo por capítulo durante la primera etapa de producción | 2026-10-15 |
+| Aprobación | Capítulo por capítulo durante la primera etapa de producción (sustituida el 2026-10-16 por producción continua; sección 4) | 2026-10-15 |
 | Ajustes A-01 a A-09 | Reubicación de capítulos nuevos (`editorial/registro_de_revisiones.md`, R-0002) | 2026-10-16 |
 | Entrega 1b y ajustes A-10, A-11 | Índices de L1–L8; revisión R-0003 | 2026-10-16 |
 | Entrega 1c | Índices de L9–L16; revisión R-0004 | 2026-10-16 |
@@ -49,16 +50,19 @@ No existe ningún capítulo redactado.
 | Política de datos (D-05) | Aprobada la política de `bibliografia/fuentes_de_datos.md`, sección 3: la obra no redistribuye datos de terceros; cifras empíricas fechadas y regenerables; datos sintéticos con semilla fija cuando no hay fuente libre con licencia verificable; FRED excluida del aprendizaje automático. Aplicada al índice de L23 (c. 2, c. 3 y c. 5). Requisito previo a la publicación: revisión legal | 2026-10-16 |
 | Piloto | L1 c. 8, «Potencias, raíces y logaritmos»; después, un piloto avanzado (L18 c. 6 o L16 c. 9) | 2026-10-15 |
 
-## 4. Pendientes que requieren decisión del director
+## 4. Decisiones del 2026-10-16 y modo de trabajo
 
-| ID | Asunto |
+El director aprobó todas las decisiones pendientes e indicó que no se le consulte más. En consecuencia:
+
+| ID | Resolución |
 |---|---|
-| D-01 | Nombre que figurará en los créditos editoriales |
-| D-02 | Licencia de la obra (todos los derechos reservados o Creative Commons, por ejemplo CC BY-NC-SA 4.0) |
-| D-03 | Hitos con revisión humana externa (propuesta: piloto, primer capítulo de cada serie, capítulos de L16, L18 y L19) |
-| D-04 | Aprobación del plan de prueba de composición (`editorial/plan_prueba_composicion.md`), incluidas las instalaciones de su sección 5 |
-| D-06 | Verificación en fuente primaria de las 33 entradas bibliográficas parciales: ampliar la red del entorno a `doi.org` y `api.crossref.org`, o verificación manual antes de componer cada libro |
-| D-07 | Ampliación opcional de la red del entorno: `packages.typst.org`, `github.com` y sus dominios de descarga, `doi.org` y `api.crossref.org` (plan de prueba, sección 9) |
+| D-01 | Aprobado el texto de créditos. El nombre del director es un dato que solo él puede aportar: se mantiene el marcador «[nombre del director de la obra]» hasta antes de la publicación (sección 7) |
+| D-02 | Licencia provisional: todos los derechos reservados. Es la opción reversible; una licencia Creative Commons, una vez publicada, no puede revocarse para las copias distribuidas. Puede cambiarse antes de la publicación |
+| D-03 | Aprobados los hitos propuestos de revisión humana externa: piloto, primer capítulo de cada serie y capítulos de L16, L18 y L19. Se registran como requisito previo a la publicación de esos capítulos (sección 7) |
+| D-04 | Aprobado el plan de prueba de composición; la prueba se ejecutó (`editorial/informe_composicion.md`) |
+| D-06 | Verificación en fuente primaria de las entradas parciales antes de componer cada libro que las cite; si la red del entorno se amplía, se hará por consulta a Crossref |
+| D-07 | Aprobada la ampliación de red, que solo el director puede ejecutar en la configuración del entorno. Mientras no se haga, el trabajo continúa con los orígenes accesibles |
+| Modo de trabajo | Se sustituye la aprobación capítulo por capítulo por producción continua: cada capítulo se redacta, se revisa según `LIBRO_DE_ESTILO.md`, sección 17, se compone, se registra y se entrega en PDF sin esperar respuesta. El director puede intervenir en cualquier momento |
 
 ## 5. Restricciones del entorno de trabajo
 
@@ -75,4 +79,6 @@ V-01 a V-03 quedaron resueltas en R-0006. Quedan abiertas las 33 entradas biblio
 
 ## 7. Requisitos previos a la publicación
 
+- Nombre del director en los créditos (D-01) y confirmación de la licencia (D-02).
+- Revisión humana externa de los hitos de D-03.
 - Revisión legal de la política de datos (redistribución y reproducción de cifras) según la licencia que se elija en D-02.

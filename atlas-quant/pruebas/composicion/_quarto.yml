@@ -1,0 +1,60 @@
+project:
+  type: book
+  output-dir: _salida
+
+book:
+  title: "Muestra de composición"
+  subtitle: "Atlas Quant · Prueba de la Fase 2"
+  author: "[nombre del director de la obra]"
+  chapters:
+    - index.qmd
+    - cap-a.qmd
+    - cap-b.qmd
+    - referencias.qmd
+
+lang: es
+number-sections: true
+bibliography: ../../bibliografia/atlas.bib
+csl: estilos/apa.csl
+link-citations: true
+execute:
+  echo: true
+  warning: false
+jupyter: atlas
+filters:
+  - filtros/numeros.lua
+  - filtros/indice.lua
+  - filtros/entornos.lua
+  - at: post-quarto
+    path: filtros/solucionario.lua
+
+format:
+  typst:
+    papersize: a4
+    margin:
+      x: 2.5cm
+      y: 2.5cm
+    fontsize: 11pt
+    mainfont: "Libertinus Serif"
+    toc: true
+    toc-depth: 2
+    theorem-appearance: simple
+    keep-typ: true
+    citeproc: true
+    include-after-body:
+      - file: typst/indice.typ
+  pdf:
+    documentclass: scrbook
+    classoption: [a4paper, 11pt, oneside, numbers=noenddot]
+    pdf-engine: lualatex
+    mainfont: "Libertinus Serif"
+    mathfont: "Libertinus Math"
+    monofont: "DejaVu Sans Mono"
+    monofontoptions: [Scale=0.85]
+    toc: true
+    toc-depth: 2
+    keep-tex: true
+    latex-clean: false
+    code-overflow: wrap
+    include-in-header: latex/preambulo.tex
+    include-after-body: latex/final.tex
