@@ -1,0 +1,1128 @@
+# Potencias, raíces y logaritmos {#sec-potencias}
+
+::: {.presentacion}
+**Prerrequisitos.** L1 §4.6 (inducción matemática), L1 §5.1 (los números naturales; notación ℕ y ℕ₀), L1 §6.2 (operaciones con fracciones e inversos), L1 §6.7 (variaciones porcentuales sucesivas), L1 §6.8 (interés simple), L1 §7.2 (los reales como cuerpo ordenado), L1 §7.3 (valor absoluto), L1 §7.4 (desigualdades), L1 §7.6 (axioma del supremo), L1 §7.8 (existencia de la raíz cuadrada de 2) y L1 ap. A (Python como calculadora científica).
+
+**Objetivos.** Al terminar el capítulo, el lector podrá:
+
+- demostrar las leyes de los exponentes naturales, enteros y racionales, y explicar por qué $a^{0} = 1$ y $a^{-n} = 1/a^{n}$ son las únicas definiciones compatibles con ellas;
+- demostrar que la raíz $n$-ésima positiva de un número positivo es única y, en la sección optativa, que existe;
+- comparar potencias según su base y su exponente;
+- demostrar la desigualdad de Bernoulli y usarla para comparar el interés simple con el compuesto;
+- definir el logaritmo y demostrar sus propiedades a partir de las leyes de los exponentes;
+- resolver problemas de interés compuesto, tasas equivalentes y tiempo de duplicación, y evaluar la regla del 72 como aproximación.
+:::
+
+Un capital depositado a una tasa de interés compuesto (*compound interest*) no crece sumando cada año la misma cantidad, como en el interés simple de L1 §6.8, sino multiplicándose cada año por el mismo factor. Si la tasa anual es del 5 %, al cabo de un año el capital se multiplica por $1{,}05$; al cabo de dos, por $1{,}05 \cdot 1{,}05$; al cabo de diez, por el producto de diez factores iguales a $1{,}05$. Para trabajar con estos productos necesitamos una notación y unas reglas de cálculo: las **potencias** (*powers*). Dos preguntas naturales llevan más allá de los exponentes naturales. La primera: ¿por qué número hay que multiplicar el capital cada mes para que, al cabo de doce meses, quede multiplicado por $1{,}05$? La respuesta es un número $x$ con $x^{12} = 1{,}05$, es decir, una **raíz** (*root*), y conduce a los exponentes fraccionarios. La segunda: ¿cuántos años tarda el capital en duplicarse? Ahora se busca un exponente $t$ con $1{,}05^{t} = 2$, y la operación que responde a esa pregunta es el **logaritmo** (*logarithm*).
+
+El capítulo construye estas tres operaciones en orden y demuestra cada regla de cálculo a partir de las anteriores. Empezamos por los exponentes naturales, cuyas leyes se demuestran por inducción (@sec-exp-naturales). Extendemos luego las potencias a exponentes enteros (@sec-exp-enteros), estudiamos las raíces (secciones -@sec-raices y -@sec-raices-existencia, esta última optativa) y con ellas definimos los exponentes racionales (@sec-exp-racionales). Después comparamos potencias (@sec-monotonia), demostramos la desigualdad de Bernoulli y comparamos interés simple y compuesto (@sec-bernoulli). Los exponentes reales requieren herramientas que este libro no tiene todavía; explicamos la idea y la usamos como resultado admitido (@sec-exp-reales). Con ella definimos el logaritmo (@sec-logaritmos) y resolvemos los problemas financieros del comienzo (@sec-aplicaciones). La última sección muestra cómo calcular potencias y logaritmos con Python y qué errores de redondeo aparecen (@sec-python-potencias).
+
+## Potencias de exponente natural {#sec-exp-naturales}
+
+¿Qué significa $a^{n}$ y por qué valen las reglas que se usan para calcular con potencias? La idea es conocida: $a^{n}$ es el producto de $n$ factores iguales a $a$. Pero la expresión «el producto de $n$ factores» con puntos suspensivos no sirve para demostrar nada. Una definición recursiva dice lo mismo de forma precisa y permite razonar por inducción (L1 §4.6).
+
+::: {#def-potencia-natural}
+## Potencia de exponente natural
+Sea $a$ un número real. Para cada $n \in \mathbb{N}$ se define la [potencia]{.idx} $a^{n}$ por
+$$
+a^{1} = a, \qquad a^{n+1} = a^{n} \cdot a \quad \text{para todo } n \in \mathbb{N}.
+$$
+El número $a$ se llama **base** y $n$ se llama **exponente**.
+:::
+
+La definición dice cómo obtener $a^{1}$ y cómo obtener cada potencia a partir de la anterior: $a^{2} = a^{1} \cdot a = a \cdot a$, $a^{3} = a^{2} \cdot a = a \cdot a \cdot a$, y así sucesivamente. Que una definición de este tipo determina un único número $a^{n}$ para cada $n \in \mathbb{N}$ es una consecuencia del principio de inducción, que usamos en esta forma: el conjunto de los $n$ para los que $a^{n}$ está determinado contiene a 1 y, si contiene a $n$, contiene a $n + 1$, porque $a^{n+1} = a^{n} \cdot a$. Su justificación formal completa (el llamado teorema de recursión) no es necesaria para lo que sigue.
+
+Las tres leyes de los exponentes enlazan las potencias con la multiplicación. Las demostramos por inducción sobre el segundo exponente, con el primero fijo. La estrategia es la misma en los tres casos: el caso $n = 1$ se reduce a la definición, y el paso de $n$ a $n + 1$ usa la definición recursiva para «sacar un factor» y la hipótesis inductiva para el resto.
+
+::: {#thm-leyes-naturales}
+## Leyes de los exponentes naturales
+Sean $a, b \in \mathbb{R}$ y $m, n \in \mathbb{N}$. Entonces
+$$
+\text{(i)}\;\; a^{m} a^{n} = a^{m+n}, \qquad
+\text{(ii)}\;\; \bigl(a^{m}\bigr)^{n} = a^{mn}, \qquad
+\text{(iii)}\;\; (ab)^{n} = a^{n} b^{n}.
+$$
+:::
+
+::: {.proof}
+Fijamos $m$ y razonamos por inducción sobre $n$.
+
+*(i)* Para $n = 1$, la definición da $a^{m} a^{1} = a^{m} \cdot a = a^{m+1}$. Supongamos $a^{m} a^{n} = a^{m+n}$ para cierto $n$. Entonces, usando la definición, la asociatividad del producto y la hipótesis inductiva,
+$$
+a^{m} a^{n+1} = a^{m} \bigl(a^{n} \cdot a\bigr) = \bigl(a^{m} a^{n}\bigr) \cdot a = a^{m+n} \cdot a = a^{m+n+1}.
+$$
+
+*(ii)* Para $n = 1$, $(a^{m})^{1} = a^{m} = a^{m \cdot 1}$. Si $(a^{m})^{n} = a^{mn}$, entonces, por la definición, la hipótesis inductiva y la ley (i),
+$$
+\bigl(a^{m}\bigr)^{n+1} = \bigl(a^{m}\bigr)^{n} a^{m} = a^{mn} a^{m} = a^{mn + m} = a^{m(n+1)}.
+$$
+
+*(iii)* Para $n = 1$, $(ab)^{1} = ab = a^{1} b^{1}$. Si $(ab)^{n} = a^{n} b^{n}$, entonces, por la conmutatividad y la asociatividad del producto,
+$$
+(ab)^{n+1} = (ab)^{n} (ab) = a^{n} b^{n} a b = \bigl(a^{n} a\bigr)\bigl(b^{n} b\bigr) = a^{n+1} b^{n+1}.
+$$
+En los tres casos, el principio de inducción da la igualdad para todo $n \in \mathbb{N}$.
+:::
+
+Un caso numérico ayuda a fijar las leyes: $2^{3} \cdot 2^{4} = 8 \cdot 16 = 128 = 2^{7}$, $(2^{3})^{2} = 8^{2} = 64 = 2^{6}$ y $(2 \cdot 5)^{3} = 1000 = 8 \cdot 125 = 2^{3} \cdot 5^{3}$.
+
+La división también tiene su ley, pero requiere que la base no sea cero, porque se divide por una potencia de ella.
+
+::: {#prp-cociente-natural}
+## Signo y cociente de potencias
+Sean $a, b \in \mathbb{R}$ y $m, n \in \mathbb{N}$.
+
+1. Si $a \neq 0$, entonces $a^{n} \neq 0$. Si $a > 0$, entonces $a^{n} > 0$.
+2. Si $a \neq 0$ y $m > n$, entonces $a^{m} / a^{n} = a^{m-n}$.
+3. Si $b \neq 0$, entonces $(a/b)^{n} = a^{n} / b^{n}$.
+4. $1^{n} = 1$, y $(-1)^{n}$ vale $1$ si $n$ es par y $-1$ si $n$ es impar.
+:::
+
+::: {.proof}
+(1) Por inducción: $a^{1} = a \neq 0$, y si $a^{n} \neq 0$, entonces $a^{n+1} = a^{n} a$ es producto de dos reales no nulos, que no es nulo (L1 §7.2). El mismo argumento, con «positivo» en lugar de «no nulo», prueba la segunda afirmación, porque el producto de positivos es positivo.
+
+(2) Como $m - n \in \mathbb{N}$, la ley (i) da $a^{m-n} a^{n} = a^{m}$. Al dividir por $a^{n}$, que no es cero por (1), se obtiene la igualdad.
+
+(3) La ley (iii) aplicada a $a/b$ y $b$ da $(a/b)^{n} b^{n} = \bigl((a/b) b\bigr)^{n} = a^{n}$; basta dividir por $b^{n} \neq 0$.
+
+(4) Por inducción: $1^{1} = 1$ y, si $1^{n} = 1$, entonces $1^{n+1} = 1^{n} \cdot 1 = 1$. Para $(-1)^{n}$: $(-1)^{1} = -1$ y $n = 1$ es impar; si la afirmación vale para $n$, entonces $(-1)^{n+1} = (-1)^{n} \cdot (-1)$ tiene el signo contrario, y $n + 1$ tiene la paridad contraria a la de $n$.
+:::
+
+::: {.callout-warning}
+## Errores frecuentes
+Las leyes de los exponentes se refieren a productos, no a sumas. En general $(a + b)^{n} \neq a^{n} + b^{n}$: por ejemplo, $(1 + 1)^{2} = 4$, mientras que $1^{2} + 1^{2} = 2$. Tampoco $a^{m} + a^{n}$ es $a^{m+n}$: $2^{2} + 2^{3} = 12$, pero $2^{5} = 32$. Por último, la potencia tiene prioridad sobre el signo menos: $-2^{2}$ significa $-(2^{2}) = -4$, mientras que $(-2)^{2} = 4$.
+:::
+
+## Exponente cero y exponentes negativos {#sec-exp-enteros}
+
+¿Qué sentido puede tener $a^{0}$ o $a^{-3}$, si no se puede multiplicar un número «cero veces» o «menos tres veces»? La definición de la sección anterior no dice nada sobre estos símbolos, de modo que tenemos libertad para darles significado. La pregunta útil es otra: ¿hay alguna definición con la que sigan valiendo las leyes de los exponentes? La respuesta es que hay exactamente una, y eso justifica adoptarla.
+
+::: {#prp-unicidad-enteros}
+## Las definiciones obligadas
+Sea $a \neq 0$. Supongamos que a los símbolos $a^{0}$ y $a^{-n}$, con $n \in \mathbb{N}$, se les asigna algún valor real de modo que la ley $a^{p} a^{q} = a^{p+q}$ valga para todos los enteros $p$ y $q$. Entonces necesariamente
+$$
+a^{0} = 1 \qquad \text{y} \qquad a^{-n} = \frac{1}{a^{n}} \quad \text{para todo } n \in \mathbb{N}.
+$$
+:::
+
+::: {.proof}
+Con $p = 0$ y $q = 1$, la ley exige $a^{0} a^{1} = a^{1}$, es decir, $a^{0} a = a$. Como $a \neq 0$, al dividir por $a$ queda $a^{0} = 1$. Con $p = -n$ y $q = n$, la ley exige $a^{-n} a^{n} = a^{0} = 1$. Como $a^{n} \neq 0$ (@prp-cociente-natural), al dividir queda $a^{-n} = 1/a^{n}$.
+:::
+
+La proposición no prueba que las leyes valgan con esas definiciones; solo dice que no hay otra opción. Que efectivamente valen es el contenido del teorema que sigue.
+
+::: {#def-potencia-entera}
+## Potencias de exponente entero
+Sea $a \neq 0$. Se define $a^{0} = 1$ y, para cada $n \in \mathbb{N}$, $a^{-n} = 1/a^{n}$.
+:::
+
+::: {.remark}
+La definición excluye la base cero. Con $a = 0$, la expresión $0^{-n} = 1/0^{n}$ no tiene sentido porque $0^{n} = 0$, y $0^{0}$ no queda determinado por el argumento de la @prp-unicidad-enteros, que dividía por $a$. En este libro $0^{0}$ no se define. Algunos textos adoptan la convención $0^{0} = 1$ por comodidad de notación en ciertas fórmulas; cuando la obra la use, lo dirá expresamente.
+:::
+
+::: {#thm-leyes-enteras}
+## Leyes de los exponentes enteros
+Sean $a, b \neq 0$ y $m, n \in \mathbb{Z}$. Entonces
+$$
+\text{(i)}\;\; a^{m} a^{n} = a^{m+n}, \qquad
+\text{(ii)}\;\; \bigl(a^{m}\bigr)^{n} = a^{mn}, \qquad
+\text{(iii)}\;\; (ab)^{n} = a^{n} b^{n}.
+$$
+:::
+
+La estrategia consiste en reducir cada caso al de exponentes naturales. Los exponentes nulos se tratan directamente con la definición; los negativos se escriben como inversos de potencias naturales, a las que se aplican el @thm-leyes-naturales y la @prp-cociente-natural.
+
+::: {.proof}
+Demostramos las tres leyes por casos, en el orden (i), (iii), (ii).
+
+*(i)* Si $m = 0$, entonces $a^{0} a^{n} = 1 \cdot a^{n} = a^{n} = a^{0+n}$, y lo mismo si $n = 0$. Si $m, n \in \mathbb{N}$, es el @thm-leyes-naturales. Quedan los casos con algún exponente negativo. Escribimos $m = -p$ cuando $m < 0$ y $n = -q$ cuando $n < 0$, con $p, q \in \mathbb{N}$.
+
+- Si $m = -p$ y $n = -q$, entonces $a^{m} a^{n} = \dfrac{1}{a^{p}} \cdot \dfrac{1}{a^{q}} = \dfrac{1}{a^{p+q}} = a^{-(p+q)} = a^{m+n}$.
+- Si $m > 0$ y $n = -q$ con $m > q$, la @prp-cociente-natural da $a^{m} a^{-q} = a^{m}/a^{q} = a^{m-q} = a^{m+n}$.
+- Si $m > 0$ y $n = -q$ con $m = q$, entonces $a^{m} a^{-q} = a^{m}/a^{m} = 1 = a^{0} = a^{m+n}$.
+- Si $m > 0$ y $n = -q$ con $m < q$, entonces $a^{m} a^{-q} = \dfrac{a^{m}}{a^{q}} = \dfrac{1}{a^{q}/a^{m}} = \dfrac{1}{a^{q-m}} = a^{-(q-m)} = a^{m+n}$.
+- Si $m < 0$ y $n > 0$, se intercambian los papeles de $m$ y $n$ en los tres casos anteriores, porque el producto es conmutativo.
+
+*(iii)* Si $n = 0$, ambos lados valen 1. Si $n \in \mathbb{N}$, es el @thm-leyes-naturales. Si $n = -q$ con $q \in \mathbb{N}$, entonces
+$$
+(ab)^{-q} = \frac{1}{(ab)^{q}} = \frac{1}{a^{q} b^{q}} = \frac{1}{a^{q}} \cdot \frac{1}{b^{q}} = a^{-q} b^{-q},
+$$
+donde la segunda igualdad es la ley (iii) para exponentes naturales y la tercera, la regla del producto de fracciones (L1 §6.2).
+
+*(ii)* De la ley (i) se sigue que $1/a^{-k} = a^{k}$ para $k \in \mathbb{N}$, porque $a^{-k} a^{k} = a^{0} = 1$; y también $1^{k} = 1$ para todo $k \in \mathbb{Z}$: para $k > 0$ es la @prp-cociente-natural (4), para $k = 0$ es la definición, y para $k = -q$ es $1^{-q} = 1/1^{q} = 1$. Si $m = 0$ o $n = 0$, ambos lados valen 1: $(a^{0})^{n} = 1^{n} = 1$ y $(a^{m})^{0} = 1$. Si $m, n \in \mathbb{N}$, es el @thm-leyes-naturales. En los demás casos escribimos $m = -p$ o $n = -q$ con $p, q \in \mathbb{N}$.
+
+- Si $m = -p$ y $n > 0$: $(a^{-p})^{n} = (1/a^{p})^{n} = 1^{n}/(a^{p})^{n} = 1/a^{pn} = a^{-pn} = a^{mn}$, por la @prp-cociente-natural (3) y (4) y el @thm-leyes-naturales.
+- Si $m > 0$ y $n = -q$: $(a^{m})^{-q} = 1/(a^{m})^{q} = 1/a^{mq} = a^{-mq} = a^{mn}$.
+- Si $m = -p$ y $n = -q$: $(a^{-p})^{-q} = 1/(a^{-p})^{q} = 1/a^{-pq} = a^{pq} = a^{mn}$, donde $(a^{-p})^{q} = a^{-pq}$ es el primer caso de esta lista.
+:::
+
+Con exponentes enteros, la ley del cociente ya no necesita la condición $m > n$: para $a \neq 0$, $a^{m}/a^{n} = a^{m} a^{-n} = a^{m-n}$ para todos $m, n \in \mathbb{Z}$, porque dividir por $a^{n}$ es multiplicar por su inverso $1/a^{n} = a^{-n}$.
+
+::: {#exm-descuento}
+Un capital crece al 8 % anual de interés compuesto, es decir, se multiplica por $1{,}08$ cada año. ¿Qué capital había que depositar hace tres años para tener hoy $5000$ u. m.? Si $C$ es el depósito, hoy se tiene $C \cdot 1{,}08^{3}$, de modo que $C = 5000 / 1{,}08^{3} = 5000 \cdot 1{,}08^{-3}$. Como $1{,}08^{3} = 1{,}259712$, resulta $C \approx 3969{,}16$ u. m. Para verificar: $3969{,}16 \cdot 1{,}259712 \approx 5000{,}00$. El exponente negativo expresa un retroceso en el tiempo: multiplicar por $1{,}08^{-1}$ deshace un año de crecimiento.
+:::
+
+## Raíces $n$-ésimas {#sec-raices}
+
+¿Qué número multiplicado por sí mismo doce veces da $1{,}05$? En L1 §7.8 se demostró que existe un número real positivo cuyo cuadrado es 2. Ahora necesitamos lo mismo para cualquier exponente $n \in \mathbb{N}$ y cualquier número no negativo. Antes de definir la raíz conviene saber que, si existe, es única. La unicidad depende de un hecho simple: entre números no negativos, elevar a una potencia natural conserva el orden estricto.
+
+::: {#lem-monotonia-natural}
+## Las potencias conservan el orden
+Sean $x, y \in \mathbb{R}$ con $0 \leq x < y$, y sea $n \in \mathbb{N}$. Entonces $x^{n} < y^{n}$.
+:::
+
+::: {.proof}
+Por inducción sobre $n$. Para $n = 1$ es la hipótesis. Supongamos $x^{n} < y^{n}$. Como $x \geq 0$ y $x^{n} \geq 0$, multiplicar desigualdades entre números no negativos (L1 §7.4) da $x^{n+1} = x^{n} x \leq x^{n} y$, y como $y > 0$, la hipótesis inductiva da $x^{n} y < y^{n} y = y^{n+1}$. Encadenando, $x^{n+1} < y^{n+1}$.
+:::
+
+El lema tiene dos lecturas contrarrecíprocas que se usarán muchas veces. Para $x, y \geq 0$: si $x^{n} \leq y^{n}$, entonces $x \leq y$, porque si fuera $x > y$ el lema daría $x^{n} > y^{n}$; y si $x^{n} < y^{n}$, entonces $x < y$, porque si fuera $x \geq y$ se tendría $x^{n} \geq y^{n}$ (por el lema si $x > y$, o porque son iguales si $x = y$).
+
+::: {#def-raiz}
+## Raíz $n$-ésima
+Sean $a \geq 0$ y $n \in \mathbb{N}$. Una **raíz $n$-ésima no negativa** de $a$ es un número $b \geq 0$ tal que $b^{n} = a$.
+:::
+
+::: {#thm-raiz-unicidad}
+## Unicidad de la raíz
+Sean $a \geq 0$ y $n \in \mathbb{N}$. Existe a lo sumo un número $b \geq 0$ con $b^{n} = a$.
+:::
+
+::: {.proof}
+Si $b, c \geq 0$ cumplen $b^{n} = c^{n} = a$ y fueran distintos, uno sería menor que el otro, digamos $b < c$, y el @lem-monotonia-natural daría $b^{n} < c^{n}$, una contradicción.
+:::
+
+La unicidad es la mitad del problema. La otra mitad, la existencia, es el resultado siguiente, cuya demostración generaliza la de L1 §7.8 y está en la @sec-raices-existencia, que es optativa.
+
+::: {#thm-raiz-existencia}
+## Existencia de la raíz
+Para todo $a \geq 0$ y todo $n \in \mathbb{N}$ existe un número $b \geq 0$ tal que $b^{n} = a$.
+:::
+
+Juntos, los dos teoremas permiten hablar de *la* [raíz $n$-ésima]{.idx} (*n-th root*) no negativa de $a$, que se denota $\sqrt[n]{a}$. Si $a > 0$, la raíz es positiva, porque $0^{n} = 0 \neq a$; para $a > 0$ se escribe también $a^{1/n}$, notación que se justificará en la @sec-exp-racionales. Para $n = 2$ se escribe $\sqrt{a}$. Por ejemplo, $\sqrt[3]{8} = 2$ porque $2^{3} = 8$ y $2 \geq 0$, y $\sqrt[4]{0{,}0016} = 0{,}2$ porque $0{,}2^{4} = 0{,}0016$.
+
+::: {.callout-warning}
+## Errores frecuentes
+Aunque $(-3)^{2} = 9$, la raíz cuadrada de 9 es 3, no $-3$: por definición, $\sqrt{a}$ es la raíz *no negativa*. En consecuencia, $\sqrt{x^{2}} = \lvert x \rvert$ y no $x$; por ejemplo, $\sqrt{(-5)^{2}} = \sqrt{25} = 5$. Tampoco la raíz se distribuye sobre la suma: $\sqrt{9 + 16} = 5$, mientras que $\sqrt{9} + \sqrt{16} = 7$.
+:::
+
+::: {.remark}
+Para $n$ impar, todo número real negativo tiene una raíz $n$-ésima real: si $a < 0$, el número $b = -\sqrt[n]{-a}$ cumple $b^{n} = (-1)^{n} (\sqrt[n]{-a})^{n} = -(-a) = a$, por la ley (iii) y la @prp-cociente-natural (4). Así, la raíz cúbica de $-8$ es $-2$. En este capítulo no usaremos raíces de números negativos, porque no se comportan bien con los exponentes fraccionarios (véase el @exr-base-negativa).
+:::
+
+## Existencia de las raíces $n$-ésimas (\*) {#sec-raices-existencia}
+
+¿Por qué existe, para cada $a \geq 0$ y cada $n \in \mathbb{N}$, un número no negativo cuya potencia $n$-ésima es $a$? Esta sección lo demuestra (@thm-raiz-existencia). Puede omitirse en una primera lectura; el resultado se usa en el resto del capítulo.
+
+La demostración de L1 §7.8 para $\sqrt{2}$ consideraba el conjunto de los números cuyo cuadrado es menor que 2, tomaba su supremo y probaba que el cuadrado del supremo no podía ser ni menor ni mayor que 2. Haremos lo mismo con la potencia $n$-ésima. La única dificultad nueva es controlar cuánto cambia $x^{n}$ cuando $x$ cambia un poco. Para eso sirve una identidad algebraica.
+
+::: {#lem-diferencia-potencias}
+## Diferencia de potencias
+Para todos $x, y \in \mathbb{R}$ y todo $n \in \mathbb{N}$,
+$$
+y^{n} - x^{n} = (y - x) \, S_n(x, y), \qquad S_n(x, y) = y^{n-1} + y^{n-2} x + \dots + y x^{n-2} + x^{n-1},
+$$ {#eq-diferencia-potencias}
+donde $S_n(x, y)$ es la suma de los $n$ productos $y^{n-1-k} x^{k}$, $k = 0, 1, \dots, n-1$, y en cada producto un factor con exponente 0 se omite (vale 1), también si su base es 0. Así, $S_1 = 1$, $S_2 = y + x$ y $S_3 = y^{2} + yx + x^{2}$. En consecuencia, si $0 \leq x < y$, entonces $0 < y^{n} - x^{n} \leq n (y - x) y^{n-1}$, donde $y^{0} = 1$ porque $y > 0$.
+:::
+
+La identidad se comprueba desarrollando el producto: casi todos los términos aparecen dos veces con signos opuestos y se cancelan. La desigualdad sale de acotar cada sumando de $S_n$ por el mayor de ellos.
+
+::: {.proof}
+Para $n = 1$, la identidad es $y - x = (y - x) \cdot 1$. Sea $n \geq 2$. Al multiplicar $S_n$ por $y$ se obtienen los productos $y^{n-k} x^{k}$ con $k = 0, 1, \dots, n-1$; al multiplicarlo por $-x$, los productos $-y^{n-1-k} x^{k+1}$, es decir, $-y^{n-j} x^{j}$ con $j = 1, \dots, n$ (con la misma convención sobre los exponentes 0). Cada producto $y^{n-k} x^{k}$ con $1 \leq k \leq n-1$ aparece una vez en cada lista con signos opuestos y se cancela; quedan $y^{n}$ (de la primera lista, $k = 0$) y $-x^{n}$ (de la segunda, $j = n$).
+
+Para la desigualdad, sea $0 \leq x < y$. El sumando de $S_n$ con $k = 0$ es $y^{n-1} > 0$, y cada uno de los demás, con $1 \leq k \leq n-1$, cumple $0 \leq y^{n-1-k} x^{k} \leq y^{n-1-k} y^{k} = y^{n-1}$, porque $x^{k} \leq y^{k}$ por el @lem-monotonia-natural. Así $y^{n-1} \leq S_n(x, y) \leq n y^{n-1}$, y al multiplicar por $y - x > 0$ se obtiene $0 < y^{n} - x^{n} \leq n (y - x) y^{n-1}$.
+:::
+
+::: {.proof}
+*Del @thm-raiz-existencia.* Si $a = 0$, basta tomar $b = 0$. Sea $a > 0$ y consideremos el conjunto
+$$
+S = \{ x \in \mathbb{R} : x \geq 0 \text{ y } x^{n} \leq a \}.
+$$
+
+*Paso 1: $S$ tiene supremo.* $S$ no es vacío, porque $0 \in S$. Está acotado superiormente por $M = \max\{1, a\}$: si $x > M$, entonces $x > 1$, de modo que $x^{n-1} \geq 1$ (por el @lem-monotonia-natural y la @prp-cociente-natural (4) si $n \geq 2$; es la igualdad $x^{0} = 1$ si $n = 1$), de donde $x^{n} = x^{n-1} x \geq x > M \geq a$, y $x \notin S$. Por el axioma del supremo (L1 §7.6), existe $b = \sup S$. Como $0 \in S$, $b \geq 0$.
+
+*Paso 2: no puede ser $b^{n} < a$.* Supongamos que lo fuera. Elegimos un número $h$ con
+$$
+0 < h < 1 \qquad \text{y} \qquad h < \frac{a - b^{n}}{n (b + 1)^{n-1}},
+$$
+lo que es posible porque el segundo cociente es positivo. Por el @lem-diferencia-potencias con $x = b$ e $y = b + h$, y porque $b + h < b + 1$,
+$$
+(b + h)^{n} - b^{n} \leq n h (b + h)^{n-1} \leq n h (b + 1)^{n-1} < a - b^{n}.
+$$
+Por tanto $(b + h)^{n} < a$, es decir, $b + h \in S$. Pero $b + h > b = \sup S$, una contradicción.
+
+*Paso 3: no puede ser $b^{n} > a$.* Supongamos que lo fuera. Entonces $b > 0$, porque $0^{n} = 0 < a$. Elegimos $h$ con
+$$
+0 < h < b \qquad \text{y} \qquad h < \frac{b^{n} - a}{n b^{n-1}}.
+$$
+Por el @lem-diferencia-potencias con $x = b - h$ e $y = b$,
+$$
+b^{n} - (b - h)^{n} \leq n h b^{n-1} < b^{n} - a,
+$$
+de donde $(b - h)^{n} > a$. Si $x \in S$, entonces $x^{n} \leq a < (b - h)^{n}$ y, por la segunda lectura contrarrecíproca del @lem-monotonia-natural, $x < b - h$. Así, $b - h$ es una cota superior de $S$ menor que su supremo $b$, una contradicción.
+
+*Conclusión.* Descartados los dos casos, $b^{n} = a$, y $b \geq 0$.
+:::
+
+La demostración es un argumento de existencia: no calcula $b$. Pero sugiere cómo aproximarlo. Los pasos 2 y 3 muestran que cualquier número con potencia menor que $a$ es demasiado pequeño y cualquier número con potencia mayor es demasiado grande, lo que permite encerrar la raíz entre aproximaciones cada vez mejores (véase el @exr-biseccion).
+
+## Exponentes racionales {#sec-exp-racionales}
+
+¿Qué debería significar $a^{p/q}$? Si queremos que valga la ley $(a^{m})^{n} = a^{mn}$, el número $a^{1/q}$ tiene que cumplir $(a^{1/q})^{q} = a^{1} = a$, es decir, tiene que ser una raíz $q$-ésima de $a$. Y entonces $a^{p/q}$ debería ser $(a^{1/q})^{p}$. Esta es la definición, con una precaución: para tener una única raíz positiva que elevar a cualquier exponente entero, nos restringimos a bases positivas.
+
+::: {#def-potencia-racional}
+## Potencias de exponente racional
+Sea $a > 0$ y sea $r = p/q$ con $p \in \mathbb{Z}$ y $q \in \mathbb{N}$. Se define
+$$
+a^{p/q} = \bigl(\sqrt[q]{a}\bigr)^{p}.
+$$
+La potencia entera está definida aunque $p$ sea negativo o cero, porque $\sqrt[q]{a} > 0$ (@sec-raices).
+:::
+
+Hay un problema que resolver antes de usar la definición. Un mismo número racional se escribe de muchas formas: $1/2 = 2/4 = 3/6$. La definición da, en principio, tres valores para $a^{1/2}$: $\sqrt{a}$, $(\sqrt[4]{a})^{2}$ y $(\sqrt[6]{a})^{3}$. Si fueran distintos, el símbolo $a^{1/2}$ no designaría un número. Hay que demostrar que el resultado no depende de la fracción elegida; en el lenguaje de la matemática, que la definición es **buena**.
+
+::: {#prp-buena-definicion}
+## Buena definición
+Sea $a > 0$. Si $p/q = p'/q'$ con $p, p' \in \mathbb{Z}$ y $q, q' \in \mathbb{N}$, entonces $\bigl(\sqrt[q]{a}\bigr)^{p} = \bigl(\sqrt[q']{a}\bigr)^{p'}$. Además, si $q = 1$ la definición coincide con la potencia entera $a^{p}$, y si $p = 1$ coincide con la raíz $\sqrt[q]{a}$.
+:::
+
+La estrategia es la del @thm-raiz-unicidad: dos números positivos que tienen la misma potencia $N$-ésima son iguales. Basta entonces elevar ambos lados a un exponente común y comprobar que se obtiene lo mismo.
+
+::: {.proof}
+Sean $x = (\sqrt[q]{a})^{p}$ e $y = (\sqrt[q']{a})^{p'}$. Ambos son positivos, porque las raíces de $a$ son positivas y toda potencia entera de un número positivo es positiva (@prp-cociente-natural y @def-potencia-entera). Con $N = q q'$ y las leyes de los exponentes enteros (@thm-leyes-enteras),
+$$
+x^{N} = \bigl(\sqrt[q]{a}\bigr)^{p q q'} = \Bigl(\bigl(\sqrt[q]{a}\bigr)^{q}\Bigr)^{p q'} = a^{p q'},
+\qquad
+y^{N} = \Bigl(\bigl(\sqrt[q']{a}\bigr)^{q'}\Bigr)^{p' q} = a^{p' q}.
+$$
+Como $p/q = p'/q'$, se tiene $p q' = p' q$, de modo que $x^{N} = y^{N}$. Por el @thm-raiz-unicidad aplicado a la raíz $N$-ésima de este número, $x = y$. Las dos afirmaciones finales son inmediatas: con $q = 1$, $\sqrt[1]{a} = a$ y la definición da $a^{p}$; con $p = 1$, da $(\sqrt[q]{a})^{1} = \sqrt[q]{a}$.
+:::
+
+::: {#thm-leyes-racionales}
+## Leyes de los exponentes racionales
+Sean $a, b > 0$ y $r, s \in \mathbb{Q}$. Entonces $a^{r} > 0$ y
+$$
+\text{(i)}\;\; a^{r} a^{s} = a^{r+s}, \qquad
+\text{(ii)}\;\; \bigl(a^{r}\bigr)^{s} = a^{rs}, \qquad
+\text{(iii)}\;\; (ab)^{r} = a^{r} b^{r}.
+$$
+:::
+
+::: {.proof}
+La positividad se vio en la prueba anterior. Para cada ley, ambos lados son positivos, y basta comprobar que tienen la misma potencia $N$-ésima para un $N$ adecuado, gracias al @thm-raiz-unicidad. Escribimos $r = p/q$ y $s = p'/q$ con un denominador común $q \in \mathbb{N}$, lo que es lícito por la @prp-buena-definicion. Sea $c = \sqrt[q]{a}$, de modo que $a^{r} = c^{p}$ y $a^{s} = c^{p'}$.
+
+*(i)* $a^{r} a^{s} = c^{p} c^{p'} = c^{p+p'} = a^{(p+p')/q} = a^{r+s}$, por la ley (i) de los exponentes enteros y la definición. En esta ley ni siquiera hace falta elevar.
+
+*(ii)* Llamamos $x = (a^{r})^{s}$ e $y = a^{rs}$. Por definición, $x = \bigl(\sqrt[q]{a^{r}}\bigr)^{p'}$ y, como $rs = p p'/q^{2}$, $y = \bigl(\sqrt[q^{2}]{a}\bigr)^{p p'}$. Elevamos ambos a $q^{2}$ con las leyes de los exponentes enteros:
+$$
+x^{q^{2}} = \Bigl(\bigl(\sqrt[q]{a^{r}}\bigr)^{q}\Bigr)^{p' q} = \bigl(a^{r}\bigr)^{p' q} = \bigl(c^{p}\bigr)^{p' q} = \bigl(c^{q}\bigr)^{p p'} = a^{p p'},
+\qquad
+y^{q^{2}} = \Bigl(\bigl(\sqrt[q^{2}]{a}\bigr)^{q^{2}}\Bigr)^{p p'} = a^{p p'} .
+$$
+Así $x^{q^{2}} = y^{q^{2}}$, y $x = y$ por la unicidad de la raíz $q^{2}$-ésima.
+
+*(iii)* Sea $d = \sqrt[q]{b}$. Entonces $(cd)^{q} = c^{q} d^{q} = ab$, de modo que $cd = \sqrt[q]{ab}$ por la unicidad de la raíz. Por tanto $(ab)^{r} = (cd)^{p} = c^{p} d^{p} = a^{r} b^{r}$.
+:::
+
+::: {#exm-racionales}
+Las leyes permiten calcular sin raíces explícitas: $8^{2/3} = (\sqrt[3]{8})^{2} = 2^{2} = 4$; $27^{-1/3} = 1/\sqrt[3]{27} = 1/3$; $16^{3/4} = (16^{1/4})^{3} = 2^{3} = 8$. En finanzas, si un capital crece un 21 % en dos años con un factor anual constante $x > 0$, entonces $x^{2} = 1{,}21$ y $x = 1{,}21^{1/2} = 1{,}1$: el crecimiento anual equivalente es del 10 %, no del 10,5 % que daría dividir 21 % entre dos. Es el mismo fenómeno de las variaciones porcentuales sucesivas de L1 §6.7: los porcentajes se componen multiplicando factores, no sumando porcentajes.
+:::
+
+## Monotonía de las potencias {#sec-monotonia}
+
+¿Qué es mayor, $2^{30}$ o $3^{20}$? ¿Y $0{,}9^{10}$ o $0{,}9^{12}$? Las dos preguntas comparan potencias, la primera con bases y exponentes distintos, la segunda con la misma base. El teorema siguiente responde en general, con exponentes racionales.
+
+::: {#thm-monotonia}
+## Monotonía de las potencias
+Sean $r, s \in \mathbb{Q}$.
+
+1. *Respecto de la base.* Si $0 < a < b$ y $r > 0$, entonces $a^{r} < b^{r}$; si $r < 0$, entonces $a^{r} > b^{r}$.
+2. *Respecto del exponente.* Si $a > 1$ y $r < s$, entonces $a^{r} < a^{s}$. Si $0 < a < 1$ y $r < s$, entonces $a^{r} > a^{s}$.
+:::
+
+Las dos partes se reducen al @lem-monotonia-natural, que compara potencias naturales. Para la base, se comparan primero las raíces y luego sus potencias; para el exponente, se escribe $a^{s} = a^{r} a^{s-r}$ y se prueba que el factor $a^{s-r}$ es mayor que 1. Los exponentes negativos y las bases menores que 1 se tratan pasando a inversos.
+
+::: {.proof}
+*(1)* Sea $r = p/q$ con $p, q \in \mathbb{N}$. Primero, $\sqrt[q]{a} < \sqrt[q]{b}$: si fuera $\sqrt[q]{a} \geq \sqrt[q]{b}$, el @lem-monotonia-natural (o la igualdad) daría $a \geq b$. Luego, otra vez por el @lem-monotonia-natural, $a^{r} = (\sqrt[q]{a})^{p} < (\sqrt[q]{b})^{p} = b^{r}$. Si $r < 0$, entonces $-r > 0$ y $a^{-r} < b^{-r}$; como $a^{r} = 1/a^{-r}$ y $b^{r} = 1/b^{-r}$ (por la ley (i) de los exponentes racionales, $a^{r} a^{-r} = a^{0} = 1$), al invertir números positivos se invierte la desigualdad (L1 §7.4).
+
+*(2)* Sea $a > 1$ y $r < s$. Escribimos $s - r = p/q$ con $p, q \in \mathbb{N}$. Como $1^{q} = 1 < a$, la segunda lectura contrarrecíproca del @lem-monotonia-natural da $\sqrt[q]{a} > 1$, y entonces $a^{s-r} = (\sqrt[q]{a})^{p} > 1^{p} = 1$, por el @lem-monotonia-natural y la @prp-cociente-natural (4). Por la ley (i) de los exponentes racionales, $a^{s} = a^{r} a^{s-r} > a^{r}$, porque $a^{r} > 0$. Si $0 < a < 1$, entonces $1/a > 1$ y lo anterior da $(1/a)^{r} < (1/a)^{s}$, es decir, $1/a^{r} < 1/a^{s}$, porque $(1/a)^{r} a^{r} = 1^{r} = 1$ por la ley (iii) (y $1^{r} = 1$ porque $\sqrt[q]{1} = 1$); de donde $a^{r} > a^{s}$.
+:::
+
+Las respuestas a las preguntas iniciales son ahora inmediatas. Como $2^{30} = (2^{3})^{10} = 8^{10}$ y $3^{20} = (3^{2})^{10} = 9^{10}$, y $8 < 9$, el primer punto del teorema da $2^{30} < 3^{20}$. Y como $0 < 0{,}9 < 1$ y $10 < 12$, el segundo punto da $0{,}9^{10} > 0{,}9^{12}$.
+
+En términos financieros, el teorema dice dos cosas sensatas sobre el factor de crecimiento $(1 + i)^{t}$ con $i > 0$: a mayor tasa, mayor crecimiento en el mismo plazo, y a mayor plazo, mayor crecimiento con la misma tasa. Si la tasa es negativa, $0 < 1 + i < 1$ y el capital decrece con el plazo.
+
+::: {.callout-warning}
+## Error frecuente
+La intuición de que «elevar a una potencia agranda» solo vale para bases mayores que 1. Para $0 < a < 1$ ocurre lo contrario con exponentes naturales: $0{,}5^{2} = 0{,}25 < 0{,}5$. Y con exponentes entre 0 y 1 la relación vuelve a invertirse: $0{,}25^{1/2} = 0{,}5 > 0{,}25$.
+:::
+
+## Desigualdad de Bernoulli e interés compuesto {#sec-bernoulli}
+
+¿Cuánto mayor es el capital con interés compuesto que con interés simple? Para responder necesitamos comparar $(1 + i)^{n}$ con $1 + n i$. Empezamos por fijar el modelo de capitalización compuesta.
+
+::: {#def-interes-compuesto}
+## Interés compuesto
+Un capital $C_0 > 0$ (en u. m.) se invierte a [interés compuesto]{.idx} con tasa $i > -1$ por período cuando, al final de cada período, el interés del período se suma al capital y pasa a generar interés en los períodos siguientes. El capital $C_n$ al cabo de $n \in \mathbb{N}_0$ períodos queda definido por $C_{n+1} = C_n + i C_n = C_n (1 + i)$ para todo $n \in \mathbb{N}_0$.
+:::
+
+::: {#prp-capital-compuesto}
+## Capital con interés compuesto
+En las condiciones de la @def-interes-compuesto, $C_n = C_0 (1 + i)^{n}$ para todo $n \in \mathbb{N}_0$.
+:::
+
+::: {.proof}
+Por inducción sobre $n \in \mathbb{N}_0$, es decir, con el principio de L1 §4.6 aplicado a partir de 0. Para $n = 0$, $C_0 = C_0 (1+i)^{0}$ porque $(1+i)^{0} = 1$ (es $1 + i > 0$). Si $C_n = C_0 (1+i)^{n}$, entonces $C_{n+1} = C_n (1 + i) = C_0 (1+i)^{n+1}$.
+:::
+
+Con interés simple, en cambio, el interés de cada período se calcula siempre sobre $C_0$ (L1 §6.8), y el capital es $C_0 (1 + n i)$.
+
+::: {#thm-bernoulli}
+## Desigualdad de Bernoulli
+Para todo $x \geq -1$ y todo $n \in \mathbb{N}$,
+$$
+(1 + x)^{n} \geq 1 + n x.
+$$
+Si además $x \neq 0$ y $n \geq 2$, la desigualdad es estricta.
+:::
+
+La [desigualdad de Bernoulli]{.idx} (*Bernoulli's inequality*) se demuestra por inducción. El paso inductivo multiplica la desigualdad por $1 + x$, y para eso hace falta que $1 + x$ no sea negativo: ahí se usa la hipótesis $x \geq -1$.
+
+::: {.proof}
+Para $n = 1$ ambos lados valen $1 + x$. Supongamos $(1 + x)^{n} \geq 1 + n x$. Como $1 + x \geq 0$, multiplicar por $1 + x$ conserva la desigualdad (L1 §7.4):
+$$
+(1 + x)^{n+1} = (1 + x)^{n} (1 + x) \geq (1 + n x)(1 + x) = 1 + (n + 1) x + n x^{2} \geq 1 + (n + 1) x,
+$$
+porque $n x^{2} \geq 0$. Esto completa la inducción.
+
+Para la desigualdad estricta, si $x \neq 0$, en el paso de $n$ a $n + 1$ el término $n x^{2}$ es positivo y la última desigualdad es estricta. Así, para $n = 2$ se tiene $(1+x)^{2} > 1 + 2x$, y el mismo paso inductivo, con «$>$» en la hipótesis, conserva la desigualdad estricta para todo $n \geq 2$.
+:::
+
+¿Es necesaria la hipótesis $x \geq -1$? Para $n$ par no lo es (@exr-bernoulli-par), y para $n = 1$ la desigualdad es una igualdad para todo $x$; pero para $n$ impar mayor o igual que 3 sí lo es: con $x = -4$ y $n = 3$, $(1 + x)^{3} = (-3)^{3} = -27$, mientras que $1 + 3x = -11$, y la desigualdad falla.
+
+::: {#cor-simple-compuesto}
+## Compuesto frente a simple
+Sea $C_0 > 0$ y sea $i > 0$ la tasa por período. Para todo $n \in \mathbb{N}$, el capital con interés compuesto, que es $C_0 (1 + i)^{n}$ por la @prp-capital-compuesto, es mayor o igual que con interés simple:
+$$
+C_0 (1 + i)^{n} \geq C_0 (1 + n i),
+$$
+con igualdad si y solo si $n = 1$.
+:::
+
+::: {.proof}
+Es la desigualdad de Bernoulli con $x = i > 0 \geq -1$, multiplicada por $C_0 > 0$. Para $n = 1$ hay igualdad, y para $n \geq 2$ la desigualdad es estricta porque $i \neq 0$.
+:::
+
+La diferencia crece con el plazo. Con $C_0 = 1000$ u. m. e $i = 0{,}10$ anual, a los 10 años el interés simple da $1000 (1 + 10 \cdot 0{,}10) = 2000$ u. m. y el compuesto $1000 \cdot 1{,}1^{10} \approx 2593{,}74$ u. m.; a los 30 años, $4000$ u. m. frente a unas $17\,449{,}40$ u. m.
+
+¿Y para fracciones de período? Si el plazo es medio período, el «capital compuesto» sería $C_0 (1+i)^{1/2}$, y la comparación se invierte.
+
+::: {#prp-medio-periodo}
+## Medio período
+Si $i > 0$, entonces $(1 + i)^{1/2} < 1 + \tfrac{1}{2} i$.
+:::
+
+::: {.proof}
+Ambos números son positivos y $\bigl(1 + \tfrac{1}{2} i\bigr)^{2} = 1 + i + \tfrac{1}{4} i^{2} > 1 + i = \bigl((1+i)^{1/2}\bigr)^{2}$. Por la segunda lectura contrarrecíproca del @lem-monotonia-natural, $(1+i)^{1/2} < 1 + \tfrac{1}{2} i$.
+:::
+
+Así, para un plazo de medio período el interés simple produce más que el compuesto, mientras que para un número entero $n \geq 2$ de períodos ocurre lo contrario (@cor-simple-compuesto). El @exr-fraccion-periodo extiende la proposición a plazos de $1/q$ de período. Para plazos fraccionarios cualesquiera, como $2/3$ o $1{,}5$ períodos, la comparación requiere la desigualdad de Bernoulli con exponente real, que es una de las desigualdades por convexidad de L4 §6.4; los plazos no enteros se discuten además en la @sec-aplicaciones.
+
+## Exponentes reales: idea y uso {#sec-exp-reales}
+
+¿Qué significa $2^{\sqrt{2}}$? El exponente $\sqrt{2}$ no es racional (L1 §7.8), de modo que ninguna de las definiciones anteriores se aplica. Sin embargo, los racionales $1{,}4$, $1{,}41$, $1{,}414$, $1{,}4142, \dots$ se acercan cada vez más a $\sqrt{2}$, y por el @thm-monotonia las potencias $2^{1{,}4} < 2^{1{,}41} < 2^{1{,}414} < 2^{1{,}4142} < \dots$ forman una lista creciente, siempre menor que $2^{1{,}5}$. Es razonable esperar que se acerquen a un número bien determinado, que sería $2^{\sqrt{2}}$. La @tbl-raiz-dos muestra los primeros valores.
+
+```{python}
+#| echo: false
+#| output: asis
+#| label: tbl-raiz-dos
+#| tbl-cap: "Potencias de 2 con exponentes racionales que aproximan $\\sqrt{2}$."
+import sys
+sys.path.insert(0, "../../composicion/python")
+import atlas_texto as tx
+
+exponentes = ["1.4", "1.41", "1.414", "1.4142", "1.41421"]
+filas = [[tx.numero(float(e), len(e) - 2), tx.numero(2 ** float(e), 6)] for e in exponentes]
+print(tx.tabla(["Exponente $r$", "$2^{r}$"], filas))
+```
+
+Convertir esta idea en una definición requiere la noción de límite, que se estudia en L2, y probar las leyes de los exponentes reales requiere herramientas del cálculo de L4. Este libro usa el resultado sin demostración, como resultado admitido.
+
+::: {.admitido #adm-exponentes-reales}
+## RA-02, potencias de exponente real
+Sea $a > 0$. Existe una única función que asigna a cada $x \in \mathbb{R}$ un número $a^{x} > 0$, que coincide con la potencia racional cuando $x \in \mathbb{Q}$ y que es estrictamente creciente si $a > 1$, estrictamente decreciente si $0 < a < 1$ y constante igual a 1 si $a = 1$. Además, para todos $a, b > 0$ y $x, y \in \mathbb{R}$ valen las leyes $a^{x} a^{y} = a^{x+y}$, $(a^{x})^{y} = a^{xy}$ y $(ab)^{x} = a^{x} b^{x}$, y la función $x \mapsto a^{x}$ varía sin saltos (es continua, noción que se define en L4). Se demuestra en L4 §10.4.
+:::
+
+Con este resultado valen para exponentes reales las tres leyes de los exponentes y la monotonía respecto del exponente. También vale la monotonía respecto de la base: si $0 < a < b$ y $x > 0$, entonces $b/a > 1$ y, por la monotonía respecto del exponente, $(b/a)^{x} > (b/a)^{0} = 1$; por la ley $(ab)^{x} = a^{x} b^{x}$, $b^{x} = a^{x} (b/a)^{x} > a^{x}$. En cambio, la desigualdad de Bernoulli y la @prp-medio-periodo solo se demostraron para exponentes naturales, para $1/2$ y (en el @exr-fraccion-periodo) para $1/q$; su extensión a exponentes reales se estudia en L4 §6.4. Con el resultado admitido, el factor de crecimiento $(1 + i)^{t}$ tiene sentido para cualquier plazo $t \geq 0$.
+
+## Logaritmos {#sec-logaritmos}
+
+¿En cuántos años se duplica un capital al 5 % anual? La pregunta pide un exponente: el número $t$ tal que $1{,}05^{t} = 2$. Por el @adm-exponentes-reales, la función $t \mapsto 1{,}05^{t}$ es estrictamente creciente, de modo que hay a lo sumo un $t$ con esa propiedad. Que haya alguno es el contenido del resultado siguiente.
+
+::: {.admitido #adm-logaritmo}
+## RA-03, existencia del logaritmo
+Sea $b > 0$ con $b \neq 1$. Para todo $x > 0$ existe un número real $y$ tal que $b^{y} = x$. Se demuestra en L4 §10.4.
+:::
+
+::: {#def-logaritmo}
+## Logaritmo
+Sean $b > 0$, $b \neq 1$ y $x > 0$. El [logaritmo]{.idx} de $x$ en base $b$, $\log_b x$, es el único número real $y$ tal que $b^{y} = x$.
+:::
+
+La unicidad viene de la monotonía estricta del @adm-exponentes-reales: si $b^{y} = b^{y'}$ con $y < y'$, la monotonía daría $b^{y} < b^{y'}$ o $b^{y} > b^{y'}$. La definición dice, en otras palabras, que
+$$
+y = \log_b x \quad \Longleftrightarrow \quad b^{y} = x .
+$$ {#eq-def-logaritmo}
+
+Por ejemplo, $\log_{2} 1024 = 10$ porque $2^{10} = 1024$; $\log_{10} 0{,}001 = -3$ porque $10^{-3} = 0{,}001$; $\log_{9} 3 = 1/2$ porque $9^{1/2} = 3$. El logaritmo solo está definido para $x > 0$: como $b^{y} > 0$ para todo $y$, ninguna potencia de $b$ es cero ni negativa. En la obra no se escribe «log» sin base; la base 10 se indica siempre. En L2 se introducirá una base especial, el número $e$, y su logaritmo, que se escribe $\ln$.
+
+::: {#thm-propiedades-logaritmo}
+## Propiedades del logaritmo
+Sean $b > 0$ con $b \neq 1$, $x, y > 0$ y $r \in \mathbb{R}$. Entonces:
+
+1. $\log_b 1 = 0$ y $\log_b b = 1$;
+2. $\log_b (b^{r}) = r$ y $b^{\log_b x} = x$;
+3. $\log_b (x y) = \log_b x + \log_b y$;
+4. $\log_b (x / y) = \log_b x - \log_b y$;
+5. $\log_b (x^{r}) = r \log_b x$;
+6. si $b > 1$, $\log_b$ es estrictamente creciente: $x < y$ implica $\log_b x < \log_b y$; si $0 < b < 1$, es estrictamente decreciente.
+:::
+
+Cada propiedad del logaritmo es una ley de los exponentes leída al revés. La estrategia común es poner nombre a los logaritmos que aparecen, traducir la afirmación a potencias mediante la @eq-def-logaritmo, aplicar la ley correspondiente y volver a traducir.
+
+::: {.proof}
+*(1)* $b^{0} = 1$ y $b^{1} = b$.
+
+*(2)* La primera igualdad dice que $r$ es el número cuya potencia de base $b$ es $b^{r}$, lo que es cierto. La segunda es la definición: $\log_b x$ es el exponente al que hay que elevar $b$ para obtener $x$.
+
+*(3)* Sean $u = \log_b x$ y $v = \log_b y$, de modo que $b^{u} = x$ y $b^{v} = y$. Por la ley $b^{u} b^{v} = b^{u+v}$, se tiene $b^{u+v} = xy$, y la @eq-def-logaritmo da $\log_b(xy) = u + v$.
+
+*(4)* Por (3), $\log_b (x/y) + \log_b y = \log_b\bigl((x/y) \, y\bigr) = \log_b x$.
+
+*(5)* Con $u = \log_b x$, la ley $(b^{u})^{r} = b^{ur}$ da $b^{ru} = x^{r}$, de modo que $\log_b(x^{r}) = r u$.
+
+*(6)* Sea $b > 1$ y $x < y$. Si fuera $\log_b x \geq \log_b y$, la monotonía de $t \mapsto b^{t}$ daría $x = b^{\log_b x} \geq b^{\log_b y} = y$, una contradicción. El caso $0 < b < 1$ es análogo.
+:::
+
+::: {#thm-cambio-base}
+## Cambio de base
+Sean $a, b > 0$ con $a \neq 1$ y $b \neq 1$, y sea $x > 0$. Entonces
+$$
+\log_b x = \frac{\log_a x}{\log_a b}.
+$$
+:::
+
+::: {.proof}
+Sea $y = \log_b x$, de modo que $b^{y} = x$. Aplicando $\log_a$ a ambos lados y la propiedad (5), $y \log_a b = \log_a x$. Como $b \neq 1$, $\log_a b \neq \log_a 1 = 0$ por la monotonía estricta, y podemos dividir.
+:::
+
+El cambio de base es lo que permite calcular cualquier logaritmo con una sola tecla de la calculadora. Con $\log_{10} 2 \approx 0{,}30103$ y $\log_{10} 3 \approx 0{,}47712$, por ejemplo, $\log_{2} 3 = \log_{10} 3 / \log_{10} 2 \approx 1{,}58496$.
+
+::: {#exm-cifras}
+¿Cuántas cifras tiene $2^{100}$? Un número natural $N$ tiene $k$ cifras exactamente cuando $10^{k-1} \leq N < 10^{k}$. Como $\log_{10}$ es creciente, esto equivale a $k - 1 \leq \log_{10} N < k$. Para $N = 2^{100}$, la propiedad (5) da $\log_{10} 2^{100} = 100 \log_{10} 2 \approx 30{,}103$, que está entre 30 y 31. Por tanto $2^{100}$ tiene 31 cifras. Para verificarlo basta escribirlo: $2^{100} = 1\,267\,650\,600\,228\,229\,401\,496\,703\,205\,376$, que tiene 31 cifras.
+:::
+
+::: {.callout-warning}
+## Errores frecuentes
+El logaritmo convierte productos en sumas, pero no simplifica sumas: $\log_b(x + y)$ no es $\log_b x + \log_b y$. Por ejemplo, $\log_{10}(10 + 10) = \log_{10} 20 \approx 1{,}301$, mientras que $\log_{10} 10 + \log_{10} 10 = 2$. Tampoco $(\log_b x)^{r}$, la potencia del logaritmo, es igual a $\log_b(x^{r})$: $(\log_{10} 100)^{2} = 4$ y $\log_{10}(100^{2}) = 4$ coinciden solo por casualidad, mientras que $(\log_{10} 1000)^{2} = 9 \neq 6 = \log_{10}(1000^{2})$. Por último, $\log_b x / \log_b y$ no es $\log_b (x/y)$.
+:::
+
+## Aplicaciones financieras {#sec-aplicaciones}
+
+¿Cuánto tarda un capital en alcanzar un monto dado? ¿Qué tasa mensual equivale a una tasa anual? ¿Es buena la regla del 72? Las tres preguntas se responden con las herramientas del capítulo. Antes, fijamos cómo se interpreta la capitalización compuesta en plazos que no son un número entero de períodos.
+
+::: {.hipotesis #hip-plazo-real}
+## Capitalización compuesta en plazos no enteros
+Un capital $C_0$ invertido a la tasa $i > -1$ por período vale, al cabo de un plazo $t \geq 0$ medido en períodos, $C_t = C_0 (1 + i)^{t}$, aunque $t$ no sea entero.
+:::
+
+Es una hipótesis de modelización, no un teorema: en la práctica, un banco puede liquidar los intereses solo al final de cada período completo, o usar interés simple para la fracción de período. El resultado de un cálculo con esta hipótesis debe interpretarse en consecuencia.
+
+**Tasas equivalentes.** Dos tasas son [equivalentes]{.idx entrada="tasa equivalente"} (*equivalent rates*) si producen el mismo capital en el mismo plazo. Si un año se divide en $m$ subperíodos iguales y $j > -1$ es la tasa por subperíodo, la equivalencia con una tasa anual $i$ exige que el capital al cabo de un año sea el mismo:
+$$
+(1 + j)^{m} = 1 + i \qquad \Longleftrightarrow \qquad j = (1 + i)^{1/m} - 1 \qquad (j > -1).
+$$ {#eq-tasa-equivalente}
+La equivalencia se mantiene para cualquier plazo: por la ley $(a^{x})^{y} = a^{xy}$, al cabo de $t$ años se tiene $(1 + j)^{m t} = \bigl((1+j)^{m}\bigr)^{t} = (1 + i)^{t}$.
+
+::: {#exm-tasa-mensual}
+¿Qué tasa mensual equivale a una tasa anual del 12 %? La @eq-tasa-equivalente con $m = 12$ da $j = 1{,}12^{1/12} - 1 \approx 0{,}009489$, es decir, un 0,9489 % mensual, algo menos que el 1 % que se obtendría dividiendo 12 % entre 12. Para verificar: $1{,}009489^{12} \approx 1{,}12000$. La diferencia no es un error de redondeo: con un 1 % mensual compuesto, el factor anual sería $1{,}01^{12} \approx 1{,}126825$, una tasa anual del 12,68 %.
+:::
+
+**Tiempo para alcanzar un monto.** Si un capital $C_0$ crece a la tasa $i > 0$ por período, el plazo $t$ en que alcanza un monto $C > C_0$ cumple $C_0 (1 + i)^{t} = C$, es decir, $(1+i)^{t} = C / C_0$. Por la definición de logaritmo y el cambio de base,
+$$
+t = \log_{1+i} \frac{C}{C_0} = \frac{\log_{10} (C / C_0)}{\log_{10} (1 + i)} .
+$$ {#eq-plazo}
+
+::: {#exm-plazo}
+¿En cuánto tiempo $10\,000$ u. m. al 6 % anual se convierten en $15\,000$ u. m.? La @eq-plazo da $t = \log_{10} 1{,}5 / \log_{10} 1{,}06 \approx 0{,}176091 / 0{,}025306 \approx 6{,}96$ años. Si los intereses solo se liquidan al final de cada año, el monto se alcanza al cabo de 7 años: tras 6 años el capital es $10\,000 \cdot 1{,}06^{6} \approx 14\,185{,}19$ u. m., y tras 7, $\approx 15\,036{,}30$ u. m. La comprobación numérica confirma el resultado y muestra cómo la @hip-plazo-real afecta a la interpretación.
+:::
+
+**Tiempo de duplicación y regla del 72.** El caso $C = 2 C_0$ de la @eq-plazo da el [tiempo de duplicación]{.idx} (*doubling time*)
+$$
+t^{*} = \log_{1+i} 2 = \frac{\log_{10} 2}{\log_{10}(1 + i)} ,
+$$ {#eq-duplicacion}
+que no depende del capital inicial. La **regla del 72** (*rule of 72*) es una aproximación tradicional para el cálculo mental: si la tasa por período es del $100 i$ %, el capital se duplica en unos $72 / (100 i)$ períodos. La @tbl-regla-72 compara la regla con el valor exacto para varias tasas.
+
+```{python}
+#| echo: false
+#| output: asis
+#| label: tbl-regla-72
+#| tbl-cap: "Tiempo de duplicación exacto y regla del 72. El error relativo es (regla − exacto) / exacto."
+import math
+
+filas = []
+for tasa in [0.01, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.15, 0.20, 0.30]:
+    exacto = math.log10(2) / math.log10(1 + tasa)
+    regla = 72 / (100 * tasa)
+    filas.append([tx.porcentaje(tasa, 0), tx.numero(exacto, 2), tx.numero(regla, 2),
+                  tx.porcentaje((regla - exacto) / exacto, 1)])
+print(tx.tabla(["Tasa por período", "Exacto (períodos)", "Regla del 72 (períodos)", "Error relativo"], filas))
+```
+
+La tabla sugiere tres hechos: la regla funciona muy bien entre el 6 % y el 10 %; sobrestima el plazo para tasas pequeñas y lo subestima para tasas grandes; y su error relativo cambia de signo cerca del 8 %. Una tabla no demuestra nada sobre las tasas que no aparecen en ella. El resultado general se demuestra en L4 con herramientas de cálculo, y aquí lo usamos como resultado admitido.
+
+::: {.admitido #adm-regla-72}
+## RA-05, error de la regla del 72
+Para toda tasa $i$ con $0 < i \leq 0{,}15$, el error relativo de la regla del 72 cumple
+$$
+\left\lvert \frac{72/(100 i) - t^{*}}{t^{*}} \right\rvert < 0{,}04,
+$$
+donde $t^{*}$ es el tiempo de duplicación exacto de la @eq-duplicacion. La desigualdad en que se basa se demuestra en L4 §10.8 y la cota, en L4 §13.3.
+:::
+
+En palabras: para tasas de hasta el 15 % por período, la regla del 72 se equivoca en menos de un 4 % del valor exacto. Para tasas mayores el error crece (con $i = 0{,}30$ ya supera el 8 %, como muestra la tabla), y para tasas muy pequeñas la regla da un plazo casi un 4 % mayor que el exacto.
+
+::: {.callout-note}
+## Limitaciones
+Todos los cálculos de esta sección suponen una tasa constante durante todo el plazo, que los intereses se reinvierten a la misma tasa y que no hay impuestos, comisiones ni inflación. Con una tasa $i \leq 0$ el capital nunca se duplica, y la @eq-duplicacion no tiene sentido. Los rendimientos reales de una inversión no son constantes; los libros posteriores de la obra estudian cómo modelizarlos.
+:::
+
+## Cálculo con Python {#sec-python-potencias}
+
+¿Cómo se calculan potencias y logaritmos en la práctica, y cuánto hay que confiar en el resultado? En el apéndice A se presentó Python como calculadora. Repasamos aquí las operaciones del capítulo. Recuerde que en el código y en sus salidas el separador decimal es el punto.
+
+El primer fragmento calcula potencias con el operador `**`, raíces como potencias fraccionarias y logaritmos con el módulo `math`.
+
+```{python}
+import math
+
+print(2 ** 10)               # potencia de exponente natural
+print(2 ** -3)               # exponente negativo: 1 / 2**3
+print(1000 ** (1 / 3))       # raíz cúbica de 1000
+print(math.log10(0.001))     # logaritmo en base 10
+print(math.log(1024, 2))     # logaritmo en base 2
+print(math.log10(2 ** 100))  # 100 veces el logaritmo de 2
+```
+
+La primera línea importa el módulo `math`, que contiene las funciones matemáticas. `2 ** 10` calcula $2^{10}$ de forma exacta, porque base y exponente son enteros. `2 ** -3` calcula $2^{-3} = 0{,}125$. En la tercera línea `1 / 3` no es exactamente un tercio, sino el número de punto flotante más cercano, y por eso el resultado no es exactamente 10, sino un número muy próximo. `math.log10(x)` calcula $\log_{10} x$, y `math.log(x, b)` calcula $\log_b x$. La última línea calcula $\log_{10} 2^{100}$; su salida confirma el valor $30{,}103$ del @exm-cifras.
+
+Las salidas muestran que los cálculos con exponentes no enteros son aproximados. El segundo fragmento hace visibles algunos errores de redondeo.
+
+```{python}
+print(1000 ** (1 / 3) == 10)          # ¿es exactamente 10?
+print(math.log(1000, 10))             # por cambio de base
+print(math.sqrt(2) ** 2)              # el cuadrado de la raíz de 2
+print(1.12 ** (1 / 12) - 1)           # tasa mensual del ejemplo
+print(abs(math.sqrt(2) ** 2 - 2) < 1e-12)   # comparación con tolerancia
+```
+
+La primera línea compara el resultado con 10 mediante `==`, que exige igualdad exacta. La segunda calcula $\log_{10} 1000$ con `math.log(x, b)`, que internamente divide dos logaritmos como en el @thm-cambio-base; el cociente no siempre es exacto. La tercera eleva al cuadrado la raíz de 2 calculada por `math.sqrt`. La cuarta recalcula la tasa mensual del @exm-tasa-mensual. La última muestra la forma correcta de comparar números de punto flotante: preguntar si la diferencia es menor que una tolerancia pequeña, aquí $10^{-12}$.
+
+Estas discrepancias no son errores de Python: los números como $1/3$ o $\sqrt{2}$ no tienen representación exacta en la computadora y se redondean. El capítulo 9 de este libro estudia el error de redondeo y L3 explica la aritmética de punto flotante. La consecuencia práctica es que un cálculo numérico sirve para verificar o explorar, como en la @tbl-regla-72, pero no reemplaza una demostración.
+
+El último fragmento reproduce la tabla de la regla del 72 con salidas sin formato.
+
+```{python}
+for tasa in [0.01, 0.05, 0.08, 0.10, 0.15]:
+    exacto = math.log10(2) / math.log10(1 + tasa)
+    regla = 72 / (100 * tasa)
+    error = (regla - exacto) / exacto
+    print(tasa, round(exacto, 4), round(regla, 4), round(error, 4))
+```
+
+El bucle `for` recorre cinco tasas. Para cada una calcula el tiempo exacto con la @eq-duplicacion, el de la regla del 72 y el error relativo, y muestra los cuatro valores redondeados a cuatro decimales con `round`.
+
+## Síntesis {#sec-sintesis-potencias}
+
+Las potencias se definieron por recursión para exponentes naturales, y sus leyes se demostraron por inducción. La extensión a exponentes enteros no es arbitraria: $a^{0} = 1$ y $a^{-n} = 1/a^{n}$ son las únicas definiciones compatibles con las leyes. Las raíces $n$-ésimas positivas existen y son únicas (la existencia usa el axioma del supremo), y permiten definir las potencias de exponente racional sin ambigüedad. Las potencias son monótonas respecto de la base y del exponente, y la desigualdad de Bernoulli compara el crecimiento compuesto con el simple. Los exponentes reales y la existencia del logaritmo se usan como resultados admitidos (RA-02 y RA-03), y todas las propiedades del logaritmo se demostraron a partir de las leyes de los exponentes. En las aplicaciones, el logaritmo resuelve los problemas de plazo, las raíces dan las tasas equivalentes y la regla del 72 resulta una buena aproximación para tasas moderadas.
+
+Estas herramientas reaparecen en toda la obra. L2 introduce el número $e$, la función exponencial y el logaritmo natural, y estudia las funciones exponenciales y logarítmicas como funciones. L4 demuestra los resultados admitidos de este capítulo. L5 desarrolla las tasas equivalentes, la capitalización con varias frecuencias y el valor del dinero en el tiempo.
+
+## Ejercicios {#sec-ejercicios-potencias}
+
+Los ejercicios llevan una etiqueta de tipo ([C] comprensión, [P] procedimiento, [D] demostración, [A] aplicación financiera, [N] computación, [E] detección de errores, [S] síntesis, [I] problema abierto) y una dificultad de una a tres estrellas.
+
+### Potencias de exponente natural y entero
+
+::: {#exr-calculo-leyes}
+[P] ★ Simplifique usando las leyes de los exponentes: (a) $3^{4} \cdot 3^{-2}$; (b) $(2^{-1})^{3}$; (c) $(5 \cdot 2)^{3} / 10^{2}$; (d) $a^{3} b^{-2} (a b)^{2}$ con $a, b \neq 0$.
+:::
+
+::: {.solucion}
+(a) $3^{4-2} = 3^{2} = 9$. (b) $2^{-3} = 1/8$. (c) $10^{3}/10^{2} = 10$. (d) $a^{3} b^{-2} a^{2} b^{2} = a^{5} b^{0} = a^{5}$.
+:::
+
+::: {#exr-cociente-entero}
+[D] ★★ Demuestre que $(a/b)^{n} = a^{n}/b^{n}$ para $a, b \neq 0$ y todo $n \in \mathbb{Z}$. Sugerencia: separe los casos $n > 0$, $n = 0$ y $n < 0$.
+:::
+
+::: {.solucion}
+Si $n > 0$, es la @prp-cociente-natural (3). Si $n = 0$, ambos lados valen 1. Si $n = -q$ con $q \in \mathbb{N}$: $(a/b)^{-q} = 1/(a/b)^{q} = 1/(a^{q}/b^{q}) = b^{q}/a^{q}$, porque dividir por $a^{q}/b^{q}$ es multiplicar por su inverso $b^{q}/a^{q}$ (L1 §6.2); y $b^{q}/a^{q} = (1/a^{q})/(1/b^{q}) = a^{-q}/b^{-q}$.
+:::
+
+::: {#exr-base-menor-uno}
+[D] ★ Sea $0 < a < 1$. Demuestre que $0 < a^{n+1} < a^{n}$ para todo $n \in \mathbb{N}$, y deduzca que $a^{n} < 1$.
+:::
+
+::: {.solucion}
+Por la @prp-cociente-natural (1), $a^{n} > 0$. Como $a < 1$ y $a^{n} > 0$, multiplicar por $a^{n}$ conserva la desigualdad: $a^{n+1} = a^{n} a < a^{n} \cdot 1 = a^{n}$, y $a^{n+1} > 0$. Por inducción, $a^{n} < 1$: $a^{1} = a < 1$ y, si $a^{n} < 1$, entonces $a^{n+1} < a^{n} < 1$.
+:::
+
+::: {#exr-signo-potencia}
+[D] ★★ Sea $a < 0$ y $n \in \mathbb{N}$. Demuestre que $a^{n} > 0$ si $n$ es par y $a^{n} < 0$ si $n$ es impar.
+:::
+
+::: {.solucion}
+Por la ley (iii), $a^{n} = \bigl((-1)(-a)\bigr)^{n} = (-1)^{n} (-a)^{n}$. Como $-a > 0$, $(-a)^{n} > 0$ por la @prp-cociente-natural (1). El signo es el de $(-1)^{n}$, que es positivo para $n$ par y negativo para $n$ impar (@prp-cociente-natural (4)).
+:::
+
+::: {#exr-obligadas}
+[C] ★ Explique con sus palabras por qué la @prp-unicidad-enteros no demuestra las leyes de los exponentes enteros y qué papel cumple el @thm-leyes-enteras.
+:::
+
+::: {.solucion}
+La proposición supone que las leyes valen y deduce qué valores deben tener $a^{0}$ y $a^{-n}$: muestra que no hay otra opción. No dice que, con esos valores, las leyes efectivamente se cumplan; podría ocurrir que ninguna definición funcionara. El teorema verifica que sí funcionan. Juntos dicen que existe exactamente una extensión compatible con las leyes.
+:::
+
+::: {#exr-error-potencias}
+[E] ★ Un estudiante escribe: «$(2 + 3)^{2} = 2^{2} + 3^{2} = 13$ y $2^{3} \cdot 2^{4} = 4^{7}$». Señale los errores y corrija los cálculos.
+:::
+
+::: {.solucion}
+La potencia no se distribuye sobre la suma: $(2+3)^{2} = 25$. En el producto de potencias de igual base se suman los exponentes y la base se conserva: $2^{3} \cdot 2^{4} = 2^{7} = 128$, mientras que $4^{7} = 16\,384$.
+:::
+
+::: {#exr-descuento}
+[A] ★ ¿Qué capital hay que depositar hoy al 5 % anual de interés compuesto para disponer de $20\,000$ u. m. dentro de 6 años? Verifique el resultado.
+:::
+
+::: {.solucion}
+$C = 20\,000 \cdot 1{,}05^{-6} \approx 20\,000 / 1{,}340096 \approx 14\,924{,}31$ u. m. Verificación: $14\,924{,}31 \cdot 1{,}340096 \approx 20\,000{,}00$.
+:::
+
+::: {#exr-variacion-sucesiva}
+[A] ★★ (Recuperación de L1 §6.7.) Un precio sube un 10 % un año y baja un 10 % el siguiente. Exprese el precio final como el inicial multiplicado por una potencia o producto de factores, y explique por qué no vuelve al valor inicial. ¿Qué porcentaje de baja lo devolvería exactamente al valor inicial?
+:::
+
+::: {.solucion}
+El factor es $1{,}1 \cdot 0{,}9 = 0{,}99$: el precio final es el 99 % del inicial, porque la baja se aplica sobre una base mayor. Para volver al inicial hace falta un factor $1/1{,}1 = 1{,}1^{-1} \approx 0{,}909091$, es decir, una baja de aproximadamente 9,09 %.
+:::
+
+### Raíces y exponentes racionales
+
+::: {#exr-raices-calculo}
+[P] ★ Calcule sin calculadora: (a) $\sqrt[5]{32}$; (b) $\sqrt[3]{0{,}125}$; (c) $81^{3/4}$; (d) $(1/4)^{-1/2}$; (e) $1000^{-2/3}$.
+:::
+
+::: {.solucion}
+(a) 2, porque $2^{5} = 32$. (b) $0{,}5$, porque $0{,}5^{3} = 0{,}125$. (c) $(81^{1/4})^{3} = 3^{3} = 27$. (d) $4^{1/2} = 2$. (e) $1/(1000^{1/3})^{2} = 1/100 = 0{,}01$.
+:::
+
+::: {#exr-raiz-producto}
+[D] ★ Demuestre que, para $a, b \geq 0$ y $n \in \mathbb{N}$, $\sqrt[n]{ab} = \sqrt[n]{a} \, \sqrt[n]{b}$. Indique qué teorema garantiza la igualdad.
+:::
+
+::: {.solucion}
+El número $c = \sqrt[n]{a} \sqrt[n]{b}$ es no negativo y, por la ley (iii) del @thm-leyes-naturales, $c^{n} = (\sqrt[n]{a})^{n} (\sqrt[n]{b})^{n} = ab$. Por la unicidad de la raíz (@thm-raiz-unicidad), $c = \sqrt[n]{ab}$.
+:::
+
+::: {#exr-raiz-abs}
+[C] ★ ¿Para qué números reales $x$ vale $\sqrt{x^{2}} = x$? Justifique.
+:::
+
+::: {.solucion}
+Para $x \geq 0$. En general $\sqrt{x^{2}} = \lvert x \rvert$, porque $\lvert x \rvert \geq 0$ y $\lvert x \rvert^{2} = x^{2}$; por la unicidad de la raíz, es la raíz cuadrada de $x^{2}$. Coincide con $x$ si y solo si $x \geq 0$.
+:::
+
+::: {#exr-base-negativa}
+[E] ★★ Alguien razona: «$-2 = (-8)^{1/3} = (-8)^{2/6} = \bigl((-8)^{2}\bigr)^{1/6} = 64^{1/6} = 2$, luego $-2 = 2$». ¿Dónde está el error? ¿Qué parte de la @def-potencia-racional lo evita?
+:::
+
+::: {.solucion}
+La definición de exponente racional exige base positiva. Con base negativa, la @prp-buena-definicion falla: $1/3$ y $2/6$ son el mismo racional, pero «$(-8)^{1/3}$» como raíz cúbica real vale $-2$ y $((-8)^{2})^{1/6}$ vale 2. El paso incorrecto es $(-8)^{1/3} = (-8)^{2/6}$, que solo es lícito para bases positivas.
+:::
+
+::: {#exr-racionales-simplificar}
+[P] ★★ Simplifique, para $x > 0$: (a) $x^{1/2} x^{1/3}$; (b) $(x^{2/3})^{3/4}$; (c) $\sqrt{x \sqrt{x}}$; (d) $\dfrac{x^{5/6}}{x^{1/3}}$.
+:::
+
+::: {.solucion}
+(a) $x^{5/6}$. (b) $x^{1/2}$. (c) $(x \cdot x^{1/2})^{1/2} = (x^{3/2})^{1/2} = x^{3/4}$. (d) $x^{5/6 - 2/6} = x^{1/2}$.
+:::
+
+::: {#exr-buena-definicion}
+[C] ★★ Explique por qué hace falta la @prp-buena-definicion. Dé un ejemplo de una «definición» de una operación sobre fracciones que dependa de la escritura elegida.
+:::
+
+::: {.solucion}
+La definición de $a^{p/q}$ usa el numerador y el denominador, pero un racional tiene muchas escrituras; si el valor dependiera de ella, $a^{r}$ no designaría un número. Ejemplo de mala definición: asignar a $p/q$ el número $p + q$; entonces $1/2 \mapsto 3$ y $2/4 \mapsto 6$, aunque $1/2 = 2/4$.
+:::
+
+::: {#exr-inverso-racional}
+[D] ★★ Usando el @thm-leyes-racionales, demuestre que $a^{-r} = 1/a^{r}$ para $a > 0$ y $r \in \mathbb{Q}$, y que $(a/b)^{r} = a^{r}/b^{r}$ para $a, b > 0$.
+:::
+
+::: {.solucion}
+Por (i), $a^{r} a^{-r} = a^{0} = 1$, de donde $a^{-r} = 1/a^{r}$. Por (iii), $(a/b)^{r} b^{r} = \bigl((a/b) b\bigr)^{r} = a^{r}$, y basta dividir por $b^{r} > 0$.
+:::
+
+::: {#exr-crecimiento-equivalente}
+[A] ★ Una inversión creció un 33,1 % en tres años. ¿Cuál fue la tasa anual compuesta equivalente? Verifique.
+:::
+
+::: {.solucion}
+$x^{3} = 1{,}331$ con $x > 0$ da $x = 1{,}331^{1/3} = 1{,}1$: un 10 % anual. Verificación: $1{,}1^{3} = 1{,}331$.
+:::
+
+::: {#exr-biseccion}
+[N] ★★ Escriba un programa que aproxime $\sqrt[3]{10}$ así: parta del intervalo $[2; 3]$ (¿por qué contiene la raíz?), tome el punto medio $m$, conserve la mitad izquierda si $m^{3} > 10$ y la derecha en caso contrario, y repita 30 veces. Compare con `10 ** (1 / 3)`. ¿Qué paso de la @sec-raices-existencia justifica cada elección?
+:::
+
+::: {.solucion}
+$2^{3} = 8 < 10 < 27 = 3^{3}$, y por el @lem-monotonia-natural la raíz está entre 2 y 3. Programa (fragmento no ejecutado al componer el libro; sus resultados se comprobaron con el script de verificación del capítulo):
+```python
+izq, der = 2.0, 3.0
+for _ in range(30):
+    m = (izq + der) / 2
+    if m ** 3 > 10:
+        der = m
+    else:
+        izq = m
+print(izq, der, 10 ** (1 / 3))
+```
+Tras 30 pasos el intervalo mide $2^{-30} \approx 9{,}3 \cdot 10^{-10}$ y ambos extremos coinciden con $2{,}15443469\ldots$. Si $m^{3} > 10$, todo número mayor que $m$ tiene cubo mayor que 10 y la raíz está a la izquierda (como en el paso 3); si $m^{3} \leq 10$, la raíz es al menos $m$ (como en el paso 2).
+:::
+
+### Existencia de raíces (sección optativa)
+
+::: {#exr-diferencia-cubos}
+[P] ★ Verifique la @eq-diferencia-potencias para $n = 2$ y $n = 3$ desarrollando el producto.
+:::
+
+::: {.solucion}
+$n = 2$: $(y - x)(y + x) = y^{2} + xy - xy - x^{2} = y^{2} - x^{2}$. $n = 3$: $(y - x)(y^{2} + yx + x^{2}) = y^{3} + y^{2}x + yx^{2} - xy^{2} - yx^{2} - x^{3} = y^{3} - x^{3}$.
+:::
+
+::: {#exr-raiz-sup-cota}
+[D] ★★ En el paso 1 de la demostración del @thm-raiz-existencia se usó la cota $M = \max\{1, a\}$. Explique por qué no basta tomar $M = a$ cuando $0 < a < 1$, dando un ejemplo.
+:::
+
+::: {.solucion}
+Si $0 < a < 1$, la raíz es mayor que $a$: por ejemplo, con $a = 1/4$ y $n = 2$, el número $1/2 \in S$ (porque $(1/2)^{2} = 1/4$) y $1/2 > 1/4 = a$, de modo que $a$ no es cota superior de $S$. Para $x \in (0; 1)$, elevar a una potencia achica: $x^{n} \leq x$.
+:::
+
+::: {#exr-raiz-paso3}
+[D] ★★★ En el paso 3 de la demostración se elige $h$ con $h < b$ y $h < (b^{n} - a)/(n b^{n-1})$. Explique para qué sirve cada condición y qué fallaría sin ella.
+:::
+
+::: {.solucion}
+La condición $h < b$ garantiza $b - h > 0$, necesario para aplicar el @lem-diferencia-potencias con $x = b - h \geq 0$ y para usar la lectura contrarrecíproca del @lem-monotonia-natural entre números no negativos. La segunda condición hace que $n h b^{n-1} < b^{n} - a$, que es lo que da $(b - h)^{n} > a$. Sin la primera, $b - h$ podría ser negativo y el lema no se aplicaría; sin la segunda, no se sabría que $b - h$ es cota superior.
+:::
+
+::: {#exr-raiz-cuarta}
+[D] ★★★ Adapte la demostración del @thm-raiz-existencia para probar directamente que existe $b > 0$ con $b^{4} = 5$. Escriba explícitamente los valores admisibles de $h$ en los pasos 2 y 3 en términos de $b$.
+:::
+
+::: {.solucion}
+$S = \{x \geq 0 : x^{4} \leq 5\}$, acotado por $5$; $b = \sup S \geq 0$. Si $b^{4} < 5$: tomar $0 < h < 1$ con $h < (5 - b^{4}) / \bigl(4 (b+1)^{3}\bigr)$; entonces $(b+h)^{4} - b^{4} \leq 4 h (b+1)^{3} < 5 - b^{4}$ y $b + h \in S$, contradicción. Si $b^{4} > 5$: $b > 0$; tomar $0 < h < b$ con $h < (b^{4} - 5)/(4 b^{3})$; entonces $(b-h)^{4} > 5$, y $b - h$ es cota superior menor que $b$, contradicción. Luego $b^{4} = 5$, y $b > 0$ porque $0^{4} \neq 5$.
+:::
+
+### Monotonía y desigualdad de Bernoulli
+
+::: {#exr-comparar}
+[P] ★★ Ordene de menor a mayor sin calculadora y justifique: $2^{40}$, $3^{25}$ y $5^{15}$.
+:::
+
+::: {.solucion}
+$2^{40} = (2^{8})^{5} = 256^{5}$, $3^{25} = (3^{5})^{5} = 243^{5}$, $5^{15} = (5^{3})^{5} = 125^{5}$. Por el @thm-monotonia (1) con exponente 5: $5^{15} < 3^{25} < 2^{40}$.
+:::
+
+::: {#exr-monotonia-base-menor}
+[P] ★ Compare, sin calculadora: (a) $0{,}7^{1/2}$ y $0{,}7^{1/3}$; (b) $1{,}02^{-5}$ y $1{,}02^{-4}$; (c) $0{,}5^{3}$ y $0{,}6^{3}$.
+:::
+
+::: {.solucion}
+(a) Base entre 0 y 1 y $1/3 < 1/2$: $0{,}7^{1/2} < 0{,}7^{1/3}$. (b) Base mayor que 1 y $-5 < -4$: $1{,}02^{-5} < 1{,}02^{-4}$. (c) Exponente positivo y $0{,}5 < 0{,}6$: $0{,}5^{3} < 0{,}6^{3}$.
+:::
+
+::: {#exr-mayor-que-uno}
+[D] ★★ Demuestre que si $a > 1$ y $r \in \mathbb{Q}$ con $r > 0$, entonces $a^{r} > 1$, y que si $0 < a < 1$ y $r > 0$, entonces $0 < a^{r} < 1$.
+:::
+
+::: {.solucion}
+Si $a > 1$, el @thm-monotonia (2) con $0 < r$ da $a^{0} < a^{r}$, es decir, $1 < a^{r}$. Si $0 < a < 1$, el mismo punto da $a^{r} < a^{0} = 1$, y $a^{r} > 0$ por el @thm-leyes-racionales.
+:::
+
+::: {#exr-bernoulli-numerico}
+[P] ★ Compruebe la desigualdad de Bernoulli para $x = 0{,}05$ y $n = 10$, y para $x = -0{,}5$ y $n = 4$. Calcule la diferencia entre ambos lados en cada caso.
+:::
+
+::: {.solucion}
+$1{,}05^{10} \approx 1{,}628895 \geq 1{,}5$; diferencia $\approx 0{,}128895$. $0{,}5^{4} = 0{,}0625 \geq 1 - 2 = -1$; diferencia $1{,}0625$.
+:::
+
+::: {#exr-bernoulli-par}
+[D] ★★ Demuestre que si $n$ es par, la desigualdad $(1 + x)^{n} \geq 1 + n x$ vale para todo $x \in \mathbb{R}$. Sugerencia: para $x < -1$, observe el signo de cada lado.
+:::
+
+::: {.solucion}
+Para $x \geq -1$ es el @thm-bernoulli. Si $x < -1$, el lado derecho cumple $1 + nx < 1 - n \leq -1 < 0$ (pues $n \geq 2$), y el izquierdo, $(1+x)^{n}$, es positivo por ser una potencia par de un número negativo (@exr-signo-potencia). Luego la desigualdad vale.
+:::
+
+::: {#exr-bernoulli-contra}
+[C] ★★ La demostración del @thm-bernoulli usa la hipótesis $x \geq -1$ en un único punto. Indique cuál y explique por qué el contraejemplo $x = -4$, $n = 3$ muestra que la hipótesis no es superflua.
+:::
+
+::: {.solucion}
+Se usa al multiplicar la hipótesis inductiva por $1 + x$: multiplicar una desigualdad por un número negativo la invierte. Con $x = -4$ y $n = 3$, $(1 + x)^{3} = -27 < -11 = 1 + 3x$; el enunciado es falso, de modo que ninguna demostración podría prescindir de la hipótesis para $n$ impar mayor o igual que 3.
+:::
+
+::: {#exr-fraccion-periodo}
+[D] ★★★ Generalice la @prp-medio-periodo: demuestre que, si $i > 0$ y $q \in \mathbb{N}$ con $q \geq 2$, entonces $(1 + i)^{1/q} < 1 + i/q$. Interprete el resultado financieramente.
+:::
+
+::: {.solucion}
+Ambos números son positivos. Por Bernoulli con $x = i/q > 0$ y $n = q \geq 2$ (estricta), $(1 + i/q)^{q} > 1 + i = \bigl((1+i)^{1/q}\bigr)^{q}$. Por la segunda lectura contrarrecíproca del @lem-monotonia-natural, $(1+i)^{1/q} < 1 + i/q$. Para una fracción $1/q$ de período, el interés simple ($i/q$) produce más que el compuesto.
+:::
+
+::: {#exr-compuesto-simple-tabla}
+[A] ★ Con $C_0 = 1000$ u. m. e $i = 0{,}10$ anual, calcule el capital con interés simple y con interés compuesto a los 1, 5, 10 y 30 años, y la razón entre ambos.
+:::
+
+::: {.solucion}
+Simple: 1100; 1500; 2000; 4000. Compuesto: 1100; 1610,51; 2593,74; 17 449,40 (aprox.). Razones: 1; 1,0737; 1,2969; 4,3624 (aprox.).
+:::
+
+::: {#exr-tasa-negativa}
+[A] ★★ Un fondo pierde un 3 % de su valor cada año. ¿Cuál es su valor relativo al inicial al cabo de 10 años? ¿Se cumple la desigualdad de Bernoulli en este caso? Interprete $1 + n x$.
+:::
+
+::: {.solucion}
+$0{,}97^{10} \approx 0{,}737424$: un 73,74 % del valor inicial. Con $x = -0{,}03 \geq -1$, Bernoulli da $0{,}97^{10} \geq 1 - 0{,}3 = 0{,}7$, que se cumple. $1 + nx$ es lo que quedaría si cada año se perdiera el 3 % del valor *inicial* (pérdida «simple»); la pérdida compuesta es menor porque cada año se aplica sobre un valor más pequeño.
+:::
+
+### Exponentes reales y logaritmos
+
+::: {#exr-log-definicion}
+[P] ★ Calcule usando la definición: (a) $\log_{3} 81$; (b) $\log_{1/2} 8$; (c) $\log_{10} \sqrt{10}$; (d) $\log_{4} 8$; (e) $\log_{5} 1$.
+:::
+
+::: {.solucion}
+(a) 4. (b) $-3$, porque $(1/2)^{-3} = 8$. (c) $1/2$. (d) $3/2$, porque $4^{3/2} = 8$. (e) 0.
+:::
+
+::: {#exr-log-propiedades}
+[P] ★ Sabiendo que $\log_{10} 2 \approx 0{,}30103$ y $\log_{10} 3 \approx 0{,}47712$, calcule aproximadamente: (a) $\log_{10} 6$; (b) $\log_{10} 1{,}5$; (c) $\log_{10} 72$; (d) $\log_{10} 5$; (e) $\log_{3} 2$.
+:::
+
+::: {.solucion}
+(a) $0{,}77815$. (b) $0{,}47712 - 0{,}30103 = 0{,}17609$. (c) $3 \cdot 0{,}30103 + 2 \cdot 0{,}47712 = 1{,}85733$. (d) $\log_{10} 5 = 1 - \log_{10} 2 = 0{,}69897$. (e) $0{,}30103/0{,}47712 \approx 0{,}63093$.
+:::
+
+::: {#exr-log-cociente}
+[D] ★ Demuestre la propiedad (4) del @thm-propiedades-logaritmo sin usar la (3): ponga $u = \log_b x$, $v = \log_b y$ y use una ley de los exponentes.
+:::
+
+::: {.solucion}
+$b^{u-v} = b^{u} b^{-v} = x \cdot (1/y) = x/y$, de modo que $\log_b(x/y) = u - v$ por la @eq-def-logaritmo.
+:::
+
+::: {#exr-log-inverso}
+[D] ★★ Demuestre que $\log_{1/b} x = -\log_b x$ y que $\log_b a = 1/\log_a b$ para $a, b > 0$ distintos de 1.
+:::
+
+::: {.solucion}
+Por el cambio de base, $\log_{1/b} x = \log_b x / \log_b(1/b) = \log_b x / (-1)$. Y $\log_b a = \log_a a / \log_a b = 1/\log_a b$.
+:::
+
+::: {#exr-ecuaciones-exp}
+[P] ★★ Resuelva: (a) $2^{x} = 32$; (b) $3^{x+1} = 1/9$; (c) $10^{2x} = 7$; (d) $5 \cdot 1{,}04^{x} = 8$. Dé los resultados no enteros con cuatro decimales.
+:::
+
+::: {.solucion}
+(a) $x = 5$. (b) $x + 1 = -2$, $x = -3$. (c) $x = \tfrac{1}{2} \log_{10} 7 \approx 0{,}4225$. (d) $x = \log_{10} 1{,}6 / \log_{10} 1{,}04 \approx 11{,}9836$.
+:::
+
+::: {#exr-cifras}
+[P] ★★ ¿Cuántas cifras tienen $3^{50}$ y $2^{1000}$? Use $\log_{10} 2$ y $\log_{10} 3$ con cinco decimales y explique por qué la precisión es suficiente.
+:::
+
+::: {.solucion}
+$50 \log_{10} 3 \approx 23{,}856$: 24 cifras. $1000 \log_{10} 2 \approx 301{,}03$: 302 cifras. Con cinco decimales el error de $\log_{10} 2$ es menor que $5 \cdot 10^{-6}$, y multiplicado por 1000 da menos de $0{,}005$, muy lejos de cambiar la parte entera de $301{,}03$; lo mismo para $3^{50}$.
+:::
+
+::: {#exr-log-errores}
+[E] ★ Encuentre el error: «$\log_{10}(100 + 1000) = \log_{10} 100 + \log_{10} 1000 = 5$».
+:::
+
+::: {.solucion}
+El logaritmo de una suma no es la suma de logaritmos. Lo correcto: $\log_{10} 1100 \approx 3{,}0414$. El valor 5 corresponde a $\log_{10}(100 \cdot 1000)$.
+:::
+
+::: {#exr-log-monotonia}
+[C] ★ Sin calcular, decida qué es mayor: $\log_{2} 10$ o $\log_{3} 10$. Justifique.
+:::
+
+::: {.solucion}
+Por el cambio de base, $\log_{2} 10 = 1/\log_{10} 2$ y $\log_{3} 10 = 1/\log_{10} 3$. Como $\log_{10}$ es creciente, $0 < \log_{10} 2 < \log_{10} 3$, y los inversos cumplen $\log_{2} 10 > \log_{3} 10$.
+:::
+
+::: {#exr-raiz-dos-tabla}
+[N] ★★ Extienda la @tbl-raiz-dos con más cifras de $\sqrt{2}$ y compare con `2 ** math.sqrt(2)`. ¿Por qué la tabla no demuestra que la lista de potencias tiene un valor límite?
+:::
+
+::: {.solucion}
+Con exponentes $1{,}414213$, $1{,}4142135$, … los valores se estabilizan cerca de $2{,}665144$, que es lo que da `2 ** math.sqrt(2)` ($\approx 2{,}6651441$). Una tabla finita solo muestra unos pocos términos; afirmar que se acercan a un número determinado requiere la noción de límite (L2) y el @adm-exponentes-reales.
+:::
+
+### Aplicaciones financieras
+
+::: {#exr-tasa-trimestral}
+[A] ★ ¿Qué tasa trimestral equivale a una tasa anual del 10 %? ¿Y qué tasa anual equivale a un 2 % mensual?
+:::
+
+::: {.solucion}
+Trimestral: $1{,}1^{1/4} - 1 \approx 0{,}024114$ (2,4114 %). Anual: $1{,}02^{12} - 1 \approx 0{,}268242$ (26,8242 %).
+:::
+
+::: {#exr-plazo-monto}
+[A] ★ ¿Cuántos años tarda un capital en triplicarse al 8 % anual? Con capitalización anual (solo períodos completos), ¿en qué año lo logra?
+:::
+
+::: {.solucion}
+$t = \log_{10} 3 / \log_{10} 1{,}08 \approx 14{,}27$ años. Con períodos completos, a los 15 años: $1{,}08^{14} \approx 2{,}9372 < 3 < 1{,}08^{15} \approx 3{,}1722$.
+:::
+
+::: {#exr-tasa-necesaria}
+[A] ★★ ¿Qué tasa anual compuesta convierte $8000$ u. m. en $12\,000$ u. m. en 5 años?
+:::
+
+::: {.solucion}
+$(1 + i)^{5} = 1{,}5$, $i = 1{,}5^{1/5} - 1 \approx 0{,}084472$ (8,45 %). Verificación: $8000 \cdot 1{,}084472^{5} \approx 12\,000$.
+:::
+
+::: {#exr-regla-72-mental}
+[A] ★ Use la regla del 72 para estimar el tiempo de duplicación al 9 % anual y compárelo con el exacto. ¿Está el error dentro de la cota del @adm-regla-72?
+:::
+
+::: {.solucion}
+Regla: $72/9 = 8$ años. Exacto: $\log_{10} 2 / \log_{10} 1{,}09 \approx 8{,}04$ años. Error relativo $\approx -0{,}5$ %, dentro de la cota del 4 % porque $0{,}09 \leq 0{,}15$.
+:::
+
+::: {#exr-regla-otras}
+[S] ★★ Algunos usan la «regla del 70» y otros la «del 69». Calcule, para tasas del 2 %, 5 % y 10 %, el error relativo de cada regla. ¿Cuál conviene para tasas pequeñas? Formule una conjetura sobre la constante que haría exacta la regla cuando la tasa tiende a cero.
+:::
+
+::: {.solucion}
+Con $t^{*} = \log_{10} 2/\log_{10}(1+i)$: para 2 % ($t^{*} \approx 35{,}0028$), 70 da un error prácticamente nulo ($-0{,}008$ %) y 69 da $-1{,}4$ %; para 5 % ($14{,}2067$), 70 da $-1{,}5$ % y 69 da $-2{,}9$ %; para 10 % ($7{,}2725$), 70 da $-3{,}7$ % y 69 da $-5{,}1$ %. En las tres tasas calculadas, la regla del 70 tiene menor error que la del 69. Para tasas aún más pequeñas conviene calcular de nuevo: con $i = 0{,}001$ la regla del 69 da $-0{,}4$ % y la del 70 da $+1{,}0$ %, de modo que la del 69 pasa a ser mejor. Conjetura: cuando la tasa tiende a cero, la constante que hace exacta la regla tiende a un número cercano a $69{,}3$. En L2 se verá que es $100 \ln 2 \approx 69{,}31$.
+:::
+
+::: {#exr-inflacion}
+[A] ★★ Si los precios suben un 4 % anual, ¿en cuántos años se reduce a la mitad el poder de compra de una suma fija? Explique la relación con el tiempo de duplicación.
+:::
+
+::: {.solucion}
+El poder de compra se multiplica por $1/1{,}04$ cada año; se reduce a la mitad cuando $1{,}04^{t} = 2$, es decir, $t \approx 17{,}67$ años: el mismo plazo en que los precios se duplican.
+:::
+
+::: {#exr-plazo-falla}
+[C] ★ Explique qué ocurre con la @eq-plazo si $i = 0$, y qué da y cómo se interpreta si $C \leq C_0$ con $i > 0$.
+:::
+
+::: {.solucion}
+Con $i = 0$, $\log_{10}(1+i) = 0$ y no se puede dividir: el capital no crece y nunca alcanza $C > C_0$. Si $C < C_0$ con $i > 0$, la fórmula da un $t$ negativo: el monto se tuvo en el pasado. Si $C = C_0$, $t = 0$.
+:::
+
+::: {#exr-comparar-ofertas}
+[A] ★★ Un banco ofrece 1 % mensual compuesto y otro 12,5 % anual. ¿Cuál conviene a un plazo de 3 años? Compare los factores de crecimiento.
+:::
+
+::: {.solucion}
+Factor anual del primero: $1{,}01^{12} \approx 1{,}126825 > 1{,}125$. A 3 años: $1{,}01^{36} \approx 1{,}430769$ frente a $1{,}125^{3} \approx 1{,}423828$. Conviene el 1 % mensual.
+:::
+
+### Computación
+
+::: {#exr-python-potencias}
+[N] ★ Ejecute en Python `2 ** 0.5 * 2 ** 0.5`, `(-8) ** (1 / 3)` y `10 ** math.log10(11)`. Describa cada resultado y explique las discrepancias con el valor matemático.
+:::
+
+::: {.solucion}
+El primero da `2.0000000000000004`: la raíz de 2 se redondea y su cuadrado no es exactamente 2. El segundo no da $-2$: Python devuelve un número complejo (aproximadamente `1.0000000000000002+1.7320508075688772j`), porque con base negativa y exponente no entero usa una definición que este libro no ha estudiado (L2 c. 12); confirma por qué la @def-potencia-racional exige base positiva. El tercero da `10.999999999999996` en lugar de 11: el logaritmo calculado está redondeado y el error se amplifica al elevar 10 a ese exponente.
+:::
+
+::: {#exr-python-duplicacion}
+[N] ★★ Escriba una función `tiempo_duplicacion(tasa)` que devuelva el tiempo exacto, y úsela para hallar, con un paso de 0,001, la tasa entre 1 % y 30 % en que la regla del 72 es más precisa.
+:::
+
+::: {.solucion}
+Fragmento no ejecutado al componer el libro; su resultado se comprobó con el script de verificación del capítulo.
+```python
+import math
+def tiempo_duplicacion(tasa):
+    """Tiempo exacto de duplicación con tasa por período `tasa` > 0."""
+    return math.log10(2) / math.log10(1 + tasa)
+
+mejor = min((abs(72 / (100 * t) - tiempo_duplicacion(t)), t)
+            for t in [k / 1000 for k in range(10, 301)])
+print(mejor)
+```
+El error absoluto mínimo se alcanza cerca de $i = 0{,}078$ (7,8 %), donde la regla es prácticamente exacta.
+:::
+
+::: {#exr-python-comparacion}
+[N] ★ Explique por qué `0.1 + 0.2 == 0.3` da `False` en Python y escriba una comparación correcta con tolerancia.
+:::
+
+::: {.solucion}
+Ni 0,1 ni 0,2 ni 0,3 tienen representación exacta en punto flotante binario; la suma redondeada no coincide con el redondeo de 0,3. Comparación correcta: `abs((0.1 + 0.2) - 0.3) < 1e-12`, o `math.isclose(0.1 + 0.2, 0.3)`.
+:::
+
+### Síntesis y problemas abiertos
+
+::: {#exr-sintesis-cadena}
+[S] ★★ Escriba la cadena de resultados que permite demostrar $\log_b(x^{r}) = r \log_b x$ para $r$ racional, desde la definición recursiva de potencia, indicando cuáles se demostraron en el capítulo y cuáles se admitieron.
+:::
+
+::: {.solucion}
+Definición recursiva → leyes naturales (inducción) → definiciones obligadas y leyes enteras → monotonía natural (lema) → unicidad y existencia de raíces → buena definición y leyes racionales → para $r$ racional, la ley $(b^{u})^{r} = b^{ur}$ requiere $u$ real (el logaritmo), lo que usa RA-02 (exponentes reales) y RA-03 (existencia del logaritmo). Demostrado: todo hasta las leyes racionales; admitido: RA-02 y RA-03.
+:::
+
+::: {#exr-sintesis-equivalente}
+[S] ★★ Demuestre que si $j$ es la tasa mensual equivalente a una tasa anual $i > 0$, entonces $j < i/12$. Use un resultado del capítulo.
+:::
+
+::: {.solucion}
+$1 + j = (1+i)^{1/12} < 1 + i/12$ por el @exr-fraccion-periodo con $q = 12$. Luego $j < i/12$.
+:::
+
+::: {#exr-sintesis-bernoulli-log}
+[S] ★★★ Usando la desigualdad de Bernoulli, demuestre que si $0 < i$ y $n \in \mathbb{N}$ cumple $n i \geq 1$, entonces $(1 + i)^{n} \geq 2$. Deduzca que el tiempo de duplicación cumple $t^{*} \leq \lceil 1/i \rceil$, donde $\lceil 1/i \rceil$ es el menor entero mayor o igual que $1/i$. ¿Es buena esta cota comparada con la regla del 72?
+:::
+
+::: {.solucion}
+Bernoulli: $(1+i)^{n} \geq 1 + ni \geq 2$. Con $n = \lceil 1/i \rceil$, se tiene $ni \geq 1$, de modo que el capital ya se duplicó al cabo de $n$ períodos y $t^{*} \leq n$ por la monotonía respecto del exponente. Es una cota pobre: al 8 %, $\lceil 12{,}5 \rceil = 13$ frente a $t^{*} \approx 9{,}01$. La regla del 72 es mucho más precisa. La desigualdad $(1+i)^{n} \geq 2$ se demostró sin resultados admitidos; su traducción a $t^{*} \leq \lceil 1/i \rceil$ usa la definición del logaritmo y la monotonía con exponente real (RA-02 y RA-03).
+:::
+
+::: {#exr-abierto}
+[I] ★★★ Investigue en qué contextos financieros reales se usa interés simple para fracciones de período y compuesto para períodos completos. Discuta, con la @prp-medio-periodo y el @exr-fraccion-periodo, a quién favorece esa práctica.
+:::
+
+::: {.solucion}
+Orientación: es habitual en depósitos y préstamos que liquidan intereses en fechas fijas. Para plazos de $1/q$ de período, el interés simple (proporcional) supera al compuesto (@exr-fraccion-periodo), lo que favorece a quien cobra intereses en esa fracción de período; para fracciones cualesquiera, la comparación general se estudia en L4 §6.4. La respuesta debe identificar la fuente de cada práctica y su fecha; las convenciones de mercado se estudian en L5.
+:::
+
+## Bibliografía comentada {#sec-bibliografia-potencias}
+
+*Fundamental.* @spivak2008 y @apostol1967 son textos de cálculo que parten de los números reales caracterizados por sus axiomas de cuerpo, de orden y de completitud, el mismo punto de partida de este capítulo, y ofrecen muchos ejercicios de demostración del nivel de las secciones 8.1 a 8.6.
+
+*Complementaria.* @kellison2009 es un texto clásico de matemática financiera sobre la teoría del interés; desarrolla el interés compuesto y las tasas equivalentes que L5 estudiará con más profundidad.
