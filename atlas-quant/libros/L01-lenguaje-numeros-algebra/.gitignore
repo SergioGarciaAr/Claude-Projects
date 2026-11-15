@@ -12,3 +12,6 @@ _freeze/
 /*.out
 /*.quarto_ipynb
 libro.aux
+
+/.quarto/
+**/*.quarto_ipynb

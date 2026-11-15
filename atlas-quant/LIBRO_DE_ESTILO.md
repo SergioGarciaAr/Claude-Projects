@@ -1,6 +1,6 @@
 # Libro de estilo de Atlas Quant
 
-Versión 1.0 · Fase 1a · 2026-10-15 · Aprobado el 2026-10-16
+Versión 1.1 · 2026-11-15 · Aprobado el 2026-10-16; §6.2, §12 y §14 actualizados en la Fase 2
 
 Este documento fija las normas de redacción de toda la colección. Se revisará después del capítulo piloto; los cambios se registrarán en `editorial/registro_de_revisiones.md`.
 
@@ -206,7 +206,7 @@ Cada ejemplo resuelto sigue, en prosa, este recorrido: planteamiento del problem
 
 Cuando el libro muestra una salida de programa, advierte la primera vez en cada libro que en el código el separador decimal es el punto.
 
-Fundamento: la coma decimal es válida según la normativa académica del español, que recomienda el punto pero admite ambos signos; la elección de la coma es una decisión editorial de la colección. Las normas sobre el separador de millares y el espacio antes de % se tomaron de la *Ortografía de la lengua española* (2010) y del *Diccionario panhispánico de dudas*; la verificación en la fuente primaria está pendiente (véase `ESTADO.md`).
+Fundamento: la coma decimal es válida según la normativa académica del español, que recomienda el punto pero admite ambos signos; la elección de la coma es una decisión editorial de la colección. Las normas sobre el separador de millares y el espacio antes de % se tomaron de la *Ortografía de la lengua española* (2010) y del *Diccionario panhispánico de dudas*, y se verificaron en las entradas «números» y «porcentajes» del *Diccionario panhispánico de dudas* (V-01 y V-02, revisión R-0006).
 
 ## 13. Terminología
 
@@ -218,7 +218,7 @@ Fundamento: la coma decimal es válida según la normativa académica del españ
 ## 14. Código
 
 - **Función.** El código es material didáctico: ilustra, verifica y aplica la teoría. Nunca reemplaza una demostración.
-- **Lenguaje.** Python. La versión y las bibliotecas se fijarán en la Fase 2 y se declararán en el prefacio de cada libro.
+- **Lenguaje.** Python 3.13, con las versiones de bibliotecas registradas en `herramientas/versiones_composicion.txt` (fijadas en la Fase 2). El prefacio de cada libro las declara. El código se ejecuta al componer el capítulo y sus salidas se insertan sin retoques.
 - **Extensión.** Los fragmentos en el texto tienen como máximo unas 40 líneas. Las versiones completas van al material complementario del libro.
 - **Explicación.** Cada fragmento va precedido de su objetivo y seguido de una explicación de sus partes relevantes, línea por línea cuando el lector es principiante (L1 a L4).
 - **Salidas.** Se muestra la salida real de la ejecución, sin retoques. Un fragmento no ejecutado se marca expresamente como no verificado.

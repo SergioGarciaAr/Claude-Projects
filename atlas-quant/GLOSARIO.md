@@ -1,6 +1,6 @@
 # Glosario terminológico de Atlas Quant (español–inglés)
 
-Versión 1.3 · Entrega 1d · 2026-10-16
+Versión 1.4 · Piloto L1 c. 8 · 2026-11-15
 
 Este glosario fija la terminología española de la colección. Un término fijado no se alterna con sinónimos dentro de la obra. La columna «Observaciones» registra alternativas usadas en otras regiones o textos, que pueden mencionarse pero no emplearse como término principal. Las entregas 1b a 1d ampliarán el glosario e indicarán el libro y capítulo de primera aparición.
 
@@ -10,6 +10,9 @@ Este glosario fija la terminología española de la colección. Un término fija
 |---|---|---|
 | axioma del supremo | least-upper-bound property, completeness axiom | |
 | completitud | completeness | |
+| logaritmo | logarithm | Se escribe siempre con la base, $\log_b$; ln para la base e (desde L2) |
+| raíz n-ésima | n-th root | |
+| desigualdad de Bernoulli | Bernoulli's inequality | |
 | contraejemplo | counterexample | |
 | contrarrecíproco | contrapositive | |
 | convergencia uniforme | uniform convergence | |
@@ -107,6 +110,10 @@ Este glosario fija la terminología española de la colección. Un término fija
 |---|---|---|
 | tasa de interés | interest rate | «Tipo de interés» en España |
 | tasa efectiva, tasa nominal | effective rate, nominal rate | |
+| interés compuesto | compound interest | |
+| tasa equivalente | equivalent rate | |
+| tiempo de duplicación | doubling time | |
+| regla del 72 | rule of 72 | |
 | fuerza de interés | force of interest | |
 | valor presente | present value | «Valor actual» en España y otros textos |
 | valor presente neto (VPN) | net present value (NPV) | Alternativa regional: VAN |
@@ -189,7 +196,11 @@ Este glosario fija la terminología española de la colección. Un término fija
 | cota superior, cota inferior, supremo, ínfimo | L1 §7.5 |
 | axioma del supremo; completitud | L1 §7.6 |
 | propiedad arquimediana | L1 §7.7 |
-| interés compuesto; tasa equivalente | L1 §8.10 |
+| interés compuesto | L1 §8.7 |
+| tasa equivalente; tiempo de duplicación; regla del 72 | L1 §8.10 |
+| raíz n-ésima | L1 §8.3 |
+| desigualdad de Bernoulli | L1 §8.7 |
+| logaritmo | L1 §8.9 |
 | error de redondeo | L1 §9.3 |
 | punto flotante | L1 §9.6 (introducción) y L3 §2.3 |
 | cartera; replicación | L1 §12.6 |

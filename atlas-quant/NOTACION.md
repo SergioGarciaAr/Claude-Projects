@@ -1,6 +1,6 @@
 # Convenciones de notación de Atlas Quant
 
-Versión 1.3 · Entrega 1d · 2026-10-16
+Versión 1.4 · Piloto L1 c. 8 · 2026-11-15
 
 Este documento fija la notación común a toda la colección. Cada libro introduce los símbolos gradualmente, en el capítulo donde se necesitan, y su índice de símbolos remite a ese lugar. Las entregas 1b a 1d completarán, para cada símbolo, la columna «primera aparición». Un símbolo fijado aquí no se redefine en otro sentido sin advertencia explícita y sin registrar la excepción.
 
@@ -248,7 +248,7 @@ Lugar donde cada símbolo se define por primera vez en la colección. Cada libro
 | i.i.d. | L8 §10.1 |
 | →ᴾ, →ᵈ | L8 §10.2 |
 | i (tasa de interés) | L1 §6.8 |
-| C₀, Cₙ | L1 §8.10 |
+| C₀, Cₙ | L1 §8.7 |
 | VP, VF | L2 §6.6 |
 | d | L2 §4.5 |
 | v | L2 §3.5 |

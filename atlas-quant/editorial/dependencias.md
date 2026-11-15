@@ -17,7 +17,7 @@ Requisitos declarados en el plan: ninguno.
 | 5. Números naturales y enteros | L1 c. 3, L1 c. 4 |
 | 6. Números racionales | L1 c. 3, L1 c. 5 |
 | 7. Números reales | L1 c. 3, L1 c. 4, L1 c. 6 |
-| 8. Potencias, raíces y logaritmos (capítulo piloto) | L1 c. 4, L1 c. 6, L1 c. 7 |
+| 8. Potencias, raíces y logaritmos (capítulo piloto) | L1 c. 4, L1 c. 5, L1 c. 6, L1 c. 7 |
 | 9. Magnitudes, unidades, órdenes de magnitud y error | L1 c. 7, L1 c. 8 |
 | 10. Polinomios | L1 c. 5, L1 c. 7, L1 c. 8 |
 | 11. Ecuaciones e inecuaciones | L1 c. 7, L1 c. 8, L1 c. 10 |

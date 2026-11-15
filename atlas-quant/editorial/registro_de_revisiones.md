@@ -149,6 +149,28 @@ Ejecución del plan aprobado (D-04). El informe completo está en `editorial/inf
 | H-42 | Menor | El PDF de LuaLaTeX no está etiquetado (R-12) | Pendiente de verificar en la plantilla común | Abierto |
 | H-43 | Menor | APA 7 usa «&» entre autores | Copia adaptada del estilo en la plantilla común | Abierto |
 
+## Revisión R-0008 · Capítulo piloto L1 c. 8, «Potencias, raíces y logaritmos» · 2026-11-15
+
+Procedimiento de `LIBRO_DE_ESTILO.md`, §17: ficha de diseño a partir del índice; autorrevisión; verificación independiente de todos los valores numéricos con `libros/L01-lenguaje-numeros-algebra/verificacion/cap08.py`; dos rondas de revisión adversarial por un agente con contexto limpio, que recibió solo el capítulo, sus prerrequisitos, los resultados admitidos y el libro de estilo; composición con la cadena C2. La revisión del director queda sustituida por el modo de producción continua (`ESTADO.md`, §4); la revisión humana externa del piloto es un requisito previo a su publicación (D-03).
+
+Resultado de la primera ronda: 0 hallazgos críticos, 7 importantes y 12 menores. Segunda ronda: 14 resueltos, 4 resueltos en parte (completados después), 6 menores nuevos (corregidos). Hallazgos agrupados:
+
+| ID | Severidad | Hallazgo | Resolución | Estado |
+|---|---|---|---|---|
+| H-44 | Importante | El texto de §8.11 contradecía la salida real de Python (`8 ** (1 / 3)` da exactamente 2) | Ejemplo cambiado a `1000 ** (1 / 3)`, que da `9.999999999999998`; afirmación en el script de verificación | Resuelto |
+| H-45 | Importante | Generalización no demostrada: interés simple frente a compuesto para cualquier plazo fraccionario | Afirmación limitada a 1/2, 1/q y n ≥ 2; el caso real remite a L4 §6.4 | Resuelto |
+| H-46 | Importante | «Todas las propiedades siguen valiendo para exponentes reales» excedía RA-02 | Se enumera lo que se extiende y se deduce la monotonía respecto de la base | Resuelto |
+| H-47 | Importante | Demostraciones del texto apoyadas en resultados probados solo en ejercicios (ley (ii) entera, 1ⁿ = 1, (−1)ⁿ, inversos racionales) | Ley (ii) demostrada en el texto; 1ⁿ y (−1)ⁿ en la Proposición 8.1 (4); inversos justificados en línea | Resuelto |
+| H-48 | Importante | Prerrequisitos no declarados: valor absoluto (L1 §7.3) y ℕ₀ (L1 §5.1) | Añadidos al capítulo y al índice de L1 (versión 1.1) | Resuelto |
+| H-49 | Importante | Dependencias mal declaradas en la solución del ejercicio de síntesis sobre Bernoulli; hipótesis j > −1 omitida en la tasa equivalente | Corregidas | Resuelto |
+| H-50 | Menor | Lecturas contrarrecíprocas, positividad de la raíz, convención sobre exponentes 0 en la diferencia de potencias, excepción n = 1 en Bernoulli, definición recursiva del interés compuesto, ecuaciones numeradas sin cita, tipografía, párrafos de estrategia, equivalentes en inglés, fragmentos de código no ejecutados sin marcar, etiquetas de ejercicios, redacción y cifras de la solución sobre las reglas del 69 y del 70 | Corregidos uno por uno | Resuelto |
+
+Ajustes de los registros: `GLOSARIO.md` y `NOTACION.md` (versión 1.4) sitúan interés compuesto, C₀ y Cₙ en L1 §8.7 y añaden los términos del capítulo; `LIBRO_DE_ESTILO.md` (versión 1.1) fija Python 3.13 y las bibliotecas registradas (§14) y cierra V-01 y V-02 en §12.
+
+Extensión: 30 páginas compuestas (portada, créditos e índice incluidos) y 54 ejercicios, frente a las 34–40 páginas y 45–60 ejercicios del índice. La diferencia de páginas se registra como dato de calibración de las estimaciones (`PLAN_EDITORIAL.md`, §8).
+
+Incidencia del entorno: el contenedor se recicló entre sesiones y se perdió el trabajo no confirmado del piloto; se reconstruyó a partir del registro de la sesión. Desde entonces cada etapa se confirma y sube al repositorio al terminarla.
+
 ## Pendientes de verificación
 
 Las tres verificaciones abiertas en la Fase 1a se resolvieron en R-0006 (detalle en `editorial/auditoria_fase1.md`, sección 6).

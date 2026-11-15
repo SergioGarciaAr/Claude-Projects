@@ -1,6 +1,6 @@
 # Estado del proyecto Atlas Quant
 
-Última actualización: 2026-10-16\
+Última actualización: 2026-11-15\
 Rama de trabajo: `claude/magical-shannon-afvwc6`
 
 **Leer este archivo primero al reanudar el trabajo.**
@@ -15,16 +15,16 @@ Rama de trabajo: `claude/magical-shannon-afvwc6`
 | 1c | Índices detallados de L9–L16 | Aprobada (2026-10-16) |
 | 1d | Índices detallados de L17–L23 | Aprobada (2026-10-16) |
 | 1e | Bibliografía verificada, fuentes de datos y auditoría de coherencia | Aprobada (2026-10-16) |
-| 2 | Plan de prueba de composición; capítulo piloto L1 c. 8 | **En curso**: prueba de composición ejecutada y cadena elegida (D-04b, `editorial/informe_composicion.md`); siguiente: piloto L1 c. 8 |
+| 2 | Prueba de composición; capítulo piloto L1 c. 8; piloto avanzado | **En curso**: cadena elegida (D-04b); piloto L1 c. 8 compuesto y revisado (R-0008); siguiente: piloto avanzado |
 
-No existe ningún capítulo redactado.
+Capítulos redactados: 1 de 277 (L1 c. 8, piloto).
 
 ## 2. Próximo paso exacto
 
-1. Montar la plantilla común de composición en `composicion/`, a partir de `pruebas/composicion/`: filtros, preámbulo, estilo de cita adaptado y módulo de código común del lector.
-2. Crear el proyecto del libro L1 y redactar el capítulo piloto L1 c. 8, «Potencias, raíces y logaritmos», según su índice. Después, revisarlo según el libro de estilo (sección 17), componerlo con la cadena C2, registrar la revisión y entregar el PDF.
-3. Continuar la producción según el modo de trabajo de la sección 4.
-4. Al cerrar cada entrega: ejecutar `herramientas/verificar_indices.py` y `herramientas/bib_a_md.py`, regenerar los PDF de trabajo con `herramientas/generar_pdf.mjs`, componer los capítulos con Quarto, hacer commit y push. Las herramientas se reinstalan con `herramientas/instalar_composicion.sh` si el contenedor se recicló.
+1. Redactar el piloto avanzado: L18 c. 6, «Fórmula de Itô», con el mismo procedimiento que L1 c. 8 (verificación por script, dos rondas de revisión adversarial, composición con la cadena C2, registro y entrega en PDF).
+2. Recalibrar las estimaciones de extensión con los dos pilotos (`PLAN_EDITORIAL.md`, §8).
+3. Continuar la producción de L1 en orden, según el modo de trabajo de la sección 4.
+4. Al cerrar cada etapa: confirmar y subir de inmediato (el contenedor puede reciclarse y se pierde lo no confirmado); ejecutar `herramientas/verificar_indices.py` y `herramientas/bib_a_md.py`; regenerar los PDF de trabajo; componer los capítulos con `libros/<libro>/compilar.sh`. Si el contenedor se recicló, reinstalar con `herramientas/instalar_composicion.sh`.
 
 ## 3. Decisiones aprobadas
 

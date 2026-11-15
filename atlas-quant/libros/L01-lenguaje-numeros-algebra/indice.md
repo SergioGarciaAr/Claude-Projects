@@ -1,6 +1,6 @@
 # L1. Lenguaje matemático, números y álgebra
 
-Índice detallado · Versión 1.0 · Entrega 1b · 2026-10-16
+Índice detallado · Versión 1.1 · Entrega 1b; prerrequisitos de c. 8 ajustados tras el piloto · 2026-11-15
 
 ## Ficha editorial
 
@@ -209,7 +209,7 @@ Portada; créditos; prefacio (incluye la nota sobre la elaboración de la obra);
 
 ### Capítulo 8. Potencias, raíces y logaritmos (capítulo piloto)
 
-**Prerrequisitos:** L1 §4.6, L1 §6.2, L1 §6.7, L1 §6.8, L1 §7.2, L1 §7.4, L1 §7.6, L1 §7.8, L1 ap. A.
+**Prerrequisitos:** L1 §4.6, L1 §5.1, L1 §6.2, L1 §6.7, L1 §6.8, L1 §7.2, L1 §7.3, L1 §7.4, L1 §7.6, L1 §7.8, L1 ap. A.
 
 **Objetivos:** demostrar las leyes de los exponentes enteros y racionales; justificar por qué a⁰ = 1 y a⁻ⁿ = 1/aⁿ; usar la existencia de raíces n-ésimas y, en la sección opcional, demostrarla; comparar potencias según base y exponente; demostrar la desigualdad de Bernoulli y usarla para comparar interés simple y compuesto; definir el logaritmo y demostrar sus propiedades a partir de las de las potencias; resolver problemas de interés compuesto, tasas equivalentes y tiempo de duplicación; evaluar la regla del 72 como aproximación.
 
