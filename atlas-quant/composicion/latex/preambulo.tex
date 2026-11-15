@@ -1,0 +1,19 @@
+% Preámbulo común de composición de Atlas Quant (cadena Quarto → LuaLaTeX, decisión D-04b).
+% Índice analítico
+\usepackage{imakeidx}
+\makeindex[title=Índice analítico, columns=2, intoc]
+% Títulos con la fuente del texto; números de sección sin punto final.
+\addtokomafont{disposition}{\rmfamily}
+\renewcommand*{\autodot}{}
+% Corte de líneas largas en los bloques de código.
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+% Entornos propios (filtros/entornos.lua): título en línea, cuerpo en redonda, sangría izquierda.
+% No se usa amsthm con nota opcional: provoca un error de babel (bidi) con TeX Live 2023 (H-40).
+\newenvironment{atlasnota}{\par\medskip\begin{list}{}{\leftmargin=1.2em\rightmargin=0pt}\item\relax}{\end{list}\medskip}
+\newcommand{\atlasnotatitulo}[1]{\textbf{#1.}\enspace}
+\newcounter{hipotesis}[chapter]\renewcommand{\thehipotesis}{\thechapter.\arabic{hipotesis}}
+\newcounter{empirico}[chapter]\renewcommand{\theempirico}{\thechapter.\arabic{empirico}}
+\newcounter{admitido}[chapter]\renewcommand{\theadmitido}{\thechapter.\arabic{admitido}}
+% Presentación del capítulo (prerrequisitos y objetivos).
+\newenvironment{atlaspresentacion}{\par\small\begin{list}{}{\leftmargin=0pt\rightmargin=0pt}\item\relax}{\end{list}\par\normalsize\bigskip}
