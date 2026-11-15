@@ -2,6 +2,11 @@
 """Instala paquetes de conda-forge sin gestor de conda (el entorno no puede descargar micromamba).
 
 Uso:  python conda_extraer.py PREFIJO CACHE paquete==versión [paquete==versión ...]
+      python conda_extraer.py PREFIJO --lista versiones_composicion.txt
+
+El segundo modo reinstala exactamente los archivos registrados (nombre, versión, archivo, sha256)
+en la sección «conda-forge» del archivo de versiones; es el modo reproducible, porque el índice
+reducido de conda-forge solo conserva las versiones más recientes.
 
 - Lee los índices de conda-forge (linux-64 y noarch) guardados en CACHE
   (current_repodata.json y noarch_current_repodata.json).
@@ -19,6 +24,7 @@ import json
 import re
 import sys
 import tarfile
+import urllib.error
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -130,7 +136,35 @@ def extraer(pkg, prefijo):
         ruta.write_bytes(contenido)
 
 
+def instalar_lista(prefijo, archivo):
+    """Instala los paquetes registrados en el archivo de versiones, verificando su SHA-256."""
+    registro, en_seccion = [], False
+    for linea in Path(archivo).read_text(encoding="utf-8").splitlines():
+        if linea.startswith("## "):
+            en_seccion = linea.startswith("## conda-forge")
+            continue
+        partes = linea.split("\t")
+        if en_seccion and len(partes) == 4:
+            nombre, version, fn, sha = partes
+            for sub in ("linux-64", "noarch"):
+                pkg = {"fn": fn, "subdir": sub, "sha256": sha}
+                try:
+                    print(f"instalando {fn} ({sub})", flush=True)
+                    extraer(pkg, prefijo)
+                    registro.append(linea)
+                    break
+                except urllib.error.HTTPError:
+                    continue
+            else:
+                sys.exit(f"No se encontró {fn} en conda-forge")
+    (prefijo / "conda-meta").mkdir(parents=True, exist_ok=True)
+    (prefijo / "conda-meta" / "instalados.txt").write_text("\n".join(registro) + "\n")
+
+
 def main():
+    if len(sys.argv) == 4 and sys.argv[2] == "--lista":
+        instalar_lista(Path(sys.argv[1]).resolve(), sys.argv[3])
+        return
     prefijo, cache, pedidos = Path(sys.argv[1]).resolve(), sys.argv[2], sys.argv[3:]
     elegidos = resolver(cargar_indice(cache), pedidos)
     (prefijo / "conda-meta").mkdir(parents=True, exist_ok=True)

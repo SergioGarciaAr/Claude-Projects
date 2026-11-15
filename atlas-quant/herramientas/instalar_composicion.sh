@@ -19,12 +19,8 @@ python3 -m venv "$DEST/venv"
 grep -E '^[A-Za-z0-9_.-]+==' "$VERS" > "$DEST/requisitos.txt"
 "$DEST/venv/bin/pip" install -q -r "$DEST/requisitos.txt"
 
-# 2. Quarto y dependencias desde conda-forge
-for sub in linux-64 noarch; do
-  archivo="$DEST/cache/$( [ "$sub" = noarch ] && echo noarch_ )current_repodata.json"
-  [ -s "$archivo" ] || curl -sS -m 600 -o "$archivo" "https://conda.anaconda.org/conda-forge/$sub/current_repodata.json"
-done
-"$DEST/venv/bin/python" "$RAIZ/herramientas/conda_extraer.py" "$DEST/conda" "$DEST/cache" "quarto==1.9.38"
+# 2. Quarto y dependencias desde conda-forge: los archivos exactos registrados, con su SHA-256
+"$DEST/venv/bin/python" "$RAIZ/herramientas/conda_extraer.py" "$DEST/conda" --lista "$VERS"
 
 # 3. TeX Live y fuentes desde Ubuntu
 sudo apt-get update -qq
