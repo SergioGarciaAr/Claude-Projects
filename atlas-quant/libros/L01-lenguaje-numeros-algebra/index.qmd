@@ -1,0 +1,11 @@
+# Créditos y nota de la edición {.unnumbered}
+
+Dirección editorial, alcance y aprobación de contenidos: [nombre del director de la obra].\
+Redacción con asistencia de inteligencia artificial (Claude, de Anthropic) bajo dicha dirección.
+
+Esta versión contiene únicamente el capítulo 8, redactado como capítulo piloto de la colección. Las referencias a otros capítulos y libros remiten a los índices detallados aprobados (`libros/*/indice.md`), que fijan su contenido. El código del capítulo se ejecutó al componer el documento con Python 3.13 y las bibliotecas registradas en `herramientas/versiones_composicion.txt`; en el código y en sus salidas el separador decimal es el punto.
+
+```{=latex}
+% Solo para la versión piloto: el único capítulo compuesto es el 8.
+\setcounter{chapter}{7}
+```

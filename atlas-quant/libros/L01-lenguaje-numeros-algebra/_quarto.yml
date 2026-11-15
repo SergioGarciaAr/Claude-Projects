@@ -1,0 +1,46 @@
+# Proyecto de composición del libro L1 (cadena Quarto → LuaLaTeX, decisión D-04b).
+# Por ahora contiene solo el capítulo piloto; los demás capítulos se añadirán en orden.
+project:
+  type: book
+  output-dir: _salida
+
+book:
+  title: "Lenguaje matemático, números y álgebra"
+  subtitle: "Atlas Quant · Libro 1 · Capítulo piloto"
+  author: "[nombre del director de la obra]"
+  chapters:
+    - index.qmd
+    - cap08.qmd
+    - referencias.qmd
+
+lang: es
+number-sections: true
+bibliography: ../../bibliografia/atlas.bib
+csl: ../../composicion/estilos/apa-es.csl
+link-citations: true
+execute:
+  echo: true
+  warning: false
+  freeze: auto
+jupyter: atlas
+filters:
+  - ../../composicion/filtros/indice.lua
+  - ../../composicion/filtros/entornos.lua
+  - at: post-quarto
+    path: ../../composicion/filtros/solucionario.lua
+
+format:
+  pdf:
+    documentclass: scrbook
+    classoption: [a4paper, 11pt, oneside]
+    pdf-engine: lualatex
+    mainfont: "Libertinus Serif"
+    mathfont: "Libertinus Math"
+    monofont: "DejaVu Sans Mono"
+    monofontoptions: [Scale=0.85]
+    toc: true
+    toc-depth: 2
+    keep-tex: true
+    latex-clean: false
+    include-in-header: ../../composicion/latex/preambulo.tex
+    include-after-body: ../../composicion/latex/final.tex

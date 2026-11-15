@@ -1,0 +1,14 @@
+_salida/
+.quarto/
+_freeze/
+*_files/
+/*.tex
+/*.log
+/*.aux
+/*.idx
+/*.ind
+/*.ilg
+/*.toc
+/*.out
+/*.quarto_ipynb
+libro.aux

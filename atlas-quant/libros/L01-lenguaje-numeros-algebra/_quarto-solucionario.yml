@@ -1,0 +1,12 @@
+book:
+  title: "Lenguaje matemático, números y álgebra · Solucionario"
+solucionario: true
+toc: false
+execute:
+  eval: false
+format:
+  pdf:
+    include-after-body: []
+    include-in-header:
+      - ../../composicion/latex/preambulo.tex
+      - ../../composicion/latex/solucionario.tex
